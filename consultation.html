@@ -31,6 +31,7 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
+  <script src="js/theme-init.js"></script>
   <link rel="stylesheet" href="css/consultation.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet"
@@ -63,10 +64,13 @@
             <a class="nav-link" href="about.html">About</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="service-areas.html">Services</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="attorneys.html">Attorneys</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="practice-areas.html">Practice Areas</a>
+            <a class="nav-link active" href="practice-areas.html">Practice Areas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="case-studies.html">Case Studies</a>
@@ -80,13 +84,14 @@
         </ul>
       </div>
 
-      <div class="d-none d-lg-flex align-items-center action-zone">
+      <div class="d-flex align-items-center action-zone">
         <div class="phone-group me-4">
           <i class="fas fa-phone-alt text-accent me-2"></i>
           <a href="tel:+8801713456800" class="phone-number">+880 1713 456 800</a>
         </div>
 
-        <a href="consultation.html" class="btn btn-gold">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+        <a href="consultation.html" class="btn btn-gold ms-3">
           Free Consultation <i class="fas fa-arrow-right ms-2"></i>
         </a>
       </div>
@@ -152,7 +157,7 @@
               <h4 class="text-accent mb-4">
                 <i class="fas fa-user-check me-2"></i>Check Your Eligibility
               </h4>
-              <p class="text-muted mb-4">
+              <p class="text-white mb-4">
                 Enter your details to check if you're eligible for a free
                 consultation. First-time visitors get their first consultation
                 free!
@@ -187,14 +192,14 @@
                 <i class="fas fa-gift text-accent me-3 fa-2x"></i>
                 <div>
                   <strong>First Consultation FREE!</strong><br />
-                  <small class="text-muted">Subsequent consultations: BDT 2,000 (payable via bKash,
+                  <small class="text-white">Subsequent consultations: BDT 2,000 (payable via bKash,
                     Nagad, Rocket, or Card)</small>
                 </div>
               </div>
 
               <div class="secure-badge mb-4">
                 <i class="fas fa-shield-alt text-success me-2"></i>
-                <small class="text-muted">Your information is securely stored and protected</small>
+                <small class="text-white">Your information is securely stored and protected</small>
               </div>
 
               <button type="button" class="btn btn-primary btn-lg" id="checkEligibility">
@@ -274,7 +279,50 @@
                 <textarea class="form-control" id="caseDescription" rows="4"
                   placeholder="Please provide a brief overview of your legal matter (minimum 20 characters)..."
                   required></textarea>
-                <small class="text-muted">This helps us prepare for your consultation.</small>
+                <small class="text-white">This helps us prepare for your consultation.</small>
+              </div>
+
+              <!-- Document Upload Section -->
+              <div class="mb-4">
+                <label class="form-label">
+                  <i class="fas fa-file-upload me-2 text-accent"></i>Upload Supporting Documents
+                  <span style="color: #9CA3AF; font-weight: normal;">(Optional)</span>
+                </label>
+                <p class="text-white mb-3">
+                  Upload relevant documents related to your case (contracts, agreements, court orders, correspondence, etc.). 
+                  This helps us provide better consultation.
+                </p>
+
+                <!-- File Drop Zone -->
+                <div id="fileDropZone" style="
+                  border: 2px dashed rgba(175, 169, 57, 0.5);
+                  border-radius: 8px;
+                  padding: 30px;
+                  text-align: center;
+                  cursor: pointer;
+                  background: rgba(175, 169, 57, 0.05);
+                  transition: all 0.3s ease;
+                  margin-bottom: 15px;
+                ">
+                  <i class="fas fa-cloud-upload-alt" style="font-size: 32px; color: #AFA939; margin-bottom: 10px; display: block;"></i>
+                  <p class="mb-2" style="color: #ECECEC;">
+                    <strong>Drag and drop files here</strong> or click to browse
+                  </p>
+                  <small class="text-white">
+                    Supported formats: PDF, DOC, DOCX, XLS, XLSX, JPG, PNG, GIF (Max 10MB per file)
+                  </small>
+                  <input type="file" id="documentInput" multiple style="display: none;" 
+                    accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif" />
+                </div>
+
+                <!-- File List -->
+                <div id="fileList" style="margin-top: 15px;">
+                  <!-- Uploaded files will be listed here -->
+                </div>
+
+                <small class="text-white d-block mt-2">
+                  <i class="fas fa-info-circle me-2"></i>You can upload up to 5 documents. Maximum 10MB per file.
+                </small>
               </div>
 
               <div class="d-flex justify-content-between mt-4">
@@ -298,7 +346,38 @@
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">Preferred Date *</label>
-                    <input type="date" class="form-control" id="preferredDate" required />
+                    <div class="position-relative">
+                      <input type="text" class="form-control" id="preferredDateDisplay" placeholder="Select Date" readonly style="cursor: pointer; background-color: #2A2D32;" required />
+                      <i class="fas fa-calendar-alt" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #AFA939; cursor: pointer; pointer-events: none;"></i>
+                    </div>
+                    <input type="hidden" id="preferredDate" required />
+                    
+                    <!-- Calendar Picker -->
+                    <div id="calendarPicker" style="display: none; position: absolute; top: 19%; left: 80px; background: #1C1E20; border: 1px solid rgba(175, 169, 57, 0.3); border-radius: 8px; padding: 15px; width: 320px; z-index: 1000; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);">
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <button type="button" id="calendarPrevMonth" class="btn btn-sm" style="padding: 5px 10px; background: transparent; border: 1px solid rgba(175, 169, 57, 0.3); color: #AFA939; border-radius: 4px;">
+                          <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span id="calendarMonth" style="font-weight: 600; color: #AFA939; min-width: 150px; text-align: center;"></span>
+                        <button type="button" id="calendarNextMonth" class="btn btn-sm" style="padding: 5px 10px; background: transparent; border: 1px solid rgba(175, 169, 57, 0.3); color: #AFA939; border-radius: 4px;">
+                          <i class="fas fa-chevron-right"></i>
+                        </button>
+                      </div>
+                      
+                      <!-- Weekday Headers -->
+                      <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 10px;">
+                        <div style="text-align: center; font-size: 12px; color: #AFA939; font-weight: 600;">Sun</div>
+                        <div style="text-align: center; font-size: 12px; color: #AFA939; font-weight: 600;">Mon</div>
+                        <div style="text-align: center; font-size: 12px; color: #AFA939; font-weight: 600;">Tue</div>
+                        <div style="text-align: center; font-size: 12px; color: #AFA939; font-weight: 600;">Wed</div>
+                        <div style="text-align: center; font-size: 12px; color: #AFA939; font-weight: 600;">Thu</div>
+                        <div style="text-align: center; font-size: 12px; color: #AFA939; font-weight: 600;">Fri</div>
+                        <div style="text-align: center; font-size: 12px; color: #AFA939; font-weight: 600;">Sat</div>
+                      </div>
+                      
+                      <!-- Calendar Days -->
+                      <div id="calendarDays" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px;"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -326,7 +405,7 @@
                     <div class="consultation-type-card active" data-type="office">
                       <i class="fas fa-building"></i>
                       <span>In-Office</span>
-                      <small>Visit our Banani office</small>
+                      <small>Visit our Gulshan office</small>
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -355,7 +434,7 @@
                 <h5 class="text-accent mb-3">
                   <i class="fas fa-credit-card me-2"></i>Payment Required
                 </h5>
-                <p class="text-muted mb-4">
+                <p class="text-white mb-4">
                   Consultation Fee:
                   <strong class="text-accent">BDT 2,000</strong>
                 </p>
@@ -468,30 +547,30 @@
                   </h5>
                   <div class="row">
                     <div class="col-md-6 mb-3">
-                      <span class="text-muted d-block mb-1">Reference Number:</span>
+                      <span class="text-white d-block mb-1">Reference Number:</span>
                       <p class="mb-0 fw-bold text-accent" id="confirmationRef">
                         -
                       </p>
                     </div>
                     <div class="col-md-6 mb-3">
-                      <span class="text-muted d-block mb-1">Name:</span>
+                      <span class="text-white d-block mb-1">Name:</span>
                       <p class="mb-0 fw-bold" id="confirmName">-</p>
                     </div>
                     <div class="col-md-6 mb-3">
-                      <span class="text-muted d-block mb-1">Case Type:</span>
+                      <span class="text-white d-block mb-1">Case Type:</span>
                       <p class="mb-0 fw-bold" id="confirmCaseType">-</p>
                     </div>
                     <div class="col-md-6 mb-3">
-                      <span class="text-muted d-block mb-1">Preferred Date:</span>
+                      <span class="text-white d-block mb-1">Preferred Date:</span>
                       <p class="mb-0 fw-bold" id="confirmDate">-</p>
                     </div>
                     <div class="col-md-6 mb-3">
-                      <span class="text-muted d-block mb-1">Preferred Time:</span>
+                      <span class="text-white d-block mb-1">Preferred Time:</span>
                       <p class="mb-0 fw-bold" id="confirmTime">-</p>
                     </div>
                   </div>
                 </div>
-                <p class="text-muted mb-4">
+                <p class="text-white mb-4">
                   <i class="fas fa-envelope me-2"></i>
                   A confirmation email has been sent to
                   <span class="text-accent" id="confirmEmail">-</span>
@@ -517,7 +596,7 @@
               <h5 class="text-accent mb-3">
                 <i class="fas fa-headset me-2"></i>Need Help?
               </h5>
-              <p class="text-muted mb-3">
+              <p class="text-white mb-3">
                 Our team is available to assist you with any questions about
                 the consultation process.
               </p>
@@ -549,7 +628,7 @@
                 <span class="text-accent fw-bold">BDT 2,000</span>
               </div>
               <hr style="border-color: rgba(175, 169, 57, 0.2)" />
-              <small class="text-muted">
+              <small class="text-white">
                 <i class="fas fa-info-circle me-1"></i>
                 Payment accepted via bKash, Nagad, Rocket, Upay, Cards, and
                 Internet Banking.

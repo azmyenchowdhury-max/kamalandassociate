@@ -27,6 +27,50 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', handleNavbarScroll);
     handleNavbarScroll();
 
+    // ===== Theme Toggle (Light/Dark Mode) =====
+    const themeToggleButtons = document.querySelectorAll('.theme-toggle');
+    const savedTheme = localStorage.getItem('theme');
+
+    function applyTheme(theme) {
+        const isDark = theme === 'dark';
+        const root = document.documentElement;
+
+        root.classList.toggle('dark-mode', isDark);
+
+        themeToggleButtons.forEach(btn => {
+            const icon = btn.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-moon', !isDark);
+                icon.classList.toggle('fa-sun', isDark);
+            } else {
+                btn.textContent = isDark ? '☀️' : '🌙';
+            }
+
+            btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            btn.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        });
+    }
+
+    function setTheme(theme) {
+        localStorage.setItem('theme', theme);
+        applyTheme(theme);
+    }
+
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+        applyTheme(savedTheme);
+    } else {
+        // Default to light mode, but respect system preference if available
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark ? 'dark' : 'light');
+    }
+
+    themeToggleButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const currentlyDark = document.documentElement.classList.contains('dark-mode');
+            setTheme(currentlyDark ? 'light' : 'dark');
+        });
+    });
+
     // ===== Rotating Text Animation =====
     const rotatingTextElement = document.getElementById('rotatingText');
     if (rotatingTextElement) {
@@ -158,6 +202,793 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // ===== Service Areas Modal & Search =====
+    (function initServiceAreas() {
+        const modal = document.getElementById('serviceModal');
+        if (!modal) return;
+
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalServices = document.getElementById('modalServices');
+        const closeButton = modal.querySelector('.service-modal-close');
+
+        // Service data object
+        const serviceData = {
+            'administrative-law': {
+                title: 'Administrative Law in Bangladesh',
+                description: 'Our administrative law practice covers regulatory compliance, government relations, and administrative proceedings. We provide comprehensive legal support for businesses and individuals dealing with government agencies and regulatory bodies.',
+                services: [
+                    'Regulatory compliance and licensing',
+                    'Administrative appeals and reviews',
+                    'Government contract disputes',
+                    'Public procurement law',
+                    'Environmental regulatory matters',
+                    'Telecommunications regulation'
+                ]
+            },
+            'admiralty-shipping': {
+                title: 'Admiralty and Shipping',
+                description: 'We offer specialized legal services in maritime law, including ship registration, marine insurance claims, and international shipping disputes. Our expertise covers all aspects of admiralty and shipping law in Bangladesh and internationally.',
+                services: [
+                    'Ship registration and documentation',
+                    'Marine insurance claims',
+                    'Cargo disputes and claims',
+                    'Ship arrest and detention',
+                    'Maritime liens and mortgages',
+                    'International shipping contracts'
+                ]
+            },
+            'alternative-dispute': {
+                title: 'Alternative Dispute Resolution',
+                description: 'Our ADR practice focuses on mediation, arbitration, and other alternative dispute resolution methods. We help clients resolve conflicts efficiently and cost-effectively outside traditional court litigation.',
+                services: [
+                    'Commercial arbitration',
+                    'Mediation services',
+                    'Arbitration agreement drafting',
+                    'International arbitration',
+                    'Dispute resolution consulting',
+                    'Settlement negotiations'
+                ]
+            },
+            'aviation-matters': {
+                title: 'Aviation Matters',
+                description: 'We provide comprehensive legal services for aviation industry clients, including aircraft financing, regulatory compliance, and aviation litigation. Our team has extensive experience in both domestic and international aviation law.',
+                services: [
+                    'Aircraft financing and leasing',
+                    'Aviation regulatory compliance',
+                    'Airport development projects',
+                    'Aviation insurance claims',
+                    'International air transport agreements',
+                    'Drone and UAV regulations'
+                ]
+            },
+            'banking-litigation': {
+                title: 'Banking Litigation',
+                description: 'Our banking litigation practice handles complex financial disputes, regulatory compliance, and banking law matters. We represent banks, financial institutions, and clients in banking-related legal proceedings.',
+                services: [
+                    'Banking regulatory compliance',
+                    'Loan recovery litigation',
+                    'Financial fraud investigations',
+                    'Banking license applications',
+                    'Consumer banking disputes',
+                    'International banking transactions'
+                ]
+            },
+            'business-setup': {
+                title: 'Business Setup',
+                description: 'We assist entrepreneurs and businesses in establishing and structuring their operations in Bangladesh. Our comprehensive business setup services cover all legal aspects of company formation and business establishment.',
+                services: [
+                    'Company incorporation and registration',
+                    'Business license applications',
+                    'Foreign investment approvals',
+                    'Joint venture formations',
+                    'Business restructuring',
+                    'Tax registration and compliance'
+                ]
+            },
+            'civil-litigation': {
+                title: 'Civil Litigation',
+                description: 'Our civil litigation team handles a wide range of civil disputes, from contract breaches to property matters. We provide aggressive representation while seeking efficient resolutions for our clients.',
+                services: [
+                    'Contract dispute resolution',
+                    'Property and real estate litigation',
+                    'Tort claims and negligence',
+                    'Commercial disputes',
+                    'Civil appeals',
+                    'Injunction applications'
+                ]
+            },
+            'commercial-litigation': {
+                title: 'Commercial Litigation',
+                description: 'We specialize in complex commercial disputes involving businesses and corporations. Our commercial litigation practice covers all aspects of business law disputes and corporate conflicts.',
+                services: [
+                    'Corporate governance disputes',
+                    'Shareholder litigation',
+                    'Commercial contract disputes',
+                    'Intellectual property disputes',
+                    'Competition law matters',
+                    'Business tort litigation'
+                ]
+            },
+            'company-formation': {
+                title: 'Company Formation and Registration',
+                description: 'Our company formation services provide end-to-end support for establishing businesses in Bangladesh. We handle all legal requirements and regulatory filings for various business structures.',
+                services: [
+                    'Private limited company formation',
+                    'Public limited company registration',
+                    'Partnership firm establishment',
+                    'Foreign company branch registration',
+                    'NGO and society registration',
+                    'Business name registration'
+                ]
+            },
+            'constitutional-law': {
+                title: 'Constitutional Law',
+                description: 'We provide expert legal services in constitutional matters, including fundamental rights enforcement and constitutional challenges. Our team has extensive experience in constitutional litigation and public law.',
+                services: [
+                    'Fundamental rights petitions',
+                    'Constitutional writs and PIL',
+                    'Election law matters',
+                    'Administrative law challenges',
+                    'Human rights litigation',
+                    'Constitutional interpretation'
+                ]
+            },
+            'contracts': {
+                title: 'Contracts',
+                description: 'Our contract law practice covers drafting, negotiation, and enforcement of commercial agreements. We ensure that our clients\' contractual relationships are legally sound and enforceable.',
+                services: [
+                    'Contract drafting and review',
+                    'Commercial agreement negotiation',
+                    'Contract dispute resolution',
+                    'Terms and conditions development',
+                    'Supply chain agreements',
+                    'Service level agreements'
+                ]
+            },
+            'criminal-defense': {
+                title: 'Criminal Prosecution and Defense',
+                description: 'We provide comprehensive criminal law services for both prosecution and defense matters. Our experienced criminal lawyers handle cases ranging from minor offenses to complex white-collar crimes.',
+                services: [
+                    'Criminal defense representation',
+                    'Prosecution services',
+                    'Bail applications and hearings',
+                    'Criminal appeals',
+                    'White-collar crime defense',
+                    'Corporate criminal liability'
+                ]
+            },
+            'domestic-arbitration': {
+                title: 'Domestic and International Arbitration',
+                description: 'Our arbitration practice handles both domestic and international commercial disputes. We represent clients in arbitration proceedings under various institutional rules and ad-hoc arbitrations.',
+                services: [
+                    'International commercial arbitration',
+                    'Investment treaty arbitration',
+                    'Construction arbitration',
+                    'Arbitration award enforcement',
+                    'Arbitration agreement drafting',
+                    'Arbitrator appointments'
+                ]
+            },
+            'entertainment-litigation': {
+                title: 'Entertainment and Media Litigation',
+                description: 'We represent clients in entertainment industry disputes, including copyright infringement, defamation, and media law matters. Our practice covers film, music, publishing, and digital media.',
+                services: [
+                    'Copyright and trademark disputes',
+                    'Defamation and privacy claims',
+                    'Entertainment contract disputes',
+                    'Media law compliance',
+                    'Celebrity and talent representation',
+                    'Digital content disputes'
+                ]
+            },
+            'environmental-law': {
+                title: 'Environmental Law',
+                description: 'Our environmental law practice addresses regulatory compliance, environmental litigation, and sustainable development matters. We help businesses navigate complex environmental regulations.',
+                services: [
+                    'Environmental impact assessments',
+                    'Regulatory compliance',
+                    'Environmental litigation',
+                    'Climate change law',
+                    'Natural resource management',
+                    'Sustainable development projects'
+                ]
+            },
+            'family-matters': {
+                title: 'Family Matters and Child Custody',
+                description: 'We provide compassionate and expert legal services in family law matters, including divorce, child custody, and domestic relations. Our focus is on achieving fair and equitable outcomes for families.',
+                services: [
+                    'Divorce and separation proceedings',
+                    'Child custody and visitation',
+                    'Child support arrangements',
+                    'Domestic violence protection',
+                    'Adoption and guardianship',
+                    'Family property disputes'
+                ]
+            },
+            'foreign-investment': {
+                title: 'Foreign Investment',
+                description: 'Our foreign investment practice assists international investors in establishing and operating businesses in Bangladesh. We provide comprehensive legal support for FDI and international business ventures.',
+                services: [
+                    'Foreign direct investment approvals',
+                    'Investment license applications',
+                    'Joint venture structuring',
+                    'Repatriation of profits',
+                    'Investment protection agreements',
+                    'Cross-border M&A transactions'
+                ]
+            },
+            'fraud-crimes': {
+                title: 'Fraud and White Collar Crimes',
+                description: 'We specialize in investigating and defending white-collar crimes, financial fraud, and corporate misconduct. Our team has extensive experience in complex financial crime litigation.',
+                services: [
+                    'Financial fraud investigations',
+                    'Money laundering defense',
+                    'Securities fraud litigation',
+                    'Corporate fraud matters',
+                    'Regulatory enforcement defense',
+                    'Asset recovery and forfeiture'
+                ]
+            },
+            'global-investment': {
+                title: 'Global Investment and Citizenship',
+                description: 'Our global investment practice helps clients with international investment strategies and citizenship programs. We provide legal support for offshore investments and residency programs.',
+                services: [
+                    'Citizenship by investment programs',
+                    'Offshore company formation',
+                    'International tax planning',
+                    'Asset protection structures',
+                    'Immigration and residency',
+                    'Global investment advisory'
+                ]
+            },
+            'government-contracts': {
+                title: 'Government Contracts and Litigation',
+                description: 'We handle government contracting matters, including bid protests, contract disputes, and procurement litigation. Our practice covers all aspects of public sector contracting.',
+                services: [
+                    'Government contract bidding',
+                    'Contract dispute resolution',
+                    'Bid protest litigation',
+                    'Public procurement compliance',
+                    'Government relations',
+                    'Contract performance disputes'
+                ]
+            },
+            'immigration-law': {
+                title: 'Immigration Law in Bangladesh',
+                description: 'Our immigration practice provides comprehensive legal services for visa applications, residency permits, and citizenship matters. We assist individuals and businesses with immigration compliance.',
+                services: [
+                    'Work permit applications',
+                    'Residency visa processing',
+                    'Citizenship applications',
+                    'Immigration appeals',
+                    'Family reunification',
+                    'Business immigration'
+                ]
+            },
+            'insurance-recovery': {
+                title: 'Insurance Recovery',
+                description: 'We assist clients in insurance claim disputes and recovery matters. Our practice covers property insurance, liability insurance, and complex insurance litigation.',
+                services: [
+                    'Insurance claim disputes',
+                    'Bad faith insurance litigation',
+                    'Property damage claims',
+                    'Liability insurance recovery',
+                    'Life insurance disputes',
+                    'Insurance contract interpretation'
+                ]
+            },
+            'intellectual-property': {
+                title: 'Intellectual Property (Trademark Patent Copyright)',
+                description: 'Our IP practice protects and enforces intellectual property rights across trademarks, patents, and copyrights. We provide comprehensive IP legal services for businesses and creators.',
+                services: [
+                    'Trademark registration and protection',
+                    'Patent prosecution and litigation',
+                    'Copyright registration and enforcement',
+                    'IP licensing and transactions',
+                    'Trade secret protection',
+                    'IP infringement litigation'
+                ]
+            },
+            'international-trade': {
+                title: 'International Trade',
+                description: 'We provide legal services for international trade and commerce, including import/export regulations, trade agreements, and customs matters. Our practice supports global business operations.',
+                services: [
+                    'International trade agreements',
+                    'Import/export compliance',
+                    'Customs and tariff matters',
+                    'Trade dispute resolution',
+                    'WTO compliance',
+                    'International sanctions'
+                ]
+            },
+            'judicial-review': {
+                title: 'Judicial Review of Administrative Action',
+                description: 'Our judicial review practice challenges administrative decisions and government actions. We represent clients in high court proceedings against administrative overreach.',
+                services: [
+                    'Administrative decision challenges',
+                    'Judicial review applications',
+                    'Government action appeals',
+                    'Regulatory decision review',
+                    'Administrative fairness claims',
+                    'Public law litigation'
+                ]
+            },
+            'labour-employment': {
+                title: 'Labour and Employment Matters',
+                description: 'We provide comprehensive employment law services for employers and employees. Our practice covers workplace disputes, employment contracts, and labor regulatory compliance.',
+                services: [
+                    'Employment contract drafting',
+                    'Workplace dispute resolution',
+                    'Labor law compliance',
+                    'Wrongful termination claims',
+                    'Employee rights protection',
+                    'Collective bargaining'
+                ]
+            },
+            'land-documentation': {
+                title: 'Land Related Documentation',
+                description: 'Our land law practice handles property documentation, land registration, and real estate transactions. We ensure proper legal documentation for all land-related matters.',
+                services: [
+                    'Land registration and transfer',
+                    'Property documentation',
+                    'Title verification',
+                    'Land dispute resolution',
+                    'Real estate transactions',
+                    'Property development agreements'
+                ]
+            },
+            'marine-insurance': {
+                title: 'Marine Insurance',
+                description: 'We specialize in marine insurance claims and disputes, including cargo insurance, hull insurance, and marine liability. Our practice covers all aspects of maritime insurance law.',
+                services: [
+                    'Cargo insurance claims',
+                    'Hull and machinery insurance',
+                    'Marine liability claims',
+                    'Insurance dispute resolution',
+                    'Salvage and general average',
+                    'Marine insurance contracts'
+                ]
+            },
+            'natural-resources': {
+                title: 'Natural Resources',
+                description: 'Our natural resources practice covers mining, energy, and environmental resource matters. We provide legal support for resource extraction and environmental compliance.',
+                services: [
+                    'Mining and extraction rights',
+                    'Energy project development',
+                    'Environmental impact assessments',
+                    'Resource licensing',
+                    'Land use and zoning',
+                    'Sustainable resource management'
+                ]
+            },
+            'oil-gas-law': {
+                title: 'Oil and Gas Law',
+                description: 'We provide specialized legal services for the oil and gas industry, including exploration contracts, regulatory compliance, and energy project development.',
+                services: [
+                    'Oil and gas exploration contracts',
+                    'Regulatory compliance',
+                    'Energy project financing',
+                    'Environmental compliance',
+                    'Pipeline and infrastructure',
+                    'Energy dispute resolution'
+                ]
+            },
+            'private-equity': {
+                title: 'Private Equity Loan Syndication',
+                description: 'Our private equity practice handles complex financing transactions and loan syndications. We provide legal support for private equity investments and structured finance.',
+                services: [
+                    'Private equity transactions',
+                    'Loan syndication agreements',
+                    'Investment fund formation',
+                    'Structured finance deals',
+                    'Equity financing',
+                    'Investment advisory'
+                ]
+            },
+            'procurement-bidding': {
+                title: 'Procurement Bidding and Government Contracts',
+                description: 'We assist clients in government procurement processes, bid preparation, and contract negotiation. Our practice ensures compliance with public procurement regulations.',
+                services: [
+                    'Bid preparation and submission',
+                    'Government procurement compliance',
+                    'Contract negotiation',
+                    'Bid protest defense',
+                    'Public tender processes',
+                    'Procurement dispute resolution'
+                ]
+            },
+            'project-finance': {
+                title: 'Project Finance Documentation',
+                description: 'Our project finance practice handles complex infrastructure and development project financing. We provide comprehensive legal documentation for large-scale projects.',
+                services: [
+                    'Project finance agreements',
+                    'Infrastructure project documentation',
+                    'Development financing',
+                    'Security documentation',
+                    'Project risk assessment',
+                    'Financial closing documentation'
+                ]
+            },
+            'real-estate': {
+                title: 'Real Estate and Property Matters',
+                description: 'We provide comprehensive real estate legal services, including property transactions, development, and dispute resolution. Our practice covers residential and commercial property matters.',
+                services: [
+                    'Property purchase and sale',
+                    'Real estate development',
+                    'Property dispute resolution',
+                    'Lease agreements',
+                    'Mortgage and financing',
+                    'Property management'
+                ]
+            },
+            'security-documentation': {
+                title: 'Security Documentation',
+                description: 'Our security documentation practice handles collateral agreements, guarantees, and security interests. We ensure proper documentation for secured transactions.',
+                services: [
+                    'Security agreements',
+                    'Mortgage documentation',
+                    'Guarantee agreements',
+                    'Pledge and hypothecation',
+                    'Security registration',
+                    'Enforcement of security interests'
+                ]
+            },
+            'ship-building': {
+                title: 'Ship Building and Ship Breaking Matters',
+                description: 'We provide legal services for shipbuilding contracts, ship breaking operations, and maritime construction matters. Our practice covers the entire shipbuilding lifecycle.',
+                services: [
+                    'Shipbuilding contracts',
+                    'Ship breaking regulations',
+                    'Maritime construction disputes',
+                    'Vessel financing',
+                    'Shipyard agreements',
+                    'Environmental compliance'
+                ]
+            },
+            'taxation-systems': {
+                title: 'Taxation Systems',
+                description: 'Our tax practice provides comprehensive tax planning, compliance, and dispute resolution services. We help clients navigate complex tax regulations and optimize their tax positions.',
+                services: [
+                    'Tax planning and advisory',
+                    'Tax compliance and filing',
+                    'Tax dispute resolution',
+                    'Transfer pricing',
+                    'International tax matters',
+                    'Tax audit defense'
+                ]
+            },
+            'tenant-rights': {
+                title: 'Tenant Rights in Bangladesh',
+                description: 'We protect tenant rights and handle landlord-tenant disputes. Our practice ensures fair treatment and legal compliance in rental relationships.',
+                services: [
+                    'Tenant rights protection',
+                    'Rent dispute resolution',
+                    'Eviction defense',
+                    'Lease agreement review',
+                    'Housing discrimination claims',
+                    'Tenant security deposits'
+                ]
+            },
+            'telecommunication': {
+                title: 'Telecommunication and IT Law',
+                description: 'Our technology law practice covers telecommunications regulation, IT contracts, and digital law matters. We provide legal support for technology businesses and digital transformation.',
+                services: [
+                    'Telecommunications licensing',
+                    'IT contract drafting',
+                    'Data protection compliance',
+                    'Technology dispute resolution',
+                    'Digital content regulation',
+                    'Cybersecurity legal matters'
+                ]
+            },
+            'vat-tax': {
+                title: 'VAT Tax and Customs Matters',
+                description: 'We specialize in VAT compliance, customs regulations, and international trade taxation. Our practice helps businesses navigate complex indirect tax requirements.',
+                services: [
+                    'VAT registration and compliance',
+                    'Customs duty assessment',
+                    'Import/export taxation',
+                    'VAT audit defense',
+                    'Indirect tax planning',
+                    'Customs dispute resolution'
+                ]
+            },
+            'verification-documents': {
+                title: 'Verification and Land Documents',
+                description: 'Our document verification practice ensures authenticity and legal validity of land documents and property records. We provide comprehensive due diligence services.',
+                services: [
+                    'Land document verification',
+                    'Title search and verification',
+                    'Property due diligence',
+                    'Document authentication',
+                    'Legal opinion on documents',
+                    'Chain of title verification'
+                ]
+            },
+            'vetting-documents': {
+                title: 'Vetting of Documents',
+                description: 'We provide thorough document vetting and legal review services. Our practice ensures that all legal documents meet regulatory standards and legal requirements.',
+                services: [
+                    'Legal document review',
+                    'Contract vetting',
+                    'Regulatory compliance check',
+                    'Document authentication',
+                    'Legal risk assessment',
+                    'Document standardization'
+                ]
+            },
+            'writ-matters': {
+                title: 'Writ and High Court Matters',
+                description: 'Our constitutional and public law practice handles writ petitions and high court matters. We represent clients in fundamental rights cases and public interest litigation.',
+                services: [
+                    'Writ petition drafting',
+                    'Fundamental rights enforcement',
+                    'Public interest litigation',
+                    'Judicial review applications',
+                    'Constitutional challenges',
+                    'High court appeals'
+                ]
+            }
+        };
+
+        const searchInput = document.getElementById('serviceSearch');
+        const alphabetNav = document.getElementById('alphabetNav');
+        const directoryContainer = document.getElementById('serviceDirectory');
+        const popularContainer = document.getElementById('popularServices');
+
+        const popularServiceKeys = [
+            'civil-litigation',
+            'company-formation',
+            'criminal-defense',
+            'family-matters',
+            'intellectual-property',
+            'real-estate'
+        ];
+
+        const serviceIcons = {
+            'civil-litigation': 'fa-gavel',
+            'company-formation': 'fa-building',
+            'criminal-defense': 'fa-shield-halved',
+            'family-matters': 'fa-users',
+            'intellectual-property': 'fa-lightbulb',
+            'real-estate': 'fa-landmark'
+        };
+
+        const serviceItems = Array.from(document.querySelectorAll('.service-item'));
+
+        let lastFocusedElement = null;
+
+        function getIconForService(key) {
+            return serviceIcons[key] || 'fa-gavel';
+        }
+
+        function renderPopularServices() {
+            if (!popularContainer) return;
+
+            popularContainer.innerHTML = '';
+
+            popularServiceKeys.forEach(key => {
+                const data = serviceData[key];
+                if (!data) return;
+
+                const col = document.createElement('div');
+                col.className = 'col-md-6 col-lg-4';
+
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'service-item popular-service-card';
+                button.setAttribute('data-service', key);
+                button.setAttribute('aria-label', `Open details for ${data.title}`);
+                button.addEventListener('click', () => openModal(key));
+
+                const icon = document.createElement('div');
+                icon.className = 'service-item-icon';
+                icon.innerHTML = `<i class="fas ${getIconForService(key)}"></i>`;
+
+                const title = document.createElement('p');
+                title.className = 'service-item-title';
+                title.textContent = data.title;
+
+                button.appendChild(icon);
+                button.appendChild(title);
+
+                col.appendChild(button);
+                popularContainer.appendChild(col);
+            });
+        }
+
+        const alphabetLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+        function initAlphabetNav() {
+            const sections = Array.from(directoryContainer.querySelectorAll('.service-section'));
+            const availableLetters = new Set(sections.map(s => s.id.replace('section-', '')));
+
+            alphabetNav.innerHTML = '';
+
+            alphabetLetters.forEach(letter => {
+                const li = document.createElement('li');
+                li.className = 'list-inline-item';
+
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'alphabet-link';
+                button.textContent = letter;
+                button.disabled = !availableLetters.has(letter);
+                if (!availableLetters.has(letter)) {
+                    button.classList.add('disabled');
+                }
+
+                button.addEventListener('click', () => {
+                    const target = document.getElementById(`section-${letter}`);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        document.querySelectorAll('.alphabet-link').forEach(el => el.classList.remove('active'));
+                        button.classList.add('active');
+                    }
+                });
+
+                li.appendChild(button);
+                alphabetNav.appendChild(li);
+            });
+        }
+
+        function filterServices(query) {
+            const term = query.trim().toLowerCase();
+            const matches = [];
+
+            serviceItems.forEach(item => {
+                const key = item.dataset.service;
+                const data = serviceData[key] || {};
+                const title = (item.querySelector('.service-item-title')?.textContent || '').toLowerCase();
+                const description = (data.description || '').toLowerCase();
+                const keywords = (data.services || []).join(' ').toLowerCase();
+
+                const haystack = `${title} ${description} ${keywords}`;
+                const visible = term === '' || haystack.includes(term);
+
+                item.style.display = visible ? '' : 'none';
+                if (visible) matches.push(item);
+            });
+
+            directoryContainer.querySelectorAll('.service-section').forEach(section => {
+                const visibleItems = section.querySelectorAll('.service-item:not([style*="display: none"])');
+                section.style.display = visibleItems.length ? '' : 'none';
+            });
+
+            const noResults = document.getElementById('noResultsMessage');
+            const anyVisible = matches.length > 0;
+
+            if (!anyVisible) {
+                if (!noResults) {
+                    const message = document.createElement('p');
+                    message.id = 'noResultsMessage';
+                    message.className = 'text-center mt-4 text-muted';
+                    message.textContent = 'No services match your search. Try different keywords.';
+                    directoryContainer.parentElement.appendChild(message);
+                }
+            } else if (noResults) {
+                noResults.remove();
+            }
+
+            if (term !== '' && matches.length) {
+                matches[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function openModal(serviceKey) {
+            const data = serviceData[serviceKey];
+            if (!data) return;
+
+            lastFocusedElement = document.activeElement;
+
+            modalTitle.textContent = data.title;
+            modalDescription.textContent = data.description;
+            modalServices.innerHTML = '';
+
+            data.services.forEach(service => {
+                const li = document.createElement('li');
+                li.textContent = service;
+                modalServices.appendChild(li);
+            });
+
+            modal.setAttribute('aria-hidden', 'false');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            closeButton.focus();
+        }
+
+        function closeModal() {
+            modal.classList.remove('show');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = 'auto';
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+            }
+        }
+
+        serviceItems.forEach(item => {
+            item.addEventListener('click', () => openModal(item.dataset.service));
+        });
+
+        searchInput.addEventListener('input', e => filterServices(e.target.value));
+
+        closeButton.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', event => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && modal.classList.contains('show')) {
+                closeModal();
+            }
+        });
+
+        let scrollTicking = false;
+        function updateActiveLetterOnScroll() {
+            const sections = document.querySelectorAll('.service-section');
+            const offset = window.innerHeight * 0.35;
+            let activeLetter = null;
+
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= offset && rect.bottom > offset) {
+                    activeLetter = section.id.replace('section-', '');
+                }
+            });
+
+            if (activeLetter) {
+                document.querySelectorAll('.alphabet-link').forEach(btn => {
+                    btn.classList.toggle('active', btn.textContent === activeLetter);
+                });
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!scrollTicking) {
+                scrollTicking = true;
+                window.requestAnimationFrame(() => {
+                    updateActiveLetterOnScroll();
+                    scrollTicking = false;
+                });
+            }
+        });
+
+        modal.addEventListener('wheel', event => {
+            if (modal.classList.contains('show')) {
+                event.stopPropagation();
+            }
+        });
+
+        modal.addEventListener('keydown', event => {
+            if (event.key === 'Tab') {
+                const focusableElements = modal.querySelectorAll('button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])');
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+
+                if (event.shiftKey) {
+                    if (document.activeElement === firstElement) {
+                        event.preventDefault();
+                        lastElement.focus();
+                    }
+                } else {
+                    if (document.activeElement === lastElement) {
+                        event.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            }
+        });
+
+        initAlphabetNav();
+        renderPopularServices();
+        filterServices('');
+        updateActiveLetterOnScroll();
+    })();
+
     // ===== Testimonials Carousel =====
     const testimonials = [
         {
@@ -216,64 +1047,66 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    (function ($) {
-        "use strict";
+    if (window.jQuery) {
+        (function ($) {
+            "use strict";
 
-        $(document).ready(function () {
+            $(document).ready(function () {
 
-            /* =================================
-               TESTIMONIALS CAROUSEL INITIALIZATION
-               ================================= */
-            $(".testimonial-carousel").owlCarousel({
-                loop: true,
-                margin: 30,
-                nav: false,       /* No left/right arrows */
-                dots: true,       /* Show bottom dots */
-                autoplay: true,
-                autoplayTimeout: 4000,
-                smartSpeed: 700,
-                responsive: {
-                    0: {
-                        items: 1  /* Mobile: 1 card */
-                    },
-                    768: {
-                        items: 2  /* Tablet: 2 cards */
-                    },
-                    992: {
-                        items: 3  /* Desktop: 3 cards */
+                /* =================================
+                   TESTIMONIALS CAROUSEL INITIALIZATION
+                   ================================= */
+                $(".testimonial-carousel").owlCarousel({
+                    loop: true,
+                    margin: 30,
+                    nav: false,       /* No left/right arrows */
+                    dots: true,       /* Show bottom dots */
+                    autoplay: true,
+                    autoplayTimeout: 4000,
+                    smartSpeed: 700,
+                    responsive: {
+                        0: {
+                            items: 1  /* Mobile: 1 card */
+                        },
+                        768: {
+                            items: 2  /* Tablet: 2 cards */
+                        },
+                        992: {
+                            items: 3  /* Desktop: 3 cards */
+                        }
                     }
-                }
+                });
+
             });
 
-        });
-
-    })(jQuery);
+        })(jQuery);
 
 
-    /* =================================
-       CLIENT LOGO CAROUSEL INITIALIZATION
-       ================================= */
-    $(".logo-carousel").owlCarousel({
-        rtl: true,       /* Right to Left */
-        loop: true,
-        margin: 30,
-        nav: false,         /* No arrows */
-        dots: false,        /* No dots needed for logos */
-        autoplay: true,     /* Auto Scroll */
-        autoplayTimeout: 2000, /* Speed of slide */
-        autoplayHoverPause: true, /* Stops if user hovers to look closer */
-        responsive: {
-            0: {
-                items: 2    /* 2 logos on mobile */
-            },
-            600: {
-                items: 3    /* 3 logos on tablet */
-            },
-            1000: {
-                items: 5    /* 5 logos on desktop */
+        /* =================================
+           CLIENT LOGO CAROUSEL INITIALIZATION
+           ================================= */
+        $(".logo-carousel").owlCarousel({
+            rtl: true,       /* Right to Left */
+            loop: true,
+            margin: 30,
+            nav: false,         /* No arrows */
+            dots: false,        /* No dots needed for logos */
+            autoplay: true,     /* Auto Scroll */
+            autoplayTimeout: 2000, /* Speed of slide */
+            autoplayHoverPause: true, /* Stops if user hovers to look closer */
+            responsive: {
+                0: {
+                    items: 2    /* 2 logos on mobile */
+                },
+                600: {
+                    items: 3    /* 3 logos on tablet */
+                },
+                1000: {
+                    items: 5    /* 5 logos on desktop */
+                }
             }
-        }
-    });
+        });
+    }
 
     // ===== Video Modal =====
     const videoModal = document.getElementById('videoModal');

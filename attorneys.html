@@ -29,6 +29,7 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
+  <script src="js/theme-init.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
@@ -60,6 +61,9 @@
             <a class="nav-link" href="about.html">About</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="service-areas.html">Services</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" href="attorneys.html">Attorneys</a>
           </li>
           <li class="nav-item">
@@ -77,13 +81,14 @@
         </ul>
       </div>
 
-      <div class="d-none d-lg-flex align-items-center action-zone">
+      <div class="d-flex align-items-center action-zone">
         <div class="phone-group me-4">
           <i class="fas fa-phone-alt text-accent me-2"></i>
           <a href="tel:+8801713456800" class="phone-number">+880 1713 456 800</a>
         </div>
 
-        <a href="consultation.html" class="btn btn-gold">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+        <a href="consultation.html" class="btn btn-gold ms-3">
           Free Consultation <i class="fas fa-arrow-right ms-2"></i>
         </a>
       </div>
@@ -91,20 +96,17 @@
   </nav>
 
   <!-- Page Header -->
-  <section class="hero-section" style="
-        min-height: 50vh;
-        background-image: url(&quot;https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920&quot;);
-      ">
+  <section class="hero-section attorneys-hero">
     <div class="hero-overlay"></div>
     <div class="container">
-      <div class="row align-items-center justify-content-center text-center" style="min-height: 50vh">
+      <div class="row align-items-center justify-content-center text-center">
         <div class="col-md-8" data-aos="fade-up">
           <span class="hero-subtitle">Our Legal Team</span>
-          <h1 class="hero-title" style="font-size: 3rem">
+          <h1 class="hero-title">
             Meet Our <span class="text-accent">Attorneys</span>
           </h1>
           <nav aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-center" style="background: transparent">
+            <ol class="breadcrumb justify-content-center">
               <li class="breadcrumb-item">
                 <a href="index.html" class="text-accent">Home</a>
               </li>
@@ -152,7 +154,7 @@
                 </div>
 
                 <div class="col-md-7">
-                  <div class="p-4 p-lg-5 d-flex flex-column h-100 justify-content-center">
+                  <div class="p-4 p-lg-5 d-flex flex-column h-100 justify-content-center attorney-bio">
                     <h3 class="fw-bold text-white mb-2">
                       Mohammad Mostofa Kamal
                     </h3>
@@ -162,7 +164,7 @@
                       Head of The Chamber & Founder
                     </p>
 
-                    <p class="text-white mb-4" style="line-height: 1.8">
+                    <p class="text-white mb-4">
                       With over 25 years of experience in the Supreme Court of
                       Bangladesh, Mr. Kamal has established himself as a
                       leading figure in Criminal Defense and Corporate Law. He
@@ -170,7 +172,7 @@
                     </p>
 
                     <div class="mb-4">
-                      <h6 class="text-accent text-uppercase small fw-bold mb-3" style="letter-spacing: 1px">
+                      <h6 class="text-accent text-uppercase small fw-bold mb-3">
                         Areas of Expertise
                       </h6>
                       <div class="d-flex flex-wrap">
@@ -233,9 +235,7 @@
                 </div>
               </div>
 
-              <div class="flip-card-back" style="
-                    background-image: url(&quot;images/Attorneys/Nasrin.jpg&quot;);
-                  ">
+              <div class="flip-card-back bg-nasrin">
                 <div class="flip-back-content">
                   <h4 class="text-white mb-1">Adv. Nasrin Akter</h4>
                   <p class="text-accent small mb-4">
@@ -277,9 +277,7 @@
                 </div>
               </div>
 
-              <div class="flip-card-back" style="
-                    background-image: url(&quot;images/Attorneys/Harun2.jpg&quot;);
-                  ">
+              <div class="flip-card-back bg-harun">
                 <div class="flip-back-content">
                   <h4 class="text-white mb-1">Adv. Harun Rayhan</h4>
                   <p class="text-accent small mb-4">
@@ -323,9 +321,7 @@
                 </div>
               </div>
 
-              <div class="flip-card-back" style="
-                    background-image: url(&quot;images/Attorneys/Chowdhury.jpg&quot;);
-                  ">
+              <div class="flip-card-back bg-chowdhury">
                 <div class="flip-back-content">
                   <h4 class="text-white mb-1">
                     Adv. Mustafa Kamal Chowdhury
@@ -367,9 +363,7 @@
                 </div>
               </div>
 
-              <div class="flip-card-back" style="
-                    background-image: url(&quot;images/Attorneys/Kabir.jpg&quot;);
-                  ">
+              <div class="flip-card-back bg-kabir">
                 <div class="flip-back-content">
                   <h4 class="text-white mb-1">Adv. Mohammad Kabir</h4>
                   <p class="text-accent small mb-4">Family Law</p>
@@ -409,9 +403,7 @@
                 </div>
               </div>
 
-              <div class="flip-card-back" style="
-                    background-image: url(&quot;images/Attorneys/Rashed2.jpg&quot;);
-                  ">
+              <div class="flip-card-back bg-rashed">
                 <div class="flip-back-content">
                   <h4 class="text-white mb-1">Adv. Rashed</h4>
                   <p class="text-accent small mb-4">Civil & Property Law</p>
@@ -451,9 +443,7 @@
                 </div>
               </div>
 
-              <div class="flip-card-back" style="
-                    background-image: url(&quot;images/Attorneys/Mahadi.jpg&quot;);
-                  ">
+              <div class="flip-card-back bg-mahadi">
                 <div class="flip-back-content">
                   <h4 class="text-white mb-1">Adv. Mahadi</h4>
                   <p class="text-accent small mb-4">

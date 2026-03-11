@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
-<body style="background-color: #0f1113; color: #ececec">
+<body>
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark-custom">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
@@ -49,6 +49,9 @@
             <a class="nav-link" href="about.html">About</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="service-areas.html">Services</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" href="attorneys.html">Attorneys</a>
           </li>
           <li class="nav-item">
@@ -66,12 +69,13 @@
         </ul>
       </div>
 
-      <div class="d-none d-lg-flex align-items-center action-zone">
+      <div class="d-flex align-items-center action-zone">
         <div class="phone-group me-4">
           <i class="fas fa-phone-alt text-accent me-2"></i>
           <a href="tel:+8801713456800" class="phone-number">+880 1713 456 800</a>
         </div>
-        <a href="consultation.html" class="btn btn-gold">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+        <a href="consultation.html" class="btn btn-gold ms-3">
           Free Consultation <i class="fas fa-arrow-right ms-2"></i>
         </a>
       </div>
@@ -83,10 +87,10 @@
     <div class="glow-blob blob-gold blob-profile-side"></div>
 
     <!-- Hero Section -->
-    <section class="hero-section" style="min-height: 50vh">
+    <section class="hero-section hero-short">
       <div class="hero-overlay"></div>
       <div class="container">
-        <div class="row align-items-center justify-content-center text-center" style="min-height: 50vh">
+        <div class="row align-items-center justify-content-center text-center">
           <div class="col-md-8" data-aos="fade-down" data-aos-duration="800">
             <div class="row align-items-center">
               <div class="col-12 mb-3">
@@ -97,7 +101,7 @@
 
               <div class="col-12">
                 <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb justify-content-center mb-0" style="background: transparent">
+                  <ol class="breadcrumb justify-content-center mb-0">
                     <li class="breadcrumb-item">
                       <a href="index.html" class="text-accent text-decoration-none">Home</a>
                     </li>
@@ -216,7 +220,8 @@
                 <strong>Advocate Mustafa Kamal Chowdhury</strong> serves as a distinguished Senior Associate at Kamal &
                 Associates. His journey into the legal profession is unique, defined by a lifetime of leadership as a
                 celebrated educationist, researcher, and social reformer before turning his full focus to legal
-                advocacy. Born in Whaikyang in 1962, Mr. Chowdhury brings a profound depth of wisdom, administrative
+                advocacy. Born in Teknaf, Cox's Bazar in 1962, Mr. Chowdhury brings a profound depth of wisdom,
+                administrative
                 experience, and community trust to the firm, distinguishing him as a legal practitioner who understands
                 both the letter of the law and the pulse of society. Although he obtained his LL.B in 1994 and was
                 enrolled as an Advocate in 1997, his legal career has been enriched by decades of public service and
@@ -229,7 +234,9 @@
                 to higher education for thousands of students. His legacy as an institutional builder is further
                 cemented by his tenure as the <strong>Founder Principal of Alhaj Ali Achiya School & College</strong>.
                 Through his relentless efforts and administrative foresight, he successfully upgraded the institution
-                from a high school to a college, creating a lasting educational infrastructure for the community.
+                from a high school to a college, creating a lasting educational infrastructure for the community. His
+                undisputed leadership in the academic community is evidenced by his election—<strong>three times
+                  unopposed—as the President of the Bangladesh Teachers' Association, Cox's Bazar District.</strong>
               </p>
               <p class="profile-text">
                 Beyond the classroom and courtroom, Mr. Chowdhury is a formidable voice in media and civil society. He
@@ -703,10 +710,10 @@
             legal advocacy.
           </p>
           <div class="footer-social mt-4">
-            <a href="javascript:void(0)" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="javascript:void(0)" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="javascript:void(0)" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="javascript:void(0)" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
 
@@ -724,10 +731,10 @@
         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
           <h4 class="footer-heading">Resources</h4>
           <ul class="footer-links list-unstyled">
-            <li><a href="javascript:void(0)">Blog & News</a></li>
-            <li><a href="javascript:void(0)">Legal FAQ</a></li>
-            <li><a href="javascript:void(0)">Client Portal</a></li>
-            <li><a href="javascript:void(0)">Careers</a></li>
+            <li><a href="#">Blog & News</a></li>
+            <li><a href="#">Legal FAQ</a></li>
+            <li><a href="#">Client Portal</a></li>
+            <li><a href="#">Careers</a></li>
           </ul>
         </div>
 
@@ -784,22 +791,37 @@
           <div class="col-12 mb-3">
             <h5 class="footer-subheading text-accent">Our Chambers</h5>
           </div>
+
           <div class="col-md-4 mb-4 mb-md-0 chamber-col">
             <div class="chamber-box">
               <h6 class="chamber-title">High Court Chamber</h6>
-              <p class="chamber-address">Dhaka-1000, Bangladesh</p>
+              <p class="chamber-address">
+                Room No. 204, Annex Building<br />
+                Supreme Court Bar Association<br />
+                Dhaka-1000, Bangladesh
+              </p>
             </div>
           </div>
+
           <div class="col-md-4 mb-4 mb-md-0 chamber-col border-start-md border-end-md">
             <div class="chamber-box">
               <h6 class="chamber-title">Judge Court Chamber</h6>
-              <p class="chamber-address">Dhaka-1100</p>
+              <p class="chamber-address">
+                Room No. 405, Sayed Building<br />
+                Dhaka Bar Association<br />
+                Johnson Road, Dhaka-1100
+              </p>
             </div>
           </div>
+
           <div class="col-md-4 chamber-col">
             <div class="chamber-box">
               <h6 class="chamber-title">Evening Chamber</h6>
-              <p class="chamber-address">Gulshan-1, Dhaka</p>
+              <p class="chamber-address">
+                House 12, Road 5 (2nd Floor)<br />
+                Gulshan-1, Dhaka-1212<br />
+                (6:00 PM - 9:00 PM)
+              </p>
             </div>
           </div>
         </div>
@@ -810,14 +832,17 @@
           <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
             <p class="mb-0">
               &copy; 2026 <span class="text-white">Kamal & Associates</span>.
-              All rights reserved.
+              All rights reserved. <br class="d-sm-none" />
+              <span class="established-text">Established 2008.</span>
             </p>
           </div>
           <div class="col-md-6 text-center text-md-end">
             <div class="legal-links">
-              <a href="javascript:void(0)">Privacy Policy</a>
+              <a href="privacy-policy.html">Privacy Policy</a>
               <span class="divider">|</span>
-              <a href="javascript:void(0)">Terms of Service</a>
+              <a href="terms-of-service.html">Terms of Service</a>
+              <span class="divider">|</span>
+              <a href="disclaimer.html">Disclaimer</a>
             </div>
           </div>
         </div>

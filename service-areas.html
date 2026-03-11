@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service Areas - Kamal & Associates</title>
+  <meta name="description" content="Discover our comprehensive range of legal services tailored for individuals, corporations, and international clients in Bangladesh." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/Logo.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/theme-init.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark-custom">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo.png" alt="Kamal & Associates" class="brand-logo me-3">
+                <div class="brand-text d-flex flex-column">
+                    <span class="brand-name">Kamal & Associates</span>
+                    <span class="brand-tagline">Defender Of Justice</span>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="service-areas.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attorneys.html">Attorneys</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="practice-areas.html">Practice Areas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="case-studies.html">Case Studies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="d-flex align-items-center action-zone">
+                <div class="phone-group me-4">
+                    <i class="fas fa-phone-alt text-accent me-2"></i>
+                    <a href="tel:+8801713456800" class="phone-number">+880 1713 456 800</a>
+                </div>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+                <a href="consultation.html" class="btn btn-gold ms-3">
+                    Free Consultation <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section service-areas-hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="row align-items-center justify-content-center text-center hero-content" data-aos="fade-up">
+                <div class="col-md-8">
+                    <span class="hero-subtitle">Service Areas</span>
+                    <h1 class="hero-title">
+                        Explore Our <span class="text-accent">Services</span>
+                    </h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item">
+                                <a href="index.html" class="text-accent">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active text-light" aria-current="page">Service Areas</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search & Popular Services -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center mb-5" data-aos="fade-up">
+                <div class="col-lg-8">
+                    <form class="service-search" role="search" aria-label="Search legal services">
+                        <div class="input-group input-group-lg shadow-sm">
+                            <span class="input-group-text bg-dark text-light border-0">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <input id="serviceSearch" type="search" class="form-control bg-dark border-0 text-light" placeholder="Search legal services..." aria-label="Search legal services" aria-autocomplete="list" aria-controls="serviceSuggestions" aria-expanded="false" autocomplete="off" />
+                        </div>
+                        <div id="serviceSuggestions" class="service-search-suggestions" role="listbox" aria-label="Suggested services" hidden></div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row mb-5" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-12 text-center">
+                    <h2 class="section-title">Popular Services</h2>
+                    <p class="section-description mb-4">
+                        Quickly explore the legal services clients seek most often.
+                    </p>
+                </div>
+                <div id="popularServices" class="row g-4"></div>
+            </div>
+
+            <div class="row mb-4" data-aos="fade-up" data-aos-delay="150">
+                <div class="col-12">
+                    <nav class="alphabet-nav" aria-label="Alphabet navigation">
+                        <ul class="alphabet-list list-inline text-center mb-0" id="alphabetNav"></ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div id="serviceDirectory" class="service-directory">
+<!-- Service directory list (generated from service-areas.js data) -->
+<!-- Each service is a button; clicking opens the modal with details -->
+<section id='section-A' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>A</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='administrative-law' aria-label='Open details for Administrative Law in Bangladesh'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Administrative Law in Bangladesh</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='admiralty-shipping' aria-label='Open details for Admiralty and Shipping'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Admiralty and Shipping</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='alternative-dispute' aria-label='Open details for Alternative Dispute Resolution'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Alternative Dispute Resolution</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='aviation-matters' aria-label='Open details for Aviation Matters'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Aviation Matters</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-B' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>B</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='banking-litigation' aria-label='Open details for Banking Litigation'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Banking Litigation</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='business-setup' aria-label='Open details for Business Setup'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Business Setup</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-C' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>C</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='civil-litigation' aria-label='Open details for Civil Litigation'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Civil Litigation</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='commercial-litigation' aria-label='Open details for Commercial Litigation'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Commercial Litigation</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='company-formation' aria-label='Open details for Company Formation and Registration'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Company Formation and Registration</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='constitutional-law' aria-label='Open details for Constitutional Law'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Constitutional Law</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='contracts' aria-label='Open details for Contracts'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Contracts</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='criminal-defense' aria-label='Open details for Criminal Prosecution and Defense'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Criminal Prosecution and Defense</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-D' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>D</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='domestic-arbitration' aria-label='Open details for Domestic and International Arbitration'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Domestic and International Arbitration</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-E' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>E</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='entertainment-litigation' aria-label='Open details for Entertainment and Media Litigation'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Entertainment and Media Litigation</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='environmental-law' aria-label='Open details for Environmental Law'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Environmental Law</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-F' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>F</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='foreign-investment' aria-label='Open details for Foreign Investment'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Foreign Investment</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='fraud-crimes' aria-label='Open details for Fraud and White Collar Crimes'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Fraud and White Collar Crimes</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-G' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>G</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='global-investment' aria-label='Open details for Global Investment and Citizenship'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Global Investment and Citizenship</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='government-contracts' aria-label='Open details for Government Contracts and Litigation'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Government Contracts and Litigation</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-I' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>I</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='immigration-law' aria-label='Open details for Immigration Law in Bangladesh'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Immigration Law in Bangladesh</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='insurance-recovery' aria-label='Open details for Insurance Recovery'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Insurance Recovery</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='intellectual-property' aria-label='Open details for Intellectual Property (Trademark Patent Copyright)'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Intellectual Property (Trademark Patent Copyright)</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='international-trade' aria-label='Open details for International Trade'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>International Trade</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-J' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>J</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='judicial-review' aria-label='Open details for Judicial Review of Administrative Action'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Judicial Review of Administrative Action</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-L' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>L</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='labour-employment' aria-label='Open details for Labour and Employment Matters'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Labour and Employment Matters</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='land-documentation' aria-label='Open details for Land Related Documentation'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Land Related Documentation</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-M' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>M</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='marine-insurance' aria-label='Open details for Marine Insurance'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Marine Insurance</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-N' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>N</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='natural-resources' aria-label='Open details for Natural Resources'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Natural Resources</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-O' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>O</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='oil-gas-law' aria-label='Open details for Oil and Gas Law'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Oil and Gas Law</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-P' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>P</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='private-equity' aria-label='Open details for Private Equity Loan Syndication'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Private Equity Loan Syndication</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='procurement-bidding' aria-label='Open details for Procurement Bidding and Government Contracts'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Procurement Bidding and Government Contracts</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='project-finance' aria-label='Open details for Project Finance Documentation'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Project Finance Documentation</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='privacy-policy' aria-label='Open details for Privacy Policy'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Privacy Policy</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-R' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>R</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='real-estate' aria-label='Open details for Real Estate and Property Matters'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Real Estate and Property Matters</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-S' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>S</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='ship-building' aria-label='Open details for Ship Building and Ship Breaking Matters'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Ship Building and Ship Breaking Matters</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='security-documentation' aria-label='Open details for Security Documentation'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Security Documentation</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-T' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>T</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='tenant-rights' aria-label='Open details for Tenant Rights in Bangladesh'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Tenant Rights in Bangladesh</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='telecommunication' aria-label='Open details for Telecommunication and IT Law'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Telecommunication and IT Law</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='taxation-systems' aria-label='Open details for Taxation Systems'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Taxation Systems</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='terms-of-service' aria-label='Open details for Terms of Service'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Terms of Service</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-V' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>V</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='verification-documents' aria-label='Open details for Verification and Land Documents'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Verification and Land Documents</p>
+      </div>
+    </button>
+    <button type='button' class='service-item' data-service='vetting-documents' aria-label='Open details for Vetting of Documents'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Vetting of Documents</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<section id='section-W' class='service-section' data-aos='fade-up'>
+  <h2 class='service-section-title'>W</h2>
+  <div class='service-grid'>
+    <button type='button' class='service-item' data-service='writ-matters' aria-label='Open details for Writ and High Court Matters'>
+      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
+      <div>
+        <p class='service-item-title'>Writ and High Court Matters</p>
+      </div>
+    </button>
+  </div>
+</section>
+</div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <h2 class="section-title">Have a question?</h2>
+                    <p class="section-description">
+                        Our experienced attorneys are ready to review your case and guide you through every step.
+                    </p>
+                </div>
+                <div class="col-lg-4 text-lg-end" data-aos="fade-up" data-aos-delay="100">
+                    <a href="consultation.html" class="btn btn-primary btn-lg">Request a Consultation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Modal -->
+    <div id="serviceModal" class="service-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="service-modal-dialog" role="document">
+            <div class="service-modal-content" data-aos="fade-up">
+                <button type="button" class="service-modal-close" aria-label="Close modal">&times;</button>
+                <h2 id="modalTitle" class="service-modal-title"></h2>
+                <p id="modalDescription" class="service-modal-text"></p>
+                <div class="service-modal-section">
+                    <h3 class="service-modal-subtitle">Our Services Include</h3>
+                    <ul id="modalServices" class="service-modal-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+    <div class="container">
+      <div class="row gx-5 mb-5">
+        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+          <div class="footer-brand mb-4">
+            <h2 class="footer-logo">Kamal & Associates</h2>
+            <span class="footer-tagline">Defender Of Justice</span>
+          </div>
+          <p class="footer-desc">
+            With a proven record of assisting thousands in overcoming wrongful
+            denials nationwide, Kamal & Associates stands as a trusted name in
+            legal advocacy.
+          </p>
+          <div class="footer-social mt-4">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="attorneys.html">Attorneys</a></li>
+            <li><a href="case-studies.html">Case Studies</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h4 class="footer-heading">Resources</h4>
+          <ul class="footer-links list-unstyled">
+            <li><a href="#">Blog & News</a></li>
+            <li><a href="#">Legal FAQ</a></li>
+            <li><a href="#">Client Portal</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <h4 class="footer-heading">Business Hours</h4>
+          <ul class="business-hours list-unstyled mb-4">
+            <li class="d-flex justify-content-between">
+              <span>Sunday - Thursday</span>
+              <span class="text-white">9:00 AM - 6:00 PM</span>
+            </li>
+            <li class="d-flex justify-content-between">
+              <span>Saturday</span>
+              <span class="text-white">10:00 AM - 2:00 PM</span>
+            </li>
+            <li class="d-flex justify-content-between text-accent">
+              <span>Friday</span>
+              <span>Closed</span>
+            </li>
+          </ul>
+
+          <div class="footer-newsletter-compact mt-5">
+            <h4 class="footer-heading mb-3">Subscribe</h4>
+            <p class="text-white small mb-3">
+              Stay updated with the latest legal news and firm announcements.
+            </p>
+            <form class="subscribe-form-compact">
+              <div class="input-group">
+                <input type="email" class="form-control" placeholder="Email Address" required />
+                <button class="btn btn-gold" type="submit">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-middle-bar">
+        <div class="row justify-content-center mb-4 border-bottom-light pb-4">
+          <div class="col-md-10 text-center">
+            <div class="contact-pill-wrapper">
+              <a href="tel:+8801713456800" class="contact-pill">
+                <i class="fas fa-phone-alt text-accent"></i> +880 1713 456 800
+              </a>
+              <span class="d-none d-md-inline-block mx-3 text-muted">|</span>
+              <a href="mailto:info@kamallaw.com" class="contact-pill">
+                <i class="fas fa-envelope text-accent"></i> info@kamallaw.com
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row text-center">
+          <div class="col-12 mb-3">
+            <h5 class="footer-subheading text-accent">Our Chambers</h5>
+          </div>
+
+          <div class="col-md-4 mb-4 mb-md-0 chamber-col">
+            <div class="chamber-box">
+              <h6 class="chamber-title">High Court Chamber</h6>
+              <p class="chamber-address">
+                Room No. 204, Annex Building<br />
+                Supreme Court Bar Association<br />
+                Dhaka-1000, Bangladesh
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4 mb-md-0 chamber-col border-start-md border-end-md">
+            <div class="chamber-box">
+              <h6 class="chamber-title">Judge Court Chamber</h6>
+              <p class="chamber-address">
+                Room No. 405, Sayed Building<br />
+                Dhaka Bar Association<br />
+                Johnson Road, Dhaka-1100
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4 chamber-col">
+            <div class="chamber-box">
+              <h6 class="chamber-title">Evening Chamber</h6>
+              <p class="chamber-address">
+                House 12, Road 5 (2nd Floor)<br />
+                Gulshan-1, Dhaka-1212<br />
+                (6:00 PM - 9:00 PM)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+            <p class="mb-0">
+              &copy; 2026 <span class="text-white">Kamal & Associates</span>.
+              All rights reserved. <br class="d-sm-none" />
+              <span class="established-text">Established 2008.</span>
+            </p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <div class="legal-links">
+              <a href="privacy-policy.html">Privacy Policy</a>
+              <span class="divider">|</span>
+              <a href="terms-of-service.html">Terms of Service</a>
+              <span class="divider">|</span>
+              <a href="disclaimer.html">Disclaimer</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

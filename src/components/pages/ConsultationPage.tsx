@@ -27,21 +27,58 @@ const ConsultationPage: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Fallback eligibility check function
+  const checkEligibilityFallback = async (email: string, phone: string) => {
+    try {
+      const consultationHistory = JSON.parse(localStorage.getItem('consultationHistory') || '{}');
+      const userKey = `${email}_${phone}`;
+      
+      if (consultationHistory[userKey]) {
+        return {
+          freeConsultationUsed: true,
+          consultationFee: 2000,
+          consultationCount: consultationHistory[userKey].count || 1
+        };
+      }
+      
+      return {
+        freeConsultationUsed: false,
+        consultationFee: 2000,
+        consultationCount: 0
+      };
+    } catch (err) {
+      console.error('Fallback check error:', err);
+      return {
+        freeConsultationUsed: false,
+        consultationFee: 2000,
+        consultationCount: 0
+      };
+    }
+  };
+
   // Check eligibility when email and phone are filled
   useEffect(() => {
     const checkEligibility = async () => {
       if (formData.email && formData.phone && formData.email.includes('@')) {
         setIsCheckingEligibility(true);
         try {
-          const { data, error } = await supabase.functions.invoke('consultation-check', {
-            body: { email: formData.email, phone: formData.phone }
-          });
+          let data;
+          try {
+            const result = await supabase.functions.invoke('consultation-check', {
+              body: { email: formData.email, phone: formData.phone }
+            });
+            data = result.data;
+          } catch (apiError) {
+            console.warn('Edge Function unavailable, using fallback:', apiError);
+            data = await checkEligibilityFallback(formData.email, formData.phone);
+          }
           
-          if (data && !error) {
+          if (data) {
             setIsFreeConsultation(!data.freeConsultationUsed);
           }
         } catch (err) {
           console.error('Error checking eligibility:', err);
+          setIsFreeConsultation(true); // Default to free if error occurs
         }
         setIsCheckingEligibility(false);
       }

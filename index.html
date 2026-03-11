@@ -29,6 +29,7 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
+  <script src="js/theme-init.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
@@ -60,6 +61,9 @@
             <a class="nav-link" href="about.html">About</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="service-areas.html">Services</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="attorneys.html">Attorneys</a>
           </li>
           <li class="nav-item">
@@ -77,13 +81,14 @@
         </ul>
       </div>
 
-      <div class="d-none d-lg-flex align-items-center action-zone">
+      <div class="d-flex align-items-center action-zone">
         <div class="phone-group me-4">
           <i class="fas fa-phone-alt text-accent me-2"></i>
           <a href="tel:+8801713456800" class="phone-number">+880 1713 456 800</a>
         </div>
 
-        <a href="consultation.html" class="btn btn-gold">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+        <a href="consultation.html" class="btn btn-gold ms-3">
           Free Consultation <i class="fas fa-arrow-right ms-2"></i>
         </a>
       </div>
@@ -103,10 +108,8 @@
             </span>
           </h1>
           <p class="hero-description">
-            With a proven record of assisting thousands in overcoming wrongful
-            denials nationwide,
-            <strong>Kamal & Associates</strong> stands as a trusted name in
-            legal advocacy.
+            With a proven record of assisting thousands in overcoming wrongful denials nationwide,
+           <strong>Kamal & Associates Law Firm</strong> has earned its reputation as a trusted leader in legal advocacy.
           </p>
           <div class="hero-buttons">
             <a href="contact.html" class="btn btn-primary btn-lg">
@@ -214,7 +217,7 @@
               <i class="fas fa-balance-scale"></i>
             </div>
             <div class="counter-number">
-              <span class="counter" data-target="1000">0</span>+
+              <span class="counter" data-target="2000">0</span>+
             </div>
             <div class="counter-label">Cases Completed</div>
           </div>
@@ -223,7 +226,7 @@
           <div class="counter-wrap">
             <div class="counter-icon"><i class="fas fa-users"></i></div>
             <div class="counter-number">
-              <span class="counter" data-target="2000">0</span>+
+              <span class="counter" data-target="1950">0</span>+
             </div>
             <div class="counter-label">Satisfied Clients</div>
           </div>
@@ -438,9 +441,7 @@
       <div class="row" id="caseStudiesGrid">
         <div class="col-lg-3 col-md-6 case-item" data-category="corporate" data-aos="fade-up" data-aos-delay="100">
           <div class="case-study-card">
-            <div class="case-img" style="
-                  background-image: url(&quot;https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&quot;);
-                ">
+            <div class="case-img case-img--corporate">
               <span class="badge-category">Corporate</span>
             </div>
             <div class="case-content">
@@ -458,9 +459,7 @@
         </div>
         <div class="col-lg-3 col-md-6 case-item" data-category="property" data-aos="fade-up" data-aos-delay="200">
           <div class="case-study-card">
-            <div class="case-img" style="
-                  background-image: url(&quot;https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&quot;);
-                ">
+            <div class="case-img case-img--property">
               <span class="badge-category">Property</span>
             </div>
             <div class="case-content">
@@ -478,9 +477,7 @@
         </div>
         <div class="col-lg-3 col-md-6 case-item" data-category="criminal" data-aos="fade-up" data-aos-delay="300">
           <div class="case-study-card">
-            <div class="case-img" style="
-                  background-image: url(&quot;https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&quot;);
-                ">
+            <div class="case-img case-img--criminal">
               <span class="badge-category">Criminal</span>
             </div>
             <div class="case-content">
@@ -498,9 +495,7 @@
         </div>
         <div class="col-lg-3 col-md-6 case-item" data-category="family" data-aos="fade-up" data-aos-delay="400">
           <div class="case-study-card">
-            <div class="case-img" style="
-                  background-image: url(&quot;https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&quot;);
-                ">
+            <div class="case-img case-img--family">
               <span class="badge-category">Family</span>
             </div>
             <div class="case-content">
@@ -590,9 +585,7 @@
         <div class="col-lg-4 col-md-6" data-aos="fade-up">
           <a href="attorney-kamal.html" class="attorney-link">
             <div class="attorney-card head-attorney">
-              <div class="attorney-img" style="
-                    background-image: url(&quot;images/Attorneys/Kamal.jpg&quot;);
-                  ">
+              <div class="attorney-img attorney-img--kamal">
                 <div class="attorney-social">
                   <div class="social-link">
                     <i class="fab fa-facebook-f"></i>
@@ -620,9 +613,7 @@
             <div class="item">
               <a href="attorney-nasrin.html" class="attorney-link">
                 <div class="attorney-card">
-                  <div class="attorney-img" style="
-                        background-image: url(&quot;images/Attorneys/Nasrin.jpg&quot;);
-                      ">
+                  <div class="attorney-img attorney-img--nasrin">
                     <div class="attorney-social">
                       <div class="social-link">
                         <i class="fab fa-facebook-f"></i>
@@ -643,9 +634,7 @@
             <div class="item">
               <a href="attorney-harun.html" class="attorney-link">
                 <div class="attorney-card">
-                  <div class="attorney-img" style="
-                        background-image: url(&quot;images/Attorneys/Harun.jpg&quot;);
-                      ">
+                  <div class="attorney-img attorney-img--harun">
                     <div class="attorney-social">
                       <div class="social-link">
                         <i class="fab fa-facebook-f"></i>
@@ -666,9 +655,7 @@
             <div class="item">
               <a href="attorney-mustafa.html" class="attorney-link">
                 <div class="attorney-card">
-                  <div class="attorney-img" style="
-                        background-image: url(&quot;images/Attorneys/Chowdhury.jpg&quot;);
-                      ">
+                  <div class="attorney-img attorney-img--chowdhury">
                     <div class="attorney-social">
                       <div class="social-link">
                         <i class="fab fa-facebook-f"></i>
@@ -689,9 +676,7 @@
             <div class="item">
               <a href="attorney-kabir.html" class="attorney-link">
                 <div class="attorney-card">
-                  <div class="attorney-img" style="
-                        background-image: url(&quot;images/Attorneys/Kabir.jpg&quot;);
-                      ">
+                  <div class="attorney-img attorney-img--kabir">
                     <div class="attorney-social">
                       <div class="social-link">
                         <i class="fab fa-facebook-f"></i>
@@ -712,9 +697,7 @@
             <div class="item">
               <a href="attorney-rashed.html" class="attorney-link">
                 <div class="attorney-card">
-                  <div class="attorney-img" style="
-                        background-image: url(&quot;images/Attorneys/Rashed.jpg&quot;);
-                      ">
+                  <div class="attorney-img attorney-img--rashed">
                     <div class="attorney-social">
                       <div class="social-link">
                         <i class="fab fa-facebook-f"></i>
@@ -846,10 +829,7 @@
           </div>
           <div class="row">
             <div class="col-12">
-              <hr style="
-                    border-top: 1px solid rgba(255, 255, 255, 0.1);
-                    margin: 60px 0;
-                  " />
+              <hr class="divider" />
             </div>
           </div>
 

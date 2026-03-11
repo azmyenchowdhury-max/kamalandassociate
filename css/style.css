@@ -6,19 +6,78 @@
 
 /* ===== CSS Variables ===== */
 :root {
-    --primary-color: #AFA939;
-    --primary-dark: #B48811;
-    --bg-dark: #0F1113;
-    --bg-dark-secondary: #1A1D21;
-    --text-light: #ECECEC;
-    --text-muted: #9CA3AF;
-    --gradient-primary: linear-gradient(135deg, #AFA939 0%, #B48811 100%);
-    --gradient-primary-hover: linear-gradient(135deg, #B48811 0%, #AFA939 100%);
+    /* Core Color Palette */
+    --background-color: #FFFFFF;
+    --text-color: #1F2937;
+    --text-muted: #6B7280;
+
+    --card-bg: #F8FAFC;
+    --card-border: rgba(15, 23, 42, 0.08);
+
+    --toggle-border: rgba(15, 23, 42, 0.18);
+    --toggle-bg-hover: rgba(15, 23, 42, 0.06);
+
+    --navbar-bg: #FFFFFF;
+    --navbar-border: rgba(15, 23, 42, 0.08);
+    --navbar-text: #111827;
+
+    --footer-bg: #0F1113;
+    --footer-text: #ECECEC;
+
+    --accent-color: #AFA939;
+    --accent-color-dark: #B48811;
+
+    --primary-color: var(--accent-color);
+    --primary-dark: var(--accent-color-dark);
+    --gradient-primary: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-dark) 100%);
+    --gradient-primary-hover: linear-gradient(135deg, var(--accent-color-dark) 0%, var(--accent-color) 100%);
+
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
+
     --transition: all 0.3s ease;
-    --shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.4);
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
+
+    --input-bg: rgba(0, 0, 0, 0.05);
+    --input-border: rgba(0, 0, 0, 0.12);
+
+    /* Compatibility variables (legacy usage in this stylesheet) */
+    --bg-dark: var(--background-color);
+    --bg-dark-secondary: var(--card-bg);
+    --text-light: var(--text-color);
+}
+
+.dark-mode {
+    --background-color: #0F1113;
+    --text-color: #F1F5F9;
+    --text-muted: rgba(241, 245, 249, 0.72);
+
+    --card-bg: #13151A;
+    --card-border: rgba(255, 255, 255, 0.08);
+
+    --navbar-bg: #0B0D10;
+    --navbar-border: rgba(255, 255, 255, 0.08);
+    --navbar-text: #F1F5F9;
+
+    --footer-bg: #050607;
+    --footer-text: #E5E7EB;
+
+    --toggle-border: rgba(255, 255, 255, 0.2);
+    --toggle-bg-hover: rgba(255, 255, 255, 0.12);
+
+    --accent-color: #D4AF37;
+    --accent-color-dark: #B48811;
+
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.6);
+
+    --input-bg: rgba(255, 255, 255, 0.08);
+    --input-border: rgba(255, 255, 255, 0.15);
+
+    --bg-dark: var(--background-color);
+    --bg-dark-secondary: var(--card-bg);
+    --text-light: var(--text-color);
 }
 
 /* ===== Base Styles ===== */
@@ -34,10 +93,21 @@ html {
 
 body {
     font-family: var(--font-body);
-    background-color: var(--bg-dark);
-    color: var(--text-light);
+    background-color: var(--background-color);
+    color: var(--text-color);
     line-height: 1.7;
     overflow-x: hidden;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.navbar,
+.footer-section,
+.service-item,
+.service-modal-content,
+.popular-service-card,
+.btn,
+.theme-toggle {
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 h1,
@@ -116,11 +186,28 @@ img {
 
 /* 1. Navbar Container */
 .navbar-dark.bg-dark-custom {
-    background-color: #0F1113;
-    /* Matches React Background */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: var(--navbar-bg);
+    border-bottom: 1px solid var(--navbar-border);
     padding: 15px 0;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Allow the navbar to span the full viewport width so nav links stay on a single line */
+.navbar-dark.bg-dark-custom .container {
+    max-width: 100% !important;
+}
+
+.action-zone {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 992px) {
+    .action-zone {
+        justify-content: flex-end;
+    }
 }
 
 /* 2. Brand Section (Logo + Text) */
@@ -134,7 +221,7 @@ img {
     font-family: 'Playfair Display', serif;
     font-size: 22px;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--navbar-text);
     line-height: 1;
     margin-bottom: 4px;
 }
@@ -151,48 +238,80 @@ img {
 
 /* 3. Navigation Links (Center) */
 .navbar-nav .nav-link {
-    color: #e5e7eb !important;
-    /* Light Grey */
+    color: var(--navbar-text) !important;
     font-weight: 500;
     font-size: 15px;
     padding: 0 15px !important;
+    position: relative;
     transition: color 0.3s;
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+    width: 100%;
 }
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
-    color: var(--primary-color) !important;
-    /* Gold on Hover */
+    color: var(--accent-color) !important;
 }
 
 /* 4. Action Zone (Right) */
 .phone-number {
-    color: #ffffff;
+    color: var(--navbar-text);
     font-weight: 600;
     text-decoration: none;
     font-size: 15px;
 }
 
 .btn-gold {
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
     color: #000000;
     font-weight: 600;
     padding: 10px 25px;
-    border-radius: 4px;
+    border-radius: 6px;
     border: none;
-    transition: all 0.3s ease;
-    display: block;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .btn-gold:hover {
-    background-color: #ffffff;
-    color: var(--primary-color);
+    background-color: var(--accent-color-dark);
+    color: #000000;
     transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--toggle-border);
+    color: var(--navbar-text);
+    padding: 0.55rem 0.9rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--toggle-bg-hover);
 }
 
 /* 5. Sticky State (Optional: Adds shadow when scrolling) */
-.navbar.sticky-top.scrolled {
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+.navbar.scrolled {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
     padding: 10px 0;
     /* Shrinks slightly on scroll */
 }
@@ -209,6 +328,10 @@ img {
     background-attachment: fixed;
 }
 
+.hero-section.hero-short {
+    min-height: 50vh;
+}
+
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -216,6 +339,11 @@ img {
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 60px 0;
 }
 
 .hero-section .container {
@@ -238,6 +366,14 @@ img {
     font-weight: 700;
     margin-bottom: 25px;
     line-height: 1.2;
+}
+
+.attorney-bio p {
+    line-height: 1.8;
+}
+
+.attorney-bio h6 {
+    letter-spacing: 1px;
 }
 
 @media (min-width: 768px) {
@@ -596,8 +732,11 @@ img {
 }
 
 .flip-card-back {
-    background: rgba(0, 0, 0, 0.6);
-    /* Transparent background */
+    background-color: rgba(0, 0, 0, 0.6);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
@@ -607,6 +746,16 @@ img {
     text-align: center;
     gap: 20px;
 }
+
+/* Background helpers for flip cards */
+.flip-card-back.bg-nasrin { background-image: url('images/Attorneys/Nasrin.jpg'); }
+.flip-card-back.bg-harun { background-image: url('images/Attorneys/Harun2.jpg'); }
+.flip-card-back.bg-chowdhury { background-image: url('images/Attorneys/Chowdhury.jpg'); }
+.flip-card-back.bg-kabir { background-image: url('images/Attorneys/Kabir.jpg'); }
+.flip-card-back.bg-rashed { background-image: url('images/Attorneys/Rashed2.jpg'); }
+.flip-card-back.bg-mahadi { background-image: url('images/Attorneys/Mahadi.jpg'); }
+
+.flip-card-back.bg-sandip { background-image: url('images/Staffs/Sandip.jpg'); }
 
 .flip-card-back h3 {
     font-size: 1.5rem;
@@ -687,6 +836,11 @@ img {
     background-position: center;
     position: relative;
 }
+
+.case-img--corporate { background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600'); }
+.case-img--property { background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600'); }
+.case-img--criminal { background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600'); }
+.case-img--family { background-image: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600'); }
 
 .badge-category {
     position: absolute;
@@ -832,6 +986,13 @@ img {
     position: relative;
     overflow: hidden;
 }
+
+.attorney-img--kamal { background-image: url('images/Attorneys/Kamal.jpg'); }
+.attorney-img--nasrin { background-image: url('images/Attorneys/Nasrin.jpg'); }
+.attorney-img--harun { background-image: url('images/Attorneys/Harun.jpg'); }
+.attorney-img--chowdhury { background-image: url('images/Attorneys/Chowdhury.jpg'); }
+.attorney-img--kabir { background-image: url('images/Attorneys/Kabir.jpg'); }
+.attorney-img--rashed { background-image: url('images/Attorneys/Rashed.jpg'); }
 
 .attorney-social {
     position: absolute;
@@ -1201,19 +1362,16 @@ img {
    ======================== */
 
 .footer-section {
-    background-color: #0F1113;
-    /* Dark Background */
-    color: #9CA3AF;
-    /* Muted Text Color */
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
     padding: 80px 0 30px 0;
     font-family: 'Inter', sans-serif;
-    border-top: 3px solid var(--primary-color);
-    /* Gold Top Border */
+    border-top: 3px solid var(--accent-color);
 }
 
 /* 1. Brand Styling */
 .footer-logo {
-    color: #FFFFFF;
+    color: var(--footer-text);
     font-family: 'Playfair Display', serif;
     font-size: 26px;
     font-weight: 700;
@@ -1221,8 +1379,7 @@ img {
 }
 
 .footer-tagline {
-    color: var(--primary-color);
-    /* Gold Color */
+    color: var(--accent-color);
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
@@ -1239,7 +1396,7 @@ img {
 
 /* 2. Headings */
 .footer-heading {
-    color: #FFFFFF;
+    color: var(--footer-text);
     font-family: 'Playfair Display', serif;
     font-size: 18px;
     font-weight: 600;
@@ -1265,14 +1422,15 @@ img {
 }
 
 .footer-links a {
-    color: #9CA3AF;
+    color: var(--footer-text);
+    opacity: 0.8;
     text-decoration: none;
-    transition: 0.3s;
+    transition: color 0.3s, padding-left 0.3s;
     font-size: 15px;
 }
 
 .footer-links a:hover {
-    color: var(--primary-color);
+    color: var(--accent-color);
     padding-left: 5px;
 }
 
@@ -2997,4 +3155,308 @@ p {
 
 .flip-card:hover .flip-card-back {
     z-index: 100;
+}
+
+/* ===== Service Areas Page ===== */
+.service-areas-hero {
+  background: linear-gradient(rgba(15, 17, 19, 0.75), rgba(15, 17, 19, 0.75)), url('images/BG/law-bg.jpg') center/cover no-repeat;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.service-areas-hero .hero-content {
+  min-height: 55vh;
+}
+
+.service-areas-hero .hero-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-section .breadcrumb {
+  background: transparent;
+}
+
+.hero-section .breadcrumb-item + .breadcrumb-item::before {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+@media (max-width: 768px) {
+  .service-areas-hero .hero-title {
+    font-size: 2.5rem;
+  }
+}
+
+.practice-areas-hero,
+.attorneys-hero {
+  background: linear-gradient(rgba(15, 17, 19, 0.75), rgba(15, 17, 19, 0.75)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920') center/cover no-repeat;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.practice-areas-hero .hero-title,
+.attorneys-hero .hero-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .practice-areas-hero .hero-title,
+  .attorneys-hero .hero-title {
+    font-size: 2.5rem;
+  }
+}
+
+.service-search .form-control {
+  background: var(--input-bg);
+  border-radius: 12px;
+  border: 1px solid var(--input-border);
+  height: 56px;
+  color: var(--text-color);
+}
+
+.service-search .form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(175, 169, 57, 0.3);
+  border-color: rgba(175, 169, 57, 0.8);
+}
+
+.service-search .input-group-text {
+  border-radius: 12px 0 0 12px;
+  border: 1px solid var(--input-border);
+  border-right: 0;
+}
+
+.popular-service-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 1.8rem 1.5rem;
+  transition: var(--transition);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.popular-service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent-color);
+}
+
+.popular-service-card .service-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(175, 169, 57, 0.15);
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.25rem;
+  font-size: 1.4rem;
+  color: var(--primary-color);
+}
+
+.popular-service-card .service-card-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.popular-service-card .service-card-link {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.popular-service-card .service-card-link i {
+  transition: transform 0.2s ease;
+}
+
+.popular-service-card:hover .service-card-link i {
+  transform: translateX(4px);
+}
+
+.alphabet-nav {
+  padding: 0.5rem 0;
+  background: var(--card-bg);
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+}
+
+.alphabet-list .alphabet-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin: 0 4px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: var(--transition);
+}
+
+.alphabet-list .alphabet-link:hover,
+.alphabet-list .alphabet-link.active {
+  background: rgba(175, 169, 57, 0.2);
+  color: var(--text-light);
+  border-color: rgba(175, 169, 57, 0.25);
+}
+
+.alphabet-list .alphabet-link.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.service-directory .service-section {
+  margin-bottom: 3.5rem;
+}
+
+.service-directory .service-section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.75rem;
+  color: var(--primary-color);
+}
+
+.service-directory .service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.service-item:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent-color);
+}
+
+.service-item-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(175, 169, 57, 0.15);
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.service-item-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-color);
+}
+
+.service-item-description {
+  margin: 0.35rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.service-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1050;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  overflow-y: auto;
+  transition: opacity 0.25s ease;
+}
+
+.service-modal.show {
+  display: flex;
+  opacity: 1;
+}
+
+.service-modal-dialog {
+  max-width: 640px;
+  width: 100%;
+}
+
+.service-modal-content {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 2rem;
+  position: relative;
+  box-shadow: var(--shadow);
+}
+
+.service-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.service-modal-close:hover {
+  color: var(--accent-color);
+}
+
+.service-modal-title {
+  margin-top: 0;
+  font-size: 2rem;
+  color: var(--accent-color);
+}
+
+.service-modal-text {
+  margin: 1rem 0 1.2rem;
+  color: var(--text-color);
+  line-height: 1.7;
+}
+
+.service-modal-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.service-modal-list {
+  list-style: disc inside;
+  color: var(--text-color);
+  padding-left: 1rem;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .service-areas-hero .hero-title {
+    font-size: 3rem;
+  }
+
+  .service-modal-content {
+    padding: 1.5rem;
+  }
 }

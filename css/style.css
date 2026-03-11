@@ -790,7 +790,7 @@ img {
     justify-content: flex-end;
 }
 
-.kamal-chatbot-bubble {
+.kamal-chatbot-message-bubble {
     max-width: 80%;
     border-radius: 14px;
     padding: 8px 10px;
@@ -800,7 +800,7 @@ img {
     color: var(--text-color);
 }
 
-.kamal-chatbot-bubble.user {
+.kamal-chatbot-message-bubble.user {
     background: linear-gradient(135deg, var(--accent-color), var(--accent-color-dark));
     color: #000;
 }

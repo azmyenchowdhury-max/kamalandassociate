@@ -661,11 +661,11 @@
     });
 
     if (role === "bot") {
-      const bubble = createElement("div", { class: "kamal-chatbot-bubble bot" });
+      const bubble = createElement("div", { class: "kamal-chatbot-message-bubble bot" });
       bubble.textContent = text;
       msg.appendChild(bubble);
     } else {
-      const bubble = createElement("div", { class: "kamal-chatbot-bubble user" });
+      const bubble = createElement("div", { class: "kamal-chatbot-message-bubble user" });
       bubble.textContent = text;
       msg.appendChild(bubble);
     }

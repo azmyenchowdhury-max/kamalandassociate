@@ -6,8 +6,22 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // Supabase Configuration
-    const SUPABASE_URL = 'https://xtpvadsmapafzkhhnlio.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjFkYjI5NmJmLTczMzktNGU0Ny1iMjdmLThlNWYwOGZhOWQ4ZSJ9.eyJwcm9qZWN0SWQiOiJ4dHB2YWRzbWFwYWZ6a2hobmxpbyIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzcwMDA3MzkzLCJleHAiOjIwODUzNjczOTMsImlzcyI6ImZhbW91cy5kYXRhYmFzZXBhZCIsImF1ZCI6ImZhbW91cy5jbGllbnRzIn0.JQJq2LRDRaDvviKvPOyN0X3rKLCTTo06oSqjRauMJpg';
+    const SUPABASE_URL = window.__SUPABASE_URL__ || 'https://rujctxkklzxnogniivdj.supabase.co';
+    const SUPABASE_ANON_KEY = window.__SUPABASE_ANON_KEY__ || '';
+
+    function getAuthHeaders() {
+        if (!SUPABASE_ANON_KEY) {
+            throw new Error('Missing runtime Supabase anon key (window.__SUPABASE_ANON_KEY__).');
+        }
+
+        const headers = {
+            'apikey': SUPABASE_ANON_KEY
+        };
+
+        headers['Authorization'] = `Bearer ${SUPABASE_ANON_KEY}`;
+
+        return headers;
+    }
     
     // API Helper Function
     async function invokeEdgeFunction(functionName, body) {
@@ -16,8 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                    'apikey': SUPABASE_ANON_KEY
+                    ...getAuthHeaders()
                 },
                 body: JSON.stringify(body)
             });
@@ -50,8 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const response = await fetch(`${SUPABASE_URL}/functions/v1/${functionName}`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                    'apikey': SUPABASE_ANON_KEY
+                    ...getAuthHeaders()
                     // Don't set Content-Type, let the browser set it with boundary
                 },
                 body: formData

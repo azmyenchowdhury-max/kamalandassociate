@@ -5,8 +5,8 @@
 
 // Configuration
 const CONFIG = {
-    supabaseUrl: 'https://xtpvadsmapafzkhhnlio.supabase.co',
-    functionUrl: 'https://xtpvadsmapafzkhhnlio.supabase.co/functions/v1/admin-dashboard'
+    supabaseUrl: window.__SUPABASE_URL__ || 'https://rujctxkklzxnogniivdj.supabase.co',
+    functionUrl: window.__ADMIN_DASHBOARD_FUNCTION_URL__ || 'https://rujctxkklzxnogniivdj.supabase.co/functions/v1/admin-dashboard'
 };
 
 // State Management

@@ -8,6 +8,14 @@
 ;(function () {
   const CONFIG = {
     firmName: "Kamal & Associates",
+    api: {
+      enabled: true,
+      baseUrl: window.__KAMAL_CHATBOT_API_BASE__ || "https://rujctxkklzxnogniivdj.supabase.co/functions/v1",
+      sessionStartPath: "/api-chat-session-start",
+      messagePath: "/api-chat-message",
+      anonJwt: window.__KAMAL_CHATBOT_SUPABASE_ANON_KEY__ || "",
+      timeoutMs: 6000,
+    },
     whatsappNumber: "+8801713456800",
     office: {
       name: "Kamal & Associates, Dhaka Office",
@@ -139,6 +147,8 @@
 
   const STORAGE_KEYS = {
     visitor: "kamal_chatbot_visitor",
+    backendVisitorId: "kamal_chatbot_backend_visitor_id",
+    backendConversationId: "kamal_chatbot_backend_conversation_id",
     leads: "kamal_chatbot_leads",
     messages: "kamal_chatbot_messages",
     lang: "kamal_chatbot_lang",
@@ -151,6 +161,8 @@
     isOpen: false,
     language: "en",
     visitor: null,
+    backendVisitorId: null,
+    backendConversationId: null,
     messages: [],
     currentFlow: null,
     lastInteractionAt: Date.now(),
@@ -246,6 +258,114 @@
   function t(key) {
     const strings = getLangStrings();
     return strings[key] || key;
+  }
+
+  function applyApiAuthHeaders(requestHeaders) {
+    const apiKey = CONFIG.api.anonJwt;
+    if (!apiKey) return;
+
+    requestHeaders.apikey = apiKey;
+    requestHeaders.Authorization = `Bearer ${apiKey}`;
+  }
+
+  function normalizeApiBaseUrl() {
+    const raw = String(CONFIG.api.baseUrl || "").trim();
+    if (!raw) return "";
+    return raw.replace(/\/$/, "");
+  }
+
+  function buildApiUrl(path) {
+    const normalizedPath = String(path || "").startsWith("/") ? path : `/${path}`;
+    const baseUrl = normalizeApiBaseUrl();
+    return `${baseUrl}${normalizedPath}`;
+  }
+
+  async function requestWithTimeout(url, options = {}) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), CONFIG.api.timeoutMs || 6000);
+    try {
+      return await fetch(url, { ...options, signal: controller.signal });
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
+  async function startBackendSession() {
+    if (!CONFIG.api.enabled) return null;
+
+    const existingConversationId = readStorage(STORAGE_KEYS.backendConversationId, null);
+    const existingVisitorId = readStorage(STORAGE_KEYS.backendVisitorId, null);
+
+    if (existingConversationId) {
+      STATE.backendConversationId = existingConversationId;
+      STATE.backendVisitorId = existingVisitorId;
+      return {
+        conversation_id: existingConversationId,
+        visitor_id: existingVisitorId,
+      };
+    }
+
+    try {
+      const requestHeaders = { "Content-Type": "application/json" };
+      applyApiAuthHeaders(requestHeaders);
+
+      const response = await requestWithTimeout(buildApiUrl(CONFIG.api.sessionStartPath), {
+        method: "POST",
+        headers: requestHeaders,
+        body: JSON.stringify({
+          visitor_id: existingVisitorId,
+          language: STATE.language,
+          source_page: window.location.pathname,
+        }),
+      });
+
+      if (!response.ok) return null;
+      const payload = await response.json();
+      const visitorId = payload?.data?.visitor_id || null;
+      const conversationId = payload?.data?.conversation_id || null;
+
+      if (!conversationId) return null;
+
+      STATE.backendConversationId = conversationId;
+      STATE.backendVisitorId = visitorId;
+
+      writeStorage(STORAGE_KEYS.backendConversationId, conversationId);
+      writeStorage(STORAGE_KEYS.backendVisitorId, visitorId);
+
+      return payload?.data || null;
+    } catch (error) {
+      log("Backend session start failed, using local fallback", error?.message || error);
+      return null;
+    }
+  }
+
+  async function sendBackendMessage(message) {
+    if (!CONFIG.api.enabled || !STATE.backendConversationId) return null;
+
+    try {
+      const requestHeaders = { "Content-Type": "application/json" };
+      applyApiAuthHeaders(requestHeaders);
+
+      const response = await requestWithTimeout(buildApiUrl(CONFIG.api.messagePath), {
+        method: "POST",
+        headers: requestHeaders,
+        body: JSON.stringify({
+          conversation_id: STATE.backendConversationId,
+          message,
+          language: STATE.language,
+          context: {
+            current_flow: STATE.currentFlow,
+          },
+        }),
+      });
+
+      if (!response.ok) return null;
+      const payload = await response.json();
+      return payload?.data || null;
+    } catch (error) {
+      log("Backend message call failed, using local fallback", error?.message || error);
+      return null;
+    }
   }
 
   function smartReply(message) {
@@ -578,7 +698,7 @@
       const lastActive = readStorage(STORAGE_KEYS.lastActive, Date.now());
       const now = Date.now();
       if (now - lastActive > 60_000 && !readStorage(STORAGE_KEYS.followUp, false)) {
-        sendBotMessage(t("followUp"));
+        addBotMessage(t("followUp"));
         writeStorage(STORAGE_KEYS.followUp, true);
       }
     }, followUpDelay);
@@ -620,7 +740,7 @@
     }
   }
 
-  function submitMessage(raw = null) {
+  async function submitMessage(raw = null) {
     const input = find(SELECTORS.input);
     if (!input) return;
     const message = raw !== null ? raw : input.value.trim();
@@ -628,7 +748,7 @@
 
     addUserMessage(message);
     input.value = "";
-    handleUserMessage(message);
+    await handleUserMessage(message);
   }
 
   function promptFileUpload() {
@@ -766,7 +886,7 @@
     }
   }
 
-  function handleUserMessage(text) {
+  async function handleUserMessage(text) {
     const normalized = text.trim().toLowerCase();
 
     // Booking subflow (collect visitor details)
@@ -884,6 +1004,24 @@
     // Smart case intake: ask for case type
     if (normalized.includes("case") || normalized.includes("type")) {
       startCaseIntake();
+      return;
+    }
+
+    const backendReply = await sendBackendMessage(text);
+    if (backendReply?.reply_text) {
+      addBotMessage(backendReply.reply_text, {
+        buttons: Array.isArray(backendReply.buttons) ? backendReply.buttons : undefined,
+      });
+
+      if (backendReply.next_flow) {
+        STATE.currentFlow = backendReply.next_flow;
+      }
+
+      if (backendReply.escalation_required) {
+        addBotMessage("For urgent matters, please call us now or continue on WhatsApp for immediate support.");
+      }
+
+      persistMessages();
       return;
     }
 
@@ -1239,12 +1377,19 @@
     if (visitor) {
       STATE.visitor = visitor;
     }
+
+    const backendVisitorId = readStorage(STORAGE_KEYS.backendVisitorId, null);
+    const backendConversationId = readStorage(STORAGE_KEYS.backendConversationId, null);
+    STATE.backendVisitorId = backendVisitorId;
+    STATE.backendConversationId = backendConversationId;
+
     const lastActive = readStorage(STORAGE_KEYS.lastActive, Date.now());
     STATE.lastInteractionAt = lastActive;
   }
 
   function init() {
     renderChatbot();
+    startBackendSession();
 
     document.addEventListener("click", (event) => {
       const button = event.target.closest(".kamal-chatbot-meta-btn");

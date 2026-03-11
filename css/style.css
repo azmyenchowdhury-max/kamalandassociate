@@ -623,6 +623,7 @@ img {
 /* ===== Chatbot Widget ===== */
 #kamal-chatbot-root {
     position: fixed;
+    left: auto;
     right: 24px;
     bottom: 24px;
     z-index: 9999;
@@ -894,6 +895,7 @@ img {
 
 @media (max-width: 768px) {
     #kamal-chatbot-root {
+        left: auto;
         right: 12px;
         bottom: 12px;
     }
@@ -1892,7 +1894,7 @@ img {
 .back-to-top {
     position: fixed;
     bottom: 30px;
-    right: 30px;
+    left: 30px;
     width: 50px;
     height: 50px;
     border-radius: 50%;

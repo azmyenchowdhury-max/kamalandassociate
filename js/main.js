@@ -16,6 +16,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // ===== Navbar Scroll Effect =====
     const navbar = document.querySelector('.navbar');
 
+    function loadChatbotWidget() {
+        if (document.querySelector('script[src="js/chatbot.js"]')) return;
+        const script = document.createElement('script');
+        script.src = 'js/chatbot.js';
+        script.defer = true;
+        document.body.appendChild(script);
+    }
+
+    loadChatbotWidget();
+
     function handleNavbarScroll() {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');

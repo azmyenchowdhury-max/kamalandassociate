@@ -219,15 +219,23 @@ img {
     .navbar-collapse {
         flex: 1 1 auto;
         min-width: 0;
+        display: flex !important;
+        justify-content: center;
     }
 
     .navbar-nav {
+        display: flex;
         flex-wrap: nowrap;
         white-space: nowrap;
+        align-items: center;
     }
 
     .action-zone {
+        display: flex;
         flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-end;
+        margin-left: auto;
     }
 }
 
@@ -236,6 +244,16 @@ img {
     align-items: center;
     gap: 0.75rem;
     flex-wrap: wrap;
+}
+.action-zone .phone-group {
+    order: 1;
+}
+.action-zone .btn-gold {
+    order: 2;
+    margin-left: 0 !important;
+}
+.action-zone .theme-toggle {
+    order: 3;
 }
 
 @media (max-width: 992px) {
@@ -298,10 +316,6 @@ img {
 
     .brand-name {
         font-size: 20px;
-    }
-
-    .phone-group {
-        display: none;
     }
 
     .btn-gold {

@@ -34,6 +34,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function updateNavbarPhoneLabel() {
+        const phoneLinks = document.querySelectorAll('.phone-number');
+        if (!phoneLinks.length) return;
+
+        const isMediumWidth = window.innerWidth >= 992 && window.innerWidth <= 1260;
+
+        phoneLinks.forEach((link) => {
+            if (!link.dataset.fullText) {
+                link.dataset.fullText = (link.textContent || '').trim();
+            }
+
+            const fullText = link.dataset.fullText;
+            if (!fullText) return;
+
+            link.textContent = isMediumWidth ? fullText.replace(/\s+/g, '') : fullText;
+        });
+    }
+
     function injectMobileConsultationCta() {
         const navList = document.querySelector('#mainNav .navbar-nav');
         if (!navList) return;
@@ -68,9 +86,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     injectMobileConsultationCta();
+    updateNavbarPhoneLabel();
 
     window.addEventListener('scroll', handleNavbarScroll);
     handleNavbarScroll();
+    window.addEventListener('resize', updateNavbarPhoneLabel);
 
     // ===== Theme Toggle (Light/Dark Mode) =====
     const themeToggleButtons = document.querySelectorAll('.theme-toggle');

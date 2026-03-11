@@ -34,6 +34,41 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function injectMobileConsultationCta() {
+        const navList = document.querySelector('#mainNav .navbar-nav');
+        if (!navList) return;
+        if (navList.querySelector('.nav-mobile-cta-item')) return;
+
+        const sourceCta = document.querySelector('.action-zone .btn-gold');
+        const ctaHref = (sourceCta && sourceCta.getAttribute('href')) || 'consultation.html';
+        const ctaLabel = (sourceCta && sourceCta.textContent && sourceCta.textContent.trim()) || 'Free Consultation';
+
+        const li = document.createElement('li');
+        li.className = 'nav-item nav-mobile-cta-item';
+
+        const link = document.createElement('a');
+        link.className = 'nav-link nav-mobile-cta-link';
+        link.href = ctaHref;
+        link.innerHTML = '<i class="fas fa-calendar-check me-2"></i>' + ctaLabel;
+
+        li.appendChild(link);
+        navList.insertBefore(li, navList.firstChild);
+
+        link.addEventListener('click', function () {
+            const collapseEl = document.getElementById('mainNav');
+            if (!collapseEl || !collapseEl.classList.contains('show')) return;
+
+            if (window.bootstrap && window.bootstrap.Collapse) {
+                const instance = window.bootstrap.Collapse.getOrCreateInstance(collapseEl);
+                instance.hide();
+            } else {
+                collapseEl.classList.remove('show');
+            }
+        });
+    }
+
+    injectMobileConsultationCta();
+
     window.addEventListener('scroll', handleNavbarScroll);
     handleNavbarScroll();
 

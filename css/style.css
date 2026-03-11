@@ -192,6 +192,11 @@ img {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
+.navbar-dark.bg-dark-custom .container {
+    padding-left: clamp(12px, 2vw, 28px);
+    padding-right: clamp(12px, 2vw, 28px);
+}
+
 /* Allow the navbar to span the full viewport width so nav links stay on a single line */
 .navbar-dark.bg-dark-custom .container {
     max-width: 100% !important;
@@ -207,6 +212,12 @@ img {
 @media (max-width: 992px) {
     .action-zone {
         justify-content: flex-end;
+        gap: 0.4rem;
+    }
+
+    .action-zone .phone-group,
+    .action-zone .btn-gold {
+        display: none;
     }
 }
 
@@ -265,6 +276,37 @@ img {
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
     color: var(--accent-color) !important;
+}
+
+.nav-mobile-cta-item {
+    display: none;
+}
+
+.navbar-toggler {
+    border-color: var(--toggle-border);
+    padding: 0.4rem 0.55rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(175, 169, 57, 0.25);
+}
+
+.navbar-toggler-icon {
+    background-image: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-toggler-icon::before {
+    content: "\f0c9";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--navbar-text);
+    font-size: 1rem;
+    line-height: 1;
 }
 
 /* 4. Action Zone (Right) */
@@ -1955,11 +1997,36 @@ img {
 /* ===== Responsive Styles ===== */
 @media (max-width: 991px) {
     .navbar-collapse {
-        background: rgba(15, 17, 19, 0.98);
+        background: var(--card-bg);
         padding: 20px;
         border-radius: 16px;
         margin-top: 15px;
-        border: 1px solid rgba(175, 169, 57, 0.1);
+        border: 1px solid var(--card-border);
+        box-shadow: var(--shadow);
+    }
+
+    .navbar-nav .nav-link {
+        padding: 8px 0 !important;
+    }
+
+    .nav-mobile-cta-item {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .nav-mobile-cta-link {
+        background: var(--gradient-primary);
+        color: #000 !important;
+        border-radius: 8px;
+        padding: 10px 14px !important;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .nav-mobile-cta-link:hover {
+        color: #000 !important;
+        transform: translateY(-1px);
     }
 
     .navbar-nav .nav-link::after {

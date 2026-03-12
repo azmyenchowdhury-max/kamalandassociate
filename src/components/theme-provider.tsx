@@ -2,9 +2,12 @@
 
 import * as React from "react"
 import { createContext, useContext, useEffect, useState } from "react"
-import { ThemeProviderProps } from "next-themes/dist/types"
 
-type Theme = "dark" | "light" | "system"
+type Theme = "dark"
+
+type ThemeProviderProps = {
+  children: React.ReactNode
+}
 
 type ThemeContextType = {
   theme: Theme
@@ -15,41 +18,20 @@ const ThemeContext = createContext<ThemeContextType | null>(null)
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
-  value: _value,
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme")
-      return (savedTheme && (savedTheme === "dark" || savedTheme === "light" || savedTheme === "system")
-        ? savedTheme
-        : defaultTheme) as Theme
-    }
-    return defaultTheme as Theme
-  })
+  const [theme] = useState<Theme>("dark")
 
   useEffect(() => {
     const root = window.document.documentElement
-    root.classList.remove("light", "dark")
-
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light"
-      root.classList.add(systemTheme)
-      return
-    }
-
-    root.classList.add(theme)
+    root.classList.remove("light")
+    root.classList.add("dark")
   }, [theme])
 
   const value: ThemeContextType = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem("theme", theme)
-      setTheme(theme)
+    setTheme: (_nextTheme: Theme) => {
+      // Theme switching is intentionally disabled (dark mode only).
     },
   }
 

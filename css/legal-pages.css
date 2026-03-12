@@ -5,7 +5,7 @@
 
 /* Page Header */
 .page-header {
-    background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+    background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--navbar-bg) 100%);
     padding: 180px 0 80px;
     position: relative;
     overflow: hidden;
@@ -24,7 +24,7 @@
 
 .page-subtitle {
     display: inline-block;
-    color: #AFA939;
+    color: var(--accent-color);
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
@@ -37,12 +37,12 @@
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
     font-weight: 700;
-    color: #ECECEC;
+    color: var(--heading-color);
     margin-bottom: 15px;
 }
 
 .page-description {
-    color: #888;
+    color: var(--text-muted);
     font-size: 16px;
     margin-bottom: 20px;
 }
@@ -53,35 +53,35 @@
 }
 
 .page-header .breadcrumb-item a {
-    color: #AFA939;
+    color: var(--accent-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .page-header .breadcrumb-item a:hover {
-    color: #D4CE6A;
+    color: var(--accent-color-soft);
 }
 
 .page-header .breadcrumb-item.active {
-    color: #888;
+    color: var(--text-muted);
 }
 
 .page-header .breadcrumb-item + .breadcrumb-item::before {
-    color: #555;
+    color: var(--text-muted);
 }
 
 /* Legal Content */
 .legal-content {
-    background: linear-gradient(145deg, #141414, #1A1A1A);
-    border: 1px solid rgba(175, 169, 57, 0.15);
+    background: linear-gradient(145deg, var(--card-bg), var(--navbar-bg));
+    border: 1px solid rgba(var(--accent-rgb), 0.15);
     border-radius: 16px;
     padding: 40px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 .legal-intro {
-    background: rgba(175, 169, 57, 0.08);
-    border-left: 4px solid #AFA939;
+    background: rgba(var(--accent-rgb), 0.08);
+    border-left: 4px solid var(--accent-color);
     padding: 20px 25px;
     border-radius: 0 8px 8px 0;
     margin-bottom: 40px;
@@ -89,7 +89,7 @@
 
 .legal-intro p {
     margin-bottom: 0;
-    color: #ECECEC;
+    color: var(--heading-color);
     font-size: 16px;
     line-height: 1.7;
 }
@@ -97,14 +97,14 @@
 .legal-intro.alert-box {
     text-align: center;
     border-left: none;
-    border: 1px solid rgba(175, 169, 57, 0.3);
+    border: 1px solid rgba(var(--accent-rgb), 0.3);
     border-radius: 12px;
 }
 
 .legal-section {
     margin-bottom: 40px;
     padding-bottom: 30px;
-    border-bottom: 1px solid rgba(175, 169, 57, 0.1);
+    border-bottom: 1px solid rgba(var(--accent-rgb), 0.1);
 }
 
 .legal-section:last-child {
@@ -116,7 +116,7 @@
 .legal-section h2 {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
-    color: #AFA939;
+    color: var(--accent-color);
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -128,14 +128,14 @@
 
 .legal-section h3 {
     font-size: 1.1rem;
-    color: #ECECEC;
+    color: var(--heading-color);
     margin-top: 25px;
     margin-bottom: 15px;
     font-weight: 600;
 }
 
 .legal-section p {
-    color: #ECECEC;
+    color: var(--heading-color);
     line-height: 1.8;
     margin-bottom: 15px;
 }
@@ -146,31 +146,31 @@
 }
 
 .legal-section ul li {
-    color: #ECECEC;
+    color: var(--heading-color);
     line-height: 1.8;
     margin-bottom: 8px;
     position: relative;
 }
 
 .legal-section ul li::marker {
-    color: #AFA939;
+    color: var(--accent-color);
 }
 
 .legal-section a {
-    color: #AFA939;
+    color: var(--accent-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .legal-section a:hover {
-    color: #D4CE6A;
+    color: var(--accent-color-soft);
     text-decoration: underline;
 }
 
 /* Contact Info Box */
 .contact-info-box {
-    background: rgba(175, 169, 57, 0.08);
-    border: 1px solid rgba(175, 169, 57, 0.2);
+    background: rgba(var(--accent-rgb), 0.08);
+    border: 1px solid rgba(var(--accent-rgb), 0.2);
     border-radius: 12px;
     padding: 25px;
     margin-top: 20px;
@@ -185,13 +185,13 @@
 }
 
 .contact-info-box a {
-    color: #AFA939;
+    color: var(--accent-color);
 }
 
 /* Highlight Box */
 .highlight-box {
-    background: rgba(175, 169, 57, 0.1);
-    border: 1px solid rgba(175, 169, 57, 0.2);
+    background: rgba(var(--accent-rgb), 0.1);
+    border: 1px solid rgba(var(--accent-rgb), 0.2);
     border-radius: 8px;
     padding: 20px;
     margin: 20px 0;
@@ -223,15 +223,15 @@
 }
 
 .sidebar-card {
-    background: linear-gradient(145deg, #141414, #1A1A1A);
-    border: 1px solid rgba(175, 169, 57, 0.15);
+    background: linear-gradient(145deg, var(--card-bg), var(--navbar-bg));
+    border: 1px solid rgba(var(--accent-rgb), 0.15);
     border-radius: 12px;
     padding: 25px;
     margin-bottom: 20px;
 }
 
 .sidebar-card h5 {
-    color: #AFA939;
+    color: var(--accent-color);
     font-size: 16px;
     margin-bottom: 15px;
     display: flex;
@@ -239,15 +239,15 @@
 }
 
 .sidebar-card p {
-    color: #ECECEC;
+    color: var(--heading-color);
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 15px;
 }
 
 .sidebar-card.highlight {
-    background: linear-gradient(145deg, rgba(175, 169, 57, 0.1), rgba(175, 169, 57, 0.05));
-    border-color: rgba(175, 169, 57, 0.3);
+    background: linear-gradient(145deg, rgba(var(--accent-rgb), 0.1), rgba(var(--accent-rgb), 0.05));
+    border-color: rgba(var(--accent-rgb), 0.3);
 }
 
 .sidebar-card.warning {
@@ -274,15 +274,15 @@
     display: flex;
     align-items: center;
     padding: 12px 15px;
-    background: rgba(175, 169, 57, 0.05);
+    background: rgba(var(--accent-rgb), 0.05);
     border-radius: 8px;
-    color: #ECECEC;
+    color: var(--heading-color);
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 .legal-nav li a i {
-    color: #AFA939;
+    color: var(--accent-color);
     margin-right: 10px;
     font-size: 12px;
     transition: transform 0.3s ease;
@@ -290,8 +290,8 @@
 
 .legal-nav li a:hover,
 .legal-nav li.active a {
-    background: rgba(175, 169, 57, 0.15);
-    color: #AFA939;
+    background: rgba(var(--accent-rgb), 0.15);
+    color: var(--accent-color);
 }
 
 .legal-nav li a:hover i,
@@ -308,9 +308,9 @@
 
 .security-features li {
     padding: 10px 0;
-    color: #ECECEC;
+    color: var(--heading-color);
     font-size: 14px;
-    border-bottom: 1px solid rgba(175, 169, 57, 0.1);
+    border-bottom: 1px solid rgba(var(--accent-rgb), 0.1);
     display: flex;
     align-items: center;
 }
@@ -332,7 +332,7 @@
 
 .key-points li {
     padding: 10px 0;
-    color: #ECECEC;
+    color: var(--heading-color);
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -416,3 +416,5 @@
         max-width: 100% !important;
     }
 }
+
+

@@ -14,7 +14,7 @@ import ClientPortalPage from "./components/pages/ClientPortalPage";
 import NotFound from "./pages/NotFound";
 
 const App = () => (
-  <ThemeProvider defaultTheme="light" storageKey="kamal-theme">
+  <ThemeProvider>
     <BrowserRouter>
       <Routes>
         <Route element={<MainLayout />}>

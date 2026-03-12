@@ -31,7 +31,6 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
-  <script src="js/theme-init.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
@@ -89,8 +88,6 @@
           <i class="fas fa-phone-alt text-accent me-2"></i>
           <a href="tel:+8801713456800" class="phone-number">+880 1713 456 800</a>
         </div>
-
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
         <a href="consultation.html" class="btn btn-gold ms-3">
           Free Consultation <i class="fas fa-arrow-right ms-2"></i>
         </a>
@@ -139,28 +136,19 @@
         </div>
       </div>
       <div class="row">
-        <!-- Practice Area 1 -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
           <div class="flip-card">
             <div class="flip-card-inner">
-              <div class="flip-card-front" style="
-                    background-image: url(&quot;https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&quot;);
-                  ">
+              <div class="flip-card-front" style="background-image: url(&quot;https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&quot;);">
                 <div class="flip-card-content">
-                  <div class="flip-icon">
-                    <i class="fas fa-briefcase"></i>
-                  </div>
-                  <h3>Corporate & Commercial</h3>
+                  <div class="flip-icon"><i class="fas fa-briefcase"></i></div>
+                  <h3>Corporate, Commercial and Business Setup</h3>
                 </div>
               </div>
               <div class="flip-card-back">
-                <h3>Corporate & Commercial</h3>
-                <p>
-                  Comprehensive corporate legal services including mergers,
-                  acquisitions, contracts, and business formation.
-                </p>
-                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal"
-                  data-practice="corporate">
+                <h3>Corporate, Commercial and Business Setup</h3>
+                <p>Entity setup, contracts, procurement and business-facing dispute strategy.</p>
+                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="corporate-business">
                   Learn More <i class="fas fa-arrow-right ms-2"></i>
                 </button>
               </div>
@@ -168,27 +156,19 @@
           </div>
         </div>
 
-        <!-- Practice Area 2 -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
           <div class="flip-card">
             <div class="flip-card-inner">
-              <div class="flip-card-front" style="
-                    background-image: url(&quot;https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&quot;);
-                  ">
+              <div class="flip-card-front" style="background-image: url(&quot;https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&quot;);">
                 <div class="flip-card-content">
-                  <div class="flip-icon">
-                    <i class="fas fa-university"></i>
-                  </div>
-                  <h3>Banking & Finance</h3>
+                  <div class="flip-icon"><i class="fas fa-university"></i></div>
+                  <h3>Banking, Finance and Insurance</h3>
                 </div>
               </div>
               <div class="flip-card-back">
-                <h3>Banking & Finance</h3>
-                <p>
-                  Expert guidance on banking regulations, financial
-                  transactions, and investment compliance.
-                </p>
-                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="banking">
+                <h3>Banking, Finance and Insurance</h3>
+                <p>Banking disputes, syndicated finance, security documents and insurance recovery.</p>
+                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="banking-finance-insurance">
                   Learn More <i class="fas fa-arrow-right ms-2"></i>
                 </button>
               </div>
@@ -196,26 +176,19 @@
           </div>
         </div>
 
-        <!-- Practice Area 3 -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
           <div class="flip-card">
             <div class="flip-card-inner">
-              <div class="flip-card-front" style="
-                    background-image: url(&quot;https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&quot;);
-                  ">
+              <div class="flip-card-front" style="background-image: url(&quot;https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600&quot;);">
                 <div class="flip-card-content">
-                  <div class="flip-icon"><i class="fas fa-home"></i></div>
-                  <h3>Real Estate & Property</h3>
+                  <div class="flip-icon"><i class="fas fa-calculator"></i></div>
+                  <h3>Tax, VAT and Customs</h3>
                 </div>
               </div>
               <div class="flip-card-back">
-                <h3>Real Estate & Property</h3>
-                <p>
-                  Full-service real estate law including transactions,
-                  disputes, and property development.
-                </p>
-                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal"
-                  data-practice="realestate">
+                <h3>Tax, VAT and Customs</h3>
+                <p>Tax planning, VAT matters, customs positions and revenue dispute defense.</p>
+                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="tax-vat-customs">
                   Learn More <i class="fas fa-arrow-right ms-2"></i>
                 </button>
               </div>
@@ -223,25 +196,19 @@
           </div>
         </div>
 
-        <!-- Practice Area 4 -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="250">
           <div class="flip-card">
             <div class="flip-card-inner">
-              <div class="flip-card-front" style="
-                    background-image: url(&quot;https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&quot;);
-                  ">
+              <div class="flip-card-front" style="background-image: url(&quot;https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&quot;);">
                 <div class="flip-card-content">
-                  <div class="flip-icon"><i class="fas fa-heart"></i></div>
-                  <h3>Family Law</h3>
+                  <div class="flip-icon"><i class="fas fa-home"></i></div>
+                  <h3>Real Estate, Land and Tenancy</h3>
                 </div>
               </div>
               <div class="flip-card-back">
-                <h3>Family Law</h3>
-                <p>
-                  Compassionate representation in divorce, custody, adoption,
-                  and family matters.
-                </p>
-                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="family">
+                <h3>Real Estate, Land and Tenancy</h3>
+                <p>Land documentation, title verification, tenancy rights and property disputes.</p>
+                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="realestate-land-tenancy">
                   Learn More <i class="fas fa-arrow-right ms-2"></i>
                 </button>
               </div>
@@ -249,28 +216,19 @@
           </div>
         </div>
 
-        <!-- Practice Area 5 -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
           <div class="flip-card">
             <div class="flip-card-inner">
-              <div class="flip-card-front" style="
-                    background-image: url(&quot;https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&quot;);
-                  ">
+              <div class="flip-card-front" style="background-image: url(&quot;https://images.unsplash.com/photo-1453945619913-79ec89a82c51?w=600&quot;);">
                 <div class="flip-card-content">
-                  <div class="flip-icon">
-                    <i class="fas fa-shield-alt"></i>
-                  </div>
-                  <h3>Criminal Defense</h3>
+                  <div class="flip-icon"><i class="fas fa-balance-scale"></i></div>
+                  <h3>Civil, Commercial and ADR (Arbitration/Mediation)</h3>
                 </div>
               </div>
               <div class="flip-card-back">
-                <h3>Criminal Defense</h3>
-                <p>
-                  Aggressive defense strategies for all criminal charges with
-                  proven results.
-                </p>
-                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal"
-                  data-practice="criminal">
+                <h3>Civil, Commercial and ADR (Arbitration/Mediation)</h3>
+                <p>Civil and commercial litigation plus arbitration and settlement pathways.</p>
+                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="civil-commercial-adr">
                   Learn More <i class="fas fa-arrow-right ms-2"></i>
                 </button>
               </div>
@@ -278,27 +236,19 @@
           </div>
         </div>
 
-        <!-- Practice Area 6 -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="350">
           <div class="flip-card">
             <div class="flip-card-inner">
-              <div class="flip-card-front" style="
-                    background-image: url(&quot;https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&quot;);
-                  ">
+              <div class="flip-card-front" style="background-image: url(&quot;https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&quot;);">
                 <div class="flip-card-content">
-                  <div class="flip-icon">
-                    <i class="fas fa-lightbulb"></i>
-                  </div>
-                  <h3>Intellectual Property</h3>
+                  <div class="flip-icon"><i class="fas fa-shield-alt"></i></div>
+                  <h3>Criminal Defense and White-Collar Crime</h3>
                 </div>
               </div>
               <div class="flip-card-back">
-                <h3>Intellectual Property</h3>
-                <p>
-                  Protection of patents, trademarks, copyrights, and trade
-                  secrets.
-                </p>
-                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="ip">
+                <h3>Criminal Defense and White-Collar Crime</h3>
+                <p>Criminal defense, bail strategy, financial fraud and white-collar response.</p>
+                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="criminal-whitecollar">
                   Learn More <i class="fas fa-arrow-right ms-2"></i>
                 </button>
               </div>
@@ -306,27 +256,19 @@
           </div>
         </div>
 
-        <!-- Practice Area 7 -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
           <div class="flip-card">
             <div class="flip-card-inner">
-              <div class="flip-card-front" style="
-                    background-image: url(&quot;https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600&quot;);
-                  ">
+              <div class="flip-card-front" style="background-image: url(&quot;https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=600&quot;);">
                 <div class="flip-card-content">
-                  <div class="flip-icon">
-                    <i class="fas fa-calculator"></i>
-                  </div>
-                  <h3>Tax & Revenue</h3>
+                  <div class="flip-icon"><i class="fas fa-landmark"></i></div>
+                  <h3>Constitutional, Administrative and Writ</h3>
                 </div>
               </div>
               <div class="flip-card-back">
-                <h3>Tax & Revenue</h3>
-                <p>
-                  Strategic tax planning, compliance, and dispute resolution
-                  services.
-                </p>
-                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="tax">
+                <h3>Constitutional, Administrative and Writ</h3>
+                <p>Constitutional remedies, judicial review and administrative challenge work.</p>
+                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="constitutional-admin-writ">
                   Learn More <i class="fas fa-arrow-right ms-2"></i>
                 </button>
               </div>
@@ -334,26 +276,19 @@
           </div>
         </div>
 
-        <!-- Practice Area 8 -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="450">
           <div class="flip-card">
             <div class="flip-card-inner">
-              <div class="flip-card-front" style="
-                    background-image: url(&quot;https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&quot;);
-                  ">
+              <div class="flip-card-front" style="background-image: url(&quot;https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&quot;);">
                 <div class="flip-card-content">
-                  <div class="flip-icon"><i class="fas fa-globe"></i></div>
-                  <h3>Immigration Law</h3>
+                  <div class="flip-icon"><i class="fas fa-heart"></i></div>
+                  <h3>Family Law and Personal Disputes</h3>
                 </div>
               </div>
               <div class="flip-card-back">
-                <h3>Immigration Law</h3>
-                <p>
-                  Visa applications, work permits, citizenship matters, and
-                  immigration appeals.
-                </p>
-                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal"
-                  data-practice="immigration">
+                <h3>Family Law and Personal Disputes</h3>
+                <p>Family disputes, child custody, maintenance and personal rights protection.</p>
+                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="family-personal">
                   Learn More <i class="fas fa-arrow-right ms-2"></i>
                 </button>
               </div>
@@ -361,25 +296,79 @@
           </div>
         </div>
 
-        <!-- Practice Area 9 -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
           <div class="flip-card">
             <div class="flip-card-inner">
-              <div class="flip-card-front" style="
-                    background-image: url(&quot;https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&quot;);
-                  ">
+              <div class="flip-card-front" style="background-image: url(&quot;https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&quot;);">
                 <div class="flip-card-content">
                   <div class="flip-icon"><i class="fas fa-users"></i></div>
-                  <h3>Labor & Employment</h3>
+                  <h3>Labour, Employment and Immigration</h3>
                 </div>
               </div>
               <div class="flip-card-back">
-                <h3>Labor & Employment</h3>
-                <p>
-                  Employment contracts, workplace disputes, labor compliance,
-                  and termination matters.
-                </p>
-                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="labor">
+                <h3>Labour, Employment and Immigration</h3>
+                <p>Employment compliance, workplace disputes, work permits and immigration routes.</p>
+                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="labour-employment-immigration">
+                  Learn More <i class="fas fa-arrow-right ms-2"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="550">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front" style="background-image: url(&quot;https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&quot;);">
+                <div class="flip-card-content">
+                  <div class="flip-icon"><i class="fas fa-globe"></i></div>
+                  <h3>International Trade, Maritime and Aviation</h3>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <h3>International Trade, Maritime and Aviation</h3>
+                <p>Trade, shipping, marine insurance and aviation-related legal matters.</p>
+                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="intl-trade-maritime-aviation">
+                  Learn More <i class="fas fa-arrow-right ms-2"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front" style="background-image: url(&quot;https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&quot;);">
+                <div class="flip-card-content">
+                  <div class="flip-icon"><i class="fas fa-microchip"></i></div>
+                  <h3>Intellectual Property, Technology and Telecom</h3>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <h3>Intellectual Property, Technology and Telecom</h3>
+                <p>IP protection, technology contracts, digital compliance and telecom regulation.</p>
+                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="ip-tech-telecom">
+                  Learn More <i class="fas fa-arrow-right ms-2"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="650">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front" style="background-image: url(&quot;https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&quot;);">
+                <div class="flip-card-content">
+                  <div class="flip-icon"><i class="fas fa-industry"></i></div>
+                  <h3>Energy, Natural Resources and Infrastructure</h3>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <h3>Energy, Natural Resources and Infrastructure</h3>
+                <p>Energy projects, environmental regulation and infrastructure documentation support.</p>
+                <button class="btn-flip" data-bs-toggle="modal" data-bs-target="#practiceModal" data-practice="energy-resources-infra">
                   Learn More <i class="fas fa-arrow-right ms-2"></i>
                 </button>
               </div>
@@ -530,7 +519,7 @@
           </div>
         </div>
         <div class="modal-footer border-top-gold justify-content-between">
-          <p class="mb-0 text-muted small d-none d-md-block"><i class="fas fa-info-circle text-accent me-1"></i> First
+          <p class="mb-0 text-light small d-none d-md-block"><i class="fas fa-info-circle text-accent me-1"></i> First
             consultation is free for new clients.</p>
           <div>
             <button type="button" class="btn btn-outline-light me-2" data-bs-dismiss="modal">Close</button>

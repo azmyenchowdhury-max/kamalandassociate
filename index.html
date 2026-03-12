@@ -29,11 +29,18 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
-  <script type="module" src="js/theme-init.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
   <script src="js/runtime-config.js"></script>
+  <script>
+    // Defensive fallback: some environments inject onload handlers that call this symbol.
+    if (typeof window.solveSimpleChallenge !== 'function') {
+      window.solveSimpleChallenge = function () {
+        return true;
+      };
+    }
+  </script>
 </head>
 
 <body>
@@ -87,8 +94,6 @@
           <i class="fas fa-phone-alt text-accent me-2"></i>
           <a href="tel:+8801713456800" class="phone-number">+880 1713 456 800</a>
         </div>
-
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
         <a href="consultation.html" class="btn btn-gold ms-3">
           Free Consultation <i class="fas fa-arrow-right ms-2"></i>
         </a>
@@ -611,27 +616,7 @@
       <div class="row" data-aos="fade-up" data-aos-delay="200">
         <div class="col-12">
           <div class="owl-carousel attorney-carousel owl-theme">
-            <div class="item">
-              <a href="attorney-nasrin.html" class="attorney-link">
-                <div class="attorney-card">
-                  <div class="attorney-img attorney-img--nasrin">
-                    <div class="attorney-social">
-                      <div class="social-link">
-                        <i class="fab fa-facebook-f"></i>
-                      </div>
-                      <div class="social-link">
-                        <i class="fab fa-twitter"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="attorney-info">
-                    <h3>Adv. Nasrin Akter</h3>
-                    <span class="position">Managing Partner</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-
+            
             <div class="item">
               <a href="attorney-harun.html" class="attorney-link">
                 <div class="attorney-card">
@@ -647,6 +632,27 @@
                   </div>
                   <div class="attorney-info">
                     <h3>Adv. Harun Rayhan</h3>
+                    <span class="position">Managing Partner</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="item">
+              <a href="attorney-nasrin.html" class="attorney-link">
+                <div class="attorney-card">
+                  <div class="attorney-img attorney-img--nasrin">
+                    <div class="attorney-social">
+                      <div class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                      </div>
+                      <div class="social-link">
+                        <i class="fab fa-twitter"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="attorney-info">
+                    <h3>Adv. Nasrin Akter</h3>
                     <span class="position">Senior Partner</span>
                   </div>
                 </div>
@@ -654,7 +660,49 @@
             </div>
 
             <div class="item">
-              <a href="attorney-mustafa.html" class="attorney-link">
+              <a href="attorney-jagadish.html" class="attorney-link">
+                <div class="attorney-card">
+                  <div class="attorney-img attorney-img--jagadish">
+                    <div class="attorney-social">
+                      <div class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                      </div>
+                      <div class="social-link">
+                        <i class="fab fa-twitter"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="attorney-info">
+                    <h3>Adv. Jagadish Chandra Shaha</h3>
+                    <span class="position">Senior Associate</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="item">
+              <a href="attorney-habibur.html" class="attorney-link">
+                <div class="attorney-card">
+                  <div class="attorney-img attorney-img--habibur">
+                    <div class="attorney-social">
+                      <div class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                      </div>
+                      <div class="social-link">
+                        <i class="fab fa-twitter"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="attorney-info">
+                    <h3>Adv. Habibur Rahman</h3>
+                    <span class="position">Senior Associate</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="item">
+              <a href="attorney-chowdhury.html" class="attorney-link">
                 <div class="attorney-card">
                   <div class="attorney-img attorney-img--chowdhury">
                     <div class="attorney-social">
@@ -690,27 +738,6 @@
                   <div class="attorney-info">
                     <h3>Adv. Mohammad Kabir</h3>
                     <span class="position">Senior Associate</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div class="item">
-              <a href="attorney-rashed.html" class="attorney-link">
-                <div class="attorney-card">
-                  <div class="attorney-img attorney-img--rashed">
-                    <div class="attorney-social">
-                      <div class="social-link">
-                        <i class="fab fa-facebook-f"></i>
-                      </div>
-                      <div class="social-link">
-                        <i class="fab fa-twitter"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="attorney-info">
-                    <h3>Adv. Rashed</h3>
-                    <span class="position">Associate</span>
                   </div>
                 </div>
               </a>
@@ -1080,32 +1107,36 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <!-- Custom JS -->
-  <script type="module" src="js/main.js"></script>
-  <script type="module" src="chatbot.js"></script>
+  <script src="js/main.js"></script>
+  <script src="chatbot.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $(".attorney-carousel").owlCarousel({
-        loop: true, // Makes the slider infinite
-        margin: 30, // Space between cards
-        nav: false, // Hides ugly Next/Prev buttons
-        dots: true, // Shows the dots at the bottom
-        autoplay: true, // Auto-scrolls
-        autoplayTimeout: 3000, // Speed of auto-scroll
-        responsive: {
-          0: {
-            items: 1, // 1 item on Mobile
+    if (window.jQuery && window.jQuery.fn && typeof window.jQuery.fn.owlCarousel === 'function') {
+      $(document).ready(function () {
+        $(".attorney-carousel").owlCarousel({
+          loop: true, // Makes the slider infinite
+          margin: 30, // Space between cards
+          nav: false, // Hides ugly Next/Prev buttons
+          dots: true, // Shows the dots at the bottom
+          autoplay: true, // Auto-scrolls
+          autoplayTimeout: 3000, // Speed of auto-scroll
+          responsive: {
+            0: {
+              items: 1, // 1 item on Mobile
+            },
+            768: {
+              items: 2, // 2 items on Tablets
+            },
+            992: {
+              items: 3, // 3 items on Desktop
+            },
           },
-          768: {
-            items: 2, // 2 items on Tablets
-          },
-          992: {
-            items: 3, // 3 items on Desktop
-          },
-        },
+        });
       });
-    });
+    } else {
+      console.warn('jQuery/Owl Carousel failed to load. Attorney carousel was skipped.');
+    }
   </script>
 </body>
 

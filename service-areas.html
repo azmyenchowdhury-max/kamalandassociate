@@ -27,7 +27,6 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
-  <script src="js/theme-init.js"></script>
   <script src="js/runtime-config.js"></script>
 </head>
 <body>
@@ -80,7 +79,6 @@
                     <i class="fas fa-phone-alt text-accent me-2"></i>
                     <a href="tel:+8801713456800" class="phone-number">+880 1713 456 800</a>
                 </div>
-                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
                 <a href="consultation.html" class="btn btn-gold ms-3">
                     Free Consultation <i class="fas fa-arrow-right ms-2"></i>
                 </a>
@@ -114,14 +112,14 @@
     <!-- Search & Popular Services -->
     <section class="section-padding">
         <div class="container">
-            <div class="row justify-content-center mb-5" data-aos="fade-up">
+            <div class="row justify-content-center mb-5 service-search-row" data-aos="fade-up">
                 <div class="col-lg-8">
                     <form class="service-search" role="search" aria-label="Search legal services">
                         <div class="input-group input-group-lg shadow-sm">
                             <span class="input-group-text bg-dark text-light border-0">
                                 <i class="fas fa-search"></i>
                             </span>
-                            <input id="serviceSearch" type="search" class="form-control bg-dark border-0 text-light" placeholder="Search legal services..." aria-label="Search legal services" aria-autocomplete="list" aria-controls="serviceSuggestions" aria-expanded="false" autocomplete="off" />
+                            <input id="serviceSearch" type="search" class="form-control bg-dark border-0 text-light" placeholder="Search legal services..." aria-label="Search legal services" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-controls="serviceSuggestions" aria-expanded="false" autocomplete="off" />
                         </div>
                         <div id="serviceSuggestions" class="service-search-suggestions" role="listbox" aria-label="Suggested services" hidden></div>
                     </form>
@@ -135,7 +133,13 @@
                         Quickly explore the legal services clients seek most often.
                     </p>
                 </div>
-                <div id="popularServices" class="row g-4"></div>
+                <div id="popularServices" class="row g-4 justify-content-center"></div>
+            </div>
+
+            <div class="row mb-4" data-aos="fade-up" data-aos-delay="120">
+              <div class="col-12">
+                <div id="serviceCategoryFilters" class="service-category-filters" role="toolbar" aria-label="Filter services by category"></div>
+              </div>
             </div>
 
             <div class="row mb-4" data-aos="fade-up" data-aos-delay="150">
@@ -422,12 +426,6 @@
         <p class='service-item-title'>Project Finance Documentation</p>
       </div>
     </button>
-    <button type='button' class='service-item' data-service='privacy-policy' aria-label='Open details for Privacy Policy'>
-      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
-      <div>
-        <p class='service-item-title'>Privacy Policy</p>
-      </div>
-    </button>
   </div>
 </section>
 
@@ -482,12 +480,6 @@
         <p class='service-item-title'>Taxation Systems</p>
       </div>
     </button>
-    <button type='button' class='service-item' data-service='terms-of-service' aria-label='Open details for Terms of Service'>
-      <span class='service-item-icon'><i class='fas fa-gavel'></i></span>
-      <div>
-        <p class='service-item-title'>Terms of Service</p>
-      </div>
-    </button>
   </div>
 </section>
 
@@ -521,25 +513,38 @@
   </div>
 </section>
 </div>
+
+      <div id="serviceRescue" class="service-rescue" hidden></div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="cta-section section-padding">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8" data-aos="fade-up">
-                    <h2 class="section-title">Have a question?</h2>
-                    <p class="section-description">
-                        Our experienced attorneys are ready to review your case and guide you through every step.
-                    </p>
-                </div>
-                <div class="col-lg-4 text-lg-end" data-aos="fade-up" data-aos-delay="100">
-                    <a href="consultation.html" class="btn btn-primary btn-lg">Request a Consultation</a>
-                </div>
-            </div>
+    <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="row justify-content-center" data-aos="fade-up">
+        <div class="col-lg-8 text-center">
+          <h2>
+            Ready to Discuss Your
+            <span class="text-accent">Legal Needs?</span>
+          </h2>
+          <p>
+            Schedule a free consultation with our expert attorneys. We're here
+            to help you navigate your legal challenges with confidence and
+            expertise.
+          </p>
+          <div class="cta-buttons">
+            <a href="consultation.html" class="btn btn-primary btn-lg">
+              Schedule Free Consultation
+              <i class="fas fa-calendar-alt ms-2"></i>
+            </a>
+            <a href="contact.html" class="btn btn-outline-primary btn-lg">
+              Contact Us <i class="fas fa-envelope ms-2"></i>
+            </a>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
     <!-- Service Modal -->
     <div id="serviceModal" class="service-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
@@ -549,9 +554,48 @@
                 <h2 id="modalTitle" class="service-modal-title"></h2>
                 <p id="modalDescription" class="service-modal-text"></p>
                 <div class="service-modal-section">
+                  <h3 class="service-modal-subtitle">Bangladesh Context Snapshot</h3>
+                  <div id="modalRegulatorySection" class="service-regulatory-grid" aria-label="Regulatory touchpoints"></div>
+                  <p id="modalReadinessScore" class="service-readiness-score"></p>
+                  <h4 class="service-modal-mini-subtitle">Typical Approvals and Process</h4>
+                  <ul id="modalApprovalsSection" class="service-escalation-list"></ul>
+                  <h4 class="service-modal-mini-subtitle">Common Legal Risk Flags</h4>
+                  <ul id="modalRiskSection" class="service-escalation-list"></ul>
+                  <h4 class="service-modal-mini-subtitle">If The Matter Escalates</h4>
+                  <ol id="modalEscalationSection" class="service-escalation-list"></ol>
+                </div>
+                <div class="service-modal-section">
                     <h3 class="service-modal-subtitle">Our Services Include</h3>
                     <ul id="modalServices" class="service-modal-list"></ul>
                 </div>
+              <div class="service-modal-section service-lawyer-section">
+                <h3 class="service-modal-subtitle">Best Match Lawyer</h3>
+                <div id="modalLawyerCard" class="service-lawyer-card">
+                  <div class="service-lawyer-meta">
+                    <p id="modalLawyerName" class="service-lawyer-name"></p>
+                    <p id="modalLawyerRole" class="service-lawyer-role"></p>
+                    <p id="modalLawyerTrust" class="service-lawyer-trust"></p>
+                  </div>
+                  <a id="modalLawyerProfile" class="service-lawyer-profile-link" href="attorneys.html">View Full Profile</a>
+                </div>
+              </div>
+              <div class="service-modal-section">
+                <h3 class="service-modal-subtitle">Connect Immediately</h3>
+                <div class="service-modal-actions">
+                  <a id="modalCallNow" class="btn btn-primary service-action-btn" href="tel:+8801713456800">
+                    <i class="fas fa-phone-alt me-2"></i>Call Now
+                  </a>
+                  <a id="modalWhatsAppNow" class="btn btn-outline-primary service-action-btn" href="https://wa.me/8801713456800" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp me-2"></i>WhatsApp Now
+                  </a>
+                  <a id="modalBookConsultation" class="btn btn-primary service-action-btn" href="consultation.html">
+                    <i class="fas fa-calendar-check me-2"></i>Book Consultation
+                  </a>
+                  <a id="modalContactFallback" class="btn btn-outline-primary service-action-btn" href="contact.html">
+                    <i class="fas fa-envelope me-2"></i>Contact Form
+                  </a>
+                </div>
+              </div>
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us | Kamal & Associates - Get in Touch</title>
   <meta name="description"
-    content="Contact Kamal & Associates for expert legal advice. Visit our office in Banani, Dhaka or reach us by phone or email." />
+    content="Contact Kamal & Associates for expert legal advice. Reach our High Court, Judge Court, or Evening chambers in Dhaka by phone, email, or in person." />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/Logo.png" />
@@ -29,6 +29,8 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
@@ -123,25 +125,18 @@
   <section class="section-padding">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="contact-info-card">
-            <div class="contact-icon">
-              <i class="fas fa-map-marker-alt"></i>
-            </div>
-            <h4>Address</h4>
-            <p>House 45, Road 12, Banani<br />Dhaka 1213, Bangladesh</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
           <div class="contact-info-card">
             <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
             <h4>Phone</h4>
             <p>
-              <a href="tel:+88029821234">+880 2-9821234</a><br /><a href="tel:+8801711123456">+880 1711-123456</a>
+              <a href="tel:+8801713456800">+880 1713 456 800</a><br />
+              <a href="tel:+8801973456800">+880 1973 456 800</a><br />
+              <a href="tel:+8801712566638">+8801712 566 638</a>
             </p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
           <div class="contact-info-card">
             <div class="contact-icon"><i class="fas fa-envelope"></i></div>
             <h4>Email</h4>
@@ -151,11 +146,50 @@
             </p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
           <div class="contact-info-card">
             <div class="contact-icon"><i class="fas fa-clock"></i></div>
             <h4>Office Hours</h4>
-            <p>Sunday - Thursday<br />9:00 AM - 6:00 PM</p>
+            <p>
+              Sunday to Thursday : 09:00 AM to 06:00PM<br />
+              Saturday : 10:00 AM to 09:00PM
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="contact-info-card">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <h4>High Court Chamber</h4>
+            <p>
+              Supreme Court Bar Association<br />
+              Room No. 709, 6th Floor<br />
+              Annex Extension Building, Ramna, Dhaka - 1000
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="contact-info-card">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <h4>Judge Court Chamber</h4>
+            <p>
+              Dhaka Bar Association<br />
+              Room No. 7018, 6th Floor<br />
+              Annex Extension Building-2, Dhaka-1100
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="contact-info-card">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <h4>Evening Chamber</h4>
+            <p>
+              House #13, Road #07, Block #C<br />
+              Flat #1-A, Ground Floor<br />
+              Niketan, Gulshan, Dhaka-1212
+            </p>
           </div>
         </div>
       </div>
@@ -172,28 +206,32 @@
             Get in <span class="text-accent">Touch</span>
           </h2>
 
-          <form id="contactForm" class="mt-4">
+          <form id="contactForm" class="mt-4" action="https://formsubmit.co/info@kamalassociates.com.bd" method="POST" data-email-provider="formsubmit">
+            <input type="hidden" name="_subject" value="New Contact Message - Kamal & Associates" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
-                  <input type="text" class="form-control" placeholder="Your Name *" required />
+                  <input type="text" class="form-control" name="name" placeholder="Your Name *" required />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
-                  <input type="email" class="form-control" placeholder="Your Email *" required />
+                  <input type="email" class="form-control" name="email" placeholder="Your Email *" required />
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
-                  <input type="tel" class="form-control" placeholder="Your Phone" />
+                  <input type="tel" class="form-control" name="phone" placeholder="Your Phone" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
-                  <select class="form-select" required>
+                  <select class="form-select" name="subject" required>
                     <option value="">Select Subject *</option>
                     <option value="general">General Inquiry</option>
                     <option value="consultation">Request Consultation</option>
@@ -207,7 +245,7 @@
               </div>
             </div>
             <div class="mb-3">
-              <textarea class="form-control" rows="5" placeholder="Your Message *" required></textarea>
+              <textarea class="form-control" rows="5" name="message" placeholder="Your Message *" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">
               Send Message <i class="fas fa-paper-plane ms-2"></i>
@@ -220,12 +258,11 @@
             Find <span class="text-accent">Us</span>
           </h2>
           <div class="map-wrapper mt-4" style="height: 350px">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.7383!2d90.4!3d23.79!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDQ3JzI0LjAiTiA5MMKwMjQnMDAuMCJF!5e0!3m2!1sen!2sbd!4v1234567890"
-              width="100%" height="100%" style="border: 0; filter: grayscale(100%) invert(90%)" allowfullscreen
-              loading="lazy" title="Office Location">
-            </iframe>
+            <div id="contactOfficeMap" class="contact-office-map" aria-label="Map showing Kamal & Associates office locations"></div>
           </div>
+          <p class="contact-map-note mt-3 mb-0">
+            <i class="fas fa-location-dot text-accent me-2"></i>Three chamber locations are highlighted with live blinking markers.
+          </p>
           <div class="mt-4 p-4" style="
                 background: #1c1e20;
                 border-radius: 12px;
@@ -234,15 +271,15 @@
             <div class="row align-items-center">
               <div class="col-md-8">
                 <h5 class="text-accent mb-2">
-                  <i class="fab fa-whatsapp me-2"></i>WhatsApp Support
+                  <i class="fab fa-whatsapp me-2" style="color: #25D366;"></i>WhatsApp Support
                 </h5>
-                <p class="text-muted mb-0">
+                <p class="text-white mb-0">
                   For quick inquiries, reach us on WhatsApp
                 </p>
               </div>
               <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                <a href="https://wa.me/8801711123456" target="_blank" class="btn btn-outline-primary">
-                  <i class="fab fa-whatsapp me-2"></i>Chat Now
+                <a href="https://wa.me/8801713456800" target="_blank" class="btn btn-outline-primary">
+                  <i class="fab fa-whatsapp me-2" style="color: #25D366;"></i>Chat Now
                 </a>
               </div>
             </div>
@@ -275,14 +312,14 @@
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1"
                   style="background: transparent; color: #ececec">
                   <i class="fas fa-question-circle text-accent me-3"></i>
-                  How do I schedule a consultation?
+                  How do I book a free consultation?
                 </button>
               </h2>
               <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-muted">
-                  You can schedule a consultation by calling our office,
-                  filling out the contact form above, or using our online
-                  consultation booking system.
+                <div class="accordion-body text-white">
+                  You can book in two simple ways: call us directly or use our
+                  <a href="consultation.html" class="text-accent">Free Consultation page</a>.
+                  Share your details, pick a preferred time, and our team will confirm your slot.
                 </div>
               </div>
             </div>
@@ -295,14 +332,13 @@
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#faq2" style="background: transparent; color: #ececec">
                   <i class="fas fa-question-circle text-accent me-3"></i>
-                  What are your consultation fees?
+                  I have an urgent legal issue. How fast can I talk to a lawyer?
                 </button>
               </h2>
               <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-muted">
-                  We offer a free initial consultation for most practice
-                  areas. Specific fees will be discussed during your first
-                  meeting based on your case requirements.
+                <div class="accordion-body text-white">
+                  For urgent matters, call or WhatsApp us for the fastest response.
+                  Our team will quickly assess the urgency and connect you to the right lawyer.
                 </div>
               </div>
             </div>
@@ -315,14 +351,13 @@
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#faq3" style="background: transparent; color: #ececec">
                   <i class="fas fa-question-circle text-accent me-3"></i>
-                  How long does a typical case take?
+                  What details should I include when sending a message?
                 </button>
               </h2>
               <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-muted">
-                  Case duration varies significantly depending on the
-                  complexity and type of legal matter. We provide estimated
-                  timelines during your initial consultation.
+                <div class="accordion-body text-white">
+                  Please include your full name, phone number, the legal issue, and any deadline.
+                  Clear details help us review your case faster and guide you correctly.
                 </div>
               </div>
             </div>
@@ -335,14 +370,127 @@
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#faq4" style="background: transparent; color: #ececec">
                   <i class="fas fa-question-circle text-accent me-3"></i>
-                  Do you offer payment plans?
+                  What documents should I bring to my first meeting?
                 </button>
               </h2>
               <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-muted">
-                  Yes, we offer flexible payment plans for qualifying clients.
-                  Please discuss your needs with our team during your
-                  consultation.
+                <div class="accordion-body text-white">
+                  Bring your NID or passport, agreements, notices, and any court papers.
+                  If you are not sure, bring whatever you have and we will guide you step by step.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-3" style="
+                  background: #1c1e20;
+                  border: 1px solid rgba(175, 169, 57, 0.15);
+                  border-radius: 12px;
+                " data-aos="fade-up" data-aos-delay="400">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq5" style="background: transparent; color: #ececec">
+                  <i class="fas fa-question-circle text-accent me-3"></i>
+                  Can I get help if I am outside Dhaka or outside Bangladesh?
+                </button>
+              </h2>
+              <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white">
+                  Yes. We assist clients across Bangladesh and abroad through phone, email, and online consultation.
+                  You only need to visit physically when your matter requires in-person presence.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-3" style="
+                  background: #1c1e20;
+                  border: 1px solid rgba(175, 169, 57, 0.15);
+                  border-radius: 12px;
+                " data-aos="fade-up" data-aos-delay="500">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq6" style="background: transparent; color: #ececec">
+                  <i class="fas fa-question-circle text-accent me-3"></i>
+                  Is the first consultation free?
+                </button>
+              </h2>
+              <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white">
+                  Yes, the first consultation is free for most new clients.
+                  If any paid legal work is needed after review, we will explain the fees clearly in advance.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-3" style="
+                  background: #1c1e20;
+                  border: 1px solid rgba(175, 169, 57, 0.15);
+                  border-radius: 12px;
+                " data-aos="fade-up" data-aos-delay="600">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq7" style="background: transparent; color: #ececec">
+                  <i class="fas fa-question-circle text-accent me-3"></i>
+                  How do I know my consultation booking is confirmed?
+                </button>
+              </h2>
+              <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white">
+                  After your request, our team will contact you by phone, email, or WhatsApp.
+                  We will confirm your date, time, and assigned lawyer.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-3" style="
+                  background: #1c1e20;
+                  border: 1px solid rgba(175, 169, 57, 0.15);
+                  border-radius: 12px;
+                " data-aos="fade-up" data-aos-delay="700">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq8" style="background: transparent; color: #ececec">
+                  <i class="fas fa-question-circle text-accent me-3"></i>
+                  Can consultations be done online?
+                </button>
+              </h2>
+              <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white">
+                  Yes, we offer online consultations for suitable matters.
+                  This is especially useful for clients outside Dhaka or overseas.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-3" style="
+                  background: #1c1e20;
+                  border: 1px solid rgba(175, 169, 57, 0.15);
+                  border-radius: 12px;
+                " data-aos="fade-up" data-aos-delay="800">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq9" style="background: transparent; color: #ececec">
+                  <i class="fas fa-question-circle text-accent me-3"></i>
+                  Will my information remain confidential?
+                </button>
+              </h2>
+              <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white">
+                  Yes. We treat your personal and legal information with strict confidentiality.
+                  Your documents and communications are handled with professional care.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item mb-3" style="
+                  background: #1c1e20;
+                  border: 1px solid rgba(175, 169, 57, 0.15);
+                  border-radius: 12px;
+                " data-aos="fade-up" data-aos-delay="900">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq10" style="background: transparent; color: #ececec">
+                  <i class="fas fa-question-circle text-accent me-3"></i>
+                  Do you offer payment plans for legal services?
+                </button>
+              </h2>
+              <div id="faq10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-white">
+                  For eligible matters, flexible payment plans can be discussed.
+                  Please share your situation during consultation so we can suggest suitable options.
                 </div>
               </div>
             </div>
@@ -469,9 +617,9 @@
             <div class="chamber-box">
               <h6 class="chamber-title">High Court Chamber</h6>
               <p class="chamber-address">
-                Room No. 204, Annex Building<br />
                 Supreme Court Bar Association<br />
-                Dhaka-1000, Bangladesh
+                Room No. 709, 6th Floor<br />
+                Annex Extension Building, Ramna, Dhaka - 1000
               </p>
             </div>
           </div>
@@ -480,9 +628,9 @@
             <div class="chamber-box">
               <h6 class="chamber-title">Judge Court Chamber</h6>
               <p class="chamber-address">
-                Room No. 405, Sayed Building<br />
                 Dhaka Bar Association<br />
-                Johnson Road, Dhaka-1100
+                Room No. 7018, 6th Floor<br />
+                Annex Extension Building-2, Dhaka-1100
               </p>
             </div>
           </div>
@@ -491,9 +639,9 @@
             <div class="chamber-box">
               <h6 class="chamber-title">Evening Chamber</h6>
               <p class="chamber-address">
-                House 12, Road 5 (2nd Floor)<br />
-                Gulshan-1, Dhaka-1212<br />
-                (6:00 PM - 9:00 PM)
+                House #13, Road #07, Block #C<br />
+                Flat #1-A, Ground Floor<br />
+                Niketan, Gulshan, Dhaka-1212
               </p>
             </div>
           </div>
@@ -549,6 +697,9 @@
 
   <!-- AOS Animation -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <!-- Custom JS -->
   <script src="js/main.js"></script>

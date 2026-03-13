@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const SUPABASE_URL = window.__SUPABASE_URL__ || 'https://rujctxkklzxnogniivdj.supabase.co';
     const SUPABASE_ANON_KEY = window.__SUPABASE_ANON_KEY__ || '';
 
+    // ===== Google Sheets Eligibility API =====
+    const ELIGIBILITY_API_URL = 'https://script.google.com/macros/s/AKfycbxjbOeyq6VE41zIDU-N5IUaO7w1ntHTo47V463n4Q7UHOQ9vJMU43QzxWxyTqq-xjfD_Q/exec';
+    const ELIGIBILITY_CLIENT_KEY = 'KamalLaw_EligCheck_2026';
+
     function getAuthHeaders() {
         if (!SUPABASE_ANON_KEY) {
             throw new Error('Missing runtime Supabase anon key (window.__SUPABASE_ANON_KEY__).');
@@ -81,39 +85,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Fallback consultation check function for when Edge Function is unavailable
-    async function checkEligibilityFallback(email, phone) {
-        try {
-            // Try to check from local storage/sessionStorage for demo purposes
-            const consultationHistory = JSON.parse(localStorage.getItem('consultationHistory') || '{}');
-            const userKey = `${email}_${phone}`;
-            
-            if (consultationHistory[userKey]) {
-                return {
-                    hasUsedFreeConsultation: true,
-                    consultationFee: 2000,
-                    consultationCount: consultationHistory[userKey].count || 1,
-                    freeConsultationUsed: true
-                };
-            }
-            
-            // First time user
-            return {
-                hasUsedFreeConsultation: false,
-                consultationFee: 2000,
-                consultationCount: 0,
-                freeConsultationUsed: false
-            };
-        } catch (error) {
-            console.error('Fallback check error:', error);
-            // Default to first-time user if all else fails
-            return {
-                hasUsedFreeConsultation: false,
-                consultationFee: 2000,
-                consultationCount: 0,
-                freeConsultationUsed: false
-            };
+    // Normalize Bangladesh phone to canonical 01XXXXXXXXX (accepts +8801..., 8801..., 01...)
+    function normalizePhone(phone) {
+        let p = String(phone).replace(/[\s\-\(\)]/g, '');
+        if (p.startsWith('+')) p = p.slice(1);
+        if (p.length === 13 && p.startsWith('880')) p = '0' + p.slice(3);
+        return p;
+    }
+
+    // Google Sheets Eligibility API – authoritative source of truth
+    async function callEligibilityAPI(action, email, phone, extraData = {}) {
+        const response = await fetch(ELIGIBILITY_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+                action,
+                email: email.trim().toLowerCase(),
+                phone: normalizePhone(phone),
+                clientKey: ELIGIBILITY_CLIENT_KEY,
+                ...extraData
+            })
+        });
+        if (!response.ok) {
+            throw new Error('Eligibility service unavailable (HTTP ' + response.status + '). Please try again or call our office.');
         }
+        return response.json();
     }
     
     // State management
@@ -383,6 +379,29 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => toast.remove(), 300);
         }, 4000);
     }
+
+    async function confirmPendingConsultationIfAvailable() {
+        const storedData = sessionStorage.getItem('pendingConsultation');
+        if (!storedData) {
+            return null;
+        }
+
+        const pending = JSON.parse(storedData);
+        if (!pending.consultationId || !pending.email || !pending.phone) {
+            return pending;
+        }
+
+        const confirmResult = await callEligibilityAPI('confirm_consultation', pending.email, pending.phone, {
+            consultationId: pending.consultationId,
+            paymentStatus: 'paid'
+        });
+
+        if (!confirmResult.success) {
+            throw new Error(confirmResult.error || 'Payment succeeded, but confirmation notification failed.');
+        }
+
+        return pending;
+    }
     
     // ===== Payment Callback Handler =====
     async function checkPaymentCallback() {
@@ -415,6 +434,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (verifyResult.success && verifyResult.verified) {
                     showNotification('Payment verified successfully!', 'success');
+
+                    let pendingData = null;
+                    try {
+                        pendingData = await confirmPendingConsultationIfAvailable();
+                        if (pendingData) {
+                            sessionStorage.removeItem('pendingConsultation');
+                        }
+                    } catch (confirmError) {
+                        console.error('Post-payment confirmation sync error:', confirmError);
+                        showNotification('Payment is successful, but email confirmation is pending. Our team will contact you shortly.', 'warning');
+                    }
                     
                     // Show success with consultation data
                     const consultation = verifyResult.consultation || {};
@@ -432,13 +462,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     
                     showSuccess({
-                        id: consultation.id,
-                        firstName: consultation.first_name,
-                        lastName: consultation.last_name,
-                        caseType: consultation.practice_area,
-                        email: consultation.email,
-                        preferredDate: 'To be confirmed',
-                        preferredTime: 'To be confirmed'
+                        id: (pendingData && pendingData.consultationId) || consultation.id,
+                        firstName: (pendingData && pendingData.firstName) || consultation.first_name,
+                        lastName: (pendingData && pendingData.lastName) || consultation.last_name,
+                        caseType: (pendingData && pendingData.caseType) || consultation.practice_area,
+                        email: (pendingData && pendingData.email) || consultation.email,
+                        preferredDate: (pendingData && pendingData.preferredDate) || 'To be confirmed',
+                        preferredTime: (pendingData && pendingData.preferredTime) || 'To be confirmed'
                     });
                 } else {
                     showError('Payment verification failed. Please contact support.');
@@ -452,20 +482,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 // For demo mode, simulate success
                 if (demo === 'true') {
                     showNotification('Demo payment processed successfully!', 'success');
-                    const storedData = sessionStorage.getItem('pendingConsultation');
-                    if (storedData) {
-                        const consultationData = JSON.parse(storedData);
-                        showSuccess(consultationData);
-                        sessionStorage.removeItem('pendingConsultation');
-                    } else {
-                        showSuccess({
-                            firstName: 'Demo',
-                            lastName: 'User',
-                            caseType: 'Legal Consultation',
-                            email: 'demo@example.com',
-                            preferredDate: 'To be confirmed',
-                            preferredTime: 'To be confirmed'
-                        });
+                    try {
+                        const pendingData = await confirmPendingConsultationIfAvailable();
+                        if (pendingData) {
+                            showSuccess({
+                                id: pendingData.consultationId,
+                                firstName: pendingData.firstName,
+                                lastName: pendingData.lastName,
+                                caseType: pendingData.caseType,
+                                email: pendingData.email,
+                                preferredDate: pendingData.preferredDate,
+                                preferredTime: pendingData.preferredTime
+                            });
+                            sessionStorage.removeItem('pendingConsultation');
+                        } else {
+                            showSuccess({
+                                firstName: 'Demo',
+                                lastName: 'User',
+                                caseType: 'Legal Consultation',
+                                email: 'demo@example.com',
+                                preferredDate: 'To be confirmed',
+                                preferredTime: 'To be confirmed'
+                            });
+                        }
+                    } catch (confirmError) {
+                        console.error('Demo confirmation sync error:', confirmError);
+                        showError('Payment simulated, but consultation confirmation could not be completed. Please contact support.');
                     }
                 } else {
                     showError('Unable to verify payment. Please contact support.');
@@ -645,11 +687,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Validate Bangladesh phone number
+            // Normalize and validate Bangladesh phone (accepts 01XXXXXXXXX or +8801XXXXXXXXX)
+            const cleanPhone = normalizePhone(phone);
             const phoneRegex = /^01[3-9]\d{8}$/;
-            const cleanPhone = phone.replace(/[-\s+]/g, '');
             if (!phoneRegex.test(cleanPhone)) {
-                showError('Please enter a valid Bangladesh mobile number (e.g., 01XXX-XXXXXX).');
+                showError('Please enter a valid Bangladesh mobile number (e.g., 01XXX-XXXXXX or +8801XXX-XXXXXX).');
                 return;
             }
             
@@ -658,18 +700,9 @@ document.addEventListener('DOMContentLoaded', function() {
             this.disabled = true;
             
             try {
-                // Call backend API to check consultation history
-                let result;
-                try {
-                    result = await invokeEdgeFunction('consultation-check', {
-                        email: email,
-                        phone: cleanPhone
-                    });
-                } catch (apiError) {
-                    console.warn('Edge Function unavailable, using fallback:', apiError);
-                    result = await checkEligibilityFallback(email, cleanPhone);
-                }
-                
+                // Check eligibility via Google Sheets – authoritative, server-side
+                const result = await callEligibilityAPI('check_eligibility', email, cleanPhone);
+
                 isFirstTimeUser = !result.hasUsedFreeConsultation;
                 consultationFee = result.consultationFee || 2000;
                 
@@ -805,7 +838,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Gather form data
             const email = document.getElementById('checkEmail').value.trim();
-            const phone = document.getElementById('checkPhone').value.replace(/[-\s+]/g, '');
+            const phone = normalizePhone(document.getElementById('checkPhone').value);
             const firstName = document.getElementById('firstName').value.trim();
             const lastName = document.getElementById('lastName').value.trim();
             const caseType = document.getElementById('caseType').value;
@@ -819,12 +852,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 firstName,
                 lastName,
                 practiceArea: caseType,
+                urgency,
+                caseDescription: description,
+                additionalNotes,
                 message: `${description}\n\nUrgency: ${urgency}\nConsultation Type: ${selectedConsultationType}\nPreferred Date: ${preferredDate}\nPreferred Time: ${preferredTime}\n${additionalNotes ? 'Additional Notes: ' + additionalNotes : ''}`,
                 preferredDate,
                 preferredTime,
                 consultationType: selectedConsultationType,
                 documentsCount: uploadedDocuments.length,
-                documentNames: uploadedDocuments.map(doc => doc.name)
+                documentNames: uploadedDocuments.map(doc => doc.name),
+                submissionSource: 'website_consultation_form'
             };
             
             // Show loading state
@@ -833,51 +870,69 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 if (isFirstTimeUser) {
-                    // Submit free consultation with or without documents
-                    let result;
-                    if (uploadedDocuments.length > 0) {
-                        result = await invokeEdgeFunctionWithFiles('submit-consultation', {
-                            ...consultationData,
-                            isFree: true
-                        }, uploadedDocuments);
-                    } else {
-                        result = await invokeEdgeFunction('submit-consultation', {
-                            ...consultationData,
-                            isFree: true
-                        });
+                    // Verify & consume free slot via Google Sheets (server-side, race-condition safe)
+                    const consumeResult = await callEligibilityAPI('consume_free', email, phone);
+
+                    if (!consumeResult.success || !consumeResult.freeGranted) {
+                        throw new Error(consumeResult.error || 'Free consultation is no longer available for this account. Please contact our office.');
                     }
-                    
-                    if (result.success) {
-                        // Record this consultation in local storage for future eligibility checks
-                        const consultationHistory = JSON.parse(localStorage.getItem('consultationHistory') || '{}');
-                        const userKey = `${email}_${phone}`;
-                        consultationHistory[userKey] = {
-                            count: (consultationHistory[userKey]?.count || 0) + 1,
-                            lastConsultation: new Date().toISOString(),
-                            usedFreeConsultation: true
-                        };
-                        localStorage.setItem('consultationHistory', JSON.stringify(consultationHistory));
-                        
-                        showNotification('Consultation scheduled successfully!', 'success');
-                        showSuccess({
-                            id: result.consultation?.id,
-                            firstName,
-                            lastName,
-                            caseType,
-                            email,
-                            preferredDate,
-                            preferredTime
-                        });
-                    } else {
-                        throw new Error(result.error || 'Failed to submit consultation');
+
+                    // Mirror locally as a UI cache only (never used as eligibility source)
+                    const consultationHistory = JSON.parse(localStorage.getItem('consultationHistory') || '{}');
+                    const userKey = `${email}_${normalizePhone(phone)}`;
+                    consultationHistory[userKey] = {
+                        count: (consultationHistory[userKey]?.count || 0) + 1,
+                        lastConsultation: new Date().toISOString(),
+                        usedFreeConsultation: true
+                    };
+                    localStorage.setItem('consultationHistory', JSON.stringify(consultationHistory));
+
+                    // Save full consultation details to Google Sheets
+                    const saveResult = await callEligibilityAPI('save_consultation', email, phone, {
+                        consultation: {
+                            ...consultationData,
+                            paymentStatus: 'not_required_free',
+                            isFree: true,
+                            submittedAt: new Date().toISOString()
+                        }
+                    });
+                    if (!saveResult.success) {
+                        throw new Error(saveResult.error || 'Consultation was eligible but details could not be stored. Please try again.');
                     }
-                } else {
-                    // Initiate payment for returning users
-                    sessionStorage.setItem('pendingConsultation', JSON.stringify({
+
+                    showNotification('Consultation scheduled successfully!', 'success');
+                    showSuccess({
+                        id: saveResult.consultationId || ('KC-' + Date.now().toString(36).toUpperCase()),
                         firstName,
                         lastName,
                         caseType,
                         email,
+                        preferredDate,
+                        preferredTime
+                    });
+                } else {
+                    // Save consultation details before payment redirect (status: pending payment)
+                    const savePendingResult = await callEligibilityAPI('save_consultation', email, phone, {
+                        consultation: {
+                            ...consultationData,
+                            paymentStatus: 'pending',
+                            isFree: false,
+                            selectedPaymentMethod,
+                            submittedAt: new Date().toISOString()
+                        }
+                    });
+                    if (!savePendingResult.success) {
+                        throw new Error(savePendingResult.error || 'Unable to save consultation details before payment.');
+                    }
+
+                    // Initiate payment for returning users
+                    sessionStorage.setItem('pendingConsultation', JSON.stringify({
+                        consultationId: savePendingResult.consultationId || null,
+                        firstName,
+                        lastName,
+                        caseType,
+                        email,
+                        phone,
                         preferredDate,
                         preferredTime
                     }));

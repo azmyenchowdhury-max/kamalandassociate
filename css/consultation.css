@@ -581,4 +581,54 @@
     box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15) !important;
 }
 
+@media (max-width: 768px) {
+    #calendarPicker {
+        left: 0 !important;
+        right: auto !important;
+        top: calc(100% + 8px) !important;
+        width: min(92vw, 320px) !important;
+        max-width: 92vw;
+        padding: 12px !important;
+    }
+
+    #calendarMonth {
+        min-width: 0 !important;
+        font-size: 14px;
+    }
+
+    #calendarDays {
+        gap: 4px !important;
+    }
+
+    #calendarDays button {
+        min-height: 32px;
+        font-size: 13px;
+    }
+
+    .payment-badges {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .consultation-form-wrap {
+        padding: 20px 14px;
+    }
+
+    .progress-line {
+        left: 20px;
+        right: 20px;
+    }
+
+    .step-label {
+        font-size: 10px;
+    }
+
+    .toast-notification {
+        top: 84px;
+        left: 12px;
+        right: 12px;
+    }
+}
+
 

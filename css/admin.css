@@ -650,7 +650,7 @@ body {
 /* Charts Section */
 .charts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
     margin-bottom: 30px;
 }
@@ -996,10 +996,22 @@ body {
 }
 
 @media (max-width: 768px) {
+    .admin-main {
+        padding: 20px 16px;
+    }
+
     .admin-header {
         flex-direction: column;
         gap: 16px;
         align-items: flex-start;
+    }
+
+    .chart-card {
+        padding: 16px;
+    }
+
+    .chart-container {
+        height: 260px !important;
     }
 
     .stats-grid {
@@ -1038,7 +1050,8 @@ body {
 
     .data-table th,
     .data-table td {
-        padding: 10px 12px;
+        padding: 10px;
+        white-space: nowrap;
     }
 }
 

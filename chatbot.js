@@ -1415,14 +1415,7 @@
       scheduleFollowUp();
     });
 
-    // Initial greeting
-    setTimeout(() => {
-      // open automatically on first visit
-      const isReturning = !!readStorage(STORAGE_KEYS.visitor, null);
-      if (!isReturning) {
-        toggleChat();
-      }
-    }, 1500);
+    // Keep chat closed by default. It opens only when the visitor clicks the chat bubble.
   }
 
   if (document.readyState === "complete" || document.readyState === "interactive") {

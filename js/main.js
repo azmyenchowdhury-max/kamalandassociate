@@ -1,4 +1,4 @@
-/* ===================================
+﻿/* ===================================
    Kamal & Associates - Main JavaScript
    Pure HTML/CSS/JS/Bootstrap Version
    Created by: Azmyen Mustafa Chowdhury
@@ -755,18 +755,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const modalTitle = document.getElementById('modalTitle');
         const modalDescription = document.getElementById('modalDescription');
         const modalServices = document.getElementById('modalServices');
-        const modalRegulatorySection = document.getElementById('modalRegulatorySection');
-        const modalApprovalsSection = document.getElementById('modalApprovalsSection');
-        const modalRiskSection = document.getElementById('modalRiskSection');
-        const modalEscalationSection = document.getElementById('modalEscalationSection');
-        const modalReadinessScore = document.getElementById('modalReadinessScore');
         const closeButton = modal.querySelector('.service-modal-close');
 
         // Service data object
         const serviceData = {
             'administrative-law': {
                 title: 'Administrative Law in Bangladesh',
-                description: 'Our administrative law practice covers regulatory compliance, government relations, and administrative proceedings. We provide comprehensive legal support for businesses and individuals dealing with government agencies and regulatory bodies.',
+                description: 'Administrative law in Bangladesh governs the relationship between citizens, businesses, and the state, ensuring that government bodies exercise their powers lawfully and fairly. Our team advises clients on regulatory compliance, licensing requirements, and approvals from ministries, the Bangladesh Energy Regulatory Commission, BTRC, and other statutory bodies. We represent clients before administrative tribunals and regulatory authorities when agencies act arbitrarily or outside their lawful mandate. Where unlawful decisions have already been made, we challenge those decisions through judicial review and administrative appeals before the High Court Division. Our goal is to shield clients from regulatory overreach while maintaining productive, credible relationships with government institutions.',
                 services: [
                     'Regulatory compliance and licensing',
                     'Administrative appeals and reviews',
@@ -778,7 +773,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'admiralty-shipping': {
                 title: 'Admiralty and Shipping',
-                description: 'We offer specialized legal services in maritime law, including ship registration, marine insurance claims, and international shipping disputes. Our expertise covers all aspects of admiralty and shipping law in Bangladesh and internationally.',
+                description: "Bangladesh's position as a major maritime nation creates complex legal needs across the shipping, port, and trade industries. Our admiralty practice handles ship registration, flag-state compliance, and vessel arrests under the Admiralty Court Act 2000. We represent cargo owners, shipowners, and insurers in disputes arising from collisions, salvage, general average, and cargo loss before the Admiralty Division of the High Court Division. Our lawyers advise on Bill of Lading disputes, charter party breaches, and demurrage claims under BIMCO contract forms. With expertise spanning the Bangladesh Merchant Shipping Ordinance and international maritime conventions, we deliver authoritative counsel at every stage of a shipping matter.",
                 services: [
                     'Ship registration and documentation',
                     'Marine insurance claims',
@@ -790,7 +785,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'alternative-dispute': {
                 title: 'Alternative Dispute Resolution',
-                description: 'Our ADR practice focuses on mediation, arbitration, and other alternative dispute resolution methods. We help clients resolve conflicts efficiently and cost-effectively outside traditional court litigation.',
+                description: 'Alternative dispute resolution offers parties a faster, more cost-effective path to resolving commercial conflicts without the delay and expense of court proceedings. Our ADR team is experienced in commercial mediation, arbitration under the Arbitration Act 2001, and conciliation conducted under institutional and ad-hoc rules. We draft multi-tiered dispute resolution clauses, appoint arbitrators, and represent clients before domestic and international arbitral tribunals including those of BIAC, ICC, and LCIA. Our lawyers also design structured escalation processes that combine negotiation, mediation, and binding arbitration in a single contractual framework. We help clients achieve durable, enforceable settlements that protect business relationships while fully securing their legal interests.',
                 services: [
                     'Commercial arbitration',
                     'Mediation services',
@@ -802,7 +797,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'aviation-matters': {
                 title: 'Aviation Matters',
-                description: 'We provide comprehensive legal services for aviation industry clients, including aircraft financing, regulatory compliance, and aviation litigation. Our team has extensive experience in both domestic and international aviation law.',
+                description: "Bangladesh's aviation sector is one of the fastest-growing in South Asia, bringing with it an increasingly complex regulatory and commercial legal landscape. We advise airlines, lessors, aviation companies, and airports on compliance with CAAB regulations, bilateral air services agreements, and ICAO standards applicable in Bangladesh. Our practice covers aircraft purchase and lease financing, mortgage registration under the Civil Aviation Act, and cross-border asset recovery from defaulting operators. We also handle aviation accident investigations, cargo liability claims under the Warsaw and Montreal Conventions, and slot coordination disputes involving HSIA and other airports. From Biman Bangladesh Airlines to private charter operators, we provide reliable legal support at every stage of the aviation lifecycle.",
                 services: [
                     'Aircraft financing and leasing',
                     'Aviation regulatory compliance',
@@ -814,7 +809,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'banking-litigation': {
                 title: 'Banking Litigation',
-                description: 'Our banking litigation practice handles complex financial disputes, regulatory compliance, and banking law matters. We represent banks, financial institutions, and clients in banking-related legal proceedings.',
+                description: "Bangladesh's banking sector is subject to strict oversight by Bangladesh Bank, the Financial Intelligence Unit, and the courts, making specialist legal representation indispensable in disputes. Our banking litigation team handles loan recovery suits under the Artha Rin Adalat Ain 2003, enforcement of mortgages and hypothecations, and foreclosure proceedings for financial institutions. We represent banks, non-bank financial institutions, and corporate borrowers in matters ranging from documentary credit defaults to guarantor liability and fraudulent loan disbursements. Our lawyers also advise on compliance with Anti-Money Laundering regulations, prudential norms, and Bangladesh Bank circulars governing capital adequacy and provisioning. We pursue swift, effective resolutions to protect our clients' balance sheets, regulatory standing, and reputations.",
                 services: [
                     'Banking regulatory compliance',
                     'Loan recovery litigation',
@@ -826,7 +821,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'business-setup': {
                 title: 'Business Setup',
-                description: 'We assist entrepreneurs and businesses in establishing and structuring their operations in Bangladesh. Our comprehensive business setup services cover all legal aspects of company formation and business establishment.',
+                description: 'Starting a business in Bangladesh requires navigating multiple regulatory bodies including RJSC, BIDA, BEPZA, city corporations, and sector-specific licensing authorities. Our business setup team manages company incorporation, trade licence applications, sector permits, and foreign investment approvals from start to finish, eliminating confusion and delay for our clients. We design optimal business structures—whether private limited, branch office, or joint venture—to match each client\'s operational, ownership, and tax objectives. Our lawyers also advise on the BIDA One Stop Service portal and prepare the full pre-investment regulatory roadmap. We stay engaged through every approval stage until the business is fully licensed, compliant, and ready to operate.',
                 services: [
                     'Company incorporation and registration',
                     'Business license applications',
@@ -838,7 +833,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'civil-litigation': {
                 title: 'Civil Litigation',
-                description: 'Our civil litigation team handles a wide range of civil disputes, from contract breaches to property matters. We provide aggressive representation while seeking efficient resolutions for our clients.',
+                description: 'Civil litigation in Bangladesh spans District Judge courts, the High Court Division, and the Appellate Division, and demands strategic navigation at every level. Our civil litigation team handles property disputes, breach of contract claims, tortious liability, declaratory suits, and injunction applications across all civil courts. We draft pleadings with precision, manage documentary evidence, and appear before courts to argue our clients\' cases with conviction and rigour. Our approach emphasises early case analysis to identify legal strengths, factual vulnerabilities, and realistic settlement opportunities before costs escalate. From filing the plaint through to obtaining a final decree and executing it against the judgment debtor, we stand with our clients at every stage.',
                 services: [
                     'Contract dispute resolution',
                     'Property and real estate litigation',
@@ -850,7 +845,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'commercial-litigation': {
                 title: 'Commercial Litigation',
-                description: 'We specialize in complex commercial disputes involving businesses and corporations. Our commercial litigation practice covers all aspects of business law disputes and corporate conflicts.',
+                description: 'Complex commercial disputes often involve large financial stakes, multiple parties, and intricate questions of contract, corporate, and competition law. Our commercial litigation team handles corporate governance disputes, shareholder oppression claims, breach of major commercial contracts, and unfair trade practice actions across Bangladeshi courts. We appear before the Commercial Court, the High Court Division, and the Appellate Division, and are equally skilled at obtaining emergency injunctions to preserve the status quo before a dispute is fully heard. Our lawyers combine deep knowledge of the Companies Act 1994, the Contract Act 1872, and international commercial law principles to construct powerful and coherent cases. We also coordinate with insolvency counsel when a commercial dispute intersects with a party\'s financial distress.',
                 services: [
                     'Corporate governance disputes',
                     'Shareholder litigation',
@@ -862,7 +857,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'company-formation': {
                 title: 'Company Formation and Registration',
-                description: 'Our company formation services provide end-to-end support for establishing businesses in Bangladesh. We handle all legal requirements and regulatory filings for various business structures.',
+                description: 'Incorporating a company in Bangladesh involves formal registration with the Registrar of Joint Stock Companies and Firms (RJSC) and obtaining a range of sector-specific approvals from regulatory authorities. Our company formation team prepares memoranda and articles of association, statutory declarations, and all RJSC filing documents for private limited, public limited, and one-person companies. We also handle branch office and liaison office registrations for foreign companies wishing to operate in Bangladesh. After incorporation, we guide clients through post-registration compliance including share allotment, director appointments, statutory books maintenance, and first board resolutions. Our end-to-end support ensures every company starts on a legally solid footing with clear governance structures and compliance obligations clearly mapped out.',
                 services: [
                     'Private limited company formation',
                     'Public limited company registration',
@@ -874,7 +869,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'constitutional-law': {
                 title: 'Constitutional Law',
-                description: 'We provide expert legal services in constitutional matters, including fundamental rights enforcement and constitutional challenges. Our team has extensive experience in constitutional litigation and public law.',
+                description: 'The Constitution of Bangladesh is the supreme law of the land, providing powerful remedies for citizens and organisations whose fundamental rights have been violated or threatened by state action. Our constitutional law practice files writ petitions under Articles 102 and 44 of the Constitution to enforce fundamental rights and challenge unlawful government action in the High Court Division. We have appeared in landmark matters concerning freedom of expression, right to fair trial, separation of powers, and protection from arbitrary detention in the Appellate Division. Our team also advises on public interest litigation, challenges to legislative validity, and constitutional interpretation questions alongside live proceedings. We bring both scholarly rigour and tested courtroom advocacy to every constitutional brief we accept.',
                 services: [
                     'Fundamental rights petitions',
                     'Constitutional writs and PIL',
@@ -886,7 +881,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'contracts': {
                 title: 'Contracts',
-                description: 'Our contract law practice covers drafting, negotiation, and enforcement of commercial agreements. We ensure that our clients\' contractual relationships are legally sound and enforceable.',
+                description: 'A well-drafted contract is the foundation of every successful business relationship and the first line of defence in any dispute. Our contracts team drafts, reviews, and negotiates commercial agreements ranging from simple service contracts to complex multi-jurisdictional transactions, ensuring terms are clear, balanced, and enforceable under Bangladeshi law. We identify risk allocation issues, liability exposure, unfair terms, and regulatory non-compliance before documents are executed, protecting our clients before problems arise. Where disputes occur, we advise on the full range of remedies available under the Contract Act 1872—damages, specific performance, rescission, and injunction. We also develop standard-form contract suites for businesses that transact regularly with customers, suppliers, agents, and distributors.',
                 services: [
                     'Contract drafting and review',
                     'Commercial agreement negotiation',
@@ -898,7 +893,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'criminal-defense': {
                 title: 'Criminal Prosecution and Defense',
-                description: 'We provide comprehensive criminal law services for both prosecution and defense matters. Our experienced criminal lawyers handle cases ranging from minor offenses to complex white-collar crimes.',
+                description: 'Criminal proceedings in Bangladesh carry profound personal, professional, and reputational consequences, making experienced and committed legal representation essential from the very first moment of contact with the authorities. Our criminal law team appears in Magistrate courts, Sessions courts, special tribunals, and the High Court Division and Appellate Division in both prosecution and defence matters. We handle the full spectrum of cases—from petty offences and domestic disputes to complex white-collar crimes, cybercrime, and matters under the Anti-Terrorism Act 2009 and Digital Security Act 2018. Our lawyers are skilled in bail and anticipatory bail applications, charge framing challenges, formal evidence objections, and cross-examination of prosecution witnesses. We stand firmly beside our clients from the moment of arrest or notice through to final appeal or acquittal.',
                 services: [
                     'Criminal defense representation',
                     'Prosecution services',
@@ -910,7 +905,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'domestic-arbitration': {
                 title: 'Domestic and International Arbitration',
-                description: 'Our arbitration practice handles both domestic and international commercial disputes. We represent clients in arbitration proceedings under various institutional rules and ad-hoc arbitrations.',
+                description: 'Arbitration is the preferred method of resolving commercial and investment disputes in Bangladesh, governed principally by the Arbitration Act 2001 and influenced heavily by the UNCITRAL Model Law. Our arbitration team advises on the drafting of arbitration clauses, the selection of arbitral rules—including those of BIAC, ICC, LCIA, and SIAC—and the constitution of appropriately qualified arbitral tribunals. We prepare and present claims and defences before arbitral tribunals sitting in Dhaka and in international seats such as Singapore, London, and Hong Kong. Where awards are obtained, we handle enforcement proceedings under New York Convention obligations, and where awards are defective, we challenge them on the limited grounds permitted by law in the courts. Our team has handled arbitrations exceeding BDT 500 crore in sectors spanning infrastructure, energy, banking, and manufacturing.',
                 services: [
                     'International commercial arbitration',
                     'Investment treaty arbitration',
@@ -922,7 +917,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'entertainment-litigation': {
                 title: 'Entertainment and Media Litigation',
-                description: 'We represent clients in entertainment industry disputes, including copyright infringement, defamation, and media law matters. Our practice covers film, music, publishing, and digital media.',
+                description: "Bangladesh's fast-growing entertainment industry—spanning film, television, music, OTT platforms, and advertising—generates increasingly complex legal disputes requiring specialist counsel. Our entertainment litigation practice handles copyright infringement actions, defamation claims, invasion of privacy suits, and contractual disputes involving producers, distributors, broadcasters, and talent. We advise content creators, streaming platforms, and media houses on compliance with Bangladesh Film Censor Board regulations, the Copyright Act 2000, the Digital Security Act 2018, and broadcasting licences issued by BTRC. Our team also negotiates and drafts production agreements, distribution deals, talent management contracts, and co-production arrangements to reduce the risk of future disputes. When litigation becomes unavoidable, we pursue swift and decisive court action to protect our clients' creative work and commercial interests.",
                 services: [
                     'Copyright and trademark disputes',
                     'Defamation and privacy claims',
@@ -934,7 +929,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'environmental-law': {
                 title: 'Environmental Law',
-                description: 'Our environmental law practice addresses regulatory compliance, environmental litigation, and sustainable development matters. We help businesses navigate complex environmental regulations.',
+                description: 'Environmental regulation in Bangladesh is administered by the Department of Environment under the Bangladesh Environment Conservation Act 1995 and its subsequent rules and amendments. Our environmental law practice advises on obtaining Environmental Clearance Certificates, managing Environmental Impact Assessment processes, and maintaining ongoing compliance with discharge and emission standards applicable to industrial and commercial operations. We represent clients before the DoE in enforcement proceedings and negotiate remediation plans where compliance shortfalls have occurred. Our team also handles environmental litigation in civil courts and the High Court Division, including public interest actions challenging polluting activities by industrial operators. With sustainability increasingly central to domestic and international investment decisions, we help clients build robust environmental compliance frameworks that satisfy regulators and stakeholders alike.',
                 services: [
                     'Environmental impact assessments',
                     'Regulatory compliance',
@@ -946,7 +941,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'family-matters': {
                 title: 'Family Matters and Child Custody',
-                description: 'We provide compassionate and expert legal services in family law matters, including divorce, child custody, and domestic relations. Our focus is on achieving fair and equitable outcomes for families.',
+                description: 'Family law matters are among the most sensitive and personally significant legal issues a person can face, and our approach combines rigorous legal advocacy with genuine empathy for every client. Our family law team handles divorce proceedings under the Muslim Family Laws Ordinance 1961, the Christian Marriage Act 1872, and the Special Marriage Act, as well as child custody, maintenance, and guardianship applications. We appear before Family Courts, Children Courts, and the High Court Division with full appreciation of the emotional and practical dimensions of each case alongside our legal strategy. In property disputes arising from marriage breakdown, we advise on asset division, dower enforcement, and inheritance rights under the applicable personal law. Our priority is always to achieve the best outcome for our clients and their children in the least adversarial, most dignified manner possible.',
                 services: [
                     'Divorce and separation proceedings',
                     'Child custody and visitation',
@@ -958,7 +953,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'foreign-investment': {
                 title: 'Foreign Investment',
-                description: 'Our foreign investment practice assists international investors in establishing and operating businesses in Bangladesh. We provide comprehensive legal support for FDI and international business ventures.',
+                description: 'Bangladesh has made significant strides in creating a welcoming environment for foreign direct investment, but navigating its regulatory framework still requires specialist legal guidance at every step. Our foreign investment team advises on BIDA registration, sector-specific approvals from Bangladesh Bank, BSEC, and other authorities, and the optimal structuring of joint ventures with local partners. We prepare FDI agreements, technology transfer contracts, and profit repatriation documentation in compliance with the Foreign Private Investment (Promotion and Protection) Act 1980 and related Bangladesh Bank circulars. Our lawyers also advise investors on the protections available under Bangladesh\'s bilateral investment treaties and the remedies available if a government entity breaches contractual or treaty obligations. From first entry to exit strategy, we provide seamless legal support throughout the entire investment lifecycle.',
                 services: [
                     'Foreign direct investment approvals',
                     'Investment license applications',
@@ -970,7 +965,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'fraud-crimes': {
                 title: 'Fraud and White Collar Crimes',
-                description: 'We specialize in investigating and defending white-collar crimes, financial fraud, and corporate misconduct. Our team has extensive experience in complex financial crime litigation.',
+                description: 'Financial fraud and white-collar offences carry severe criminal penalties in Bangladesh under the Penal Code 1860, the Money Laundering Prevention Act 2012, and the Anti-Corruption Commission Act 2004. Our white-collar crime team defends corporations and individuals facing allegations of banking fraud, securities manipulation, bribery, embezzlement, and customs fraud before specialised tribunals and criminal courts. We engage at the earliest stage—often before any formal charge is filed—to conduct internal investigations, preserve privileged communications, and engage constructively with the Anti-Corruption Commission or Bangladesh Financial Intelligence Unit. For clients who are victims of fraud, we simultaneously pursue civil remedies: asset tracing, freezing orders, and full recovery suits in the civil courts. Our multidisciplinary approach combines criminal defence, civil litigation, and regulatory expertise to protect our clients on all fronts at once.',
                 services: [
                     'Financial fraud investigations',
                     'Money laundering defense',
@@ -982,7 +977,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'global-investment': {
                 title: 'Global Investment and Citizenship',
-                description: 'Our global investment practice helps clients with international investment strategies and citizenship programs. We provide legal support for offshore investments and residency programs.',
+                description: 'For clients seeking to diversify assets, establish international operations, and build multi-jurisdictional wealth structures, navigating cross-border investment and citizenship programmes requires precise legal and regulatory expertise. Our global investment team advises on offshore company formations in Dubai, Singapore, London, and beyond, together with tax-efficient international holding structures and residency or citizenship-by-investment programmes across leading jurisdictions. We coordinate with our international law firm network to deliver seamless cross-border advice on asset protection trusts, offshore banking relationships, and multi-jurisdiction investment vehicles. Our Bangladeshi clients benefit from our understanding of Bangladesh Bank\'s regulatory framework for outward investments under the Foreign Exchange Regulation Act 1947 and relevant circulars. We help clients achieve their global wealth and mobility objectives fully within the bounds of applicable law in every jurisdiction involved.',
                 services: [
                     'Citizenship by investment programs',
                     'Offshore company formation',
@@ -994,7 +989,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'government-contracts': {
                 title: 'Government Contracts and Litigation',
-                description: 'We handle government contracting matters, including bid protests, contract disputes, and procurement litigation. Our practice covers all aspects of public sector contracting.',
+                description: 'Government contracts in Bangladesh are governed by the Public Procurement Act 2006 and the Public Procurement Rules 2008, which impose strict procedural requirements on both procuring entities and tenderers. Our government contracts team advises clients on qualification requirements, bid bond and performance security documentation, technical and financial proposal preparation, and compliance with mandatory submission formats before tender deadlines. We review tender documents in advance of submission to identify ambiguities, pricing risks, and commercially unfavourable conditions that should be formally raised through the pre-bid clarification process. Where contracts are wrongfully awarded or terminated, or bid processes are tainted by procedural irregularities, we file review complaints before the procuring entity and litigate in the courts when necessary. Our detailed knowledge of PPA/PPR requirements and CPTU practices ensures that our clients compete—and perform—government contracts with full legal protection.',
                 services: [
                     'Government contract bidding',
                     'Contract dispute resolution',
@@ -1006,7 +1001,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'immigration-law': {
                 title: 'Immigration Law in Bangladesh',
-                description: 'Our immigration practice provides comprehensive legal services for visa applications, residency permits, and citizenship matters. We assist individuals and businesses with immigration compliance.',
+                description: "Bangladesh's immigration framework governs the entry and stay of foreign nationals as well as the overseas employment of Bangladeshi workers, creating two distinct but equally important areas of legal need. Our immigration practice advises multinational companies on obtaining work permits, investor visas, and long-term stay endorsements for expatriate employees through BIDA, the Ministry of Home Affairs, and relevant ministries. We assist Bangladeshi nationals with overseas employment contracts, Wage Earners' Welfare Fund matters, and claims against fraudulent recruiting agents before the Bureau of Manpower, Employment and Training. For individual clients, we handle spousal and family reunion visa applications, citizenship by naturalisation, and NRB (Non-Resident Bangladeshi) investment visa matters through the Department of Immigration and Passports. Our team stays current with all policy circulars so that our clients' documentation is always accurate, complete, and in order.",
                 services: [
                     'Work permit applications',
                     'Residency visa processing',
@@ -1018,7 +1013,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'insurance-recovery': {
                 title: 'Insurance Recovery',
-                description: 'We assist clients in insurance claim disputes and recovery matters. Our practice covers property insurance, liability insurance, and complex insurance litigation.',
+                description: 'When insurers refuse to pay valid claims, delay settlement, or dispute coverage, policyholders need vigorous legal representation to recover what they are owed under their policies. Our insurance recovery team handles disputes under general, life, and marine insurance policies governed by the Insurance Development and Regulatory Authority (IDRA) regulatory framework and the Insurance Act 2010. We draft and send formal insurance claim demands, initiate arbitration under policy arbitration clauses, and litigate in civil courts and consumer rights forums when insurers act in bad faith or unreasonably delay payment. Our lawyers also advise policyholders on coverage adequacy before a loss occurs, reducing the risk of partial or total claim denial when it matters most. From first-party property claims to third-party liability settlements, we maximise the recovery our clients receive from their insurers.',
                 services: [
                     'Insurance claim disputes',
                     'Bad faith insurance litigation',
@@ -1030,7 +1025,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'intellectual-property': {
                 title: 'Intellectual Property (Trademark Patent Copyright)',
-                description: 'Our IP practice protects and enforces intellectual property rights across trademarks, patents, and copyrights. We provide comprehensive IP legal services for businesses and creators.',
+                description: 'Intellectual property rights are among a business\'s most valuable assets, and protecting them in Bangladesh requires proactive registration and vigilant enforcement in a market where infringement remains common. Our IP team handles trademark registration at the Department of Patents, Designs and Trademarks (DPDT), patent prosecution, and copyright registration with the Copyright Office of Bangladesh for local and multinational clients. We conduct IP due diligence, portfolio audits, and freedom-to-operate analyses for businesses entering new markets or launching new products in Bangladesh and the wider region. When infringement occurs, we move swiftly to obtain interlocutory injunctions, pursue civil damages, and coordinate with customs authorities and law enforcement for border seizure actions against counterfeit goods. Our practice also covers IP licensing agreements, technology transfer contracts, and comprehensive brand protection strategies tailored to each client\'s business model.',
                 services: [
                     'Trademark registration and protection',
                     'Patent prosecution and litigation',
@@ -1042,7 +1037,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'international-trade': {
                 title: 'International Trade',
-                description: 'We provide legal services for international trade and commerce, including import/export regulations, trade agreements, and customs matters. Our practice supports global business operations.',
+                description: "Bangladesh's export-oriented economy—anchored by the garment, textile, pharmaceutical, and agricultural sectors—demands sophisticated legal support for international trade operations at every level. Our international trade team advises on export contracts, letters of credit documentation, INCOTERMS 2020 obligations, and compliance with WTO agreements including the Agreement on Textiles and Clothing and the Agreement on Customs Valuation. We assist importers and exporters in customs classification disputes, anti-dumping proceedings, and trade remedy investigations initiated by the National Board of Revenue or foreign authorities against Bangladeshi exporters. Our lawyers also handle complex trade finance instruments—back-to-back L/Cs, UPAS credits, and deferred payment arrangements—ensuring that our clients' transactions are legally watertight before shipment occurs. With access to international trade law networks, we support cross-border commercial operations from contract formation through to payment, delivery, and any post-shipment dispute.",
                 services: [
                     'International trade agreements',
                     'Import/export compliance',
@@ -1054,7 +1049,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'judicial-review': {
                 title: 'Judicial Review of Administrative Action',
-                description: 'Our judicial review practice challenges administrative decisions and government actions. We represent clients in high court proceedings against administrative overreach.',
+                description: 'Judicial review is the primary remedy available in Bangladesh to challenge unlawful decisions by public authorities, regulatory bodies, and statutory tribunals under Article 102 of the Constitution. Our judicial review team files writ petitions seeking certiorari to quash unlawful orders, mandamus to compel the performance of public duties, and prohibition to restrain ultra vires acts by administrative bodies. We have successfully challenged licensing refusals, arbitrary tax reassessments, unlawful land acquisition proceedings, and disciplinary orders made without following principles of natural justice. Our lawyers conduct thorough pre-litigation analysis of every case—assessing grounds of review, time limits, standing requirements, and the realistic prospects of obtaining an interim stay order at the urgent hearing. We appear in both the High Court Division and the Appellate Division to prosecute judicial review matters to their final conclusion on behalf of our clients.',
                 services: [
                     'Administrative decision challenges',
                     'Judicial review applications',
@@ -1066,7 +1061,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'labour-employment': {
                 title: 'Labour and Employment Matters',
-                description: 'We provide comprehensive employment law services for employers and employees. Our practice covers workplace disputes, employment contracts, and labor regulatory compliance.',
+                description: "Bangladesh's labour law framework under the Bangladesh Labour Act 2006, as amended in 2013 and 2018, governs employment relationships from hire to termination, and non-compliance exposes employers to financial penalties and reputational damage. Our employment law team drafts employment contracts, standing orders, workplace policies, and HR manuals that meet BLA standards and the BEPZA Worker Welfare Regulations for export processing zone enterprises. We advise on employee disciplinary proceedings, misconduct inquiries, retrenchment procedures, and the correct calculation and payment of terminal gratuity and provident fund entitlements. When disputes arise, we represent employers and employees before Labour Courts, Labour Appellate Tribunals, and the High Court Division with equal effectiveness. Our proactive compliance audit service helps businesses identify and correct labour law vulnerabilities before they escalate into costly litigation or regulatory action.",
                 services: [
                     'Employment contract drafting',
                     'Workplace dispute resolution',
@@ -1078,7 +1073,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'land-documentation': {
                 title: 'Land Related Documentation',
-                description: 'Our land law practice handles property documentation, land registration, and real estate transactions. We ensure proper legal documentation for all land-related matters.',
+                description: 'Land transactions in Bangladesh are exceptionally complex due to a layered system of title records spanning CS, SA, RS, and BS surveys, mutations, and multiple historical transfer instruments that must each be examined. Our land documentation team conducts thorough title searches, examines the full chain of ownership across all relevant records, and prepares or reviews sale deeds, gift deeds, partition deeds, and heba documents with precision. We register instruments at the Sub-Registry Office, process mutation applications before the AC Land office, and obtain certified copies of all relevant records to complete the documentary chain. When land documents are disputed, forged, or legally insufficient, we advise on rectification suits, cancellation proceedings, and injunctions to protect lawful possession and title. Our meticulous approach to every document gives clients and financiers the confidence that their land assets are legally secure and fully defensible.',
                 services: [
                     'Land registration and transfer',
                     'Property documentation',
@@ -1090,7 +1085,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'marine-insurance': {
                 title: 'Marine Insurance',
-                description: 'We specialize in marine insurance claims and disputes, including cargo insurance, hull insurance, and marine liability. Our practice covers all aspects of maritime insurance law.',
+                description: 'Marine insurance is an essential safeguard for Bangladesh\'s vibrant trade, shipping, and fishing industries, and disputes under marine policies require specialist legal knowledge of both insurance and maritime law. Our marine insurance team represents cargo owners, vessel operators, port operators, and P&I club correspondents in claims arising from total loss, particular average, general average contributions, and collision liability. We advise on the application of the Marine Insurance Act 1906, Lloyd\'s policies, and Institute Cargo and Hull Clauses to the specific facts of each claim, and assist in appointing surveyors and average adjusters. When insurers dispute liability or quantum, we pursue recovery through arbitration or litigation in the Admiralty Division of the High Court Division with full command of the factual and legal arguments. Our experience across both domestic and international marine insurance markets enables us to secure commercially astute, prompt, and maximum claim settlements for our clients.',
                 services: [
                     'Cargo insurance claims',
                     'Hull and machinery insurance',
@@ -1102,7 +1097,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'natural-resources': {
                 title: 'Natural Resources',
-                description: 'Our natural resources practice covers mining, energy, and environmental resource matters. We provide legal support for resource extraction and environmental compliance.',
+                description: "Bangladesh's natural resource sector—including coal, natural gas, river sand, construction aggregates, and forest resources—is regulated by multiple ministries and statutory bodies whose requirements must all be satisfied before commercial extraction begins. Our natural resources team advises mining companies, energy developers, and investors on concession agreements, exploration licences, and production sharing contracts with Petrobangla and BAPEX. We navigate the permitting requirements of the Department of Mines, the Bangladesh Forest Department, and the Department of Environment to secure the necessary clearances for resource development projects. Our lawyers also handle disputes arising from licence revocations, royalty reassessments, and environmental damage claims made against resource operators by regulators or communities. We help clients structure resource investments to balance commercial returns with full regulatory compliance and responsible community engagement.",
                 services: [
                     'Mining and extraction rights',
                     'Energy project development',
@@ -1114,7 +1109,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'oil-gas-law': {
                 title: 'Oil and Gas Law',
-                description: 'We provide specialized legal services for the oil and gas industry, including exploration contracts, regulatory compliance, and energy project development.',
+                description: "Bangladesh's oil and gas sector is governed by the Bangladesh Oil, Gas and Mineral Corporation Ordinance 1985 and Production Sharing Contracts negotiated with Petrobangla, requiring specialist legal expertise to navigate effectively. Our energy law team advises on the full lifecycle of oil and gas projects—from initial PSC negotiations and exploration rights through to development financing, pipeline easements, gas sales contracts, and field decommissioning. We represent international oil companies, gas utilities, and local participants in negotiations with Petrobangla, BAPEX, Titas Gas, Bakhrabad Gas, and the Ministry of Power, Energy and Mineral Resources. Our practice also covers LNG import terminal projects, downstream distribution framework agreements, and gas pricing disputes before the Bangladesh Energy Regulatory Commission. We bring a practical and commercially grounded understanding of both the regulatory and transactional dimensions of the Bangladeshi energy market.",
                 services: [
                     'Oil and gas exploration contracts',
                     'Regulatory compliance',
@@ -1126,7 +1121,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'private-equity': {
                 title: 'Private Equity Loan Syndication',
-                description: 'Our private equity practice handles complex financing transactions and loan syndications. We provide legal support for private equity investments and structured finance.',
+                description: 'Private equity and structured lending transactions in Bangladesh require careful legal architecture to protect investors and lenders in a market with rapidly evolving regulatory frameworks and limited secondary market liquidity. Our private equity team advises funds, development finance institutions, and strategic investors on equity investments, convertible instruments, and shareholder agreements in Bangladeshi companies across multiple sectors. We structure loan syndications, club deals, and bilateral facilities for project and corporate financing in compliance with Bangladesh Bank directives and BSEC capital market regulations. Our lawyers draft term sheets, subscription agreements, and SHA provisions covering drag-along and tag-along rights, anti-dilution protections, reserved matters, and exit mechanisms including put/call options and IPO rights. We coordinate with relevant regulatory authorities to obtain all required investment approvals and ensure smooth repatriation of returns to international fund investors when the investment matures.',
                 services: [
                     'Private equity transactions',
                     'Loan syndication agreements',
@@ -1138,7 +1133,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'procurement-bidding': {
                 title: 'Procurement Bidding and Government Contracts',
-                description: 'We assist clients in government procurement processes, bid preparation, and contract negotiation. Our practice ensures compliance with public procurement regulations.',
+                description: 'Winning and performing government contracts in Bangladesh requires mastery of the Public Procurement Act 2006, the Public Procurement Rules 2008, and the often complex special conditions issued by individual procuring entities. Our procurement team advises bidders on qualification requirements, bid bond and performance security documentation, technical proposal preparation, financial bid structuring, and strict compliance with mandatory submission formats and deadlines. We review tender documents for our clients before submission to identify ambiguities, calculation errors, commercially unfavourable terms, and grounds on which clarifications should formally be sought before the bid submission deadline. When procurement decisions are made unfairly or in violation of PPR requirements, we file review complaints before the procuring entity\'s review panel and pursue litigation in the courts where the review mechanism fails to provide a fair outcome. Our knowledge of PPA/PPR compliance and the CPTU process ensures our clients compete on a level playing field and protect their contractual rights throughout performance.',
                 services: [
                     'Bid preparation and submission',
                     'Government procurement compliance',
@@ -1150,7 +1145,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'project-finance': {
                 title: 'Project Finance Documentation',
-                description: 'Our project finance practice handles complex infrastructure and development project financing. We provide comprehensive legal documentation for large-scale projects.',
+                description: 'Major infrastructure and energy projects in Bangladesh typically require bespoke financing structures supported by comprehensive security packages, intercreditor arrangements, and direct agreements with government counterparts. Our project finance team advises sponsors, senior lenders, and development finance institutions on the full suite of project documents—concession agreements, EPC contracts, O&M agreements, offtake contracts, and direct step-in agreements. We handle the creation and perfection of security over project assets, land, equipment, shares, and receivables under Bangladeshi law, ensuring that the security package meets the requirements of international lenders. Our lawyers manage financial close processes, advise on conditions precedent and drawdown conditions, and issue the legal opinions required by international creditors in structured transactions. We have acted on some of Bangladesh\'s most significant power sector, infrastructure, and industrial financing transactions, bringing disciplined project management to every complex multi-party deal.',
                 services: [
                     'Project finance agreements',
                     'Infrastructure project documentation',
@@ -1162,7 +1157,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'real-estate': {
                 title: 'Real Estate and Property Matters',
-                description: 'We provide comprehensive real estate legal services, including property transactions, development, and dispute resolution. Our practice covers residential and commercial property matters.',
+                description: "Bangladesh's real estate market—from commercial towers in Dhaka to residential developments across divisional cities—presents rich investment opportunities alongside significant legal risk that requires specialist guidance. Our real estate team advises on property acquisition, due diligence, sale and purchase agreements, and registration at the Sub-Registry Office under the Registration Act 1908 and the Transfer of Property Act 1882. We negotiate and document joint development agreements between landowners and REHAB-registered developers, construction contracts, and real estate investment structures for both commercial and residential projects. Our lawyers resolve possession disputes, boundary conflicts, and illegal encroachment cases through courts and direct negotiation with the other party. We also advise developers on consumer protection obligations, advance booking agreement terms, and handover disputes under the Real Estate Development and Management Act 2010.",
                 services: [
                     'Property purchase and sale',
                     'Real estate development',
@@ -1174,7 +1169,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'security-documentation': {
                 title: 'Security Documentation',
-                description: 'Our security documentation practice handles collateral agreements, guarantees, and security interests. We ensure proper documentation for secured transactions.',
+                description: 'Security documentation is the backbone of every lending transaction in Bangladesh, and a single defect in any security instrument can jeopardise the recovery of an entire loan in a default scenario. Our security documentation team prepares and reviews mortgage deeds, hypothecation agreements, charge documents, and personal and corporate guarantees for banks, non-bank financial institutions, and private lenders across all sectors. We advise on the correct form, execution, stamp duty, and registration requirements that make each security interest fully enforceable against the borrower and binding on third parties and liquidators. Our team also handles enforcement of security—mortgage foreclosure, sale of pledged and hypothecated assets, encashment of guarantees, and recovery suits under the Artha Rin Adalat Ain 2003. By ensuring every security document is correct and perfected from the outset, we minimise the risk of that security being successfully challenged by a borrower in financial difficulty.',
                 services: [
                     'Security agreements',
                     'Mortgage documentation',
@@ -1186,7 +1181,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'ship-building': {
                 title: 'Ship Building and Ship Breaking Matters',
-                description: 'We provide legal services for shipbuilding contracts, ship breaking operations, and maritime construction matters. Our practice covers the entire shipbuilding lifecycle.',
+                description: 'Bangladesh is one of the world\'s leading ship-recycling nations and an emerging player in small and medium vessel construction, creating unique legal needs in this highly specialised sector. Our shipbuilding and ship-breaking team drafts and reviews new-building contracts aligned with SAJ shipbuilding form standards, advising on risk allocation during construction, warranty provisions, delivery and acceptance tests, and vessel financing under construction. For ship-breaking operations, we assist clients in complying with the Bangladesh Ship Breaking and Recycling Rules 2011, obtaining yard licences, and managing environmental compliance audits by the Department of Environment and international classification societies. We handle disputes arising from construction defects, delayed delivery, variation orders, and casualty damage to vessels under construction before arbitral tribunals and the Admiralty Division. Our integrated understanding of both the commercial and regulatory dimensions of Bangladesh\'s maritime industry makes us the natural legal partner for ship operators, builders, and recyclers.',
                 services: [
                     'Shipbuilding contracts',
                     'Ship breaking regulations',
@@ -1198,7 +1193,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'taxation-systems': {
                 title: 'Taxation Systems',
-                description: 'Our tax practice provides comprehensive tax planning, compliance, and dispute resolution services. We help clients navigate complex tax regulations and optimize their tax positions.',
+                description: "Bangladesh's tax framework—administered by the National Board of Revenue—includes income tax, corporate tax, minimum tax, and sector-specific levies now governed primarily by the Income Tax Act 2023 and accompanying SROs. Our tax team provides year-round advisory on tax-efficient structuring of business transactions, transfer pricing compliance, and minimisation of withholding tax exposure for companies operating across borders. We prepare and file income tax returns, respond formally to assessment orders and demand notices, and defend clients in audit proceedings before the Deputy Commissioner of Taxes and the Commissioner (Appeals). When disputes escalate, we appear before the Tax Appellate Tribunal and the High Court Division to challenge arbitrary, inflated, or legally flawed assessments by the revenue authorities. Our goal is to ensure every client pays exactly what the law requires—no more—while maintaining full documented compliance.",
                 services: [
                     'Tax planning and advisory',
                     'Tax compliance and filing',
@@ -1210,7 +1205,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'tenant-rights': {
                 title: 'Tenant Rights in Bangladesh',
-                description: 'We protect tenant rights and handle landlord-tenant disputes. Our practice ensures fair treatment and legal compliance in rental relationships.',
+                description: "Bangladesh's tenancy legislation and the Premises Rent Control Act provide important protections for residential and commercial tenants against unlawful eviction, arbitrary rent increases, and harassment by landlords. Our tenant rights team reviews and negotiates tenancy agreements before execution to ensure legally compliant and fair terms that protect the tenant's position from the outset. We provide practical guidance on security deposit recovery, landlord repair obligations, lawful eviction procedures, and the correct legal steps for defending eviction proceedings before Rent Controllers and civil courts. When landlords resort to unlawful self-help—locking out tenants, cutting utilities, or threatening occupants—we obtain emergency injunctive relief from the courts swiftly and decisively. For commercial tenants facing business-critical lease issues, we provide urgent advice on securing possession and negotiating mutually acceptable lease modifications or exits.",
                 services: [
                     'Tenant rights protection',
                     'Rent dispute resolution',
@@ -1222,7 +1217,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'telecommunication': {
                 title: 'Telecommunication and IT Law',
-                description: 'Our technology law practice covers telecommunications regulation, IT contracts, and digital law matters. We provide legal support for technology businesses and digital transformation.',
+                description: "Bangladesh's telecommunications and digital sector is one of the most dynamic in South Asia, regulated by the Bangladesh Telecommunication Regulatory Commission under the Bangladesh Telecommunication Act 2001 and a rapidly evolving set of digital laws. Our telecom and IT law team advises mobile network operators, internet service providers, fintech companies, and technology startups on licensing requirements, spectrum allocation, tariff filings, and BTRC compliance obligations. We draft and negotiate network sharing agreements, infrastructure access deals, managed service contracts, software licensing arrangements, and SaaS agreements for businesses operating across Bangladesh's digital economy. Our practice also covers data protection obligations under the Data Protection Act framework, compliance with the Digital Security Act 2018, and representation in regulatory enforcement proceedings before BTRC and other authorities. As digital business models continue to evolve rapidly, we help our clients stay fully compliant while capturing commercial opportunities in this high-growth sector.",
                 services: [
                     'Telecommunications licensing',
                     'IT contract drafting',
@@ -1234,7 +1229,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'vat-tax': {
                 title: 'VAT Tax and Customs Matters',
-                description: 'We specialize in VAT compliance, customs regulations, and international trade taxation. Our practice helps businesses navigate complex indirect tax requirements.',
+                description: 'Value Added Tax is Bangladesh\'s largest source of government revenue, governed by the VAT and Supplementary Duty Act 2012, and non-compliance carries serious financial penalties and criminal consequences for businesses and their responsible officers. Our VAT and customs team assists clients with VAT registration, input tax credit management, monthly Mushak return preparation and filing, and compliance with supplementary duty obligations across all sectors of the economy. We advise on disputed customs valuations, HS code classification challenges, anti-dumping duty assessments, and customs penalty proceedings before the Customs, Excise and VAT Commissionerate and appellate authorities. When the National Board of Revenue raises demand notices or initiates VAT audit proceedings, we prepare comprehensive objections and formally represent clients at every level of the VAT appellate process. Our proactive compliance advisory helps businesses systematically reduce exposure to VAT arrears, penalties, and compounding interest before they become material liabilities.',
                 services: [
                     'VAT registration and compliance',
                     'Customs duty assessment',
@@ -1246,7 +1241,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'verification-documents': {
                 title: 'Verification and Land Documents',
-                description: 'Our document verification practice ensures authenticity and legal validity of land documents and property records. We provide comprehensive due diligence services.',
+                description: 'Reliable verification of land and property documents is essential before any purchase, mortgage, or investment commitment in Bangladesh\'s complex and historically layered real estate market. Our document verification team conducts comprehensive title searches covering CS, SA, RS, and City Survey records, mutation orders, succession certificates, partition decrees, and court records to establish a clean and unbroken chain of title. We identify adverse entries, undisclosed encumbrances, disputed ownership interests, and forged or fraudulent documents before our clients commit to significant legal or financial obligations. Our lawyers liaise with Sub-Registry offices, AC Land offices, District Record Rooms, and civil courts to obtain authenticated certified copies of all relevant registers and proceedings. A thorough pre-transaction verification report from our team provides clients and financiers with the legal certainty they need to proceed with full confidence in the title they are acquiring.',
                 services: [
                     'Land document verification',
                     'Title search and verification',
@@ -1258,7 +1253,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'vetting-documents': {
                 title: 'Vetting of Documents',
-                description: 'We provide thorough document vetting and legal review services. Our practice ensures that all legal documents meet regulatory standards and legal requirements.',
+                description: 'Independent legal vetting of documents before execution can prevent costly disputes, regulatory penalties, and agreements whose critical terms may be unenforceable or misunderstood by the parties. Our legal vetting team reviews commercial contracts, property instruments, corporate filings, and regulatory submissions for legal accuracy, internal consistency, and compliance with applicable Bangladeshi legislation and regulatory requirements. We verify stamping and registration requirements, confirm signatory authority through examination of corporate resolutions and duly executed powers of attorney, and ensure that contractual terms operate as the parties intend under Bangladeshi law. Where documents contain legal risks or material deficiencies, we provide clear, actionable written opinions identifying each issue and recommending specific remedial measures before signing occurs. Our vetting service is particularly valued by banks, multinational companies, and development finance institutions as a quality-assurance step before major investments or lending commitments are made.',
                 services: [
                     'Legal document review',
                     'Contract vetting',
@@ -1270,7 +1265,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             'writ-matters': {
                 title: 'Writ and High Court Matters',
-                description: 'Our constitutional and public law practice handles writ petitions and high court matters. We represent clients in fundamental rights cases and public interest litigation.',
+                description: 'Writ jurisdiction under Article 102 of the Constitution empowers the High Court Division to intervene wherever a public authority acts unlawfully, exceeds its powers, or violates a citizen\'s fundamental rights guaranteed under Part III of the Constitution. Our writ practice team drafts petitions in certiorari, mandamus, prohibition, habeas corpus, and quo warranto, each carefully tailored to the precise relief sought and the factual and legal grounds available on the record. We file urgent applications for interim stay orders to halt the execution of harmful administrative decisions while the substantive writ petition is heard and determined by the court. Over the years, we have secured landmark decisions in service law matters, tax disputes, land acquisition proceedings, licensing refusals, and fundamental rights cases of broad public importance. Appearing regularly before the High Court Division and the Appellate Division, our lawyers combine constitutional scholarship with decisive courtroom advocacy to deliver real results for our clients.',
                 services: [
                     'Writ petition drafting',
                     'Fundamental rights enforcement',
@@ -1285,6 +1280,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const searchInput = document.getElementById('serviceSearch');
         const suggestionsList = document.getElementById('serviceSuggestions');
         const alphabetNav = document.getElementById('alphabetNav');
+        const alphabetNavContainer = alphabetNav?.closest('.alphabet-nav');
         const directoryContainer = document.getElementById('serviceDirectory');
         const popularContainer = document.getElementById('popularServices');
         const categoryFilters = document.getElementById('serviceCategoryFilters');
@@ -1342,53 +1338,80 @@ document.addEventListener('DOMContentLoaded', function () {
                 role: 'Head of Chamber & Founder',
                 profileUrl: 'attorney-kamal.html',
                 phone: '+880 1713 456 800',
-                trust: '18+ years courtroom leadership | Supreme Court practice'
+                trust: 'Criminal Defense, Corporate Law, Writ Jurisdiction | 25+ Years'
             },
             harun: {
                 name: 'Adv. Harun Rayhan',
-                role: 'Senior Partner',
+                role: 'Managing Partner',
                 profileUrl: 'attorney-harun.html',
                 phone: '+880 1713 456 800',
-                trust: 'Corporate and constitutional specialist | Supreme Court enrolled'
+                trust: 'Corporate Law, Constitutional Law | 18+ Years'
             },
             nasrin: {
                 name: 'Adv. Nasrin Akter',
-                role: 'Managing Partner',
+                role: 'Senior Partner',
                 profileUrl: 'attorney-nasrin.html',
                 phone: '+880 1713 456 800',
-                trust: 'Family and dispute resolution advocate | Client-first strategy'
-            },
-            kabir: {
-                name: 'Adv. Moinul Kabir',
-                role: 'Partner',
-                profileUrl: 'attorney-kabir.html',
-                phone: '+880 1713 456 800',
-                trust: 'Criminal and litigation representation | Rapid response support'
-            },
-            rashed: {
-                name: 'Adv. Rashed Ahmed',
-                role: 'Partner',
-                profileUrl: 'attorney-rashed.html',
-                phone: '+880 1713 456 800',
-                trust: 'Land, tenancy, and property documentation expertise'
+                trust: 'Banking and Corporate Law | 15+ Years'
             },
             chowdhury: {
-                name: 'Adv. Azmyen Mustafa Chowdhury',
-                role: 'Partner',
+                name: 'Adv. Mustafa Kamal Chowdhury',
+                role: 'Senior Associate',
                 profileUrl: 'attorney-chowdhury.html',
                 phone: '+880 1713 456 800',
-                trust: 'International advisory and cross-border transaction support'
+                trust: 'Criminal Defense, Litigation | 12+ Years'
+            },
+            kabir: {
+                name: 'Adv. Mohammad Kabir',
+                role: 'Senior Associate',
+                profileUrl: 'attorney-kabir.html',
+                phone: '+880 1713 456 800',
+                trust: 'Family Law, Civil Law | 12+ Years'
+            },
+            rashed: {
+                name: 'Adv. Yeasin Arafat Rashed',
+                role: 'Associate',
+                profileUrl: 'attorney-rashed.html',
+                phone: '+880 1713 456 800',
+                trust: 'Civil Law, Property Law | 8+ Years'
+            },
+            mahadi: {
+                name: 'Adv. Mahadi Hosin Manik',
+                role: 'Associate',
+                profileUrl: 'attorney-mahadi.html',
+                phone: '+880 1713 456 800',
+                trust: 'Administrative Law, Tax Law | 5+ Years'
             }
         };
 
         const categoryLawyerMap = {
             business: 'harun',
-            family: 'nasrin',
-            criminal: 'kabir',
+            family: 'kabir',
+            criminal: 'chowdhury',
             property: 'rashed',
-            tax: 'harun',
-            international: 'chowdhury',
-            regulatory: 'kamal'
+            tax: 'mahadi',
+            international: 'nasrin',
+            regulatory: 'mahadi'
+        };
+
+        const serviceLawyerOverrides = {
+            'civil-litigation': 'kabir',
+            'commercial-litigation': 'harun',
+            'criminal-defense': 'chowdhury',
+            'family-matters': 'kabir',
+            'land-documentation': 'rashed',
+            'real-estate': 'rashed',
+            'tenant-rights': 'rashed',
+            'taxation-systems': 'mahadi',
+            'vat-tax': 'mahadi',
+            'administrative-law': 'mahadi',
+            'writ-matters': 'kamal',
+            'judicial-review': 'harun',
+            'intellectual-property': 'kamal',
+            'international-trade': 'harun',
+            'business-setup': 'harun',
+            'company-formation': 'harun',
+            'foreign-investment': 'nasrin'
         };
 
         const subServiceLibrary = {
@@ -1493,6 +1516,121 @@ document.addEventListener('DOMContentLoaded', function () {
                 parentServices: ['environmental-law', 'natural-resources', 'oil-gas-law', 'project-finance']
             }
         };
+
+        const MIN_MODAL_SUBSERVICES = 10;
+        const categorySubServicePools = {
+            business: [
+                'Business incorporation and governance structuring',
+                'Shareholder and directors agreement drafting',
+                'Corporate secretarial and compliance calendar',
+                'Commercial contract drafting and negotiation',
+                'Joint venture and investment structuring',
+                'Regulatory license application strategy',
+                'Employment policy and HR legal framework',
+                'Vendor and procurement contract safeguards',
+                'Debt recovery and payment default action',
+                'Corporate dispute prevention and representation',
+                'Business restructuring and exit planning',
+                'Mergers and acquisitions due diligence support'
+            ],
+            family: [
+                'Divorce and separation proceedings',
+                'Child custody and visitation rights',
+                'Child and spousal maintenance claims',
+                'Muslim family law advisory',
+                'Marriage registration and legal validation',
+                'Domestic violence protection strategy',
+                'Guardianship and succession family petitions',
+                'Dower and marital property claims',
+                'Family settlement and mediation',
+                'Family court representation',
+                'Decree execution and compliance follow-up',
+                'Cross-border family dispute coordination'
+            ],
+            criminal: [
+                'Anticipatory and regular bail applications',
+                'FIR and complaint response strategy',
+                'Police investigation representation',
+                'Trial defense in magistrate and sessions courts',
+                'White-collar and financial crime defense',
+                'Cybercrime complaint and defense support',
+                'Criminal revision and appeal drafting',
+                'Quashing and discharge petition strategy',
+                'Witness preparation and evidence review',
+                'Negotiated settlement where legally permissible',
+                'Remand hearing representation',
+                'Post-conviction relief planning'
+            ],
+            property: [
+                'Land title verification and record check',
+                'Mutation and land record correction',
+                'Sale deed and transfer documentation',
+                'Lease and tenancy agreement drafting',
+                'Boundary and possession dispute strategy',
+                'Developer agreement and flat handover issues',
+                'Mortgage and charge documentation review',
+                'Partition and ownership claim litigation',
+                'Land acquisition compensation advisory',
+                'Eviction and injunction representation',
+                'Encumbrance and lien due diligence',
+                'Property tax and utility dispute support'
+            ],
+            tax: [
+                'Income tax return and planning support',
+                'VAT registration and compliance management',
+                'Tax audit and assessment response',
+                'Customs duty and tariff advisory',
+                'Tax objection and appeal representation',
+                'Withholding tax compliance review',
+                'Transfer pricing and cross-border tax support',
+                'Refund and rebate claim handling',
+                'Documentation and reconciliation health check',
+                'Penalty mitigation and settlement strategy',
+                'Advance tax and installment advisory',
+                'Tax tribunal litigation support'
+            ],
+            international: [
+                'Visa and immigration compliance planning',
+                'Work permit and expatriate onboarding',
+                'Foreign investment entry structuring',
+                'Cross-border contract drafting',
+                'International trade compliance support',
+                'Import-export documentation review',
+                'Multi-jurisdiction dispute strategy',
+                'Shipping and logistics legal support',
+                'Overseas employment legal advisory',
+                'International arbitration coordination',
+                'Foreign remittance and repatriation compliance',
+                'Cross-border tax and regulatory alignment'
+            ],
+            regulatory: [
+                'Regulatory notice response and representation',
+                'Licensing and permit defense strategy',
+                'Administrative hearing submissions',
+                'Judicial review and writ preparation',
+                'Public procurement compliance advisory',
+                'Sector regulator engagement support',
+                'Compliance audit and corrective roadmap',
+                'Environmental and operational approvals strategy',
+                'Telecom and digital regulatory compliance',
+                'Anti-corruption and governance advisory',
+                'Statutory appeal filing and representation',
+                'Policy impact and legal risk assessment'
+            ]
+        };
+
+        const universalSubServiceFallback = [
+            'Legal notice drafting and response',
+            'Document review and legal opinion',
+            'Evidence and records preparation',
+            'Negotiation and settlement support',
+            'Court filing and procedural representation',
+            'Interim relief and urgent petition strategy',
+            'Hearing management and case updates',
+            'Appeal and revision planning',
+            'Order or decree execution support',
+            'Compliance and post-case advisory'
+        ];
 
         const categoryBangladeshDefaults = {
             business: {
@@ -1769,6 +1907,20 @@ document.addEventListener('DOMContentLoaded', function () {
             return Array.from(new Set(items.filter(Boolean).map(item => String(item).trim()).filter(Boolean)));
         }
 
+        function getShortDescription(text) {
+            const normalized = String(text || '').replace(/\s+/g, ' ').trim();
+            if (!normalized) return '';
+
+            const sentenceMatch = normalized.match(/^.*?[.!?](\s|$)/);
+            const firstSentence = sentenceMatch ? sentenceMatch[0].trim() : normalized;
+
+            if (firstSentence.length <= 180) {
+                return firstSentence;
+            }
+
+            return `${firstSentence.slice(0, 177).trimEnd()}...`;
+        }
+
         function levenshteinDistance(a, b) {
             const source = String(a || '');
             const target = String(b || '');
@@ -1824,7 +1976,7 @@ document.addEventListener('DOMContentLoaded', function () {
             Object.entries(serviceData).forEach(([key, data]) => {
                 const override = serviceMetadataOverrides[key] || {};
                 const category = override.category || inferCategoryFromData(data);
-                const lawyerKey = categoryLawyerMap[category] || 'kamal';
+                const lawyerKey = serviceLawyerOverrides[key] || categoryLawyerMap[category] || 'kamal';
                 const lawyer = lawyerDirectory[lawyerKey] || lawyerDirectory.kamal;
 
                 data.category = category;
@@ -1885,15 +2037,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 parentServices: [serviceKey]
             }));
 
+            const categoryEntries = (categorySubServicePools[data.category] || []).map((title, index) => ({
+                id: `category-${data.category}-${index + 1}`,
+                title,
+                description: '',
+                parentServices: [serviceKey]
+            }));
+
+            const universalEntries = universalSubServiceFallback.map((title, index) => ({
+                id: `universal-${serviceKey}-${index + 1}`,
+                title,
+                description: '',
+                parentServices: [serviceKey]
+            }));
+
             const deduped = new Map();
-            [...mappedEntries, ...fallbackEntries].forEach((entry) => {
+            [...mappedEntries, ...fallbackEntries, ...categoryEntries, ...universalEntries].forEach((entry) => {
                 const key = normalizeText(entry.title);
                 if (!deduped.has(key)) {
                     deduped.set(key, entry);
                 }
             });
 
-            return Array.from(deduped.values()).slice(0, 10);
+            return Array.from(deduped.values()).slice(0, MIN_MODAL_SUBSERVICES);
         }
 
         function applyBangladeshEnhancements() {
@@ -1903,7 +2069,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 data.bangladeshProfile = profile;
                 data.subServices = subServices;
-                data.description = `${data.description} ${profile.readinessHint}`.trim();
                 data.services = subServices.map((item) => item.title);
 
                 data.keywords = uniqueList([
@@ -1914,71 +2079,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     ...subServices.map((item) => item.title)
                 ]);
             });
-        }
-
-        function buildApprovalChecklist(data) {
-            return (data?.bangladeshProfile?.approvals || []).slice(0, 6);
-        }
-
-        function renderReadinessScore(data) {
-            if (!modalReadinessScore) return;
-            const categoryBase = {
-                criminal: 52,
-                family: 58,
-                property: 60,
-                tax: 56,
-                international: 59,
-                regulatory: 57,
-                business: 63
-            };
-
-            const base = categoryBase[data.category] || 60;
-            const documentLift = Math.min((data.subServices || data.services || []).length, 10);
-            const score = Math.max(45, Math.min(88, base + documentLift));
-            modalReadinessScore.textContent = `Client readiness focus score: ${score}/100 (indicative, based on typical filing and document readiness).`;
-        }
-
-        function renderEnhancedModalSections(serviceKey, data) {
-            const profile = data.bangladeshProfile || getBangladeshProfileForService(serviceKey, data);
-
-            if (modalRegulatorySection) {
-                modalRegulatorySection.innerHTML = '';
-                (profile.regulators || []).slice(0, 8).forEach((regulator) => {
-                    const badge = document.createElement('span');
-                    badge.className = 'service-regulatory-item';
-                    badge.textContent = regulator;
-                    modalRegulatorySection.appendChild(badge);
-                });
-            }
-
-            if (modalApprovalsSection) {
-                modalApprovalsSection.innerHTML = '';
-                buildApprovalChecklist(data).forEach((itemText) => {
-                    const li = document.createElement('li');
-                    li.textContent = itemText;
-                    modalApprovalsSection.appendChild(li);
-                });
-            }
-
-            if (modalRiskSection) {
-                modalRiskSection.innerHTML = '';
-                (profile.riskFlags || []).slice(0, 5).forEach((riskText) => {
-                    const li = document.createElement('li');
-                    li.textContent = riskText;
-                    modalRiskSection.appendChild(li);
-                });
-            }
-
-            if (modalEscalationSection) {
-                modalEscalationSection.innerHTML = '';
-                (profile.escalation || []).slice(0, 4).forEach((stepText) => {
-                    const li = document.createElement('li');
-                    li.textContent = stepText;
-                    modalEscalationSection.appendChild(li);
-                });
-            }
-
-            renderReadinessScore(data);
         }
 
         enrichServiceData();
@@ -2641,7 +2741,7 @@ document.addEventListener('DOMContentLoaded', function () {
             lastFocusedElement = document.activeElement;
 
             modalTitle.textContent = data.title;
-            modalDescription.textContent = data.description;
+            modalDescription.textContent = getShortDescription(data.description);
             modalServices.innerHTML = '';
 
             const subServices = data.subServices || (data.services || []).map((serviceLabel, index) => ({
@@ -2654,35 +2754,10 @@ document.addEventListener('DOMContentLoaded', function () {
             subServices.forEach((subService) => {
                 const li = document.createElement('li');
                 li.className = 'service-modal-subservice-item';
-
-                const title = document.createElement('span');
-                title.className = 'service-subservice-title';
-                title.textContent = subService.title;
-                li.appendChild(title);
-
-                if (subService.description) {
-                    const meta = document.createElement('span');
-                    meta.className = 'service-subservice-meta';
-                    meta.textContent = subService.description;
-                    li.appendChild(meta);
-                }
-
-                const alsoIn = (subService.parentServices || [])
-                    .filter((parentKey) => parentKey !== serviceKey && serviceData[parentKey])
-                    .map((parentKey) => serviceData[parentKey].title)
-                    .slice(0, 3);
-
-                if (alsoIn.length) {
-                    const also = document.createElement('span');
-                    also.className = 'service-subservice-also';
-                    also.textContent = `Also relevant under: ${alsoIn.join(', ')}`;
-                    li.appendChild(also);
-                }
+                li.textContent = subService.title;
 
                 modalServices.appendChild(li);
             });
-
-            renderEnhancedModalSections(serviceKey, data);
 
             if (modalLawyerName) modalLawyerName.textContent = data.recommendedLawyer || 'Kamal & Associates Team';
             if (modalLawyerRole) modalLawyerRole.textContent = `${data.lawyerRole || 'Legal Counsel'} | ${data.categoryLabel || 'Legal Service'}`;
@@ -2795,14 +2870,39 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        function updateAlphabetNavVisibility() {
+            const firstSection = document.getElementById('section-A') || directoryContainer.querySelector('.service-section');
+            const footer = document.querySelector('footer.footer-section, footer');
+
+            if (!alphabetNavContainer || !firstSection) {
+                return;
+            }
+
+            const showThreshold = Math.max(110, window.innerHeight * 0.22);
+            const firstSectionVisible = firstSection.style.display !== 'none';
+            const firstReached = firstSectionVisible && firstSection.getBoundingClientRect().top <= showThreshold;
+            const reachedFooter = footer ? footer.getBoundingClientRect().top <= window.innerHeight : false;
+            const shouldShow = firstReached && !reachedFooter;
+
+            alphabetNavContainer.classList.toggle('is-hidden', !shouldShow);
+            alphabetNavContainer.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+        }
+
         window.addEventListener('scroll', () => {
             if (!scrollTicking) {
                 scrollTicking = true;
                 window.requestAnimationFrame(() => {
                     updateActiveLetterOnScroll();
+                    updateAlphabetNavVisibility();
                     scrollTicking = false;
                 });
             }
+        });
+
+        window.addEventListener('resize', () => {
+            window.requestAnimationFrame(() => {
+                updateAlphabetNavVisibility();
+            });
         });
 
         modal.addEventListener('wheel', event => {
@@ -2837,6 +2937,7 @@ document.addEventListener('DOMContentLoaded', function () {
         renderPopularServices();
         filterServices('');
         updateActiveLetterOnScroll();
+        updateAlphabetNavVisibility();
     })();
 
     // ===== Testimonials Carousel =====
@@ -3000,33 +3101,128 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // ===== Contact Office Map =====
+    const contactOfficeMap = document.getElementById('contactOfficeMap');
+    if (contactOfficeMap && window.L) {
+        const officeLocations = [
+            {
+                title: 'High Court Chamber',
+                coords: [23.7308509, 90.4013854],
+                address: 'Supreme Court Bar Association<br>Room No. 709, 6th Floor<br>Annex Extension Building, Ramna, Dhaka - 1000'
+            },
+            {
+                title: 'Judge Court Chamber',
+                coords: [23.7103044, 90.4108056],
+                address: 'Dhaka Bar Association<br>Room No. 7018, 6th Floor<br>Annex Extension Building-2, Dhaka-1100'
+            },
+            {
+                title: 'Evening Chamber',
+                coords: [23.7749862, 90.4123816],
+                address: 'House #13, Road #07, Block #C<br>Flat #1-A, Ground Floor<br>Niketan, Gulshan, Dhaka-1212'
+            }
+        ];
+
+        const map = L.map(contactOfficeMap, {
+            scrollWheelZoom: false,
+            zoomControl: true
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        const bounds = [];
+
+        officeLocations.forEach((office) => {
+            const directionUrl = `https://www.google.com/maps/dir/?api=1&destination=${office.coords[0]},${office.coords[1]}`;
+            const marker = L.marker(office.coords, {
+                icon: L.divIcon({
+                    className: 'office-map-marker-wrapper',
+                    html: '<div class="office-map-marker"><span class="office-map-marker__pulse"></span><span class="office-map-marker__dot"></span></div>',
+                    iconSize: [18, 18],
+                    iconAnchor: [9, 9],
+                    popupAnchor: [0, -12]
+                })
+            }).addTo(map);
+
+            marker.bindPopup(`
+                <div class="office-map-popup">
+                    <h6>${office.title}</h6>
+                    <p>${office.address}</p>
+                    <a class="office-map-directions" href="${directionUrl}" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-location-arrow"></i>
+                        Get Direction
+                    </a>
+                </div>
+            `);
+
+            bounds.push(office.coords);
+        });
+
+        if (bounds.length) {
+            map.fitBounds(bounds, {
+                padding: [40, 40]
+            });
+        }
+    }
+
     // ===== Contact Form =====
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
+        contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const submitBtn = this.querySelector('button[type="submit"]');
+            if (!submitBtn) return;
+
             const originalText = submitBtn.innerHTML;
+            const oldAlert = contactForm.querySelector('.contact-form-alert');
+            if (oldAlert) oldAlert.remove();
 
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Sending...';
             submitBtn.disabled = true;
 
-            // Simulate form submission
-            setTimeout(() => {
+            const showAlert = (type, message) => {
+                const alertDiv = document.createElement('div');
+                alertDiv.className = `alert alert-${type} mt-3 contact-form-alert`;
+                alertDiv.innerHTML = message;
+                contactForm.appendChild(alertDiv);
+
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 7000);
+            };
+
+            try {
+                const provider = String(contactForm.dataset.emailProvider || '').toLowerCase();
+
+                if (provider === 'formsubmit' && contactForm.action) {
+                    const payload = new FormData(contactForm);
+
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: payload,
+                        headers: {
+                            Accept: 'application/json'
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Form submission failed');
+                    }
+
+                    showAlert('success', '<i class="fas fa-check-circle me-2"></i>Thank you for your message! We have received it and will get back to you shortly.');
+                    contactForm.reset();
+                } else {
+                    showAlert('warning', '<i class="fas fa-exclamation-triangle me-2"></i>Email form provider is not configured.');
+                }
+            } catch (error) {
+                showAlert('danger', '<i class="fas fa-times-circle me-2"></i>Sorry, your message could not be sent right now. Please call us directly.');
+            } finally {
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
-
-                // Show success message
-                const successDiv = document.createElement('div');
-                successDiv.className = 'alert alert-success mt-3';
-                successDiv.innerHTML = '<i class="fas fa-check-circle me-2"></i>Thank you for your message! We will get back to you shortly.';
-                contactForm.appendChild(successDiv);
-
-                contactForm.reset();
-
-                setTimeout(() => successDiv.remove(), 5000);
-            }, 1500);
+            }
         });
     }
 

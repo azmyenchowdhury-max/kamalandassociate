@@ -26,14 +26,19 @@
       googleMaps: "https://goo.gl/maps/e1v7wUj9ZoL2",
     },
     quickActions: [
-      { id: "ask_question", label: "Ask a Legal Question", icon: "fas fa-question-circle" },
-      { id: "find_lawyer", label: "Find a Lawyer", icon: "fas fa-user-tie" },
-      { id: "book_consultation", label: "Book Consultation", icon: "fas fa-calendar-check" },
-      { id: "services", label: "Legal Services", icon: "fas fa-briefcase" },
-      { id: "upload_docs", label: "Upload Documents", icon: "fas fa-file-upload" },
-      { id: "emergency", label: "Emergency Legal Help", icon: "fas fa-phone-volume" },
-      { id: "office_location", label: "Office Location", icon: "fas fa-map-marker-alt" },
+      { id: "ask_question", label: "Legal Term", icon: "fas fa-book" },
+      { id: "legal_issue", label: "My Legal Issue", icon: "fas fa-balance-scale" },
+      { id: "book_consultation", label: "Book Consult", icon: "fas fa-calendar-check" },
+      { id: "find_lawyer", label: "Find Lawyer", icon: "fas fa-user-tie" },
+      { id: "services", label: "Services", icon: "fas fa-briefcase" },
+      { id: "upload_docs", label: "Upload Docs", icon: "fas fa-file-upload" },
+      { id: "office_location", label: "Office", icon: "fas fa-map-marker-alt" },
+      { id: "emergency", label: "Emergency Help", icon: "fas fa-phone-volume" },
     ],
+    quickActionGroups: {
+      primary: ["ask_question", "legal_issue", "book_consultation"],
+      secondary: ["find_lawyer", "services", "upload_docs", "office_location", "emergency"],
+    },
     services: [
       { id: "administrative", label: "Administrative Law", page: "practice-areas.html#administrative" },
       { id: "corporate", label: "Corporate Law", page: "practice-areas.html#corporate" },
@@ -67,6 +72,8 @@
       },
     ],
     glossary: {
+      acquittal:
+        "An acquittal is a court decision that a person is not guilty of a criminal charge after trial.",
       affidavit:
         "An affidavit is a written statement sworn under oath before a notary or magistrate. It is used as evidence in court proceedings.",
       arbitration:
@@ -166,6 +173,7 @@
     messages: [],
     currentFlow: null,
     lastInteractionAt: Date.now(),
+    quickActionsExpanded: false,
   };
 
   const SELECTORS = {
@@ -177,6 +185,7 @@
     sendBtn: ".kamal-chatbot-send",
     attachBtn: ".kamal-chatbot-attach",
     quickActions: ".kamal-chatbot-quick-actions",
+    quickActionsSecondary: ".kamal-chatbot-quick-actions-secondary",
     languageToggle: ".kamal-chatbot-language-toggle",
     whatsappBtn: ".kamal-chatbot-whatsapp",
   };
@@ -261,7 +270,11 @@
   }
 
   function applyApiAuthHeaders(requestHeaders) {
-    const apiKey = CONFIG.api.anonJwt;
+    const apiKey =
+      CONFIG.api.anonJwt ||
+      window.__KAMAL_CHATBOT_SUPABASE_ANON_KEY__ ||
+      window.__SUPABASE_ANON_KEY__ ||
+      "";
     if (!apiKey) return;
 
     requestHeaders.apikey = apiKey;
@@ -340,7 +353,12 @@
   }
 
   async function sendBackendMessage(message) {
-    if (!CONFIG.api.enabled || !STATE.backendConversationId) return null;
+    if (!CONFIG.api.enabled) return null;
+
+    if (!STATE.backendConversationId) {
+      await startBackendSession();
+      if (!STATE.backendConversationId) return null;
+    }
 
     try {
       const requestHeaders = { "Content-Type": "application/json" };
@@ -495,6 +513,14 @@
       createElement("span", { class: "kamal-chatbot-tooltip" }, "Ask a Legal Question")
     );
 
+    const actionsById = Object.fromEntries(CONFIG.quickActions.map((a) => [a.id, a]));
+    const primaryActions = CONFIG.quickActionGroups.primary
+      .map((id) => actionsById[id])
+      .filter(Boolean);
+    const secondaryActions = CONFIG.quickActionGroups.secondary
+      .map((id) => actionsById[id])
+      .filter(Boolean);
+
     // Chat window
     const windowEl = createElement(
       "section",
@@ -516,6 +542,16 @@
         createElement(
           "div",
           { class: "kamal-chatbot-header-actions" },
+          createElement(
+            "a",
+            {
+              class: "kamal-chatbot-emergency-btn",
+              href: `tel:${CONFIG.office.phone.replace(/\D/g, "")}`,
+              title: "Emergency call",
+            },
+            createElement("span", { class: "fas fa-phone-alt" }),
+            createElement("span", { class: "kamal-chatbot-emergency-text" }, "Emergency")
+          ),
           createElement(
             "button",
             {
@@ -543,16 +579,47 @@
         createElement(
           "div",
           { class: "kamal-chatbot-quick-actions" },
-          ...CONFIG.quickActions.map((action) =>
+          createElement(
+            "div",
+            { class: "kamal-chatbot-quick-actions-primary" },
+            ...primaryActions.map((action) =>
+              createElement(
+                "button",
+                {
+                  type: "button",
+                  class: "kamal-chatbot-quick-action kamal-chatbot-quick-action--primary",
+                  dataset: { action: action.id },
+                },
+                createElement("span", { class: action.icon }),
+                createElement("span", { class: "kamal-chatbot-quick-label" }, action.label)
+              )
+            ),
             createElement(
               "button",
               {
                 type: "button",
-                class: "kamal-chatbot-quick-action",
-                dataset: { action: action.id },
+                class: "kamal-chatbot-quick-action kamal-chatbot-quick-action--more",
+                dataset: { action: "toggle_more_actions" },
+                "aria-expanded": "false",
               },
-              createElement("span", { class: action.icon }),
-              createElement("span", { class: "kamal-chatbot-quick-label" }, action.label)
+              createElement("span", { class: "fas fa-ellipsis-h" }),
+              createElement("span", { class: "kamal-chatbot-quick-label" }, "More")
+            )
+          ),
+          createElement(
+            "div",
+            { class: "kamal-chatbot-quick-actions-secondary", hidden: "hidden" },
+            ...secondaryActions.map((action) =>
+              createElement(
+                "button",
+                {
+                  type: "button",
+                  class: "kamal-chatbot-quick-action kamal-chatbot-quick-action--secondary",
+                  dataset: { action: action.id },
+                },
+                createElement("span", { class: action.icon }),
+                createElement("span", { class: "kamal-chatbot-quick-label" }, action.label)
+              )
             )
           )
         )
@@ -563,9 +630,9 @@
         createElement("button", {
           type: "button",
           class: "kamal-chatbot-btn icon-btn kamal-chatbot-attach",
-          title: "Upload documents",
+          title: "More actions",
         },
-        createElement("span", { class: "fas fa-paperclip" })),
+        createElement("span", { class: "fas fa-bars" })),
         createElement("input", {
           type: "text",
           class: "kamal-chatbot-input",
@@ -641,7 +708,7 @@
       }
 
       if (btn.matches(SELECTORS.attachBtn) || btn.closest(SELECTORS.attachBtn)) {
-        promptFileUpload();
+        toggleQuickActionsPanel();
       }
 
       if (btn.matches(".kamal-chatbot-quick-action")) {
@@ -747,8 +814,45 @@
     if (!message) return;
 
     addUserMessage(message);
+    compactQuickActions();
     input.value = "";
     await handleUserMessage(message);
+  }
+
+  function toggleQuickActionsPanel(forceExpanded = null) {
+    const quickActions = find(SELECTORS.quickActions);
+    const secondary = find(SELECTORS.quickActionsSecondary);
+    const toggleButton = find(".kamal-chatbot-quick-action--more");
+    if (!quickActions || !secondary) return;
+
+    const nextExpanded =
+      forceExpanded === null
+        ? !quickActions.classList.contains("expanded")
+        : Boolean(forceExpanded);
+
+    STATE.quickActionsExpanded = nextExpanded;
+    quickActions.classList.toggle("expanded", nextExpanded);
+    toggleButton?.setAttribute("aria-expanded", String(nextExpanded));
+
+    if (nextExpanded) {
+      secondary.removeAttribute("hidden");
+    } else {
+      secondary.setAttribute("hidden", "hidden");
+    }
+  }
+
+  function compactQuickActions() {
+    const quickActions = find(SELECTORS.quickActions);
+    if (!quickActions) return;
+    quickActions.classList.add("is-compact");
+    toggleQuickActionsPanel(false);
+  }
+
+  function resetQuickActions() {
+    const quickActions = find(SELECTORS.quickActions);
+    if (!quickActions) return;
+    quickActions.classList.remove("is-compact");
+    toggleQuickActionsPanel(false);
   }
 
   function promptFileUpload() {
@@ -858,9 +962,20 @@
   }
 
   function handleQuickAction(action) {
+    if (action === "toggle_more_actions") {
+      toggleQuickActionsPanel();
+      return;
+    }
+
+    compactQuickActions();
+
     switch (action) {
       case "ask_question":
         addBotMessage("Sure! What's your legal concern?", { meta: { } });
+        focusInput();
+        break;
+      case "legal_issue":
+        addBotMessage("Tell me your legal issue in one or two lines, and I will guide you with the next best step.");
         focusInput();
         break;
       case "find_lawyer":
@@ -1091,6 +1206,15 @@
     requestLocationPermission();
   }
 
+  function showEmergencyOptions() {
+    addBotMessage("If this is urgent, contact us immediately for priority legal support.", {
+      buttons: [
+        { label: "Emergency Call", action: "open_phone", value: `tel:${CONFIG.office.phone.replace(/\D/g, "")}` },
+        { label: "WhatsApp", action: "open_whatsapp", value: getWhatsAppLink() },
+      ],
+    });
+  }
+
   function requestLocationPermission() {
     if (!navigator.geolocation) return;
 
@@ -1202,6 +1326,28 @@
 
   function handleMetaAction(action, value) {
     switch (action) {
+      case "open_map": {
+        const target = value || CONFIG.office.googleMaps;
+        addBotMessage("Opening map...", {
+          meta: { link: target, linkLabel: "Open in Google Maps" },
+        });
+        break;
+      }
+      case "open_whatsapp": {
+        const target = value || getWhatsAppLink();
+        addBotMessage("Opening WhatsApp...", {
+          meta: { link: target, linkLabel: "Open WhatsApp" },
+        });
+        break;
+      }
+      case "open_phone":
+      case "emergency_call": {
+        const target = value || `tel:${CONFIG.office.phone.replace(/\s+/g, "")}`;
+        addBotMessage("Tap to call now:", {
+          meta: { link: target, linkLabel: "Call Now" },
+        });
+        break;
+      }
       case "service_link": {
         const service = getServiceById(value);
         if (service) {
@@ -1370,6 +1516,7 @@
     STATE.language = STATE.language === "en" ? "bn" : "en";
     writeStorage(STORAGE_KEYS.lang, STATE.language);
     addBotMessage(`Language switched to ${getLangStrings().languageLabel}.`);
+    resetQuickActions();
   }
 
   function loadState() {

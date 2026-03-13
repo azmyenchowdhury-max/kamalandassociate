@@ -747,8 +747,8 @@ img {
 }
 
 .kamal-chatbot-bubble {
-    width: 62px;
-    height: 62px;
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--accent-color), var(--accent-color-dark));
     border: none;
@@ -767,7 +767,7 @@ img {
 }
 
 .kamal-chatbot-bubble-icon i {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .kamal-chatbot-tooltip {
@@ -795,10 +795,11 @@ img {
     position: absolute;
     right: 0;
     bottom: calc(100% + 12px);
-    width: min(380px, calc(100vw - 40px));
-    max-height: min(520px, calc(100vh - 80px));
+    width: min(392px, calc(100vw - 36px));
+    max-height: min(560px, calc(100vh - 78px));
     background: var(--card-bg);
-    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.32);
     overflow: hidden;
     transform: translateY(16px) scale(0.95);
@@ -819,7 +820,7 @@ img {
 
 .kamal-chatbot-header {
     background: var(--navbar-bg);
-    padding: 12px 12px;
+    padding: 10px 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -833,7 +834,7 @@ img {
 
 .kamal-chatbot-title {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--navbar-text);
 }
 
@@ -842,7 +843,7 @@ img {
     align-items: center;
     gap: 6px;
     color: var(--text-muted);
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .kamal-chatbot-status-dot {
@@ -855,7 +856,31 @@ img {
 .kamal-chatbot-header-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+}
+
+.kamal-chatbot-emergency-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 30px;
+    padding: 0 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(248, 113, 113, 0.35);
+    background: rgba(239, 68, 68, 0.12);
+    color: #fecaca;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.kamal-chatbot-emergency-btn:hover {
+    background: rgba(239, 68, 68, 0.22);
+    color: #fee2e2;
+}
+
+.kamal-chatbot-emergency-text {
+    white-space: nowrap;
 }
 
 .kamal-chatbot-btn {
@@ -886,16 +911,16 @@ img {
     flex: 1;
     display: flex;
     flex-direction: column;
-    min-height: 320px;
+    min-height: 340px;
 }
 
 .kamal-chatbot-messages {
     flex: 1;
     overflow-y: auto;
-    padding: 12px;
+    padding: 14px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .kamal-chatbot-message {
@@ -913,9 +938,10 @@ img {
 
 .kamal-chatbot-message-bubble {
     max-width: 80%;
-    border-radius: 14px;
-    padding: 8px 10px;
-    line-height: 1.4;
+    border-radius: 13px;
+    padding: 9px 11px;
+    line-height: 1.5;
+    font-size: 13px;
     border: 1px solid rgba(175, 169, 57, 0.2);
     background: var(--bg-dark-secondary);
     color: var(--text-color);
@@ -930,15 +956,15 @@ img {
     margin-top: 8px;
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
 }
 
 .kamal-chatbot-meta-btn {
     font-size: 11px;
-    padding: 6px 10px;
+    padding: 7px 11px;
     background: var(--gradient-primary);
     border: none;
-    border-radius: 6px;
+    border-radius: 999px;
     color: #000;
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -950,28 +976,69 @@ img {
 
 .kamal-chatbot-quick-actions {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 8px;
-    padding: 8px;
+    padding: 10px;
     border-top: 1px solid var(--navbar-border);
-    background: var(--card-bg);
-    max-height: 120px;
-    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.02);
+    transition: max-height 0.24s ease, padding 0.24s ease;
+}
+
+.kamal-chatbot-quick-actions.is-compact {
+    max-height: 62px;
+    overflow: hidden;
+}
+
+.kamal-chatbot-quick-actions.is-compact .kamal-chatbot-quick-actions-secondary {
+    display: none !important;
+}
+
+.kamal-chatbot-quick-actions-primary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.kamal-chatbot-quick-actions-secondary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.kamal-chatbot-quick-actions-secondary[hidden] {
+    display: none;
 }
 
 .kamal-chatbot-quick-action {
-    flex: 1 1 48%;
-    min-width: 130px;
+    min-width: 0;
     border: 1px solid var(--navbar-border);
-    background: var(--background-color);
+    background: rgba(255, 255, 255, 0.04);
     color: var(--text-color);
-    border-radius: 10px;
-    padding: 8px 8px;
+    border-radius: 12px;
+    padding: 9px 9px;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: 600;
     cursor: pointer;
+    justify-content: center;
+    text-align: center;
+}
+
+.kamal-chatbot-quick-action:hover {
+    border-color: rgba(175, 169, 57, 0.55);
+    background: rgba(175, 169, 57, 0.12);
+}
+
+.kamal-chatbot-quick-action i,
+.kamal-chatbot-quick-action .fas,
+.kamal-chatbot-quick-action .fab {
+    font-size: 12px;
+}
+
+.kamal-chatbot-quick-action--more {
+    border-style: dashed;
 }
 
 .kamal-chatbot-footer {
@@ -979,8 +1046,8 @@ img {
     background: var(--card-bg);
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px;
+    gap: 7px;
+    padding: 10px 10px 9px;
 }
 
 .kamal-chatbot-input {
@@ -988,21 +1055,27 @@ img {
     border: 1px solid var(--input-border);
     background: var(--input-bg);
     color: var(--text-color);
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 8px 10px;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .kamal-chatbot-whatsapp {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
     text-decoration: none;
     background: #25d366;
     color: #fff;
-    padding: 8px 10px;
+    width: 34px;
+    height: 34px;
+    padding: 0;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 14px;
+}
+
+.kamal-chatbot-whatsapp-text {
+    display: none;
 }
 
 .kamal-chatbot-footer-note {
@@ -1029,8 +1102,32 @@ img {
         border-radius: 14px;
     }
 
+    .kamal-chatbot-header {
+        padding: 10px;
+    }
+
+    .kamal-chatbot-emergency-text {
+        display: none;
+    }
+
+    .kamal-chatbot-emergency-btn {
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .kamal-chatbot-quick-actions-primary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .kamal-chatbot-quick-actions-secondary {
+        grid-template-columns: 1fr;
+    }
+
     .kamal-chatbot-quick-action {
-        min-width: 110px;
+        min-height: 40px;
+        font-size: 11px;
     }
 }
 

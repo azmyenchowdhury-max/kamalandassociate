@@ -1,4 +1,4 @@
-/* ===================================
+﻿/* ===================================
    Kamal & Associates - Custom CSS
    Pure HTML/CSS/JS/Bootstrap Version
    Created by: Azmyen Mustafa Chowdhury
@@ -144,6 +144,393 @@ img {
 
 .text-accent {
     color: var(--primary-color);
+}
+
+/* =========================================
+   CAREERS PAGE STYLES
+   ========================================= */
+.careers-page {
+    --ka-navy: #0a2342;
+    --ka-gold: #d4af37;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.careers-page .text-muted,
+.careers-page .small.text-muted,
+.careers-page .form-text,
+.careers-page p.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.careers-page .hero-careers {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(120deg, rgba(10, 35, 66, 0.92), rgba(15, 17, 19, 0.86)), url("../images/BG/bg_2.jpg");
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    padding: 8rem 0 5rem;
+}
+
+.careers-page .hero-careers h1 {
+    font-weight: 700;
+    font-family: var(--font-heading);
+    letter-spacing: 0.3px;
+}
+
+.careers-page .hero-careers .lead {
+    color: rgba(241, 245, 249, 0.85);
+}
+
+.careers-page .careers-note-sticky {
+    top: 1rem;
+}
+
+.careers-page .form-placeholder-wrap {
+    display: contents;
+}
+
+.careers-page .country-code-select {
+    width: 115px;
+    flex: 0 0 115px;
+}
+
+.careers-page .success-icon-wrap {
+    width: 72px;
+    height: 72px;
+    background: rgba(10, 35, 66, 0.08);
+    border: 2px solid rgba(199, 168, 90, 0.55);
+}
+
+.careers-page .success-icon {
+    font-size: 2rem;
+    color: #0a2342;
+}
+
+.careers-page .success-title {
+    color: #0a2342;
+}
+
+.careers-page .success-email-box {
+    background: #f9fafb;
+}
+
+.careers-page .success-email-title {
+    color: #1f2937;
+}
+
+.careers-page .careers-intro {
+    font-size: 0.88rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+}
+
+.careers-page #why-join-us,
+.careers-page #open-positions {
+    position: relative;
+}
+
+.careers-page .section-title {
+    color: var(--text-color);
+}
+
+.careers-page .why-card {
+    background: linear-gradient(145deg, rgba(19, 21, 26, 0.95), rgba(11, 13, 16, 0.9));
+    border: 1px solid rgba(212, 175, 55, 0.18);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    height: 100%;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.careers-page .why-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(212, 175, 55, 0.55);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.careers-page .why-card h3 {
+    color: var(--text-color);
+}
+
+.careers-page .why-icon {
+    font-size: 2rem;
+    color: var(--ka-gold);
+}
+
+.careers-page #open-positions {
+    background: radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.12), transparent 42%),
+        radial-gradient(circle at 85% 10%, rgba(10, 35, 66, 0.24), transparent 45%),
+        #14171d;
+}
+
+.careers-page #job-board .card {
+    background: rgba(15, 17, 19, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.9rem;
+    color: var(--text-color);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.careers-page #job-board .card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.35);
+}
+
+.careers-page #job-board .card-text,
+.careers-page #job-board p {
+    color: var(--text-muted) !important;
+}
+
+.careers-page #job-board .btn-apply {
+    background: var(--gradient-primary);
+    border-color: transparent;
+    color: #0f1113;
+    font-weight: 600;
+}
+
+.careers-page #job-board .btn-apply:hover {
+    background: var(--gradient-primary-hover);
+    color: #0f1113;
+}
+
+.careers-page #applyModal .modal-content {
+    background: #111318;
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    color: var(--text-color);
+}
+
+.careers-page #applyModal .modal-header,
+.careers-page #applyModal .modal-footer {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.careers-page #applyModal .btn-close {
+    filter: invert(1);
+}
+
+.careers-page #applyModal .bg-light-subtle,
+.careers-page #applyModal .bg-white {
+    background: rgba(19, 21, 26, 0.82) !important;
+    color: var(--text-color);
+}
+
+.careers-page #applyModal .border,
+.careers-page #applyModal .border-top,
+.careers-page #applyModal .rounded-3,
+.careers-page #applyModal .rounded-4 {
+    border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.careers-page #applyModal .form-control,
+.careers-page #applyModal .form-select {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.16);
+    color: var(--text-color);
+}
+
+.careers-page #applyModal .form-control:focus,
+.careers-page #applyModal .form-select:focus {
+    border-color: rgba(212, 175, 55, 0.65);
+    box-shadow: 0 0 0 0.18rem rgba(212, 175, 55, 0.2);
+}
+
+.careers-page #applyModal .badge.text-bg-primary {
+    background: rgba(212, 175, 55, 0.17) !important;
+    color: var(--accent-color) !important;
+}
+
+.careers-page #applyModal .badge.text-bg-secondary {
+    background: rgba(241, 245, 249, 0.1) !important;
+}
+
+.careers-page #applicationSuccessPanel {
+    background: linear-gradient(155deg, rgba(19, 21, 26, 0.98), rgba(11, 13, 16, 0.96)) !important;
+    border: 1px solid rgba(212, 175, 55, 0.28) !important;
+}
+
+.careers-page #applicationSuccessPanel .border {
+    border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.careers-page #applicationSuccessPanel h4,
+.careers-page #applicationSuccessPanel p,
+.careers-page #applicationSuccessPanel .fw-semibold {
+    color: var(--text-color) !important;
+}
+
+.careers-page #applicationSuccessPanel .btn-outline-primary {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.careers-page #applicationSuccessPanel .btn-outline-primary:hover {
+    background: var(--gradient-primary);
+    color: #0f1113;
+    border-color: transparent;
+}
+
+.careers-page #applicationPreviewBox .rv-header {
+    background: #0a2342;
+    color: #fff;
+    padding: 1rem 1.25rem;
+}
+
+.careers-page #applicationPreviewBox .rv-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid rgba(199, 168, 90, 0.6);
+    background: #fff;
+}
+
+.careers-page #applicationPreviewBox .rv-firm-name {
+    font-size: 0.95rem;
+    line-height: 1.1;
+}
+
+.careers-page #applicationPreviewBox .rv-firm-slogan {
+    font-size: 0.64rem;
+    opacity: 0.82;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.careers-page #applicationPreviewBox .rv-subtitle {
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    opacity: 0.65;
+    text-transform: uppercase;
+}
+
+.careers-page #applicationPreviewBox .rv-subtext {
+    font-size: 0.7rem;
+    opacity: 0.75;
+}
+
+.careers-page #applicationPreviewBox .rv-tag {
+    border-radius: 4px;
+    padding: 1px 8px;
+    font-size: 0.7rem;
+}
+
+.careers-page #applicationPreviewBox .rv-tag-primary {
+    background: rgba(199, 168, 90, 0.2);
+    border: 1px solid #c7a85a;
+    color: #c7a85a;
+}
+
+.careers-page #applicationPreviewBox .rv-tag-neutral {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.careers-page #applicationPreviewBox .rv-photo {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border: 2px solid #c7a85a;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.careers-page #applicationPreviewBox .rv-photo-placeholder {
+    width: 80px;
+    height: 100px;
+    border: 1px dashed rgba(199, 168, 90, 0.5);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.careers-page #applicationPreviewBox .rv-photo-placeholder-text {
+    opacity: 0.5;
+    font-size: 0.65rem;
+    text-align: center;
+}
+
+.careers-page #applicationPreviewBox .rv-body {
+    background: #fff;
+    padding: 1.25rem 1.25rem 1rem;
+}
+
+.careers-page #applicationPreviewBox .rv-section-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #0a2342;
+    border-bottom: 2px solid #c7a85a;
+    padding-bottom: 4px;
+    margin-bottom: 12px;
+}
+
+.careers-page #applicationPreviewBox .rv-cell {
+    margin-bottom: 8px;
+}
+
+.careers-page #applicationPreviewBox .rv-lbl {
+    display: block;
+    font-size: 0.68rem;
+    color: #6c757d;
+    margin-bottom: 1px;
+}
+
+.careers-page #applicationPreviewBox .rv-cell strong {
+    font-size: 0.82rem;
+    color: #1a1a2e;
+}
+
+.careers-page #applicationPreviewBox .rv-declaration {
+    border-top: 1px solid #e9ecef;
+}
+
+.careers-page #applicationPreviewBox .rv-declaration-text {
+    max-width: 55%;
+}
+
+.careers-page #applicationPreviewBox .rv-signature {
+    max-width: 160px;
+    max-height: 70px;
+    object-fit: contain;
+    display: block;
+    border-bottom: 1px solid #333;
+    padding-bottom: 2px;
+}
+
+.careers-page #applicationPreviewBox .rv-signature-line {
+    width: 160px;
+    height: 60px;
+    border-bottom: 1px solid #333;
+}
+
+.careers-page #applicationPreviewBox .rv-signature-label {
+    font-size: 0.68rem;
+    color: #6c757d;
+}
+
+@keyframes careersRiseIn {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.careers-page .careers-reveal {
+    animation: careersRiseIn 0.7s ease both;
 }
 
 /* ===== Buttons ===== */
@@ -4683,3 +5070,126 @@ p {
         padding: 1.15rem;
     }
 }
+
+/* INLINE STYLE MIGRATION UTILITIES - AUTO GENERATED START */
+.u-inline-0001 { min-height: 50vh; background-image: url(&quot;https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&quot;); }
+.u-inline-0002 { min-height: 50vh; }
+.u-inline-0003 { font-size: 3rem; }
+.u-inline-0004 { background: transparent; }
+.u-inline-0005 { background: #0F1113; border-top: 1px solid rgba(175, 169, 57, 0.1); overflow: hidden; }
+.u-inline-0006 { max-width: 400px; position: relative; }
+.u-inline-0007 { border: 1px solid rgba(175, 169, 57, 0.2); }
+.u-inline-0008 { position: absolute; bottom: -15px; right: -15px; background: #afa939; padding: 15px; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 2; }
+.u-inline-0009 { font-size: 20px; }
+.u-inline-0010 { letter-spacing: 2px; font-size: 14px; }
+.u-inline-0011 { font-family: 'Playfair Display', serif; font-size: 42px; }
+.u-inline-0012 { font-size: 17px; line-height: 1.9; }
+.u-inline-0013 { background: rgba(175, 169, 57, 0.05); border-left: 4px solid #afa939; border-radius: 0 12px 12px 0; max-width: 350px; }
+.u-inline-0014 { font-size: 19px; font-family: 'Playfair Display', serif; font-style: italic; line-height: 1.5; }
+.u-inline-0015 { font-weight: 700; }
+.u-inline-0016 { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.u-inline-0017 { background: #1A1D21; }
+.u-inline-0018 { position: relative; }
+.u-inline-0019 { position: absolute; bottom: -30px; right: -30px; background: linear-gradient(135deg, #afa939 0%, #b48811 100%); padding: 30px; border-radius: 12px; text-align: center; }
+.u-inline-0020 { font-size: 48px; font-weight: 700; color: #0f1113; }
+.u-inline-0021 { font-size: 14px; color: #0f1113; font-weight: 600; }
+.u-inline-0022 { font-size: 16px; line-height: 1.8; }
+.u-inline-0023 { background: #111315; }
+.u-inline-0024 { background: #0f1113; }
+.u-inline-0025 { background: rgba(175, 169, 57, 0.1); border-radius: 12px; border-left: 4px solid #afa939; }
+.u-inline-0026 { position: relative; padding-left: 30px; }
+.u-inline-0027 { position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #afa939, #b48811); }
+.u-inline-0028 { position: absolute; left: -23px; top: 25px; width: 16px; height: 16px; background: #afa939; border-radius: 50%; border: 3px solid #0f1113; }
+.u-inline-0029 { background: #1c1e20; border-radius: 12px; border: 1px solid rgba(175, 169, 57, 0.15); margin-left: 20px; }
+.u-inline-0030 { font-size: 28px; font-weight: 700; }
+.u-inline-0031 { background-image: url(&quot;images/Staffs/Sandip.jpg&quot;); }
+.u-inline-0032 { min-height: 50vh; background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920'); }
+.u-inline-0033 { min-height: 50vh; }
+.u-inline-0034 { font-size: 3rem; }
+.u-inline-0035 { background: transparent; }
+.u-inline-0036 { cursor: pointer; }
+.u-inline-0037 { background-image: url('https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600'); }
+.u-inline-0038 { background: linear-gradient(135deg, #AFA939 0%, #B48811 100%); color: #0F1113; }
+.u-inline-0039 { background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600'); }
+.u-inline-0040 { background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600'); }
+.u-inline-0041 { background-image: url('https://images.unsplash.com/photo-1462899006636-339e08d1844e?w=600'); }
+.u-inline-0042 { background-image: url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=600'); }
+.u-inline-0043 { background-image: url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600'); }
+.u-inline-0044 { background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600'); }
+.u-inline-0045 { background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600'); }
+.u-inline-0046 { background-image: url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=600'); }
+.u-inline-0047 { background-image: url('https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=600'); }
+.u-inline-0048 { background-image: url('https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=200'); }
+.u-inline-0049 { background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=200'); }
+.u-inline-0050 { background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=200'); }
+.u-inline-0051 { background-image: url('https://images.unsplash.com/photo-1462899006636-339e08d1844e?w=200'); }
+.u-inline-0052 { background-image: url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=200'); }
+.u-inline-0053 { background-image: url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=200'); }
+.u-inline-0054 { background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=200'); }
+.u-inline-0055 { background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=200'); }
+.u-inline-0056 { background-image: url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=200'); }
+.u-inline-0057 { background-image: url('https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=200'); }
+.u-inline-0058 { max-height: 400px; object-fit: cover; }
+.u-inline-0059 { list-style: none; }
+.u-inline-0060 { min-height: 50vh; background-image: url(&quot;https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&quot;); }
+.u-inline-0061 { background-image: url(&quot;https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&quot;); }
+.u-inline-0062 { background-image: url(&quot;https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&quot;); }
+.u-inline-0063 { background-image: url(&quot;https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600&quot;); }
+.u-inline-0064 { background-image: url(&quot;https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&quot;); }
+.u-inline-0065 { background-image: url(&quot;https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&quot;); }
+.u-inline-0066 { background-image: url(&quot;https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&quot;); }
+.u-inline-0067 { min-height: 50vh; background-image: url(&quot;https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920&quot;); }
+.u-inline-0068 { background: rgba(175, 169, 57, 0.1); border-color: rgba(175, 169, 57, 0.3); color: #ececec; }
+.u-inline-0069 { color: #9CA3AF; font-weight: normal; }
+.u-inline-0070 { border: 2px dashed rgba(175, 169, 57, 0.5); border-radius: 8px; padding: 30px; text-align: center; cursor: pointer; background: rgba(175, 169, 57, 0.05); transition: all 0.3s ease; margin-bottom: 15px; }
+.u-inline-0071 { font-size: 32px; color: #AFA939; margin-bottom: 10px; display: block; }
+.u-inline-0072 { color: #ECECEC; }
+.u-inline-0073 { display: none; }
+.u-inline-0074 { margin-top: 15px; }
+.u-inline-0075 { cursor: pointer; background-color: #2A2D32; }
+.u-inline-0076 { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #AFA939; cursor: pointer; pointer-events: none; }
+.u-inline-0077 { display: none; position: absolute; top: 19%; left: 80px; background: #1C1E20; border: 1px solid rgba(175, 169, 57, 0.3); border-radius: 8px; padding: 15px; width: 320px; z-index: 1000; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); }
+.u-inline-0078 { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.u-inline-0079 { padding: 5px 10px; background: transparent; border: 1px solid rgba(175, 169, 57, 0.3); color: #AFA939; border-radius: 4px; }
+.u-inline-0080 { font-weight: 600; color: #AFA939; min-width: 150px; text-align: center; }
+.u-inline-0081 { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 10px; }
+.u-inline-0082 { text-align: center; font-size: 12px; color: #AFA939; font-weight: 600; }
+.u-inline-0083 { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+.u-inline-0084 { display: none; }
+.u-inline-0085 { border-color: rgba(175, 169, 57, 0.15); margin: 30px 0; }
+.u-inline-0086 { height: 40px; }
+.u-inline-0087 { font-size: 30px; color: #8b2f89; }
+.u-inline-0088 { font-size: 30px; color: #afa939; }
+.u-inline-0089 { font-size: 30px; color: #e91e63; }
+.u-inline-0090 { font-size: 30px; color: #2196f3; }
+.u-inline-0091 { font-size: 18px; }
+.u-inline-0092 { background: rgba(175, 169, 57, 0.1); border-radius: 12px; border: 1px solid rgba(175, 169, 57, 0.2); text-align: left; }
+.u-inline-0093 { border-color: rgba(175, 169, 57, 0.2); }
+.u-inline-0094 { height: 30px; margin-right: 10px; }
+.u-inline-0095 { height: 30px; }
+.u-inline-0096 { padding-top: 0; }
+.u-inline-0097 { display:none; }
+.u-inline-0098 { height: 350px; }
+.u-inline-0099 { background: #1c1e20; border-radius: 12px; border: 1px solid rgba(175, 169, 57, 0.15); }
+.u-inline-0100 { color: #25D366; }
+.u-inline-0101 { background: #1c1e20; border: 1px solid rgba(175, 169, 57, 0.15); border-radius: 12px; }
+.u-inline-0102 { background: transparent; color: #ececec; }
+.u-inline-0103 { background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600'); }
+.u-inline-0104 { background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600'); }
+.u-inline-0105 { background-image: url('https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600'); }
+.u-inline-0106 { background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600'); }
+.u-inline-0107 { background-image: url('https://images.unsplash.com/photo-1453945619913-79ec89a82c51?w=600'); }
+.u-inline-0108 { background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600'); }
+.u-inline-0109 { background-image: url(&quot;https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&quot;); }
+.u-inline-0110 { background-image: url(&quot;https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600&quot;); }
+.u-inline-0111 { background-image: url(&quot;https://images.unsplash.com/photo-1453945619913-79ec89a82c51?w=600&quot;); }
+.u-inline-0112 { background-image: url(&quot;https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=600&quot;); }
+.u-inline-0113 { background-image: url(&quot;https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&quot;); }
+.u-inline-0114 { background-image: url(&quot;https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&quot;); }
+.u-inline-0115 { background-image: url(&quot;https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&quot;); }
+.u-inline-0116 { background-image: url(&quot;https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&quot;); }
+.u-inline-0117 { width: 50px; height: 50px; background: rgba(175, 169, 57, 0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.u-inline-0118 { font-weight: 500; }
+/* INLINE STYLE MIGRATION UTILITIES - AUTO GENERATED END */
+
+

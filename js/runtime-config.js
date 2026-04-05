@@ -35,4 +35,22 @@
     config.adminDashboardFunctionUrl ||
     window.__ADMIN_DASHBOARD_FUNCTION_URL__ ||
     supabaseUrl + "/functions/v1/admin-dashboard";
+
+  // Phase 9: Performance & Analytics Configuration
+  window.__GA_MEASUREMENT_ID__ =
+    config.gaMeasurementId ||
+    window.__GA_MEASUREMENT_ID__ ||
+    "G-5QVPHYF8N3"; // Replace with actual GA4 measurement ID
+
+  window.__PERFORMANCE_TARGETS__ = {
+    lcp_ms: 2500,           // Largest Contentful Paint target
+    fid_ms: 100,            // First Input Delay target
+    cls_value: 0.1,         // Cumulative Layout Shift target
+    inp_ms: 200,            // Interaction to Next Paint target
+    page_load_ms: 3000,     // Overall page load target
+    resource_size_kb: 5000  // Total resource size budget
+  };
+
+  window.__ANALYTICS_ENABLED__ = true;
+  window.__CONVERSION_TRACKING_ENABLED__ = true;
 })();

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading List | Kamal & Associates</title>
+    <meta name="description" content="Browse saved legal articles from your personal reading list.">
+    <link rel="icon" type="image/png" href="images/Logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/runtime-config.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark-custom">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo.png" alt="Kamal & Associates" class="brand-logo me-3">
+                <div class="brand-text d-flex flex-column">
+                    <span class="brand-name">Kamal & Associates</span>
+                    <span class="brand-tagline">Defender Of Justice</span>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="reading-list.html">Reading List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="d-flex align-items-center action-zone">
+                <a href="consultation.html" class="btn btn-gold ms-3">Free Consultation <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="reading-list-page">
+        <div class="container">
+            <div class="reading-list-head">
+                <div>
+                    <span class="article-category">Personal Library</span>
+                    <h1 class="article-title">Your Saved <span class="text-accent">Reading List</span></h1>
+                    <p class="reading-list-sub">All bookmarked legal insights in one place. Open, remove, or clear your list anytime.</p>
+                </div>
+                <div class="reading-list-actions">
+                    <a href="blog.html" class="btn btn-outline-warning"><i class="fas fa-book-open me-2"></i>Browse More Articles</a>
+                    <button id="clearReadingList" class="btn btn-gold" type="button"><i class="fas fa-trash me-2"></i>Clear All</button>
+                </div>
+            </div>
+
+            <div id="readingListGrid" class="reading-list-grid"></div>
+
+            <div id="readingListEmpty" class="reading-list-empty is-hidden">
+                <i class="far fa-bookmark"></i>
+                <h3>No Saved Articles Yet</h3>
+                <p>Bookmark articles from any blog post to build your personal legal reading list.</p>
+                <a href="blog.html" class="btn btn-gold">Go To Blog</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-section article-footer">
+        <div class="container">
+            <div class="footer-copyright-bar">
+                <p>&copy; 2026 <span class="text-white">Kamal & Associates</span>. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/reading-list.js"></script>
+</body>
+
+</html>

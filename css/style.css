@@ -842,7 +842,7 @@ img {
     display: flex;
     align-items: center;
     position: relative;
-    background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920');
+    background-image: url('../images/BG/Hero.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -6723,6 +6723,132 @@ button.is-subscribed,
     text-decoration: underline;
     transition: color 0.2s;
 }
+
+/* ===== Responsive Enhancements ===== */
+@media (max-width: 1199px) {
+    .hero-section {
+        min-height: 85vh;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .hero-description,
+    .section-description {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 991px) {
+    .hero-section {
+        min-height: 70vh;
+        background-attachment: scroll;
+    }
+
+    .hero-title {
+        font-size: 2.6rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    .section-padding {
+        padding: 70px 0;
+    }
+
+    .hero-buttons {
+        justify-content: flex-start;
+    }
+
+    .play-text {
+        display: none;
+    }
+
+    .navbar-dark.bg-dark-custom .container {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .navbar-collapse.show .navbar-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.85rem 1rem !important;
+        width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-section {
+        min-height: 58vh;
+        padding-top: 80px;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-description {
+        font-size: 0.98rem;
+        line-height: 1.7;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .btn-gold {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .action-zone {
+        justify-content: flex-end;
+        gap: 0.5rem;
+    }
+
+    .brand-logo {
+        height: 44px;
+    }
+
+    .brand-name {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 575px) {
+    .section-padding {
+        padding: 50px 0;
+    }
+
+    .hero-title {
+        font-size: 1.85rem;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 14px;
+        padding: 0.75rem 0.9rem !important;
+    }
+
+    .phone-number {
+        font-size: 14px;
+    }
+
+    .hero-subtitle,
+    .section-subtitle {
+        font-size: 0.95rem;
+    }
+}
+
 .exit-skip-btn:hover { color: #9CA3AF; }
 @media (max-width: 575.98px) {
     .exit-intent-card { padding: 36px 24px; }

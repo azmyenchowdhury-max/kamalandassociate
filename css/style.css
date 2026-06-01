@@ -842,7 +842,7 @@ img {
     display: flex;
     align-items: center;
     position: relative;
-    background-image: url('../images/BG/Hero.jpg');
+    background-image: url('../images/Background/BG1.JPG');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

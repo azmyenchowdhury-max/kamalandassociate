@@ -1,21 +1,45 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    Practice Areas | Kamal & Associates - Comprehensive Legal Services
-  </title>
-  <meta name="description"
-    content="Explore our practice areas including corporate law, criminal defense, family law, real estate, banking & finance, and intellectual property." />
+  <title>Practice Areas | Kamal &amp; Associates Legal Services</title>
+  <meta name="description" content="Kamal &amp; Associates handles corporate law, criminal defence, family law, real estate, banking &amp; finance, and intellectual property across Bangladesh courts." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Kamal &amp; Associates" />
+  <link rel="canonical" href="https://kamalassociates.com.bd/practice-areas.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kamal &amp; Associates" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Practice Areas | Kamal &amp; Associates Legal Services" />
+  <meta property="og:description" content="Kamal &amp; Associates handles corporate law, criminal defence, family law, real estate, banking &amp; finance, and intellectual property across Bangladesh courts." />
+  <meta property="og:image" content="https://kamalassociates.com.bd/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://kamalassociates.com.bd/practice-areas.html" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Practice Areas | Kamal &amp; Associates Legal Services" />
+  <meta name="twitter:description" content="Kamal &amp; Associates handles corporate law, criminal defence, family law, real estate, banking &amp; finance, and intellectual property across Bangladesh courts." />
+  <meta name="twitter:image" content="https://kamalassociates.com.bd/images/og-image.jpg" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/Logo.png" />
 
-  <!-- Fonts -->
+  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+
+  <!-- Preload -->
+  <link rel="preload" href="css/style.css" as="style" />
+
+  <!-- Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
@@ -34,7 +58,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
-  <script src="js/runtime-config.js"></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Practice Areas at Kamal & Associates",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "item": {"@type": "Service", "name": "Corporate Law", "url": "https://kamalassociates.com.bd/service-areas.html"}},
+      {"@type": "ListItem", "position": 2, "item": {"@type": "Service", "name": "Criminal Defence", "url": "https://kamalassociates.com.bd/service-areas.html"}},
+      {"@type": "ListItem", "position": 3, "item": {"@type": "Service", "name": "Family Law", "url": "https://kamalassociates.com.bd/service-areas.html"}},
+      {"@type": "ListItem", "position": 4, "item": {"@type": "Service", "name": "Real Estate Law", "url": "https://kamalassociates.com.bd/service-areas.html"}},
+      {"@type": "ListItem", "position": 5, "item": {"@type": "Service", "name": "Banking & Finance", "url": "https://kamalassociates.com.bd/service-areas.html"}},
+      {"@type": "ListItem", "position": 6, "item": {"@type": "Service", "name": "Intellectual Property", "url": "https://kamalassociates.com.bd/service-areas.html"}}
+    ]
+  }
+  </script>
+
+  <script src="js/runtime-config.js" defer></script>
 </head>
 
 <body>
@@ -83,6 +125,11 @@
           <li class="nav-item">
             <a class="nav-link" href="careers.html">Careers</a>
           </li>
+                  <li class="nav-mobile-cta-item">
+            <a href="consultation.html" class="nav-link nav-mobile-cta-link">
+              <i class="fas fa-arrow-right me-2"></i>Free Consultation
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -97,6 +144,8 @@
       </div>
     </div>
   </nav>
+
+  <main id="main-content">
 
   <!-- Page Header -->
   <section class="hero-section practice-areas-hero">
@@ -435,7 +484,7 @@
         </div>
         <div class="col-lg-6" data-aos="fade-left">
           <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800" alt="Legal Team"
-            class="img-fluid rounded-4" />
+            class="img-fluid rounded-4" loading="lazy" />
         </div>
       </div>
     </div>
@@ -501,6 +550,8 @@
     </div>
   </div>
 
+  </main>
+
   <!-- Footer -->
   <footer class="footer-section">
     <div class="container">
@@ -541,7 +592,7 @@
             <li><a href="#">Legal FAQ</a></li>
             <li><a href="#">Client Portal</a></li>
             <li><a href="careers.html">Careers</a></li>
-          </ul>
+        </ul>
         </div>
 
         <div class="col-lg-4 col-md-6">

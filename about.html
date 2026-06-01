@@ -1,21 +1,45 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    About Us | Kamal & Associates - Leading Law Firm in Bangladesh
-  </title>
-  <meta name="description"
-    content="Learn about Kamal & Associates - 18+ years of legal excellence in Bangladesh. Our mission, values, and commitment to justice." />
+  <title>About Kamal &amp; Associates | Top Law Firm Bangladesh</title>
+  <meta name="description" content="Kamal &amp; Associates – 18+ years of legal excellence in Bangladesh. Meet our founding story, mission, values and commitment to justice across all courts." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Kamal &amp; Associates" />
+  <link rel="canonical" href="https://kamalassociates.com.bd/about.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kamal &amp; Associates" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="About Kamal &amp; Associates | Top Law Firm Bangladesh" />
+  <meta property="og:description" content="Kamal &amp; Associates – 18+ years of legal excellence in Bangladesh. Meet our founding story, mission, values and commitment to justice across all courts." />
+  <meta property="og:image" content="https://kamalassociates.com.bd/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://kamalassociates.com.bd/about.html" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About Kamal &amp; Associates | Top Law Firm Bangladesh" />
+  <meta name="twitter:description" content="Kamal &amp; Associates – 18+ years of legal excellence in Bangladesh. Meet our founding story, mission, values and commitment to justice across all courts." />
+  <meta name="twitter:image" content="https://kamalassociates.com.bd/images/og-image.jpg" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/Logo.png" />
 
-  <!-- Fonts -->
+  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+
+  <!-- Preload -->
+  <link rel="preload" href="css/style.css" as="style" />
+
+  <!-- Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
@@ -34,7 +58,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
-  <script src="js/runtime-config.js"></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Kamal & Associates",
+    "url": "https://kamalassociates.com.bd/",
+    "foundingDate": "2006",
+    "founder": {
+      "@type": "Person",
+      "name": "Mohammad Mostofa Kamal"
+    },
+    "areaServed": "Bangladesh",
+    "description": "Kamal & Associates – 18+ years of legal excellence in Bangladesh. Meet our founding story, mission, values and commitment to justice across all courts."
+  }
+  </script>
+
+  <script src="js/runtime-config.js" defer></script>
 </head>
 
 <body>
@@ -83,6 +125,11 @@
           <li class="nav-item">
             <a class="nav-link" href="careers.html">Careers</a>
           </li>
+                  <li class="nav-mobile-cta-item">
+            <a href="consultation.html" class="nav-link nav-mobile-cta-link">
+              <i class="fas fa-arrow-right me-2"></i>Free Consultation
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -97,6 +144,8 @@
       </div>
     </div>
   </nav>
+
+  <main id="main-content">
 
   <!-- Page Header -->
   <section class="hero-section u-inline-0001">
@@ -130,7 +179,7 @@
           <div class="founder-message-container">
             <!-- Floating Image Wrapper -->
             <div class="founder-img-wrapper float-start me-lg-5 mb-4 mb-lg-3 u-inline-0006">
-              <img src="images/Attorneys/Kamal.jpg" alt="Mohammad Mostofa Kamal" class="img-fluid rounded-4 shadow-lg u-inline-0007">
+              <img src="images/Attorneys/Kamal.jpg" alt="Mohammad Mostofa Kamal" class="img-fluid rounded-4 shadow-lg u-inline-0007" loading="lazy">
               <div
                 class="u-inline-0008">
                 <i class="fas fa-quote-left text-dark u-inline-0009"></i>
@@ -212,7 +261,7 @@
         <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
           <div class="u-inline-0018">
             <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800" alt="Our Office"
-              class="img-fluid rounded-4" />
+              class="img-fluid rounded-4" loading="lazy" />
             <div class="u-inline-0019">
               <div class="u-inline-0020">
                 18+
@@ -427,7 +476,7 @@
         </div>
         <div class="col-lg-6" data-aos="fade-left">
           <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800" alt="Our Vision"
-            class="img-fluid rounded-4" />
+            class="img-fluid rounded-4" loading="lazy" />
         </div>
       </div>
     </div>
@@ -543,6 +592,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- Footer -->
   <footer class="footer-section">
     <div class="container">
@@ -583,7 +634,7 @@
             <li><a href="#">Legal FAQ</a></li>
             <li><a href="#">Client Portal</a></li>
             <li><a href="careers.html">Careers</a></li>
-          </ul>
+        </ul>
         </div>
 
         <div class="col-lg-4 col-md-6">

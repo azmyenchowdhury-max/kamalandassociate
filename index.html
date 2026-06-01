@@ -1,22 +1,49 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kamal & Associates | Leading Law Firm in Bangladesh</title>
-  <meta name="description"
-    content="Kamal & Associates - Premier law firm in Bangladesh providing expert legal services in corporate law, criminal defense, family law, and more. 18+ years of excellence." />
+
+  <!-- Primary SEO -->
+  <title>Kamal &amp; Associates | Top Law Firm in Bangladesh</title>
+  <meta name="description" content="Kamal &amp; Associates – Bangladesh's premier law firm with 18+ years in corporate law, criminal defence, family law &amp; more. Free first consultation." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Kamal &amp; Associates" />
+  <link rel="canonical" href="https://kamalassociates.com.bd/index.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kamal &amp; Associates" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Kamal &amp; Associates | Top Law Firm in Bangladesh" />
+  <meta property="og:description" content="Premier law firm in Bangladesh providing expert legal services in corporate law, criminal defence, family law and more. 18+ years of excellence." />
+  <meta property="og:image" content="https://kamalassociates.com.bd/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://kamalassociates.com.bd/index.html" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kamal &amp; Associates | Top Law Firm in Bangladesh" />
+  <meta name="twitter:description" content="Premier law firm in Bangladesh – corporate law, criminal defence, family law and more. Free first consultation." />
+  <meta name="twitter:image" content="https://kamalassociates.com.bd/images/og-image.jpg" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/Logo.png" />
 
-  <!-- Fonts -->
+  <!-- Preconnect to external origins -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
-    rel="stylesheet" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+
+  <!-- Preload critical CSS -->
+  <link rel="preload" href="css/style.css" as="style" />
+  <link rel="preload" href="images/BG/Hero.jpg" as="image" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -30,15 +57,70 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
-  <script src="js/runtime-config.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+
+  <!-- Structured Data: Organization + WebSite + LegalService -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LegalService",
+        "@id": "https://kamalassociates.com.bd/#organization",
+        "name": "Kamal & Associates",
+        "alternateName": "Kamal and Associates",
+        "url": "https://kamalassociates.com.bd/",
+        "logo": "https://kamalassociates.com.bd/images/Logo.png",
+        "image": "https://kamalassociates.com.bd/images/og-image.jpg",
+        "description": "Premier law firm in Bangladesh with 18+ years of experience in corporate law, criminal defence, family law, real estate, banking and more.",
+        "foundingDate": "2006",
+        "founder": {
+          "@type": "Person",
+          "name": "Mohammad Mostofa Kamal",
+          "jobTitle": "Head of Chamber & Founder"
+        },
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "addressLocality": "Dhaka",
+            "addressCountry": "BD",
+            "streetAddress": "Supreme Court Bar Association, High Court"
+          }
+        ],
+        "telephone": "+8801713456800",
+        "areaServed": "Bangladesh",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Legal Services",
+          "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate Law"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Criminal Defence"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Family Law"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Real Estate Law"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Banking & Finance Law"}}
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://kamalassociates.com.bd/#website",
+        "url": "https://kamalassociates.com.bd/",
+        "name": "Kamal & Associates",
+        "publisher": {"@id": "https://kamalassociates.com.bd/#organization"},
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://kamalassociates.com.bd/service-areas.html?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script src="js/runtime-config.js" defer></script>
   <script>
-    // Defensive fallback: some environments inject onload handlers that call this symbol.
     if (typeof window.solveSimpleChallenge !== 'function') {
-      window.solveSimpleChallenge = function () {
-        return true;
-      };
+      window.solveSimpleChallenge = function () { return true; };
     }
   </script>
 </head>
@@ -89,6 +171,11 @@
           <li class="nav-item">
             <a class="nav-link" href="careers.html">Careers</a>
           </li>
+                  <li class="nav-mobile-cta-item">
+            <a href="consultation.html" class="nav-link nav-mobile-cta-link">
+              <i class="fas fa-arrow-right me-2"></i>Free Consultation
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -104,33 +191,38 @@
     </div>
   </nav>
 
+  <main id="main-content">
+
   <!-- Hero Section -->
-  <section class="hero-section" id="hero">
+  <section class="hero-section hero-split-layout" id="hero">
     <div class="hero-overlay"></div>
     <div class="container">
-      <div class="row">
-        <div class="col-lg-7" data-aos="fade-up">
-          <span class="hero-subtitle">Welcome To Kamal & Associates</span>
-          <h1 class="hero-title">
-            Our Attorneys <br> Stand For Your
-            <span class="txt-rotate" data-period="2000" data-rotate='[ "Freedom.", "Rights.", "Case.", "Custody." ]'>
-            </span>
-          </h1>
-          <p class="hero-description">
-            With a proven record of assisting thousands in overcoming wrongful denials nationwide, the Law Firm
-           <strong>Kamal & Associates </strong> has earned its reputation as a trusted leader in legal advocacy.
-          </p>
-          <div class="hero-buttons">
-            <a href="contact.html" class="btn btn-primary btn-lg">
-              Get Legal Advice <i class="fas fa-arrow-right ms-2"></i>
-            </a>
-            <!--<div class="play-btn-wrapper">
-              <button class="play-btn" data-bs-toggle="modal" data-bs-target="#videoModal">
-                <i class="fas fa-play"></i>
-              </button>
-               <span class="play-text">Watch Our Story</span> -->
+      <div class="row justify-content-center">
+        <div class="col-lg-8 d-flex flex-column align-items-center text-center hero-split-col" data-aos="fade-up">
+
+          <!-- Top anchor: subtitle -->
+          <div class="hero-top">
+            <span class="hero-subtitle d-block" style="color: #ffffff;"><h2>Welcome To Kamal & Associates</h2></span>
+          </div>
+
+          <!-- Bottom anchor: headline + description + CTA -->
+          <div class="hero-bottom-content">
+            <h1 class="hero-title">
+              Our Attorneys <br> Stand For Your
+              <span class="txt-rotate" data-period="2000" data-rotate='[ "Freedom.", "Rights.", "Case.", "Custody." ]'>
+              </span>
+            </h1>
+            <p class="hero-description mx-auto">
+              With a proven record of assisting thousands in overcoming wrongful denials nationwide, the Law Firm
+              <strong>Kamal & Associates</strong> has earned its reputation as a trusted leader in legal advocacy.
+            </p>
+            <div class="hero-buttons justify-content-center">
+              <a href="contact.html" class="btn btn-primary btn-lg">
+                Get Legal Advice <i class="fas fa-arrow-right ms-2"></i>
+              </a>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -798,7 +890,7 @@
                   attention to detail. Highly recommended."
                 </p>
                 <div class="testimonial-author">
-                  <img src="images/Clients/Clients_Popular.png" alt="Client" class="author-img" />
+                  <img src="images/Clients/Clients_Popular.png" alt="Client of Kamal &amp; Associates law firm" class="author-img" />
                   <div class="author-info">
                     <h4 class="author-name">Popular Diagnostics</h4>
                     <span class="author-role">CEO, Popular Diagnostics</span>
@@ -819,7 +911,7 @@
                   thanks to them."
                 </p>
                 <div class="testimonial-author">
-                  <img src="images/Clients/Clients_PLFS.jpg" alt="Client" class="author-img" />
+                  <img src="images/Clients/Clients_PLFS.jpg" alt="Client of Kamal &amp; Associates law firm" class="author-img" />
                   <div class="author-info">
                     <h4 class="author-name">
                       People's Leasing & Financial Services
@@ -842,7 +934,7 @@
                   10 years."
                 </p>
                 <div class="testimonial-author">
-                  <img src="images/Clients/Clients_EXIM.jpg" alt="Client" class="author-img" />
+                  <img src="images/Clients/Clients_EXIM.jpg" alt="Client of Kamal &amp; Associates law firm" class="author-img" />
                   <div class="author-info">
                     <h4 class="author-name">EXIM Bank Limited</h4>
                     <span class="author-role">Director, EXIM Bank Limited</span>
@@ -863,7 +955,7 @@
                   export business."
                 </p>
                 <div class="testimonial-author">
-                  <img src="images/Clients/Clients_NRBC.jpg" alt="Client" class="author-img" />
+                  <img src="images/Clients/Clients_NRBC.jpg" alt="Client of Kamal &amp; Associates law firm" class="author-img" />
                   <div class="author-info">
                     <h4 class="author-name">NRBC Bank</h4>
                     <span class="author-role">Director, NRBC Bank</span>
@@ -888,25 +980,25 @@
             <div class="col-12">
               <div class="owl-carousel logo-carousel owl-theme">
                 <div class="item">
-                  <img src="images/Clients/Clients_Popular.png" class="client-logo" alt="Client 1" />
+                  <img src="images/Clients/Clients_Popular.png" class="client-logo" alt="Popular Pharmaceuticals Ltd – client of Kamal &amp; Associates" />
                 </div>
                 <div class="item">
-                  <img src="images/Clients/Clients_PLFS.jpg" class="client-logo" alt="Client 2" />
+                  <img src="images/Clients/Clients_PLFS.jpg" class="client-logo" alt="PLFS – client of Kamal &amp; Associates" />
                 </div>
                 <div class="item">
-                  <img src="images/Clients/Clients_EXIM.jpg" class="client-logo" alt="Client 3" />
+                  <img src="images/Clients/Clients_EXIM.jpg" class="client-logo" alt="EXIM Bank – client of Kamal &amp; Associates" />
                 </div>
                 <div class="item">
-                  <img src="images/Clients/Clients_NRBC.jpg" class="client-logo" alt="Client 4" />
+                  <img src="images/Clients/Clients_NRBC.jpg" class="client-logo" alt="NRB Commercial Bank – client of Kamal &amp; Associates" />
                 </div>
                 <div class="item">
-                  <img src="images/Clients/Clients_Popular.png" class="client-logo" alt="Client 5" />
+                  <img src="images/Clients/Clients_Popular.png" class="client-logo" alt="Popular Pharmaceuticals Ltd – client of Kamal &amp; Associates" />
                 </div>
                 <div class="item">
-                  <img src="images/Clients/Clients_NASSA.jpg" class="client-logo" alt="Client 6" />
+                  <img src="images/Clients/Clients_NASSA.jpg" class="client-logo" alt="NASSA Group / SEBL Bank – client of Kamal &amp; Associates" />
                 </div>
                 <div class="item">
-                  <img src="images/Clients/Clients_SEBL.png" class="client-logo" alt="Client 6" />
+                  <img src="images/Clients/Clients_SEBL.png" class="client-logo" alt="NASSA Group / SEBL Bank – client of Kamal &amp; Associates" />
                 </div>
               </div>
             </div>
@@ -987,6 +1079,8 @@
     </div>
   </div>
 
+  </main><!-- /#main-content -->
+
   <!-- Footer -->
   <footer class="footer-section">
     <div class="container">
@@ -1027,7 +1121,7 @@
             <li><a href="#">Legal FAQ</a></li>
             <li><a href="#">Client Portal</a></li>
             <li><a href="careers.html">Careers</a></li>
-          </ul>
+        </ul>
         </div>
 
         <div class="col-lg-4 col-md-6">

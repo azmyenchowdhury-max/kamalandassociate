@@ -1,18 +1,44 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Careers | Kamal & Associates</title>
-    <meta
-      name="description"
-      content="Build your legal career with Kamal & Associates. Explore open positions and submit your application online."
-    />
+    <title>Careers at Kamal &amp; Associates | Legal Jobs Bangladesh</title>
+    <meta name="description" content="Join Kamal &amp; Associates – one of Bangladesh's leading law firms. View open legal positions and apply online. Build your career in law with a trusted team." />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Kamal &amp; Associates" />
+    <link rel="canonical" href="https://kamalassociates.com.bd/careers.html" />
 
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kamal &amp; Associates" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Careers at Kamal &amp; Associates | Legal Jobs Bangladesh" />
+    <meta property="og:description" content="Join Kamal &amp; Associates – one of Bangladesh's leading law firms. View open legal positions and apply online. Build your career in law with a trusted team." />
+    <meta property="og:image" content="https://kamalassociates.com.bd/images/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://kamalassociates.com.bd/careers.html" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Careers at Kamal &amp; Associates | Legal Jobs Bangladesh" />
+    <meta name="twitter:description" content="Join Kamal &amp; Associates – one of Bangladesh's leading law firms. View open legal positions and apply online. Build your career in law with a trusted team." />
+    <meta name="twitter:image" content="https://kamalassociates.com.bd/images/og-image.jpg" />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/Logo.png" />
 
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+
+    <!-- Preload -->
+    <link rel="preload" href="css/style.css" as="style" />
+
+    <!-- Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -35,6 +61,19 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Kamal & Associates",
+      "url": "https://kamalassociates.com.bd/",
+      "sameAs": [
+        "https://kamalassociates.com.bd/careers.html"
+      ]
+    }
+    </script>
   </head>
   <body class="careers-page">
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark-custom">
@@ -62,6 +101,11 @@
             <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
             <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
             <!-- <li class="nav-item"><a class="nav-link active" href="careers.html">Careers</a></li> -->
+            <li class="nav-mobile-cta-item">
+              <a href="consultation.html" class="nav-link nav-mobile-cta-link">
+                <i class="fas fa-arrow-right me-2"></i>Free Consultation
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -87,7 +131,7 @@
       </div>
     </header>
 
-    <main>
+    <main id="main-content">
       <section class="section-padding" id="why-join-us">
         <div class="container">
           <div class="text-center mb-5" data-aos="fade-up">
@@ -181,7 +225,7 @@
               <li><a href="practice-areas.html">Practice Areas</a></li>
               <li><a href="#">Client Portal</a></li>
               <li><a href="careers.html">Careers</a></li>
-            </ul>
+        </ul>
           </div>
 
           <div class="col-lg-4 col-md-6">
@@ -976,7 +1020,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- Runtime config (Supabase URL + keys) -->
-    <script src="js/runtime-config.js"></script>
+    <script src="js/runtime-config.js" defer></script>
 
     <!-- Shared site behavior -->
     <script src="js/main.js"></script>

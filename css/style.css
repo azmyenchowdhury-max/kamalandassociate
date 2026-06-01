@@ -852,13 +852,30 @@ img {
     min-height: 50vh;
 }
 
+.hero-section.hero-split-layout {
+    align-items: stretch; /* Let the container grow to full section height */
+}
+
+/* Column spans the full viewport and distributes content top ↔ bottom */
+.hero-split-col {
+    min-height: 100vh;
+    justify-content: space-between;
+    padding-top: 130px;  /* clear the fixed navbar */
+    padding-bottom: 4rem;
+}
+
+/* Allow the description to use the full column width so text wraps in ~2 lines */
+.hero-split-col .hero-description {
+    max-width: 100%;
+}
+
 .hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.6) 100%);
 }
 
 .divider {
@@ -882,7 +899,7 @@ img {
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: clamp(1.75rem, 4vw + 0.75rem, 4.5rem);
     font-weight: 700;
     margin-bottom: 25px;
     line-height: 1.2;
@@ -896,11 +913,7 @@ img {
     letter-spacing: 1px;
 }
 
-@media (min-width: 768px) {
-    .hero-title {
-        font-size: 4.5rem;
-    }
-}
+/* hero-title now uses clamp() — no fixed breakpoint override needed */
 
 .rotating-text-wrapper {
     display: block;
@@ -1046,14 +1059,8 @@ img {
 }
 
 .section-title {
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 2.5vw + 1rem, 3rem);
     margin-bottom: 20px;
-}
-
-@media (min-width: 768px) {
-    .section-title {
-        font-size: 3rem;
-    }
 }
 
 .section-description {
@@ -1560,7 +1567,7 @@ img {
 
 .counter-number {
     font-family: var(--font-heading);
-    font-size: 3rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     color: var(--primary-color);
     margin-bottom: 10px;
@@ -2161,7 +2168,7 @@ img {
 .consultation-form-wrap {
     background: var(--bg-dark);
     border-radius: 20px;
-    padding: 50px;
+    padding: clamp(20px, 5vw, 50px);
     border: 1px solid rgba(175, 169, 57, 0.1);
 }
 
@@ -3364,13 +3371,11 @@ img {
 
 /* 1. Name: text-5xl font-bold mb-2 */
 .profile-name {
-    font-size: 3rem;
-    /* 48px - Matches Tailwind text-5xl */
+    font-size: clamp(1.75rem, 3.5vw + 0.5rem, 3rem);
     line-height: 1.1;
     font-weight: 700;
     color: #fff;
     margin-bottom: 0.75rem;
-    /* mb-3 approx */
 }
 
 /* 2. Designation: text-2xl text-theme-accent font-semibold mb-2 */
@@ -3400,13 +3405,7 @@ img {
     margin-bottom: 0;
 }
 
-/* Mobile Responsiveness for the huge name */
-@media (max-width: 768px) {
-    .profile-name {
-        font-size: 2.25rem;
-        /* Smaller on mobile */
-    }
-}
+/* profile-name now uses clamp() — no separate mobile override needed */
 
 
 /* ==================== 
@@ -3422,13 +3421,8 @@ img {
     }
 }
 
-/* 2. Increase Vertical Breathing Room */
-/* Make sections taller so content isn't squashed */
-.section-padding {
-    padding-top: 100px !important;
-    /* Increased from standard 60px/80px */
-    padding-bottom: 100px !important;
-}
+/* 2. Increase Vertical Breathing Room — no !important so mobile overrides work */
+/* Base rule at .section-padding already sets padding: 100px 0. */
 
 /* 3. Improve Text Readability ("Air" inside the text) */
 body {
@@ -3441,66 +3435,25 @@ p {
     /* Adds more space after paragraphs */
 }
 
-/* 4. Add Space Between Grid Items */
-/* Ensures cards (Attorneys, Testimonials) aren't touching each other */
-.row {
-    margin-right: -20px;
-    margin-left: -20px;
-}
+/* 4. Add Space Between Grid Items — only on md+ to prevent mobile overflow */
+@media (min-width: 768px) {
+    .row {
+        margin-right: -20px;
+        margin-left: -20px;
+    }
 
-.col-1,
-.col-2,
-.col-3,
-.col-4,
-.col-5,
-.col-6,
-.col-7,
-.col-8,
-.col-9,
-.col-10,
-.col-11,
-.col-12,
-.col,
-.col-auto,
-.col-sm-1,
-.col-sm-2,
-.col-sm-3,
-.col-sm-4,
-.col-sm-5,
-.col-sm-6,
-.col-sm-7,
-.col-sm-8,
-.col-sm-9,
-.col-sm-10,
-.col-sm-11,
-.col-sm-12,
-.col-md-1,
-.col-md-2,
-.col-md-3,
-.col-md-4,
-.col-md-5,
-.col-md-6,
-.col-md-7,
-.col-md-8,
-.col-md-9,
-.col-md-10,
-.col-md-11,
-.col-md-12,
-.col-lg-1,
-.col-lg-2,
-.col-lg-3,
-.col-lg-4,
-.col-lg-5,
-.col-lg-6,
-.col-lg-7,
-.col-lg-8,
-.col-lg-9,
-.col-lg-10,
-.col-lg-11,
-.col-lg-12 {
-    padding-right: 20px;
-    /* Increases gutter space */
-    padding-left: 20px;
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+    .col-7, .col-8, .col-9, .col-10, .col-11, .col-12,
+    .col, .col-auto,
+    .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6,
+    .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12,
+    .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
+    .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12,
+    .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6,
+    .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
 }
 
 /* =========================================
@@ -3699,7 +3652,7 @@ p {
     background: linear-gradient(135deg, rgba(175, 169, 57, 0.1) 0%, rgba(26, 30, 34, 0.8) 100%);
     border: 1px solid rgba(175, 169, 57, 0.3);
     border-radius: 16px;
-    padding: 40px;
+    padding: clamp(20px, 4vw, 40px);
     text-align: center;
     margin-top: 3rem;
 }
@@ -4161,7 +4114,7 @@ p {
 
 /* Modal Body Padding */
 .modal-body {
-    padding: 30px;
+    padding: clamp(16px, 4vw, 30px);
 }
 
 
@@ -6911,5 +6864,252 @@ button.is-subscribed,
     .phase6-lead-keyword {
         font-size: 0.94rem;
         padding: 10px 12px;
+    }
+}
+
+/* ============================================================
+   GLOBAL RESPONSIVE SYSTEM
+   Mobile ≤767px | Tablet 768–1279px | Desktop ≥1280px
+   ============================================================ */
+
+/* Prevent horizontal scroll at the document root */
+html {
+    overflow-x: hidden;
+}
+
+/* Ensure all media elements are fluid */
+img,
+video,
+iframe,
+embed,
+object {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Embedded maps & video iframes must stay full-width */
+.map-wrapper iframe,
+#videoModal iframe,
+.contact-office-map {
+    width: 100%;
+}
+
+/* ---- Tablet: 768px – 1279px ---- */
+@media (min-width: 768px) and (max-width: 1279px) {
+    .section-padding {
+        padding: 80px 0;
+    }
+
+    .hero-section {
+        min-height: 90vh;
+    }
+
+    .footer-section {
+        padding: 60px 0 24px;
+    }
+
+    .cta-section {
+        padding: 60px 0;
+    }
+
+    .flip-card {
+        height: 380px;
+    }
+}
+
+/* ---- Mobile: ≤767px ---- */
+@media (max-width: 767px) {
+    /* Section breathing room */
+    .section-padding {
+        padding: 56px 0;
+    }
+
+    /* Footer */
+    .footer-section {
+        padding: 48px 0 20px;
+    }
+
+    .footer-middle-bar {
+        padding: 20px 14px;
+        margin-bottom: 24px;
+    }
+
+    .footer-desc {
+        max-width: 100%;
+    }
+
+    .contact-pill {
+        font-size: 0.95rem;
+    }
+
+    /* CTA section */
+    .cta-section {
+        padding: 50px 0;
+    }
+
+    .cta-section h2 {
+        font-size: clamp(1.4rem, 6vw, 2rem);
+    }
+
+    /* Careers hero */
+    .careers-page .hero-careers {
+        padding: 5rem 0 3rem;
+        min-height: auto;
+    }
+
+    /* Counter section */
+    .counter-section {
+        padding: 48px 0;
+    }
+
+    .counter-wrap {
+        padding: 16px 8px;
+    }
+
+    /* Service cards */
+    .service-card {
+        padding: 28px 18px;
+    }
+
+    .service-icon {
+        width: 64px;
+        height: 64px;
+    }
+
+    .service-icon i {
+        font-size: 26px;
+    }
+
+    /* Consultation form */
+    .consultation-form-wrap {
+        border-radius: 12px;
+    }
+
+    /* Attorney profile — stop sticky sidebar so it doesn't overlap */
+    .profile-sticky-wrapper {
+        position: static;
+    }
+
+    /* Head-of-chamber image */
+    .head-img-wrapper {
+        min-height: 260px;
+    }
+
+    /* Flip cards */
+    .flip-card {
+        height: 300px;
+    }
+
+    /* Attorney compact card image */
+    .attorney-img-compact {
+        height: 200px;
+    }
+
+    /* Divider spacing */
+    .divider {
+        margin: 36px 0;
+    }
+
+    /* Legal page header */
+    .page-header {
+        padding: 130px 0 50px;
+    }
+
+    /* Legal content */
+    .legal-content {
+        padding: 22px 16px;
+    }
+
+    /* Section subtitle label */
+    .section-subtitle {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+
+    /* Hero description */
+    .hero-description {
+        max-width: 100%;
+    }
+}
+
+/* ---- Very small: ≤400px ---- */
+@media (max-width: 400px) {
+    /* Brand */
+    .brand-logo {
+        height: 36px;
+    }
+
+    .brand-name {
+        font-size: 16px;
+    }
+
+    /* Buttons */
+    .btn-gold {
+        padding: 8px 16px;
+        font-size: 0.875rem;
+    }
+
+    .btn-lg {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+
+    /* Hero buttons stacked on tiny screens */
+    .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Footer contact pills wrap nicely */
+    .contact-pill {
+        font-size: 0.875rem;
+    }
+
+    /* Testimonial card */
+    .testimonial-card {
+        padding: 20px 14px;
+    }
+
+    /* Award card */
+    .award-card {
+        padding: 28px 16px;
+    }
+
+    /* Contact info card */
+    .contact-info-card {
+        padding: 28px 16px;
+    }
+
+    /* Inline utility: some fixed font-sizes need clamping on tiny screens */
+    .u-inline-0003,
+    .u-inline-0034 {
+        font-size: clamp(1.5rem, 8vw, 3rem) !important;
+    }
+
+    .u-inline-0011 {
+        font-size: clamp(1.5rem, 9vw, 42px) !important;
+    }
+}
+
+/* ---- Ensure navbar brand stays on one line at all widths ---- */
+@media (max-width: 360px) {
+    .brand-name {
+        font-size: 14px;
+    }
+
+    .brand-tagline {
+        display: none;
+    }
+
+    .brand-logo {
+        height: 32px;
+        margin-right: 0.5rem !important;
+    }
+}
+
+/* ---- Desktop ≥1280px ---- */
+@media (min-width: 1280px) {
+    .section-padding {
+        padding: 100px 0;
     }
 }

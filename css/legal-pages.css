@@ -35,7 +35,7 @@
 
 .page-title {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem;
+    font-size: clamp(1.75rem, 3.5vw + 0.5rem, 3rem);
     font-weight: 700;
     color: var(--heading-color);
     margin-bottom: 15px;

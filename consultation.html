@@ -1,21 +1,45 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    Free Consultation | Kamal & Associates - Schedule Your Appointment
-  </title>
-  <meta name="description"
-    content="Schedule a free legal consultation with Kamal & Associates. First consultation is free. Paid consultations available for returning clients." />
+  <title>Free Legal Consultation | Kamal &amp; Associates Dhaka</title>
+  <meta name="description" content="Book your free first legal consultation at Kamal &amp; Associates. Expert advice on corporate, criminal, family and property law. Returning clients pay a modest fee." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Kamal &amp; Associates" />
+  <link rel="canonical" href="https://kamalassociates.com.bd/consultation.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kamal &amp; Associates" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Free Legal Consultation | Kamal &amp; Associates Dhaka" />
+  <meta property="og:description" content="Book your free first legal consultation at Kamal &amp; Associates. Expert advice on corporate, criminal, family and property law. Returning clients pay a modest fee." />
+  <meta property="og:image" content="https://kamalassociates.com.bd/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://kamalassociates.com.bd/consultation.html" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Legal Consultation | Kamal &amp; Associates Dhaka" />
+  <meta name="twitter:description" content="Book your free first legal consultation at Kamal &amp; Associates. Expert advice on corporate, criminal, family and property law. Returning clients pay a modest fee." />
+  <meta name="twitter:image" content="https://kamalassociates.com.bd/images/og-image.jpg" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/Logo.png" />
 
-  <!-- Fonts -->
+  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+
+  <!-- Preload -->
+  <link rel="preload" href="css/style.css" as="style" />
+
+  <!-- Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
@@ -35,7 +59,28 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
-  <script src="js/runtime-config.js"></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Free Legal Consultation",
+    "provider": {
+      "@type": "Organization",
+      "name": "Kamal & Associates"
+    },
+    "url": "https://kamalassociates.com.bd/consultation.html",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BDT",
+      "description": "First consultation free; fee applies for returning clients"
+    }
+  }
+  </script>
+
+  <script src="js/runtime-config.js" defer></script>
 </head>
 
 <body>
@@ -84,6 +129,11 @@
           <li class="nav-item">
             <a class="nav-link" href="careers.html">Careers</a>
           </li>
+                  <li class="nav-mobile-cta-item">
+            <a href="consultation.html" class="nav-link nav-mobile-cta-link">
+              <i class="fas fa-arrow-right me-2"></i>Free Consultation
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -98,6 +148,8 @@
       </div>
     </div>
   </nav>
+
+  <main id="main-content">
 
   <!-- Page Header -->
   <section class="hero-section u-inline-0067">
@@ -427,14 +479,14 @@
                     <div class="col-6 col-md-3 mb-2">
                       <div class="payment-method-card" data-method="bkash">
                         <img src="https://www.logo.wine/a/logo/BKash/BKash-Icon-Logo.wine.svg" alt="bKash"
-                          class="u-inline-0086" />
+                          class="u-inline-0086" loading="lazy" />
                         <span>bKash</span>
                       </div>
                     </div>
                     <div class="col-6 col-md-3 mb-2">
                       <div class="payment-method-card" data-method="nagad">
                         <img src="https://nagad.com.bd/wp-content/uploads/2023/01/Nagad-Logo-Icon.png" alt="Nagad"
-                          class="u-inline-0086" />
+                          class="u-inline-0086" loading="lazy" />
                         <span>Nagad</span>
                       </div>
                     </div>
@@ -632,9 +684,9 @@
               </ul>
               <div class="payment-badges mt-3">
                 <img src="https://sslcommerz.com/wp-content/uploads/2021/11/verified-by-visa.png" alt="Verified by Visa"
-                  class="u-inline-0094" />
+                  class="u-inline-0094" loading="lazy" />
                 <img src="https://sslcommerz.com/wp-content/uploads/2021/11/mastercard-securecode.png"
-                  alt="MasterCard SecureCode" class="u-inline-0095" />
+                  alt="MasterCard SecureCode" class="u-inline-0095" loading="lazy" />
               </div>
             </div>
           </div>
@@ -709,6 +761,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- Footer -->
   <footer class="footer-section">
     <div class="container">
@@ -749,7 +803,7 @@
             <li><a href="#">Legal FAQ</a></li>
             <li><a href="#">Client Portal</a></li>
             <li><a href="careers.html">Careers</a></li>
-          </ul>
+        </ul>
         </div>
 
         <div class="col-lg-4 col-md-6">

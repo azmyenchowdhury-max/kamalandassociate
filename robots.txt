@@ -1,3 +1,5 @@
+# robots.txt — Kamal & Associates (kamalassociates.com.bd)
+
 User-agent: Googlebot
 Allow: /
 
@@ -12,5 +14,17 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Block developer / build artefacts from being indexed
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /src/
+Disallow: /analytics.html
+Disallow: /analytics-quickstart.html
+Disallow: /reading-list.html
+Disallow: /blog/blog-post-template.html
+
+# Crawl-delay to avoid overloading the server (in seconds)
+Crawl-delay: 5
 
 Sitemap: https://kamalassociates.com.bd/sitemap.xml

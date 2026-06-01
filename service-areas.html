@@ -1,17 +1,44 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Service Areas - Kamal & Associates</title>
-  <meta name="description" content="Discover our comprehensive range of legal services tailored for individuals, corporations, and international clients in Bangladesh." />
+  <title>Legal Service Areas | Kamal &amp; Associates Bangladesh</title>
+  <meta name="description" content="Browse 100+ legal services at Kamal &amp; Associates – from company formation and banking litigation to criminal defence and ADR across Bangladesh." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Kamal &amp; Associates" />
+  <link rel="canonical" href="https://kamalassociates.com.bd/service-areas.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kamal &amp; Associates" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Legal Service Areas | Kamal &amp; Associates Bangladesh" />
+  <meta property="og:description" content="Browse 100+ legal services at Kamal &amp; Associates – from company formation and banking litigation to criminal defence and ADR across Bangladesh." />
+  <meta property="og:image" content="https://kamalassociates.com.bd/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://kamalassociates.com.bd/service-areas.html" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Legal Service Areas | Kamal &amp; Associates Bangladesh" />
+  <meta name="twitter:description" content="Browse 100+ legal services at Kamal &amp; Associates – from company formation and banking litigation to criminal defence and ADR across Bangladesh." />
+  <meta name="twitter:image" content="https://kamalassociates.com.bd/images/og-image.jpg" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/Logo.png" />
 
-  <!-- Fonts -->
+  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+
+  <!-- Preload -->
+  <link rel="preload" href="css/style.css" as="style" />
+
+  <!-- Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
@@ -27,7 +54,25 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
-  <script src="js/runtime-config.js"></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "Kamal & Associates",
+    "url": "https://kamalassociates.com.bd/service-areas.html",
+    "description": "Browse 100+ legal services at Kamal & Associates – from company formation and banking litigation to criminal defence and ADR across Bangladesh.",
+    "areaServed": "Bangladesh",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dhaka",
+      "addressCountry": "BD"
+    }
+  }
+  </script>
+
+  <script src="js/runtime-config.js" defer></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -74,7 +119,12 @@
           <li class="nav-item">
             <a class="nav-link" href="careers.html">Careers</a>
           </li>
-                </ul>
+                          <li class="nav-mobile-cta-item">
+            <a href="consultation.html" class="nav-link nav-mobile-cta-link">
+              <i class="fas fa-arrow-right me-2"></i>Free Consultation
+            </a>
+          </li>
+        </ul>
             </div>
             
             <div class="d-flex align-items-center action-zone">
@@ -88,6 +138,8 @@
             </div>
         </div>
     </nav>
+
+    <main id="main-content">
 
     <!-- Hero Section -->
     <section class="hero-section service-areas-hero">
@@ -592,6 +644,8 @@
         </div>
     </div>
 
+    </main>
+
     <!-- Footer -->
     <footer class="footer-section">
     <div class="container">
@@ -632,7 +686,7 @@
             <li><a href="#">Legal FAQ</a></li>
             <li><a href="#">Client Portal</a></li>
             <li><a href="careers.html">Careers</a></li>
-          </ul>
+        </ul>
         </div>
 
         <div class="col-lg-4 col-md-6">

@@ -842,10 +842,53 @@ img {
     display: flex;
     align-items: center;
     position: relative;
-    background-image: url('../images/Background/BG1.JPG');
+    background-image: url('../images/BG/Hero.JPG');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+}
+
+.about-hero {
+    background-image: url('../images/Background/BG2.JPG');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    min-height: 90vh;
+    padding: 6rem 0 4rem;
+    align-items: flex-start;
+}
+
+.about-hero .hero-overlay {
+    background: rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 1199.98px) {
+    .about-hero {
+        min-height: 85vh;
+        padding-top: 7rem;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .about-hero {
+        min-height: 80vh;
+        padding-top: 7rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .about-hero {
+        min-height: 65vh;
+        padding-top: 7rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .about-hero {
+        min-height: 55vh;
+        padding-top: 7rem;
+    }
 }
 
 .hero-section.hero-short {
@@ -4164,11 +4207,14 @@ p {
 
 /* ===== Service Areas Page ===== */
 .service-areas-hero {
-    background: linear-gradient(rgba(15, 17, 19, 0.75), rgba(15, 17, 19, 0.75)), url('../images/BG/About.jpg') center/cover no-repeat;
-  min-height: 55vh;
-  display: flex;
-  align-items: center;
-  position: relative;
+    background-image: url('../images/Background/BG3.JPG');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    min-height: 90vh;
+    padding: 6rem 0 4rem;
+    align-items: flex-start;
 }
 
 .service-areas-hero .hero-content {
@@ -4196,11 +4242,14 @@ p {
 
 .practice-areas-hero,
 .attorneys-hero {
-  background: linear-gradient(rgba(15, 17, 19, 0.75), rgba(15, 17, 19, 0.75)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920') center/cover no-repeat;
-  min-height: 55vh;
-  display: flex;
-  align-items: center;
-  position: relative;
+    background-image: url('../images/Background/BG4.JPG');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    min-height: 90vh;
+    padding: 10rem 0 4rem;
+    align-items: flex-start;
 }
 
 .practice-areas-hero .hero-title,
@@ -4438,11 +4487,29 @@ p {
     position: sticky;
     top: 92px;
     z-index: 1040;
-  padding: 0.5rem 0;
-  background: var(--card-bg);
-  border-radius: 999px;
-  border: 1px solid var(--card-border);
+    padding: 0.5rem 0;
+    background: var(--card-bg);
+    border-radius: 999px;
+    border: 1px solid var(--card-border);
     transition: opacity 0.24s ease, transform 0.24s ease, visibility 0.24s ease;
+}
+
+@media (min-width: 769px) {
+    .alphabet-nav {
+        position: fixed;
+        top: 92px;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: min(92vw, 1020px);
+        padding: 0.55rem 0.9rem;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.18);
+        background: rgba(15, 17, 19, 0.96);
+        backdrop-filter: blur(12px);
+    }
+
+    .alphabet-nav-row {
+        min-height: 80px;
+    }
 }
 
 .alphabet-nav.is-hidden {

@@ -2872,7 +2872,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function updateAlphabetNavVisibility() {
             const firstSection = document.getElementById('section-A') || directoryContainer.querySelector('.service-section');
-            const footer = document.querySelector('footer.footer-section, footer');
+            const ctaSection = document.querySelector('section.cta-section');
 
             if (!alphabetNavContainer || !firstSection) {
                 return;
@@ -2881,8 +2881,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const showThreshold = Math.max(110, window.innerHeight * 0.22);
             const firstSectionVisible = firstSection.style.display !== 'none';
             const firstReached = firstSectionVisible && firstSection.getBoundingClientRect().top <= showThreshold;
-            const reachedFooter = footer ? footer.getBoundingClientRect().top <= window.innerHeight : false;
-            const shouldShow = firstReached && !reachedFooter;
+            const reachedCta = ctaSection ? ctaSection.getBoundingClientRect().top <= window.innerHeight : false;
+            const shouldShow = firstReached && !reachedCta;
 
             alphabetNavContainer.classList.toggle('is-hidden', !shouldShow);
             alphabetNavContainer.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');

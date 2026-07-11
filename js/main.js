@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     injectMobileConsultationCta();
+    applyAlternatingSectionPalette();
     updateNavbarPhoneLabel();
 
     window.addEventListener('scroll', handleNavbarScroll);
@@ -108,6 +109,21 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', updateNavbarPhoneLabel);
 
     initBlogSearch();
+
+    function applyAlternatingSectionPalette() {
+        const sections = Array.from(document.querySelectorAll('#main-content > section'))
+            .filter((section) => {
+                return section.id !== 'hero'
+                    && section.id !== 'statsSection'
+                    && !section.classList.contains('hero-section')
+                    && !section.classList.contains('counter-section');
+        });
+
+        sections.forEach((section, index) => {
+            section.classList.remove('site-section-dark', 'site-section-lifted');
+            section.classList.add(index % 2 === 0 ? 'site-section-dark' : 'site-section-lifted');
+        });
+    }
 
     function initBlogSearch() {
         const searchInput = document.getElementById('blogSearchInput');

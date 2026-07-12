@@ -86,23 +86,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
         li.appendChild(link);
         navList.insertBefore(li, navList.firstChild);
+    }
 
-        link.addEventListener('click', function () {
-            const collapseEl = document.getElementById('mainNav');
-            if (!collapseEl || !collapseEl.classList.contains('show')) return;
+    function closeMobileNav() {
+        const collapseEl = document.getElementById('mainNav');
+        if (!collapseEl || !collapseEl.classList.contains('show')) return;
 
-            if (window.bootstrap && window.bootstrap.Collapse) {
-                const instance = window.bootstrap.Collapse.getOrCreateInstance(collapseEl);
-                instance.hide();
-            } else {
-                collapseEl.classList.remove('show');
-            }
+        if (window.bootstrap && window.bootstrap.Collapse) {
+            const instance = window.bootstrap.Collapse.getOrCreateInstance(collapseEl);
+            instance.hide();
+        } else {
+            collapseEl.classList.remove('show');
+        }
+    }
+
+    function bindMobileNavLinks() {
+        const navLinks = document.querySelectorAll('#mainNav .nav-link');
+        navLinks.forEach((link) => {
+            link.addEventListener('click', function () {
+                if (window.innerWidth < 992) {
+                    closeMobileNav();
+                }
+            });
         });
     }
 
     injectMobileConsultationCta();
+    bindMobileNavLinks();
     applyAlternatingSectionPalette();
     updateNavbarPhoneLabel();
+
+    window.addEventListener('resize', function () {
+        if (window.innerWidth >= 992) {
+            closeMobileNav();
+        }
+    });
 
     window.addEventListener('scroll', handleNavbarScroll);
     handleNavbarScroll();
@@ -3244,17 +3262,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ===== Flip Cards Touch Support =====
     const flipCards = document.querySelectorAll('.flip-card');
-    flipCards.forEach(card => {
-        card.addEventListener('touchstart', function () {
-            this.querySelector('.flip-card-inner').style.transform = 'rotateY(180deg)';
-        });
+    const touchDeviceQuery = window.matchMedia('(hover: none), (pointer: coarse)');
 
-        card.addEventListener('touchend', function () {
-            setTimeout(() => {
-                this.querySelector('.flip-card-inner').style.transform = '';
-            }, 3000);
+    function setFlipCardState(card, shouldFlip) {
+        const inner = card.querySelector('.flip-card-inner');
+        if (!inner) return;
+
+        card.classList.toggle('is-flipped', shouldFlip);
+        card.setAttribute('aria-pressed', shouldFlip ? 'true' : 'false');
+        inner.style.transform = shouldFlip ? 'rotateY(180deg)' : '';
+    }
+
+    if (touchDeviceQuery.matches) {
+        flipCards.forEach((card) => {
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-pressed', 'false');
+            card.setAttribute('aria-label', 'Tap to flip practice area card');
+
+            card.addEventListener('click', function (event) {
+                if (event.target.closest('.btn-flip')) {
+                    return;
+                }
+
+                const shouldFlip = !this.classList.contains('is-flipped');
+                setFlipCardState(this, shouldFlip);
+            });
+
+            card.addEventListener('keydown', function (event) {
+                if (event.key !== 'Enter' && event.key !== ' ') return;
+                event.preventDefault();
+                const shouldFlip = !this.classList.contains('is-flipped');
+                setFlipCardState(this, shouldFlip);
+            });
         });
-    });
+    }
 
     // ===== Smooth Scroll for Anchor Links =====
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

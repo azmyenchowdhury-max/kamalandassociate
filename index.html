@@ -138,7 +138,7 @@
         </div>
       </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -213,11 +213,12 @@
           <!-- Bottom anchor: headline + description + CTA -->
           <div class="hero-bottom-content">
             <h1 class="hero-title">
-              Our Attorneys <br> Stand For Your
-              <span class="txt-rotate" data-period="2000" data-rotate='[ "Freedom.", "Rights.", "Case.", "Custody." ]'>
-              </span>
+              <span class="hero-title-desktop">Our Attorneys <br> Stand For Your</span>
+              <span class="hero-title-mobile">We Stand For Your</span>
+              <span class="hero-title-mobile-break" aria-hidden="true"></span>
+              <span class="txt-rotate" data-period="2000" data-rotate='[ "Freedom.", "Rights.", "Case.", "Custody." ]'></span>
             </h1>
-            <p class="hero-description mx-auto">
+            <p class="hero-description mx-auto hero-description-mobile-hide">
               With a proven record of assisting thousands in overcoming wrongful denials nationwide, the Law Firm
               <strong>Kamal & Associates</strong> has earned its reputation as a trusted leader in legal advocacy.
             </p>
@@ -234,7 +235,7 @@
   </section>
 
   <!-- Why Choose Us Section -->
-  <section class="section-padding">
+  <section class="section-padding home-why-choose">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-right">
@@ -251,7 +252,7 @@
           <a href="consultation.html" class="btn btn-primary mt-3">Free Consultation</a>
         </div>
         <div class="col-lg-8">
-          <div class="row">
+          <div class="row homepage-card-grid">
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
               <div class="service-card">
                 <div class="service-icon">
@@ -652,7 +653,7 @@
           </h2>
         </div>
       </div>
-      <div class="row">
+      <div class="row homepage-card-grid">
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
           <div class="award-card">
             <div class="award-icon"><i class="fas fa-trophy"></i></div>
@@ -1108,7 +1109,7 @@
           </div>
         </div>
 
-        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+        <div class="col-6 col-lg-2 mb-4 mb-lg-0">
           <h4 class="footer-heading">Quick Links</h4>
           <ul class="footer-links list-unstyled">
             <li><a href="index.html">Home</a></li>
@@ -1119,7 +1120,7 @@
           </ul>
         </div>
 
-        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+        <div class="col-6 col-lg-2 mb-4 mb-lg-0">
           <h4 class="footer-heading">Resources</h4>
           <ul class="footer-links list-unstyled">
             <li><a href="#">Blog & News</a></li>

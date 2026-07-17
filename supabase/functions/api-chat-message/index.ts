@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { corsHeaders, jsonResponse } from "../_shared/cors.ts";
+import { matchAttorney } from "../_shared/attorneys.ts";
 
 interface ChatMessageRequest {
   conversation_id: string;
@@ -43,6 +44,7 @@ const ACTIONS = new Set([
   "open_whatsapp",
   "open_phone",
   "emergency_call",
+  "open_link",
 ]);
 
 const PRACTICE_AREA_TO_SERVICE: Record<string, string> = {
@@ -133,6 +135,12 @@ function sanitizeButtons(buttons: unknown[], intent: string, practiceArea: strin
 
     if (action === "open_map") {
       normalized.push({ label: label.slice(0, 40), action, value: OFFICE_MAP });
+      continue;
+    }
+
+    if (action === "open_link") {
+      if (!value) continue;
+      normalized.push({ label: label.slice(0, 40), action, value });
       continue;
     }
 
@@ -418,6 +426,25 @@ Deno.serve(async (req) => {
       response.reply_text = appendLegalGuardrails(response.reply_text, language);
     }
 
+    let recommendedAttorney = null;
+    if (response.intent !== "office_info") {
+      try {
+        recommendedAttorney = await matchAttorney(supabase, response.practice_area);
+        if (recommendedAttorney) {
+          const profileLabel =
+            language === "bn"
+              ? `${recommendedAttorney.name}-er প্রোফাইল দেখুন`
+              : `View ${recommendedAttorney.name}'s Profile`;
+          response.buttons = [
+            ...response.buttons.filter((b) => b.action !== "open_link"),
+            { label: profileLabel.slice(0, 40), action: "open_link", value: recommendedAttorney.profile_url ?? "attorneys.html" },
+          ].slice(0, 3);
+        }
+      } catch (error) {
+        warnings.push(`Attorney match failed: ${(error as Error).message}`);
+      }
+    }
+
     const botInsert = await supabase.from("messages").insert({
       conversation_id: payload.conversation_id,
       sender: "bot",
@@ -429,6 +456,7 @@ Deno.serve(async (req) => {
         practice_area: response.practice_area,
         provider: groqApiKey ? "groq" : "rule-based",
         buttons: response.buttons,
+        recommended_attorney: recommendedAttorney,
       },
     });
 
@@ -453,6 +481,7 @@ Deno.serve(async (req) => {
         next_flow: response.intent === "booking" ? "booking_name" : null,
         slot_prompts: response.intent === "booking" ? ["name", "phone", "email", "issue", "date"] : [],
         escalation_required: response.escalation_required,
+        recommended_attorney: recommendedAttorney,
       },
       warnings,
     });

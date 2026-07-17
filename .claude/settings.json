@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx --yes playwright install chromium --with-deps)",
+      "Bash(node \"C:/Users/azmye/AppData/Local/Temp/claude/h--Kamal---Associates-WEBSITE-MASTER-FILE-kamalandassociate/2c4f8669-31ed-405c-bd56-b40745331a2b/scratchpad/test-chatbot.mjs\")",
+      "Bash(npx --yes -p playwright node \"C:/Users/azmye/AppData/Local/Temp/claude/h--Kamal---Associates-WEBSITE-MASTER-FILE-kamalandassociate/2c4f8669-31ed-405c-bd56-b40745331a2b/scratchpad/test-chatbot.mjs\")",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(node test-chatbot.mjs)",
+      "Bash(SUPABASE_ACCESS_TOKEN=sbp_eafb1991ebe10a09100cecc8d24721b6f0698a0d npx supabase projects list)",
+      "Bash(SUPABASE_ACCESS_TOKEN=sbp_eafb1991ebe10a09100cecc8d24721b6f0698a0d npx supabase db push)",
+      "Bash(SUPABASE_ACCESS_TOKEN=sbp_eafb1991ebe10a09100cecc8d24721b6f0698a0d npx supabase secrets set GROQ_API_KEY=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)",
+      "Bash(SUPABASE_ACCESS_TOKEN=sbp_eafb1991ebe10a09100cecc8d24721b6f0698a0d npx supabase functions deploy api-chat-message)",
+      "Bash(SUPABASE_ACCESS_TOKEN=sbp_eafb1991ebe10a09100cecc8d24721b6f0698a0d npx supabase functions deploy api-chat-document-brief)",
+      "Bash(curl -s -X POST https://aehmnpsvaivmksypmvwm.supabase.co/functions/v1/api-chat-document-brief -H 'Content-Type: application/json' -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaG1ucHN2YWl2bWtzeXBtdndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzI3NTEsImV4cCI6MjA5OTg0ODc1MX0.G_MDkgEne54YeSrT32YYcTNmbD6C3oQndVruC5Rzi58' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaG1ucHN2YWl2bWtzeXBtdndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzI3NTEsImV4cCI6MjA5OTg0ODc1MX0.G_MDkgEne54YeSrT32YYcTNmbD6C3oQndVruC5Rzi58' -d '{\"conversation_id\":\"13757371-77bd-44d7-8eaf-c91f423c477c\",\"language\":\"en\",\"document_text\":\"IN THE HIGH COURT DIVISION. WRIT PETITION FOR HABEAS CORPUS. The petitioner, Mr. Abdur Rahim, states that his brother has been detained by police without producing him before a Magistrate within 24 hours, in violation of Article 33 of the Constitution. The petitioner prays that this Honourable Court direct the respondents to produce the detainee before the Court and show cause as to why the detention should not be declared illegal.\"}')",
+      "Bash(curl -s -X POST https://aehmnpsvaivmksypmvwm.supabase.co/functions/v1/api-chat-message -H 'Content-Type: application/json' -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaG1ucHN2YWl2bWtzeXBtdndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzI3NTEsImV4cCI6MjA5OTg0ODc1MX0.G_MDkgEne54YeSrT32YYcTNmbD6C3oQndVruC5Rzi58' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaG1ucHN2YWl2bWtzeXBtdndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzI3NTEsImV4cCI6MjA5OTg0ODc1MX0.G_MDkgEne54YeSrT32YYcTNmbD6C3oQndVruC5Rzi58' -d '{\"conversation_id\":\"13757371-77bd-44d7-8eaf-c91f423c477c\",\"message\":\"I want to verify land documents before buying a plot in Dhaka\",\"language\":\"en\"}')",
+      "Bash(curl -s -X POST https://aehmnpsvaivmksypmvwm.supabase.co/functions/v1/api-chat-message -H 'Content-Type: application/json' -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaG1ucHN2YWl2bWtzeXBtdndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzI3NTEsImV4cCI6MjA5OTg0ODc1MX0.G_MDkgEne54YeSrT32YYcTNmbD6C3oQndVruC5Rzi58' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaG1ucHN2YWl2bWtzeXBtdndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzI3NTEsImV4cCI6MjA5OTg0ODc1MX0.G_MDkgEne54YeSrT32YYcTNmbD6C3oQndVruC5Rzi58' -d '{\"conversation_id\":\"13757371-77bd-44d7-8eaf-c91f423c477c\",\"message\":\"হেবিয়াস কর্পাস কী?\",\"language\":\"bn\"}')",
+      "Bash(node test-chatbot-2.mjs)",
+      "Bash(node test-chatbot-file-protocol.mjs)",
+      "Bash(node test-chatbot-file-protocol-2.mjs)",
+      "Bash(node test-stale-session.mjs)",
+      "Bash(node make-test-pdf.mjs)",
+      "Bash(node test-file-upload.mjs)"
+    ]
+  }
+}

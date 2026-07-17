@@ -9,7 +9,7 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby7W3R9uInzVVhC
 const APPS_SCRIPT_SECRET = "7bd779df1a694b698e8b8cd09c23923444098777c1a14e1ca67daf876f15b9d6";
 
 // --- Supabase proxy (for job postings only) ---
-const DEFAULT_SUPABASE_URL = "https://rujctxkklzxnogniivdj.supabase.co";
+const DEFAULT_SUPABASE_URL = "https://aehmnpsvaivmksypmvwm.supabase.co";
 const SUPABASE_FUNCTIONS_BASE = String(
   window.__KAMAL_CHATBOT_API_BASE__ ||
     (window.__SUPABASE_URL__ || DEFAULT_SUPABASE_URL) + "/functions/v1"

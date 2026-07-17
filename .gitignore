@@ -25,3 +25,7 @@ dist-ssr
 
 # Supabase local workspace metadata
 supabase/.temp/
+
+# Environment variables
+.env
+.env.local

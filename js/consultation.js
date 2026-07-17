@@ -6,7 +6,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // Supabase Configuration
-    const SUPABASE_URL = window.__SUPABASE_URL__ || 'https://rujctxkklzxnogniivdj.supabase.co';
+    const SUPABASE_URL = window.__SUPABASE_URL__ || 'https://aehmnpsvaivmksypmvwm.supabase.co';
     const SUPABASE_ANON_KEY = window.__SUPABASE_ANON_KEY__ || '';
 
     // ===== Google Sheets Eligibility API =====

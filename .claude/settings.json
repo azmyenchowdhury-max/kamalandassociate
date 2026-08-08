@@ -20,7 +20,30 @@
       "Bash(node test-chatbot-file-protocol-2.mjs)",
       "Bash(node test-stale-session.mjs)",
       "Bash(node make-test-pdf.mjs)",
-      "Bash(node test-file-upload.mjs)"
+      "Bash(node test-file-upload.mjs)",
+      "Bash(git fetch *)",
+      "Bash(git rev-list *)",
+      "Bash(node test-hero-bg.mjs)",
+      "Bash(node -e \"console.log\\('ready'\\)\")",
+      "Bash(node test-hero-position.mjs)",
+      "Bash(node test-hero-position-2.mjs)",
+      "Bash(node inspect-image.mjs)",
+      "Bash(node audit-crawl.mjs)",
+      "Bash(node -e ' *)",
+      "Bash(node check-links.mjs)",
+      "Bash(cd \"h:/Kamal & Associates/WEBSITE MASTER FILE/kamalandassociate\" && sed -i 's/&quot;/\"/g' css/style.css && grep -c '&quot;' css/style.css)",
+      "Bash(node test-ga-fix.mjs)",
+      "Bash(node remove-newsletter.mjs)",
+      "Bash(node remove-newsletter-js.mjs)",
+      "Bash(sed -i '293,410d' js/blog-lead-gen.js)",
+      "Bash(sed -i 's/7\\\\. Exit Intent Overlay/5. Exit Intent Overlay/' js/blog-lead-gen.js)",
+      "Bash(node fix-exit-overlay.mjs)",
+      "Bash(node scripts/build-static-assets.mjs)",
+      "Bash(sort -u -t: -k3 \"C:\\\\Users\\\\azmye\\\\.claude\\\\projects\\\\h--Kamal---Associates-WEBSITE-MASTER-FILE-kamalandassociate\\\\2c4f8669-31ed-405c-bd56-b40745331a2b\\\\tool-results\\\\toolu_013Ak5FVwmTeyCcsE8pvjPsN.txt\")",
+      "Bash(node remove-social-icons.mjs)",
+      "Bash(node final-verify.mjs)",
+      "Bash(node add-runtime-config.mjs)",
+      "Bash(node reverify.mjs)"
     ]
   }
 }

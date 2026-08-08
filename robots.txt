@@ -20,7 +20,6 @@ Disallow: /node_modules/
 Disallow: /dist/
 Disallow: /src/
 Disallow: /analytics.html
-Disallow: /analytics-quickstart.html
 Disallow: /reading-list.html
 Disallow: /blog/blog-post-template.html
 

@@ -6,31 +6,30 @@
  * - Pageviews with custom dimensions
  * - Conversion events (CTA clicks, form submissions)
  * - Social metrics (shares, referrals)
- * - Newsletter signups
  * - Scroll depth, engagement time, scroll performance
  */
 
 (function () {
   'use strict';
 
-  // GA4 Measurement ID - configure via runtime config
-  var GA_MEASUREMENT_ID = window.__GA_MEASUREMENT_ID__ || 'G-XXXXXXXXXX';
-  
+  // GA4 Measurement ID is read lazily (inside DOMContentLoaded below), not here.
+  // Reason: this script is a plain blocking <script> tag, but js/runtime-config.js
+  // (which sets window.__GA_MEASUREMENT_ID__) loads with `defer` — deferred scripts
+  // only run after the whole document has parsed, i.e. AFTER this script executes.
+  // Reading window.__GA_MEASUREMENT_ID__ at top-level here would always see it
+  // unset and permanently fall back to the placeholder ID, silently discarding
+  // every real pageview. DOMContentLoaded fires only after all deferred scripts
+  // have run, so it's the first point this value is reliably available.
+  var GA_MEASUREMENT_ID;
+
   // Initialize gtag if not already present
   if (!window.dataLayer) {
     window.dataLayer = [];
   }
-  
+
   function gtag() {
     dataLayer.push(arguments);
   }
-  
-  gtag('js', new Date());
-  gtag('config', GA_MEASUREMENT_ID, {
-    'anonymize_ip': true,
-    'allow_google_signals': true,
-    'allow_ad_personalization_signals': false
-  });
 
   /**
    * Track page view with custom dimensions
@@ -107,16 +106,6 @@
   }
 
   /**
-   * Track newsletter signup
-   */
-  function trackNewsletterSignup(email) {
-    gtag('event', 'sign_up', {
-      'method': 'newsletter',
-      'email_provided': email ? true : false
-    });
-  }
-
-  /**
    * Track scroll depth (25%, 50%, 75%, 100%)
    */
   function trackScrollDepth() {
@@ -182,7 +171,6 @@
     trackCTAClick: trackCTAClick,
     trackFormSubmission: trackFormSubmission,
     trackSocialShare: trackSocialShare,
-    trackNewsletterSignup: trackNewsletterSignup,
     trackScrollDepth: trackScrollDepth,
     trackEngagementTime: trackEngagementTime
   };
@@ -191,6 +179,21 @@
    * Initialize on DOM ready
    */
   document.addEventListener('DOMContentLoaded', function () {
+    // Resolve the real ID now that runtime-config.js (deferred) is guaranteed to have run.
+    GA_MEASUREMENT_ID = window.__GA_MEASUREMENT_ID__ || 'G-XXXXXXXXXX';
+    gtag('js', new Date());
+    gtag('config', GA_MEASUREMENT_ID, {
+      'anonymize_ip': true,
+      'allow_google_signals': true,
+      'allow_ad_personalization_signals': false
+    });
+
+    // Load Google Analytics Script
+    var gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+    document.head.appendChild(gaScript);
+
     // Track initial page view
     trackPageView();
 
@@ -219,23 +222,6 @@
         trackFormSubmission(form);
       });
     });
-
-    // Track newsletter signup if available
-    var newsletterForm = document.querySelector('form[id*="newsletter"], form[name*="newsletter"]');
-    if (newsletterForm) {
-      newsletterForm.addEventListener('submit', function () {
-        var email = newsletterForm.querySelector('input[type="email"]');
-        trackNewsletterSignup(email ? email.value : null);
-      });
-    }
   });
-
-  // Load Google Analytics Script
-  (function () {
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
-    document.head.appendChild(script);
-  })();
 
 })();

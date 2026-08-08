@@ -436,27 +436,10 @@
         }
     }
 
-    function wireNewsletter() {
-        const newsletterForm = document.getElementById('newsletterForm');
-        const feedback = document.getElementById('newsletterFeedback');
-        if (!newsletterForm || !feedback) return;
-
-        newsletterForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            const emailInput = newsletterForm.querySelector('input[type="email"]');
-            const email = emailInput ? emailInput.value.trim() : '';
-            if (!email) return;
-            localStorage.setItem('kaBlogNewsletterEmail', email);
-            feedback.style.display = 'block';
-            newsletterForm.reset();
-        });
-    }
-
     fillSelectOptions();
     hydratePageTitle();
     renderSideData();
     syncInputs();
     bindEvents();
-    wireNewsletter();
     render();
 })();

@@ -6,9 +6,7 @@
      2. Contextual mid-article CTA
      3. Bottom CTA Banner with inline consultation form
      4. Sidebar Practice Area widget
-     5. Enhanced sidebar newsletter (pre-fill, success state)
-     6. Sticky Newsletter Bar (scroll-triggered)
-     7. Exit Intent Overlay
+     5. Exit Intent Overlay
    ============================================================= */
 (function () {
     'use strict';
@@ -292,125 +290,7 @@
         else sidebarStack.appendChild(widget);
     }
 
-    // ── 5. Enhance sidebar newsletter form ────────────────────────────────
-    // Pre-fills email if already stored; shows improved success state
-    function enhanceSidebarNewsletter() {
-        var form = document.getElementById('newsletterForm');
-        if (!form || form.dataset.phase5Enhanced) return;
-        form.dataset.phase5Enhanced = 'true';
-
-        var emailInput = form.querySelector('input[type="email"]');
-        if (emailInput) {
-            var saved = localStorage.getItem('kaBlogNewsletterEmail');
-            if (saved) {
-                emailInput.value = saved;
-                var btn = form.querySelector('button[type="submit"]');
-                if (btn) {
-                    btn.textContent = 'Already Subscribed \u2713';
-                    btn.disabled = true;
-                    btn.classList.add('is-subscribed');
-                }
-                return;
-            }
-        }
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            var input = form.querySelector('input[type="email"]');
-            if (!input || !input.value.trim()) return;
-
-            localStorage.setItem('kaBlogNewsletterEmail', input.value.trim());
-
-            var feedback = document.getElementById('newsletterFeedback');
-            if (feedback) {
-                feedback.classList.add('is-visible');
-                feedback.textContent = "You\u2019re subscribed! Legal insights coming soon.";
-            }
-            var btn = form.querySelector('button[type="submit"]');
-            if (btn) {
-                btn.textContent = 'Subscribed \u2713';
-                btn.disabled = true;
-                btn.classList.add('is-subscribed');
-            }
-        });
-    }
-
-    // ── 6. Sticky Newsletter Bar ──────────────────────────────────────────
-    // Slides up from bottom after 55% scroll depth (once per localStorage session)
-    function injectStickyNewsletterBar() {
-        if (document.getElementById('stickyNewsletterBar')) return;
-        if (localStorage.getItem('kaBlogNewsletterEmail')) return;
-        if (localStorage.getItem('kaNewsletterBarDismissed')) return;
-
-        var bar = document.createElement('div');
-        bar.id = 'stickyNewsletterBar';
-        bar.className = 'sticky-newsletter-bar';
-        bar.setAttribute('role', 'complementary');
-        bar.setAttribute('aria-label', 'Newsletter subscription offer');
-        bar.innerHTML = [
-            '<div class="snb-inner">',
-            '<div class="snb-text">',
-            '<i class="fas fa-envelope-open-text snb-icon" aria-hidden="true"></i>',
-            '<div>',
-            '<strong>Free Legal Insights</strong>',
-            '<span>Monthly updates from Kamal &amp; Associates attorneys, delivered to your inbox.</span>',
-            '</div>',
-            '</div>',
-            '<form id="stickyNewsletterForm" class="snb-form" novalidate>',
-            '<label for="snbEmail" class="visually-hidden">Email address</label>',
-            '<input type="email" id="snbEmail" placeholder="Your email address" required class="snb-email-input" autocomplete="email">',
-            '<button type="submit" class="snb-submit-btn"><i class="fas fa-paper-plane" aria-hidden="true"></i> Subscribe</button>',
-            '</form>',
-            '<button type="button" class="snb-close-btn" id="snbDismiss" aria-label="Close newsletter bar">&times;</button>',
-            '</div>'
-        ].join('');
-
-        document.body.appendChild(bar);
-
-        document.getElementById('snbDismiss').addEventListener('click', function () {
-            bar.classList.remove('is-visible');
-            localStorage.setItem('kaNewsletterBarDismissed', '1');
-            window.setTimeout(function () {
-                if (bar.parentNode) bar.parentNode.removeChild(bar);
-            }, 450);
-        });
-
-        document.getElementById('stickyNewsletterForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            var emailInput = document.getElementById('snbEmail');
-            if (!emailInput || !emailInput.value.trim()) return;
-
-            localStorage.setItem('kaBlogNewsletterEmail', emailInput.value.trim());
-
-            bar.innerHTML = [
-                '<div class="snb-inner snb-success">',
-                '<i class="fas fa-check-circle snb-success-icon" aria-hidden="true"></i>',
-                '<strong>You\u2019re subscribed! Thank you.</strong>',
-                '<span>Watch for our next legal insights digest.</span>',
-                '<button type="button" id="snbSuccessClose" class="snb-close-btn" aria-label="Close">&times;</button>',
-                '</div>'
-            ].join('');
-
-            document.getElementById('snbSuccessClose').addEventListener('click', function () {
-                bar.classList.remove('is-visible');
-                window.setTimeout(function () {
-                    if (bar.parentNode) bar.parentNode.removeChild(bar);
-                }, 450);
-            });
-        });
-
-        var shown = false;
-        window.addEventListener('scroll', function () {
-            if (shown) return;
-            var max = document.documentElement.scrollHeight - window.innerHeight;
-            if (max > 0 && window.scrollY / max > 0.55) {
-                shown = true;
-                bar.classList.add('is-visible');
-            }
-        }, { passive: true });
-    }
-
-    // ── 7. Exit Intent Overlay ────────────────────────────────────────────
+    // ── 5. Exit Intent Overlay ────────────────────────────────────────────
     // Triggered once per session when mouse exits viewport via the top edge
     function setupExitIntent(article) {
         if (sessionStorage.getItem('kaExitIntentShown')) return;
@@ -434,30 +314,12 @@
     function showExitOverlay(article) {
         if (document.getElementById('exitIntentOverlay')) return;
 
-        var alreadySubscribed = !!localStorage.getItem('kaBlogNewsletterEmail');
-
-        var formSection = alreadySubscribed ? '' : [
-            '<form id="exitIntentForm" class="exit-form" novalidate>',
-            '<label for="exitEmail" class="visually-hidden">Email address</label>',
-            '<input type="email" id="exitEmail" placeholder="Your email address" required class="exit-email-input" autocomplete="email">',
-            '<button type="submit" class="exit-subscribe-btn"><i class="fas fa-envelope-open-text" aria-hidden="true"></i> Send Me Insights</button>',
-            '</form>',
-            '<div id="exitFormSuccess" class="exit-form-success is-hidden" role="status" aria-live="polite">',
-            '<i class="fas fa-check-circle" aria-hidden="true"></i> <strong>Subscribed!</strong> Watch for our next digest.',
-            '</div>',
-            '<div class="exit-divider"><span>or</span></div>'
-        ].join('');
-
-        var subText = alreadySubscribed
-            ? 'You\u2019re already subscribed. Schedule a free consultation with one of our <strong>' + article.category + '</strong> attorneys today.'
-            : 'Get a free monthly digest of legal insights on <strong>' + article.category + '</strong> from our attorneys \u2014 no spam, unsubscribe anytime.';
-
         var overlay = document.createElement('div');
         overlay.id = 'exitIntentOverlay';
         overlay.className = 'exit-intent-overlay';
         overlay.setAttribute('role', 'dialog');
         overlay.setAttribute('aria-modal', 'true');
-        overlay.setAttribute('aria-label', 'Before you leave — free legal insights offer');
+        overlay.setAttribute('aria-label', 'Before you leave — free consultation offer');
         overlay.innerHTML = [
             '<div class="exit-intent-card">',
             '<button type="button" class="exit-close-btn" id="exitClose" aria-label="Close this dialog">',
@@ -465,8 +327,7 @@
             '</button>',
             '<div class="exit-brand-icon" aria-hidden="true"><i class="fas fa-balance-scale"></i></div>',
             '<h3 class="exit-heading">Before You Leave\u2026</h3>',
-            '<p class="exit-sub">' + subText + '</p>',
-            formSection,
+            '<p class="exit-sub">Speak with one of our <strong>' + article.category + '</strong> attorneys \u2014 schedule a free consultation today.</p>',
             '<a href="../consultation.html" class="exit-consult-btn"><i class="fas fa-calendar-check" aria-hidden="true"></i> Schedule a Free Consultation</a>',
             '<button type="button" class="exit-skip-btn" id="exitSkip">No thanks, I\u2019ll continue reading</button>',
             '</div>'
@@ -492,22 +353,6 @@
             if (e.target === overlay) closeOverlay();
         });
 
-        var exitForm = document.getElementById('exitIntentForm');
-        if (exitForm) {
-            exitForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-                var emailInput = document.getElementById('exitEmail');
-                if (!emailInput || !emailInput.value.trim()) return;
-
-                localStorage.setItem('kaBlogNewsletterEmail', emailInput.value.trim());
-                exitForm.classList.add('is-hidden');
-
-                var successDiv = document.getElementById('exitFormSuccess');
-                if (successDiv) successDiv.classList.remove('is-hidden');
-                window.setTimeout(closeOverlay, 2800);
-            });
-        }
-
         // Close on Escape
         document.addEventListener('keydown', function onEsc(e) {
             if (e.key === 'Escape') {
@@ -530,8 +375,6 @@
         injectContextualCTA(article);
         injectBottomCTA(article);
         injectSidebarPracticeWidget(article);
-        enhanceSidebarNewsletter();
-        injectStickyNewsletterBar();
         setupExitIntent(article);
 
         if (document.body) document.body.dataset.phase5Ready = 'true';

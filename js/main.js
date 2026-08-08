@@ -3124,18 +3124,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // ===== Newsletter Form =====
-    const newsletterForm = document.getElementById('newsletterForm');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            alert('Thank you for subscribing! We will send updates to: ' + email);
-            this.reset();
-        });
-    }
-
-    // ===== Contact Office Map =====
+// ===== Contact Office Map =====
     const contactOfficeMap = document.getElementById('contactOfficeMap');
     if (contactOfficeMap && window.L) {
         const officeLocations = [

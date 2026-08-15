@@ -70,16 +70,21 @@ function doPost(e) {
       return jsonResponse({ status: "error", error: "Unauthorized" });
     }
 
-    const email = String(payload.email || "").trim().toLowerCase();
-    const phone = String(payload.phone || "").trim();
-    if (!email || !phone) {
-      return jsonResponse({ success: false, error: "Email and phone are required." });
-    }
-
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
 
     try {
+      // get_booked_slots is a public availability lookup — no customer identity needed.
+      if (payload.action === "get_booked_slots") {
+        return jsonResponse(getBookedSlots(String(payload.date || "").trim()));
+      }
+
+      const email = String(payload.email || "").trim().toLowerCase();
+      const phone = String(payload.phone || "").trim();
+      if (!email || !phone) {
+        return jsonResponse({ success: false, error: "Email and phone are required." });
+      }
+
       switch (payload.action) {
         case "check_eligibility":
           return jsonResponse(checkEligibility(email, phone));
@@ -177,7 +182,48 @@ function consumeFree(email, phone) {
   return { success: true, freeGranted: true };
 }
 
+// A booking holds its slot unless it was explicitly marked failed/cancelled.
+// (No such status is set anywhere yet — abandoned "pending" payments still
+// hold the slot. That's a known limitation, not a bug: revisit if abandoned
+// pending bookings start blocking real customers.)
+const BLOCKING_PAYMENT_STATUSES = ["not_required_free", "pending", "paid"];
+
+function getBookedSlots(date) {
+  if (!date) {
+    return { success: false, error: "Missing date." };
+  }
+
+  const sheet = getOrCreateSheet(CONFIG.CONSULTATIONS_SHEET, CONFIG.CONSULTATION_HEADERS);
+  const data = sheet.getDataRange().getValues();
+  const booked = [];
+
+  for (let i = 1; i < data.length; i++) {
+    const rowDate = data[i][11];   // Preferred Date
+    const rowTime = data[i][12];   // Preferred Time
+    const rowStatus = data[i][17]; // Payment Status
+    if (rowDate === date && BLOCKING_PAYMENT_STATUSES.indexOf(rowStatus) !== -1) {
+      booked.push(rowTime);
+    }
+  }
+
+  return { success: true, bookedSlots: booked };
+}
+
 function saveConsultation(email, phone, consultation) {
+  const preferredDate = consultation.preferredDate || "";
+  const preferredTime = consultation.preferredTime || "";
+
+  if (preferredDate && preferredTime) {
+    const availability = getBookedSlots(preferredDate);
+    if (availability.bookedSlots && availability.bookedSlots.indexOf(preferredTime) !== -1) {
+      return {
+        success: false,
+        slotTaken: true,
+        error: "That time slot was just booked by someone else. Please choose a different time."
+      };
+    }
+  }
+
   const sheet = getOrCreateSheet(CONFIG.CONSULTATIONS_SHEET, CONFIG.CONSULTATION_HEADERS);
   const consultationId = "KC-" + Utilities.getUuid().split("-")[0].toUpperCase();
 

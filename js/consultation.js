@@ -259,6 +259,48 @@ document.addEventListener('DOMContentLoaded', function() {
         preferredTimeSelect.value = stillValid ? previousValue : '';
     }
 
+    // Marks already-booked slots as disabled for the given date. This is a
+    // UX convenience only — the authoritative, race-condition-safe check
+    // happens server-side in EligibilityCode.gs when the booking is submitted.
+    async function applyBookedSlotAvailability(dateString) {
+        if (!preferredTimeSelect) return;
+
+        const originalPlaceholder = preferredTimeSelect.options[0]
+            ? preferredTimeSelect.options[0].textContent
+            : 'Select Time';
+
+        try {
+            const result = await invokeEdgeFunction('api-eligibility-check', {
+                action: 'get_booked_slots',
+                date: dateString
+            });
+
+            const bookedSlots = new Set(result.bookedSlots || []);
+
+            Array.from(preferredTimeSelect.options).forEach(function(opt) {
+                if (!opt.value) return; // skip the "Select Time" placeholder
+                const isBooked = bookedSlots.has(opt.value);
+                opt.disabled = isBooked;
+                opt.textContent = isBooked ? `${opt.value} (Already booked)` : opt.value;
+            });
+
+            // If the currently selected time just became unavailable, clear it.
+            if (preferredTimeSelect.value && bookedSlots.has(preferredTimeSelect.value)) {
+                preferredTimeSelect.value = '';
+                showNotification('That time was just booked by someone else — please pick another.', 'warning');
+            }
+        } catch (error) {
+            // Availability check failing shouldn't block booking entirely — the
+            // server-side check at submission time still protects against
+            // double-booking. Just leave all slots enabled.
+            console.error('Could not check slot availability:', error);
+        } finally {
+            if (preferredTimeSelect.options[0]) {
+                preferredTimeSelect.options[0].textContent = originalPlaceholder;
+            }
+        }
+    }
+
     function selectDate(date) {
         const dateString = date.toISOString().split('T')[0];
         preferredDate.value = dateString;
@@ -269,6 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Refresh available time slots for the selected day (office hours differ by weekday)
         populateTimeSlots(date);
+        applyBookedSlotAvailability(dateString);
 
         // Close calendar and show success
         calendarPicker.style.display = 'none';
@@ -1010,7 +1053,12 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 console.error('Submission error:', error);
                 showError(error.message || 'An error occurred. Please try again.');
-                
+
+                // Refresh slot availability in case this failure was a booking conflict.
+                if (preferredDate.value) {
+                    applyBookedSlotAvailability(preferredDate.value);
+                }
+
                 // Reset button
                 this.innerHTML = `<span id="submitBtnText">${isFirstTimeUser ? 'Schedule Consultation' : 'Pay & Schedule'}</span><i class="fas fa-calendar-check ms-2"></i>`;
                 this.disabled = false;

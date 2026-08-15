@@ -38,7 +38,7 @@ const CONFIG = {
   ELIGIBILITY_SHEET: "Eligibility",
   CONSULTATIONS_SHEET: "Consultations",
 
-  DEFAULT_FEE: 2000,
+  DEFAULT_FEE: 3000,
 
   ELIGIBILITY_HEADERS: [
     "Key", "Email", "Phone", "Free Consultation Used",

@@ -36,21 +36,21 @@ const ConsultationPage: React.FC = () => {
       if (consultationHistory[userKey]) {
         return {
           freeConsultationUsed: true,
-          consultationFee: 2000,
+          consultationFee: 3000,
           consultationCount: consultationHistory[userKey].count || 1
         };
       }
       
       return {
         freeConsultationUsed: false,
-        consultationFee: 2000,
+        consultationFee: 3000,
         consultationCount: 0
       };
     } catch (err) {
       console.error('Fallback check error:', err);
       return {
         freeConsultationUsed: false,
-        consultationFee: 2000,
+        consultationFee: 3000,
         consultationCount: 0
       };
     }
@@ -230,7 +230,7 @@ const ConsultationPage: React.FC = () => {
                       <div className="col-md-6 mb-2">
                         <span style={{ color: '#9CA3AF' }}>Fee:</span>
                         <p style={{ margin: 0, fontWeight: '500', color: isFreeConsultation ? '#38a169' : '#AFA939' }}>
-                          {isFreeConsultation ? 'FREE' : '৳2,000'}
+                          {isFreeConsultation ? 'FREE' : '৳3,000'}
                         </p>
                       </div>
                     </div>
@@ -293,7 +293,7 @@ const ConsultationPage: React.FC = () => {
                   color: '#d69e2e'
                 }}>
                   <i className="fas fa-info-circle mr-2"></i>
-                  You have already used your free consultation. This consultation will cost <strong>৳2,000</strong>.
+                  You have already used your free consultation. This consultation will cost <strong>৳3,000</strong>.
                 </div>
               )}
 
@@ -570,7 +570,7 @@ const ConsultationPage: React.FC = () => {
                             fontWeight: '700', 
                             color: isFreeConsultation ? '#38a169' : '#AFA939' 
                           }}>
-                            {isFreeConsultation ? 'FREE' : '৳2,000'}
+                            {isFreeConsultation ? 'FREE' : '৳3,000'}
                           </span>
                         </div>
                       </div>

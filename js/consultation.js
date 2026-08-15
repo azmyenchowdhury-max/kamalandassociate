@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let isFirstTimeUser = true;
     let selectedPaymentMethod = null;
     let selectedConsultationType = 'office';
-    let consultationFee = 2000;
+    let consultationFee = 3000;
     let currentTransactionId = null;
     let currentConsultationId = null;
     let uploadedDocuments = []; // Store uploaded documents
@@ -790,7 +790,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const result = await callEligibilityAPI('check_eligibility', email, cleanPhone);
 
                 isFirstTimeUser = !result.hasUsedFreeConsultation;
-                consultationFee = result.consultationFee || 2000;
+                consultationFee = result.consultationFee || 3000;
                 
                 // Update eligibility status
                 const statusDiv = document.getElementById('eligibilityStatus');

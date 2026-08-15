@@ -466,9 +466,10 @@
         enforceHeadingHierarchy();
         ensureImageAltAndLazy(article);
         ensureExternalLinkAttrs();
-        ensureInternalLinkBlock(article);
-        ensureAuthorityExternalLinks();
-        ensureKeywordPlacement(article);
+        // ensureInternalLinkBlock/ensureAuthorityExternalLinks/ensureKeywordPlacement
+        // intentionally not called: they inject visible content (link boxes, a
+        // keyword-lead paragraph) that made these 10 posts inconsistent with the
+        // other 10, which don't load this script's article-data-driven behavior at all.
         optimizeGoogleFonts();
 
         if (document.body) document.body.dataset.phase6Ready = 'true';

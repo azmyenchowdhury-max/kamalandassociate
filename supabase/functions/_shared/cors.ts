@@ -1,10 +1,13 @@
 const ALLOWED_ORIGINS = new Set([
+  // Live for now: GitHub Pages (no custom domain wired up yet).
+  "https://azmyenchowdhury-max.github.io",
+  // Reserved for when the real domain is pointed at hosting later.
   "https://kamalassociates.com.bd",
   "https://www.kamalassociates.com.bd",
   "http://localhost:8080",
 ]);
 
-const DEFAULT_ORIGIN = "https://kamalassociates.com.bd";
+const DEFAULT_ORIGIN = "https://azmyenchowdhury-max.github.io";
 
 export function corsHeadersFor(origin: string | null): Record<string, string> {
   const allowOrigin = origin && ALLOWED_ORIGINS.has(origin) ? origin : DEFAULT_ORIGIN;

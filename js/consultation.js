@@ -1027,12 +1027,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (uploadedDocuments.length > 0) {
                         paymentResult = await invokeEdgeFunctionWithFiles('payment-initiate', {
                             ...consultationData,
+                            consultationId: savePendingResult.consultationId || null,
                             returnUrl: window.location.href.split('?')[0],
                             paymentMethod: selectedPaymentMethod
                         }, uploadedDocuments);
                     } else {
                         paymentResult = await invokeEdgeFunction('payment-initiate', {
                             ...consultationData,
+                            consultationId: savePendingResult.consultationId || null,
                             returnUrl: window.location.href.split('?')[0],
                             paymentMethod: selectedPaymentMethod
                         });

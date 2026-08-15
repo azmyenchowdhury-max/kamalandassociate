@@ -284,18 +284,29 @@ function confirmConsultation(email, phone, consultationId, paymentStatus) {
   const sheet = getOrCreateSheet(CONFIG.CONSULTATIONS_SHEET, CONFIG.CONSULTATION_HEADERS);
   const data = sheet.getDataRange().getValues();
   let found = false;
+  let alreadyConfirmed = false;
 
   for (let i = 1; i < data.length; i++) {
     if (data[i][0] === consultationId) {
+      found = true;
+      // Idempotent: both the browser-redirect flow and the payment IPN can
+      // call this for the same successful payment — only apply/count once.
+      if (data[i][2]) {
+        alreadyConfirmed = true;
+        break;
+      }
       sheet.getRange(i + 1, 3).setValue(new Date());              // Confirmed At
       sheet.getRange(i + 1, 18).setValue(paymentStatus || "paid"); // Payment Status
-      found = true;
       break;
     }
   }
 
   if (!found) {
     return { success: false, error: "Consultation record not found." };
+  }
+
+  if (alreadyConfirmed) {
+    return { success: true, alreadyConfirmed: true };
   }
 
   // A confirmed paid consultation counts toward the returning-client count.

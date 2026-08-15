@@ -1369,49 +1369,49 @@ document.addEventListener('DOMContentLoaded', function () {
         const lawyerDirectory = {
             kamal: {
                 name: 'Adv. Mohammad Mostofa Kamal',
-                role: 'Head of Chamber & Founder',
+                role: 'Head of The Chamber & Founder, Kamal & Associates',
                 profileUrl: 'attorney-kamal.html',
                 phone: '+880 1713 456 800',
                 trust: 'Criminal Defense, Corporate Law, Writ Jurisdiction | 25+ Years'
             },
             harun: {
                 name: 'Adv. Harun Rayhan',
-                role: 'Managing Partner',
+                role: 'Managing Partner, Kamal & Associates',
                 profileUrl: 'attorney-harun.html',
                 phone: '+880 1713 456 800',
                 trust: 'Corporate Law, Constitutional Law | 18+ Years'
             },
             nasrin: {
                 name: 'Adv. Nasrin Akter',
-                role: 'Senior Partner',
+                role: 'Managing Partner, Kamal & Associates',
                 profileUrl: 'attorney-nasrin.html',
                 phone: '+880 1713 456 800',
                 trust: 'Banking and Corporate Law | 15+ Years'
             },
             chowdhury: {
                 name: 'Adv. Mustafa Kamal Chowdhury',
-                role: 'Senior Associate',
+                role: 'Senior Associate, Kamal & Associates',
                 profileUrl: 'attorney-chowdhury.html',
                 phone: '+880 1713 456 800',
                 trust: 'Criminal Defense, Litigation | 12+ Years'
             },
             kabir: {
                 name: 'Adv. Mohammad Kabir',
-                role: 'Senior Associate',
+                role: 'Senior Associate, Kamal & Associates',
                 profileUrl: 'attorney-kabir.html',
                 phone: '+880 1713 456 800',
                 trust: 'Family Law, Civil Law | 12+ Years'
             },
             rashed: {
                 name: 'Adv. Yeasin Arafat Rashed',
-                role: 'Associate',
+                role: 'Associate, Kamal & Associates',
                 profileUrl: 'attorney-rashed.html',
                 phone: '+880 1713 456 800',
                 trust: 'Civil Law, Property Law | 8+ Years'
             },
             mahadi: {
                 name: 'Adv. Mahadi Hosin Manik',
-                role: 'Associate',
+                role: 'Associate, Kamal & Associates',
                 profileUrl: 'attorney-mahadi.html',
                 phone: '+880 1713 456 800',
                 trust: 'Administrative Law, Tax Law | 5+ Years'

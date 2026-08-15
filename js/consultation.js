@@ -127,6 +127,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const calendarPrevMonth = document.getElementById('calendarPrevMonth');
     const calendarNextMonth = document.getElementById('calendarNextMonth');
     
+    // Formats a Date using its LOCAL calendar fields (not toISOString, which
+    // converts to UTC first and shifts the date backward for any timezone
+    // ahead of UTC, e.g. Bangladesh at UTC+6).
+    function formatLocalDateISO(date) {
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const d = String(date.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    }
+
     function initializeCalendar() {
         // Set today as minimum date
         const today = new Date();
@@ -196,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 dayCell.addEventListener('mouseleave', function() {
-                    if (!this.disabled && preferredDate.value !== cellDate.toISOString().split('T')[0]) {
+                    if (!this.disabled && preferredDate.value !== formatLocalDateISO(cellDate)) {
                         this.style.background = '#2A2D32';
                         this.style.borderColor = 'rgba(175, 169, 57, 0.2)';
                     }
@@ -209,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Highlight selected date
-            if (preferredDate.value === cellDate.toISOString().split('T')[0]) {
+            if (preferredDate.value === formatLocalDateISO(cellDate)) {
                 dayCell.style.background = 'linear-gradient(135deg, #AFA939 0%, #B48811 100%)';
                 dayCell.style.color = '#0F1113';
                 dayCell.style.borderColor = '#AFA939';
@@ -302,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function selectDate(date) {
-        const dateString = date.toISOString().split('T')[0];
+        const dateString = formatLocalDateISO(date);
         preferredDate.value = dateString;
 
         // Format date for display

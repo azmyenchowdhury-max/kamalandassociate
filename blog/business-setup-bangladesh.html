@@ -167,7 +167,7 @@
                             <img src="../images/Attorneys/Kamal.jpg" alt="Adv. Mohammad Mostofa Kamal">
                             <div>
                                 <div class="meta-author-name">Adv. Mohammad Mostofa Kamal</div>
-                                <div class="meta-author-role">Head of The Chamber &amp; Founder</div>
+                                <div class="meta-author-role">Head of The Chamber &amp; Founder, Kamal &amp; Associates</div>
                             </div>
                         </div>
                         <div class="meta-right">
@@ -188,29 +188,11 @@
             <div class="row">
                 <!-- Article Body -->
                 <div class="col-lg-8">
-                    <img src="../images/blog/business-setup-bangladesh-hero.webp" alt="Business Setup in Bangladesh" class="article-hero-media">
+                    <div class="article-hero-frame">
+                        <img src="../images/blog/business-setup-bangladesh-hero.webp" alt="Business Setup in Bangladesh" class="article-hero-media">
+                    </div>
 
-                    <h2>SEO Title</h2>
-                    <p>Business Setup in Bangladesh: Complete Legal Guide for Entrepreneurs and Foreign Investors</p>
-
-                    <h2>Meta Description</h2>
-                    <p>Step-by-step legal guide to business setup in Bangladesh with entity selection, RJSC registration, foreign investment compliance, and operational licensing.</p>
-
-                    <h2>Primary Keyword</h2>
-                    <p>Business Setup in Bangladesh</p>
-
-                    <h2>Secondary Keywords</h2>
-                    <ul>
-                        <li>company registration Bangladesh</li>
-                        <li>RJSC registration</li>
-                        <li>foreign investment Bangladesh</li>
-                        <li>BIDA approval</li>
-                        <li>trade license Bangladesh</li>
-                        <li>VAT BIN Bangladesh</li>
-                        <li>corporate compliance Bangladesh</li>
-                    </ul>
-
-                    <h2>Introduction</h2>
+                        <h2>Introduction</h2>
                     <p>Business Setup in Bangladesh has become a major priority for local entrepreneurs, expatriate founders, and foreign investors looking at South Asian growth opportunities. Bangladesh offers a strategic location, growing consumer demand, expanding industrial zones, and improving infrastructure. However, business opportunity does not eliminate legal risk.</p>
                     <p>A large number of businesses face avoidable delays because they focus on registration speed but ignore legal structure, licensing sequence, and post-incorporation compliance. The result can be rejected applications, banking obstacles, tax exposure, shareholder disputes, and regulatory action.</p>
                     <p>This guide explains how to set up a business in Bangladesh through a legally sound approach. It covers the relevant laws, institutions, practical pitfalls, and strategic legal protections that support long-term growth.</p>
@@ -235,7 +217,7 @@
                     <h3>6) BIDA and Sectoral Permissions</h3>
                     <p>The Bangladesh Investment Development Authority (BIDA) is relevant for certain foreign investment processes, branch/liaison permissions, and investor facilitation. Sector-specific approvals may also be required for telecom, healthcare, manufacturing, environment, fire safety, or municipal compliance.</p>
 
-                    <div class="article-callout">
+                    <div class="article-callout callout-action">
                         <h5><i class="fas fa-link me-2"></i>Internal Linking Suggestion</h5>
                         <p>Learn more about our Company Formation and Business Setup legal services for local and foreign investors.</p>
                         <a href="../service-areas.html" class="btn btn-outline-gold btn-sm">Explore Company Formation and Business Advisory Services</a>
@@ -272,7 +254,7 @@
                         <li><strong>Ongoing compliance and risk control:</strong> Establish governance and filing systems to reduce future disputes.</li>
                     </ul>
 
-                    <div class="article-callout">
+                    <div class="article-callout callout-action">
                         <h5><i class="fas fa-link me-2"></i>Internal Linking Suggestion</h5>
                         <p>Need a practical legal roadmap before launching your company?</p>
                         <a href="../consultation.html" class="btn btn-gold btn-sm">Schedule a Business Setup Consultation</a>
@@ -313,7 +295,7 @@
                     <p><strong>5. What is the biggest legal mistake in early-stage setup?</strong><br>
                     Skipping legal planning and relying on generic documents is one of the most common and costly mistakes.</p>
 
-                    <div class="article-callout">
+                    <div class="article-callout callout-important">
                         <h5><i class="fas fa-exclamation-circle me-2"></i>A Legal Advisory Note</h5>
                         <p>This article is for general informational purposes only and does not constitute formal legal advice. Business setup laws and regulations change over time; consult a qualified legal advisor for business-specific guidance.</p>
                     </div>
@@ -331,7 +313,7 @@
                     <div class="author-profile">
                         <img src="../images/Attorneys/Kamal.jpg" alt="Adv. Mohammad Mostofa Kamal" class="author-profile-img">
                         <h4 class="author-profile-name">Adv. Mohammad Mostofa Kamal</h4>
-                        <div class="author-profile-title">Advocate, Appellate Division,<br>Supreme Court of Bangladesh,<br>Head of The Chamber &amp; Founder</div>
+                        <div class="author-profile-title">Advocate, Appellate Division, Supreme Court of Bangladesh; <br>Head of The Chamber &amp; Founder, Kamal &amp; Associates</div>
                         <p class="author-profile-bio">Expert in company formation, corporate structuring, and business setup assistance with extensive experience in RJSC registration and foreign investment facilitation for startups and multinational enterprises.</p>
                         <a href="../attorneys.html#attorney-kamal" class="author-profile-link">View Attorney Profile</a>
                     </div>
@@ -537,95 +519,12 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- AOS JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
     <script>
         AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
-
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            document.getElementById('readingProgress').style.width = (scrollTop / docHeight) * 100 + '%';
-        });
-
-        function calculateReadingTime() {
-            const content = document.querySelector('.article-content').innerText;
-            const wordCount = content.split(/\s+/).length;
-            document.getElementById('readingTime').textContent = Math.ceil(wordCount / 200) + ' min';
-        }
-
-        function generateTableOfContents() {
-            const headings = document.querySelectorAll('.article-content h2, .article-content h3');
-            const toc = document.getElementById('tableOfContents');
-            toc.innerHTML = '';
-            headings.forEach((heading, index) => {
-                heading.id = 'section-' + (index + 1);
-                const li = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = '#section-' + (index + 1);
-                link.textContent = heading.textContent;
-                li.classList.toggle('toc-h3', heading.tagName === 'H3');
-                li.appendChild(link);
-                toc.appendChild(li);
-            });
-        }
-
-        function shareArticle(platform) {
-            const title = 'Business Setup in Bangladesh: A Complete Legal Guide';
-            const url = window.location.href;
-            const text = 'Check out this article: ' + title;
-            const shareUrls = {
-                linkedin: 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url),
-                twitter: 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url),
-                whatsapp: 'https://wa.me/?text=' + encodeURIComponent(text + ' ' + url),
-                email: 'mailto:?subject=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(text + '\n\n' + url)
-            };
-            if (platform === 'email') { window.location.href = shareUrls.email; }
-            else { window.open(shareUrls[platform], '_blank', 'width=600,height=400'); }
-            return false;
-        }
-
-            });
-        }
-
-        function setupStickyCTA() {
-            const btn = document.getElementById('stickyConsultBtn');
-            if (!btn) return;
-            window.addEventListener('scroll', () => {
-                btn.classList.toggle('is-visible', window.scrollY > 420);
-            }, { passive: true });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            calculateReadingTime();
-            generateTableOfContents();
-            setupStickyCTA();
-        });
     </script>
-    <script>
-        (function () {
-            var isProd = !/^(localhost|127\.0\.0\.1)$/i.test(location.hostname) && location.protocol !== 'file:';
-            var scripts = isProd
-                ? ['../public/assets/blog-combined.min.js']
-                : [
-                    '../js/blog-social-actions.js',
-                    '../js/blog-intelligence.js',
-                    '../js/blog-lead-gen.js',
-                    '../js/blog-seo-performance.js'
-                ];
-
-            scripts.forEach(function (src) {
-                var s = document.createElement('script');
-                s.src = src;
-                s.defer = true;
-                document.body.appendChild(s);
-            });
-        })();
-    </script>
-
-    <script src="../js/blog-phase8.js"></script>
+    <script>window.__ARTICLE_TITLE__ = "Business Setup in Bangladesh: A Complete Legal Guide";</script>
+    <script src="../js/blog-article.js"></script>
     <!-- Phase 9: Performance & Analytics -->
     <script src="../js/analytics-ga4.js"></script>
     <script src="../js/web-vitals-monitor.js"></script>

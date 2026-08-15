@@ -130,7 +130,7 @@
                             <img src="../images/Attorneys/Kabir.jpg" alt="Adv. Mohammad Kabir">
                             <div>
                                 <div class="meta-author-name">Adv. Mohammad Kabir</div>
-                                <div class="meta-author-role">Senior Associate, Kamal & Associates</div>
+                                <div class="meta-author-role">Senior Associate, Kamal &amp; Associates</div>
                             </div>
                         </div>
                         <div class="meta-right">
@@ -150,29 +150,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <img src="../images/blog/commercial-litigation-complete-guide-hero.webp" alt="Commercial Litigation" class="article-hero-media">
+                    <div class="article-hero-frame">
+                        <img src="../images/blog/commercial-litigation-complete-guide-hero.webp" alt="Commercial Litigation" class="article-hero-media">
+                    </div>
 
-                    <h2>SEO Title</h2>
-                    <p>Commercial Litigation in Bangladesh: A Complete Guide for Businesses and Investors</p>
-
-                    <h2>Meta Description</h2>
-                    <p>Comprehensive guide to commercial litigation in Bangladesh covering contract disputes, shareholder conflicts, injunctions, and court strategy for businesses.</p>
-
-                    <h2>Primary Keyword</h2>
-                    <p>Commercial Litigation in Bangladesh</p>
-
-                    <h2>Secondary Keywords</h2>
-                    <ul>
-                        <li>business dispute lawyer Bangladesh</li>
-                        <li>contract dispute Bangladesh</li>
-                        <li>shareholder dispute Bangladesh</li>
-                        <li>injunction in commercial cases</li>
-                        <li>arbitration Bangladesh</li>
-                        <li>High Court Division Bangladesh</li>
-                        <li>corporate litigation Bangladesh</li>
-                    </ul>
-
-                    <h2>Introduction</h2>
+                        <h2>Introduction</h2>
                     <p>Commercial Litigation in Bangladesh has become increasingly important as trade, manufacturing, technology, and cross-border investment continue to grow. Businesses today face high-value disputes involving contracts, payments, intellectual property, shareholders, directors, and regulatory compliance. When negotiation fails, litigation becomes the formal legal route to protect rights and recover losses.</p>
                     <p>For company owners and foreign investors, a commercial dispute is rarely just a legal problem. It can disrupt operations, freeze cash flow, damage market reputation, and affect lender confidence. This is why commercial litigation strategy should be proactive, evidence-based, and aligned with the business objective, not only the legal claim.</p>
                     <p>This guide explains the legal framework, common dispute patterns, and practical action points for businesses in Bangladesh. It is designed for entrepreneurs, investors, corporate decision-makers, and anyone needing clear legal direction during complex business conflicts.</p>
@@ -199,7 +181,7 @@
                     <h3>7) Banking, Labour, and Regulatory Overlap</h3>
                     <p>Commercial disputes often involve regulatory overlap, including Bangladesh Bank rules, labor obligations under the Labour Act, 2006, and tax or licensing issues. Litigation strategy must account for these parallel compliance dimensions.</p>
 
-                    <div class="article-callout">
+                    <div class="article-callout callout-action">
                         <h5><i class="fas fa-link me-2"></i>Internal Linking Suggestion</h5>
                         <p>Learn more about our Commercial Litigation and Corporate Advisory support for Bangladeshi businesses.</p>
                         <a href="../service-areas.html" class="btn btn-outline-gold btn-sm">Explore Our Litigation and Corporate Services</a>
@@ -235,7 +217,7 @@
                         <li><strong>Enforcement and execution:</strong> Convert favorable orders into practical recovery and compliance outcomes.</li>
                     </ul>
 
-                    <div class="article-callout">
+                    <div class="article-callout callout-action">
                         <h5><i class="fas fa-link me-2"></i>Internal Linking Suggestion</h5>
                         <p>Need urgent help with a contract breach, shareholder deadlock, or injunction matter?</p>
                         <a href="../consultation.html" class="btn btn-gold btn-sm">Schedule a Commercial Litigation Consultation</a>
@@ -278,16 +260,16 @@
 
                     <div class="article-share">
                         <span class="share-label">Share Article:</span>
-                        <a href="#" class="share-button linkedin" onclick="shareArticle('linkedin'); return false;"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="share-button twitter" onclick="shareArticle('twitter'); return false;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="share-button whatsapp" onclick="shareArticle('whatsapp'); return false;"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" class="share-button email" onclick="shareArticle('email'); return false;"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="share-button linkedin" onclick="shareArticle('linkedin'); return false;" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="share-button twitter" onclick="shareArticle('twitter'); return false;" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="share-button whatsapp" onclick="shareArticle('whatsapp'); return false;" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="share-button email" onclick="shareArticle('email'); return false;" aria-label="Share on Email"><i class="fas fa-envelope"></i></a>
                     </div>
 
                     <div class="author-profile">
                         <img src="../images/Attorneys/Kabir.jpg" alt="Adv. Mohammad Kabir" class="author-profile-img">
                         <h4 class="author-profile-name">Adv. Mohammad Kabir</h4>
-                        <div class="author-profile-title">Senior Associate, Kamal & Associates<br>Advocate, Supreme Court of Bangladesh</div>
+                        <div class="author-profile-title">Advocate, Supreme Court of Bangladesh<br>Senior Associate, Kamal &amp; Associates</div>
                         <p class="author-profile-bio">Adv. Kabir specializes in commercial and corporate disputes with extensive experience in contract enforcement, shareholder conflicts, and high court advocacy for businesses across multiple sectors.</p>
                         <a href="../attorneys.html#attorney-kabir" class="author-profile-link">View Attorney Profile</a>
                     </div>
@@ -485,89 +467,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
     <script>
         AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            document.getElementById('readingProgress').style.width = scrollPercent + '%';
-        });
-        function calculateReadingTime() {
-            const content = document.querySelector('.article-content').innerText;
-            const wordCount = content.split(/\s+/).length;
-            const readingTime = Math.ceil(wordCount / 200);
-            document.getElementById('readingTime').textContent = readingTime + ' min';
-        }
-        function generateTableOfContents() {
-            const headings = document.querySelectorAll('.article-content h2, .article-content h3');
-            const toc = document.getElementById('tableOfContents');
-            toc.innerHTML = '';
-            headings.forEach((heading, index) => {
-                heading.id = `section-${index + 1}`;
-                const li = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = `#section-${index + 1}`;
-                link.textContent = heading.textContent;
-                li.classList.toggle('toc-h3', heading.tagName === 'H3');
-                li.appendChild(link);
-                toc.appendChild(li);
-            });
-        }
-        function shareArticle(platform) {
-            const title = 'Commercial Litigation in Bangladesh: A Complete Legal Guide';
-            const url = window.location.href;
-            const text = `Check out this article: ${title}`;
-            const shareUrls = {
-                linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-                twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-                whatsapp: `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`,
-                email: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text + '\n\n' + url)}`
-            };
-            if (platform === 'email') {
-                window.location.href = shareUrls.email;
-            } else {
-                window.open(shareUrls[platform], '_blank', 'width=600,height=400');
-            }
-            return false;
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            calculateReadingTime();
-            generateTableOfContents();
-
-            const stickyConsultBtn = document.getElementById('stickyConsultBtn');
-            window.addEventListener('scroll', () => {
-                if (!stickyConsultBtn) return;
-                stickyConsultBtn.classList.toggle('is-visible', window.scrollY > 260);
-            });
-        });
     </script>
-
     <a id="stickyConsultBtn" class="sticky-consult-btn" href="../consultation.html">Schedule Consultation</a>
-    <script>
-        (function () {
-            var isProd = !/^(localhost|127\.0\.0\.1)$/i.test(location.hostname) && location.protocol !== 'file:';
-            var scripts = isProd
-                ? ['../public/assets/blog-combined.min.js']
-                : [
-                    '../js/blog-social-actions.js',
-                    '../js/blog-intelligence.js',
-                    '../js/blog-lead-gen.js',
-                    '../js/blog-seo-performance.js'
-                ];
-
-            scripts.forEach(function (src) {
-                var s = document.createElement('script');
-                s.src = src;
-                s.defer = true;
-                document.body.appendChild(s);
-            });
-        })();
-    </script>
-
-    <script src="../js/blog-phase8.js"></script>
+    <script>window.__ARTICLE_TITLE__ = "Commercial Litigation in Bangladesh: A Complete Legal Guide";</script>
+    <script src="../js/blog-article.js"></script>
     <!-- Phase 9: Performance & Analytics -->
     <script src="../js/analytics-ga4.js"></script>
     <script src="../js/web-vitals-monitor.js"></script>

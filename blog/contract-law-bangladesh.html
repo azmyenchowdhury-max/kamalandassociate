@@ -156,7 +156,7 @@
                             <img src="../images/Attorneys/Harun.jpg" alt="Adv. Harun Rayhan">
                             <div>
                                 <div class="meta-author-name">Adv. Harun Rayhan</div>
-                                <div class="meta-author-role">Advocate, District &amp; Session Judge Court</div>
+                                <div class="meta-author-role">Managing Partner, Kamal &amp; Associates</div>
                             </div>
                         </div>
                         <div class="meta-right">
@@ -177,16 +177,12 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=500&fit=crop" alt="Contract Law in Bangladesh" class="article-hero-media">
-
-                    <!-- SEO Metadata Block -->
-                    <div class="article-callout mb-4">
-                        <p class="mb-1"><strong>Primary Keyword:</strong> Contract Law in Bangladesh</p>
-                        <p class="mb-0"><strong>Secondary Keywords:</strong> contract enforcement Bangladesh &bull; breach of contract Bangladesh &bull; Contract Act 1872 &bull; void and voidable contracts Bangladesh &bull; commercial contracts Bangladesh &bull; liquidated damages Bangladesh &bull; specific performance Bangladesh</p>
+                    <div class="article-hero-frame">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=500&fit=crop" alt="Contract Law in Bangladesh" class="article-hero-media">
                     </div>
 
                     <!-- Key Legal Points -->
-                    <div class="article-callout">
+                    <div class="article-callout callout-summary">
                         <h5><i class="fas fa-balance-scale me-2"></i>Key Legal Points</h5>
                         <ul class="mb-0">
                             <li>The Contract Act, 1872 is the primary legislation governing all contracts in Bangladesh — one of the oldest and most comprehensive pieces of commercial legislation in the country.</li>
@@ -237,7 +233,7 @@
                         <li><strong>Government contracts:</strong> Subject to the Public Procurement Act, 2006 and Public Procurement Rules, 2008, with additional transparency and process requirements.</li>
                     </ul>
 
-                    <div class="article-callout">
+                    <div class="article-callout callout-action">
                         <h5><i class="fas fa-link me-2"></i>Related Services</h5>
                         <p>Kamal &amp; Associates drafts, reviews, and enforces commercial contracts for businesses, investors, and individuals across all sectors in Bangladesh.</p>
                         <a href="../service-areas.html" class="btn btn-outline-gold btn-sm">Explore Our Commercial Contract Services</a>
@@ -263,7 +259,7 @@
                     <h3>6. Construction, Infrastructure, and Services Disputes</h3>
                     <p>Bangladesh's rapidly developing construction and infrastructure sector generates frequent and high-value contract disputes — typically involving payment delays, scope variations, defective workmanship, suspension of works, and termination. These disputes often require both technical and legal expertise to assess and resolve.</p>
 
-                    <div class="article-callout">
+                    <div class="article-callout callout-action">
                         <h5><i class="fas fa-link me-2"></i>Need Contract Drafting or Dispute Resolution Support?</h5>
                         <p>Our commercial law team advises clients at all stages — from contract drafting and negotiation to enforcement and litigation.</p>
                         <a href="../consultation.html" class="btn btn-gold btn-sm">Book a Contract Law Consultation</a>
@@ -292,7 +288,7 @@
                     </ul>
 
                     <!-- Practical Insight -->
-                    <div class="article-callout">
+                    <div class="article-callout callout-pro-tip">
                         <h5><i class="fas fa-lightbulb me-2"></i>Practical Insight</h5>
                         <p>In Bangladesh's commercial landscape, the most avoidable contract disputes arise not from deliberate bad faith, but from agreements where key terms — payment timelines, delivery standards, termination rights, and liability caps — are left unclear or omitted entirely. A contract reviewed by an experienced commercial lawyer before signing typically costs a small fraction of the cost of litigating a dispute afterwards. Prevention is always the smarter investment.</p>
                     </div>
@@ -307,7 +303,7 @@
                     <p>Whether you are entering a significant commercial transaction, reviewing an existing agreement for risk, dealing with non-payment, or facing a breach of contract dispute, professional legal advice is essential. At Kamal &amp; Associates, our commercial law team is ready to help you structure your contracts effectively, enforce them confidently, and resolve disputes efficiently.</p>
 
                     <!-- Legal Advisory Note -->
-                    <div class="article-callout">
+                    <div class="article-callout callout-important">
                         <h5><i class="fas fa-exclamation-circle me-2"></i>Legal Advisory Note</h5>
                         <p>This article provides general information on contract law in Bangladesh and does not constitute formal legal advice. Contract law involves detailed factual and legal analysis specific to each situation and transaction. Individuals and businesses should seek qualified legal advice from an advocate experienced in Bangladesh commercial law before entering into significant agreements or taking steps to enforce or defend contractual claims.</p>
                     </div>
@@ -342,7 +338,7 @@
                     <div class="author-profile">
                         <img src="../images/Attorneys/Harun.jpg" alt="Adv. Harun Rayhan" class="author-profile-img">
                         <h4 class="author-profile-name">Adv. Harun Rayhan</h4>
-                        <div class="author-profile-title">Advocate, District &amp; Session Judge Court, Dhaka<br>Commercial &amp; Litigation Counsel, Kamal &amp; Associates</div>
+                        <div class="author-profile-title">Advocate, Supreme Court of Bangladesh<br>Assistant Public Prosecutor, District &amp; Session Judge Court, Dhaka<br>Managing Partner, Kamal &amp; Associates</div>
                         <p class="author-profile-bio">
                             Adv. Harun Rayhan is a seasoned advocate at the District and Session Judge Court, Dhaka, with extensive experience in commercial litigation, contract disputes, debt recovery, admiralty law, and cross-border trade matters. He advises Bangladeshi and international clients on complex commercial legal challenges across multiple sectors.
                         </p>
@@ -503,71 +499,11 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- AOS JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
     <script>
         AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
-
-        // Reading Progress Bar
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            document.getElementById('readingProgress').style.width = scrollPercent + '%';
-        });
-
-        // Calculate Reading Time
-        function calculateReadingTime() {
-            const content = document.querySelector('.article-content').innerText;
-            const wordCount = content.split(/\s+/).length;
-            const readingTime = Math.ceil(wordCount / 200);
-            document.getElementById('readingTime').textContent = readingTime + ' min';
-        }
-
-        // Generate Table of Contents
-        function generateTableOfContents() {
-            const headings = document.querySelectorAll('.article-content h2, .article-content h3');
-            const toc = document.getElementById('tableOfContents');
-            toc.innerHTML = '';
-            headings.forEach((heading, index) => {
-                heading.id = `section-${index + 1}`;
-                const li = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = `#section-${index + 1}`;
-                link.textContent = heading.textContent;
-                li.classList.toggle('toc-h3', heading.tagName === 'H3');
-                li.appendChild(link);
-                toc.appendChild(li);
-            });
-        }
-
-        // Share Function
-        function shareArticle(platform) {
-            const title = 'Contract Law in Bangladesh: Formation, Enforcement & Legal Remedies';
-            const url = window.location.href;
-            const text = `Check out this article: ${title}`;
-            const shareUrls = {
-                linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-                twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-                whatsapp: `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`,
-                email: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text + '\n\n' + url)}`
-            };
-            if (platform === 'email') {
-                window.location.href = shareUrls.email;
-            } else {
-                window.open(shareUrls[platform], '_blank', 'width=600,height=400');
-            }
-            return false;
-        }
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            calculateReadingTime();
-            generateTableOfContents();
-        });
     </script>
-
+    <script>window.__ARTICLE_TITLE__ = "Contract Law in Bangladesh: Formation, Enforcement & Legal Remedies";</script>
+    <script src="../js/blog-article.js"></script>
 </body>
 </html>

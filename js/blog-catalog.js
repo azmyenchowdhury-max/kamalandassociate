@@ -4,6 +4,9 @@
     window.KABlogCatalog = [
         {
             slug: 'government-contracts-litigation-bangladesh.html',
+            readTime: 13,
+            cluster: 'litigation-disputes',
+            clusterLabel: 'Litigation & Dispute Resolution',
             title: 'Government Contracts & Litigation in Bangladesh: Legal Rights, Remedies & Strategy',
             excerpt: 'A complete guide to government contracts and litigation in Bangladesh — Public Procurement Act 2006, PPR 2008, tender disputes, blacklisting challenges, payment recovery, and writ remedies for contractors.',
             category: 'Government Contracts',
@@ -16,6 +19,9 @@
         },
         {
             slug: 'global-investment-citizenship-programs-bangladesh.html',
+            readTime: 13,
+            cluster: 'corporate-investment',
+            clusterLabel: 'Corporate, Investment & Business',
             title: 'Global Investment & Citizenship Programs: A Legal Guide for Bangladeshi Investors',
             excerpt: 'A complete legal guide to global investment and citizenship programmes for Bangladeshi investors — Golden Visa, CBI options, dual citizenship rules, Bangladesh Bank compliance, and NRB status planning.',
             category: 'Global Investment & Immigration',
@@ -28,6 +34,9 @@
         },
         {
             slug: 'fraud-white-collar-crimes-bangladesh.html',
+            readTime: 14,
+            cluster: 'criminal-fraud-rights',
+            clusterLabel: 'Criminal, Fraud & Rights Protection',
             title: 'Fraud and White Collar Crimes in Bangladesh: Legal Framework, Offences & Defence',
             excerpt: 'A complete guide to fraud and white collar crimes in Bangladesh — cheating, forgery, money laundering, corporate fraud, ACC investigations, and legal defence strategy.',
             category: 'White Collar Crime',
@@ -40,6 +49,9 @@
         },
         {
             slug: 'foreign-investment-law-bangladesh.html',
+            readTime: 13,
+            cluster: 'corporate-investment',
+            clusterLabel: 'Corporate, Investment & Business',
             title: 'Foreign Investment Law in Bangladesh: Rights, Incentives & Legal Framework',
             excerpt: 'A complete guide to foreign investment law in Bangladesh — BIDA registration, investment protections, repatriation rights, EPZ incentives, and legal strategy for foreign investors.',
             category: 'Foreign Investment',
@@ -52,6 +64,9 @@
         },
         {
             slug: 'environmental-law-bangladesh.html',
+            readTime: 19,
+            cluster: 'regulatory-public-law',
+            clusterLabel: 'Regulatory & Public Law',
             title: 'Environmental Law in Bangladesh: Regulations, Compliance & Legal Remedies',
             excerpt: 'A complete guide to Bangladesh’s environmental law framework — ECC requirements, EIA obligations, pollution standards, DoE enforcement, and legal remedies for businesses and investors.',
             category: 'Environmental Law',
@@ -64,6 +79,9 @@
         },
         {
             slug: 'entertainment-media-litigation-bangladesh.html',
+            readTime: 18,
+            cluster: 'specialized-practice',
+            clusterLabel: 'Specialized & Sector-Specific',
             title: 'Entertainment & Media Litigation in Bangladesh: Rights, Disputes & Legal Protection',
             excerpt: 'Copyright infringement, defamation, broadcasting regulation, digital content liability, and contract disputes in Bangladesh’s entertainment and media industries — explained.',
             category: 'Entertainment & Media Law',
@@ -76,6 +94,9 @@
         },
         {
             slug: 'arbitration-bangladesh.html',
+            readTime: 16,
+            cluster: 'litigation-disputes',
+            clusterLabel: 'Litigation & Dispute Resolution',
             title: 'Domestic & International Arbitration in Bangladesh: Process, Framework & Legal Strategy',
             excerpt: 'A complete guide to domestic and international arbitration in Bangladesh — Arbitration Act 2001, New York Convention, enforcement of awards, and expert legal strategy for businesses and investors.',
             category: 'ADR',
@@ -88,6 +109,9 @@
         },
         {
             slug: 'criminal-defense-prosecution-bangladesh.html',
+            readTime: 15,
+            cluster: 'criminal-fraud-rights',
+            clusterLabel: 'Criminal, Fraud & Rights Protection',
             title: 'Criminal Defense & Prosecution in Bangladesh: Rights, Process & Legal Strategy',
             excerpt: 'Bail rights, FIR process, trial procedure, and criminal defense strategies explained for individuals and families in Bangladesh.',
             category: 'Criminal Law',
@@ -100,6 +124,9 @@
         },
         {
             slug: 'contract-law-bangladesh.html',
+            readTime: 13,
+            cluster: 'corporate-investment',
+            clusterLabel: 'Corporate, Investment & Business',
             title: 'Contract Law in Bangladesh: Formation, Enforcement & Legal Remedies',
             excerpt: 'Contract formation, enforceability, breach remedies, and how to protect your contractual rights under the Contract Act 1872 in Bangladesh.',
             category: 'Contract Law',
@@ -112,6 +139,9 @@
         },
         {
             slug: 'constitutional-law-bangladesh.html',
+            readTime: 14,
+            cluster: 'regulatory-public-law',
+            clusterLabel: 'Regulatory & Public Law',
             title: 'Constitutional Law in Bangladesh: Rights, Remedies & Writ Jurisdiction',
             excerpt: 'Fundamental rights, writ petitions, judicial review, and constitutional remedies explained for citizens and businesses in Bangladesh.',
             category: 'Constitutional Law',
@@ -124,6 +154,9 @@
         },
         {
             slug: 'company-formation-guide.html',
+            readTime: 7,
+            cluster: 'corporate-investment',
+            clusterLabel: 'Corporate, Investment & Business',
             title: 'Company Formation in Bangladesh: A Step-by-Step Legal Guide',
             excerpt: 'Entity structure, RJSC process, and compliance sequencing.',
             category: 'Company Formation',
@@ -136,6 +169,9 @@
         },
         {
             slug: 'commercial-litigation-complete-guide.html',
+            readTime: 7,
+            cluster: 'litigation-disputes',
+            clusterLabel: 'Litigation & Dispute Resolution',
             title: 'Commercial Litigation in Bangladesh: A Complete Guide',
             excerpt: 'Contract claims, injunctions, and evidence strategy.',
             category: 'Commercial Litigation',
@@ -148,6 +184,9 @@
         },
         {
             slug: 'civil-litigation-complete-guide.html',
+            readTime: 6,
+            cluster: 'litigation-disputes',
+            clusterLabel: 'Litigation & Dispute Resolution',
             title: 'Civil Litigation in Bangladesh: A Complete Guide',
             excerpt: 'Procedure, injunctions, and decree enforcement essentials.',
             category: 'Civil Litigation',
@@ -160,6 +199,9 @@
         },
         {
             slug: 'business-setup-bangladesh.html',
+            readTime: 7,
+            cluster: 'corporate-investment',
+            clusterLabel: 'Corporate, Investment & Business',
             title: 'Business Setup in Bangladesh: A Complete Legal Guide',
             excerpt: 'Entity planning, registration flow, and launch compliance.',
             category: 'Business Setup',
@@ -172,6 +214,9 @@
         },
         {
             slug: 'banking-litigation-comprehensive.html',
+            readTime: 6,
+            cluster: 'litigation-disputes',
+            clusterLabel: 'Litigation & Dispute Resolution',
             title: 'Banking Litigation in Bangladesh: A Comprehensive Guide',
             excerpt: 'Artha Rin defense, cheque disputes, and recovery strategy.',
             category: 'Banking Litigation',
@@ -184,6 +229,9 @@
         },
         {
             slug: 'banking-litigation-guide.html',
+            readTime: 7,
+            cluster: 'litigation-disputes',
+            clusterLabel: 'Litigation & Dispute Resolution',
             title: 'Banking Litigation in Bangladesh: A Complete Legal Guide',
             excerpt: 'Debt recovery and borrower defense practical framework.',
             category: 'Banking Litigation',
@@ -196,6 +244,9 @@
         },
         {
             slug: 'aviation-law-bangladesh.html',
+            readTime: 6,
+            cluster: 'specialized-practice',
+            clusterLabel: 'Specialized & Sector-Specific',
             title: 'Aviation Law in Bangladesh: Navigating Complex Skies',
             excerpt: 'Regulation, operation, and liability for aviation sector.',
             category: 'Aviation Law',
@@ -208,6 +259,9 @@
         },
         {
             slug: 'adr-dispute-resolution.html',
+            readTime: 5,
+            cluster: 'litigation-disputes',
+            clusterLabel: 'Litigation & Dispute Resolution',
             title: 'Alternative Dispute Resolution (ADR) in Bangladesh',
             excerpt: 'Mediation, arbitration, and faster dispute pathways.',
             category: 'ADR',
@@ -220,6 +274,9 @@
         },
         {
             slug: 'admiralty-shipping-law.html',
+            readTime: 6,
+            cluster: 'specialized-practice',
+            clusterLabel: 'Specialized & Sector-Specific',
             title: 'Admiralty & Shipping Law in Bangladesh',
             excerpt: 'Maritime contracts, cargo disputes, and vessel liability.',
             category: 'Admiralty & Shipping',
@@ -232,6 +289,9 @@
         },
         {
             slug: 'administrative-law-bangladesh.html',
+            readTime: 5,
+            cluster: 'regulatory-public-law',
+            clusterLabel: 'Regulatory & Public Law',
             title: 'Administrative Law in Bangladesh: Complete Legal Guide',
             excerpt: 'Writ remedies, due process, and public law accountability.',
             category: 'Administrative Law',

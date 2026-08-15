@@ -51,7 +51,7 @@
     var fallbackTypes = ['important', 'pro-tip', 'case-study'];
 
     callouts.forEach(function (box, idx) {
-      if (box.classList.contains('callout-important') || box.classList.contains('callout-pro-tip') || box.classList.contains('callout-case-study')) {
+      if (box.classList.contains('callout-important') || box.classList.contains('callout-pro-tip') || box.classList.contains('callout-case-study') || box.classList.contains('callout-summary') || box.classList.contains('callout-action')) {
         return;
       }
 

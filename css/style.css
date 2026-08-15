@@ -8410,3 +8410,272 @@ iframe {
         height: 300px;
     }
 }
+
+/* ========================================================
+   PREMIUM BLOG REDESIGN — Article Reading Experience
+   & Editorial Listing Page (blog.html)
+   Appended at end of file so these rules win the cascade
+   against earlier BLOG declarations of equal specificity.
+   ======================================================== */
+
+/* ---------- Hero image: consistent duotone/overlay treatment ---------- */
+.article-hero-frame {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    border: 1px solid rgba(175, 169, 57, 0.24);
+    box-shadow: 0 24px 56px rgba(0, 0, 0, 0.38);
+}
+.article-hero-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(15, 17, 19, 0) 45%, rgba(15, 17, 19, 0.62) 100%),
+        linear-gradient(115deg, rgba(175, 169, 57, 0.16) 0%, rgba(15, 17, 19, 0) 55%);
+    pointer-events: none;
+}
+.article-hero-media {
+    width: 100%;
+    height: 460px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    filter: saturate(0.82) contrast(1.06) brightness(0.92);
+}
+@media (max-width: 991.98px) {
+    .article-hero-media { height: 340px; }
+}
+@media (max-width: 767.98px) {
+    .article-hero-media { height: 240px; }
+}
+
+/* Drop cap on the article's opening paragraph (js/blog-phase8.js may inject a
+   .phase8-stats block right after the first h2 on some pages, so match both cases) */
+.article-content h2:first-of-type + p::first-letter,
+.article-content h2:first-of-type + .phase8-stats + p::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.6em;
+    line-height: 0.78;
+    float: left;
+    padding: 6px 10px 0 0;
+    color: #AFA939;
+    font-weight: 700;
+}
+
+/* ---------- Differentiated callout system ---------- */
+.article-callout {
+    position: relative;
+    background: linear-gradient(145deg, rgba(175, 169, 57, 0.1) 0%, rgba(24, 27, 31, 0.97) 100%);
+    border: 1px solid rgba(175, 169, 57, 0.26);
+    border-left: 4px solid #AFA939;
+    border-radius: 12px;
+    padding: 26px 28px;
+    margin: 34px 0;
+}
+.article-callout h5 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #F3EFD9;
+    margin-bottom: 12px;
+    font-weight: 700;
+    font-size: 1.02rem;
+}
+.article-callout h5 i {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(175, 169, 57, 0.18);
+    color: #AFA939;
+    font-size: 0.9rem;
+    margin-right: 0 !important;
+}
+.article-callout p,
+.article-callout li { color: #D1D5DB; font-size: 0.96rem; line-height: 1.7; }
+.article-callout ul { margin: 0; padding-left: 22px; }
+.article-callout > *:last-child { margin-bottom: 0; }
+
+/* Key Legal Points — primary gold summary */
+.article-callout.callout-summary {
+    border-left-width: 5px;
+    background: linear-gradient(145deg, rgba(175, 169, 57, 0.15) 0%, rgba(24, 27, 31, 0.97) 100%);
+}
+.article-callout.callout-summary h5 i { background: rgba(175, 169, 57, 0.24); }
+
+/* Action / link-out callouts (Related Services, topic-specific consultation prompts) */
+.article-callout.callout-action {
+    border-left: none;
+    border: 1px solid rgba(175, 169, 57, 0.42);
+    background: linear-gradient(135deg, rgba(175, 169, 57, 0.17) 0%, rgba(24, 27, 31, 0.97) 100%);
+}
+.article-callout.callout-action h5 i { background: #AFA939; color: #0F1113; }
+.article-callout.callout-action .btn { margin-top: 14px; }
+
+/* Practical Insight — editorial commentary */
+.article-callout.callout-pro-tip {
+    border-left-color: #66d9a3;
+    background: linear-gradient(145deg, rgba(102, 217, 163, 0.12) 0%, rgba(24, 27, 31, 0.97) 100%);
+}
+.article-callout.callout-pro-tip h5 { color: #bdf0d6; }
+.article-callout.callout-pro-tip h5 i { background: rgba(102, 217, 163, 0.2); color: #66d9a3; }
+
+/* Legal Advisory Note — disclaimer / warning */
+.article-callout.callout-important {
+    border-left-color: #f3b43f;
+    background: linear-gradient(145deg, rgba(243, 180, 63, 0.12) 0%, rgba(24, 27, 31, 0.97) 100%);
+}
+.article-callout.callout-important h5 { color: #ffdba0; }
+.article-callout.callout-important h5 i { background: rgba(243, 180, 63, 0.2); color: #f3b43f; }
+
+/* ---------- Sidebar TOC: active-section highlighting ---------- */
+.table-of-contents { padding: 26px; }
+.table-of-contents h5 { display: flex; align-items: center; gap: 8px; }
+.table-of-contents ul { border-left: 1px solid rgba(175, 169, 57, 0.18); }
+.table-of-contents li { margin-bottom: 2px; }
+.table-of-contents a {
+    display: block;
+    padding: 7px 0 7px 16px;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+.table-of-contents li.toc-h3 a { font-size: 0.84rem; padding-left: 30px; color: #7c8592; }
+.table-of-contents a:hover { color: #AFA939; }
+.table-of-contents a.active {
+    color: #AFA939;
+    border-left-color: #AFA939;
+    font-weight: 600;
+}
+.table-of-contents li.toc-h3 a.active { color: #f0e2a4; }
+
+/* ---------- Meta bar / author / share polish ---------- */
+.meta-author img { width: 46px; height: 46px; }
+.meta-right { border-left: 1px solid rgba(175, 169, 57, 0.18); padding-left: 14px; }
+@media (max-width: 575.98px) {
+    .meta-right { border-left: none; padding-left: 0; }
+}
+
+.author-profile { padding: 34px; }
+.author-profile-img { width: 110px; height: 110px; border-width: 3px; }
+
+.article-cta { position: relative; overflow: hidden; }
+.article-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 15% 20%, rgba(175, 169, 57, 0.16), transparent 55%);
+    pointer-events: none;
+}
+
+/* ========================================================
+   Blog listing (blog.html) — editorial redesign
+   ======================================================== */
+
+/* Featured hero (single lead article, replaces carousel) */
+.featured-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    align-items: stretch;
+    background: linear-gradient(160deg, rgba(27, 31, 35, 0.86), rgba(15, 17, 19, 0.97));
+    border: 1px solid rgba(175, 169, 57, 0.26);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 50px;
+    box-shadow: 0 26px 64px rgba(0, 0, 0, 0.42);
+}
+.featured-hero-media { position: relative; display: block; overflow: hidden; min-height: 340px; }
+.featured-hero-media img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: saturate(0.84) contrast(1.05) brightness(0.88);
+    transition: transform 0.6s ease;
+}
+.featured-hero:hover .featured-hero-media img { transform: scale(1.045); }
+.featured-hero-media::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(100deg, rgba(15, 17, 19, 0) 55%, rgba(15, 17, 19, 0.5) 100%);
+    pointer-events: none;
+}
+.featured-hero-body { padding: 44px 46px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+.featured-hero-chip { width: fit-content; }
+.featured-hero-category { color: #AFA939; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; font-weight: 700; }
+.featured-hero-title { font-size: clamp(1.5rem, 2.6vw, 2.15rem); line-height: 1.22; margin: 0; }
+.featured-hero-title a { color: #f2f4f7; text-decoration: none; }
+.featured-hero-title a:hover { color: #f7e8a3; }
+.featured-hero-excerpt { color: #c7cdd6; font-size: 1rem; line-height: 1.65; margin: 0; }
+.featured-hero-meta { display: flex; flex-wrap: wrap; gap: 18px; color: #9CA3AF; font-size: 0.85rem; }
+.featured-hero-meta i { color: #AFA939; margin-right: 6px; }
+.featured-hero-cta { width: fit-content; margin-top: 6px; }
+@media (max-width: 991.98px) {
+    .featured-hero { grid-template-columns: 1fr; }
+    .featured-hero-media { min-height: 240px; }
+    .featured-hero-body { padding: 30px 26px; }
+}
+
+/* Cluster quick-filter pills */
+.cluster-filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 30px; }
+.cluster-pill {
+    border: 1px solid rgba(175, 169, 57, 0.28);
+    background: rgba(27, 31, 35, 0.6);
+    color: #cfd5de;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.cluster-pill:hover { border-color: rgba(175, 169, 57, 0.55); color: #f0e2a4; }
+.cluster-pill.is-active { background: linear-gradient(135deg, #AFA939, #B48811); color: #0F1113; border-color: transparent; }
+
+/* Category clusters (default grouped view) */
+.category-cluster { margin-bottom: 44px; }
+.cluster-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(175, 169, 57, 0.16); }
+.cluster-head h3 { font-size: 1.3rem; margin: 0; color: #e9edf2; }
+.cluster-head .cluster-count { color: #9CA3AF; font-size: 0.8rem; font-weight: 500; margin-left: 8px; }
+.cluster-link { color: #AFA939; font-size: 0.85rem; text-decoration: none; font-weight: 600; white-space: nowrap; }
+.cluster-link:hover { color: #f7e8a3; }
+
+/* Card polish: image treatment consistent with article hero, reading-time badge */
+.card-media { height: 200px; }
+.card-media-img {
+    filter: saturate(0.85) contrast(1.04) brightness(0.92);
+    transition: transform 0.45s ease;
+}
+.glass-card:hover .card-media-img { transform: scale(1.07); }
+.badge-readtime {
+    position: absolute; right: 14px; top: 14px; z-index: 1;
+    background: rgba(15, 17, 19, 0.72);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: #e9edf2; font-size: 0.72rem; padding: 5px 10px; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.badge-readtime i { color: #AFA939; margin-right: 5px; }
+.meta-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.meta-dot { color: #5b6169; }
+.meta-author-link { color: #9CA3AF; text-decoration: none; }
+.meta-author-link:hover { color: #AFA939; }
+
+@media (max-width: 767.98px) {
+    .featured-hero-body { padding: 24px 22px; }
+    .cluster-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+/* Fix: Bootstrap's .row is a flex container, and a lone .col-lg-8 (no bare .col)
+   has no width rule below the lg breakpoint, so it sizes to its content's
+   preferred width instead of the viewport — causing horizontal overflow on
+   mobile for the article header/body columns. Force it to respect the row. */
+.article-header .row.justify-content-center > [class*="col-"],
+.article-content .row > [class*="col-"] {
+    min-width: 0;
+}

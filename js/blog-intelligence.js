@@ -152,11 +152,10 @@
         return text.split(/\s+/).filter(Boolean).length;
     }
 
+    // Reading time and the TOC list itself are owned by js/blog-article.js (shared across
+    // every article page). This only adds the word-count chip and hands back the heading
+    // list — with the same section-N ids blog-article.js already assigned — for jump links.
     function updateReadingMeta(words) {
-        const minutes = Math.max(1, Math.ceil(words / 220));
-        const readingTime = document.getElementById('readingTime');
-        if (readingTime) readingTime.textContent = String(minutes) + ' min';
-
         const metaRight = document.querySelector('.article-meta-bar .meta-right');
         if (!metaRight) return;
 
@@ -171,22 +170,12 @@
     }
 
     function generateTOC() {
-        const toc = document.getElementById('tableOfContents');
         const contentRoot = document.querySelector('.article-content');
-        if (!toc || !contentRoot) return [];
+        if (!contentRoot) return [];
 
         const headings = Array.from(contentRoot.querySelectorAll('h2, h3'));
-        toc.innerHTML = '';
-
         headings.forEach((heading, index) => {
             if (!heading.id) heading.id = 'section-' + (index + 1);
-            const li = document.createElement('li');
-            if (heading.tagName === 'H3') li.classList.add('toc-h3');
-            const a = document.createElement('a');
-            a.href = '#' + heading.id;
-            a.textContent = safeText(heading);
-            li.appendChild(a);
-            toc.appendChild(li);
         });
 
         return headings;
@@ -376,17 +365,7 @@
         }
     }
 
-    function applyReadingProgress() {
-        const bar = document.getElementById('readingProgress');
-        if (!bar) return;
-        const refresh = function () {
-            const max = document.documentElement.scrollHeight - window.innerHeight;
-            const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-            bar.style.width = pct + '%';
-        };
-        window.addEventListener('scroll', refresh, { passive: true });
-        refresh();
-    }
+    // Reading-progress bar is owned by js/blog-article.js — no separate listener needed here.
 
     function init() {
         if (!location.pathname.includes('/blog/')) return;
@@ -404,7 +383,6 @@
         enhanceAuthorCard(article);
         renderRelated(article);
         renderPrevNext(article);
-        applyReadingProgress();
 
         if (document.body) document.body.dataset.phase3Ready = 'true';
     }

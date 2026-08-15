@@ -141,9 +141,9 @@
             'business-setup-bangladesh.html': '../images/blog/business-setup-bangladesh-hero.webp',
             'banking-litigation-comprehensive.html': '../images/blog/banking-litigation-comprehensive-hero.webp',
             'banking-litigation-guide.html': '../images/blog/banking-litigation-guide-hero.webp',
-            'aviation-law-bangladesh.html': '../images/blog/aviation-law-bangladesh-hero.webp',
-            'adr-dispute-resolution.html': '../images/blog/adr-dispute-resolution-hero.webp',
-            'admiralty-shipping-law.html': '../images/blog/admiralty-shipping-law-hero.webp',
+            // aviation-law-bangladesh, adr-dispute-resolution, and admiralty-shipping-law have no
+            // local -hero.webp asset — deliberately omitted so this doesn't override the working
+            // Unsplash hero already set in the page HTML (the local file would 404).
             'administrative-law-bangladesh.html': '../images/blog/administrative-law-bangladesh-hero.webp'
         };
         return map[currentSlug] || '';

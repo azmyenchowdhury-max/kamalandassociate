@@ -14,6 +14,15 @@
     const presetAuthor = app.getAttribute('data-author') || '';
     const presetYear = app.getAttribute('data-year') || '';
     const presetMonth = app.getAttribute('data-month') || '';
+    const excludeSlug = app.getAttribute('data-exclude') || '';
+
+    const CLUSTER_LABELS = {
+        'corporate-investment': 'Corporate, Investment & Business',
+        'litigation-disputes': 'Litigation & Dispute Resolution',
+        'regulatory-public-law': 'Regulatory & Public Law',
+        'criminal-fraud-rights': 'Criminal, Fraud & Rights Protection',
+        'specialized-practice': 'Specialized & Sector-Specific'
+    };
 
     // Use simple absolute paths - works from any page location
     const blogPrefix = './';  // For articles/archives in same folder or accessible via ./
@@ -33,7 +42,8 @@
         tagCloud: document.getElementById('tagCloud'),
         dateArchive: document.getElementById('dateArchiveList'),
         categoryList: document.getElementById('categoryList'),
-        authorList: document.getElementById('authorList')
+        authorList: document.getElementById('authorList'),
+        clusterBar: document.getElementById('clusterFilterBar')
     };
 
     const searchParams = new URLSearchParams(window.location.search || '');
@@ -41,10 +51,15 @@
         q: (searchParams.get('q') || '').trim().toLowerCase(),
         category: presetCategory || (searchParams.get('category') || '').trim().toLowerCase(),
         author: presetAuthor || (searchParams.get('author') || '').trim().toLowerCase(),
+        cluster: (searchParams.get('topic') || '').trim().toLowerCase(),
         from: searchParams.get('from') || '',
         to: searchParams.get('to') || '',
         tags: []
     };
+
+    function isFiltering() {
+        return !!(state.q || state.category || state.author || state.cluster || state.from || state.to || state.tags.length);
+    }
 
     function nestedBlogPrefix() {
         const path = (window.location.pathname || '').replace(/\\/g, '/').toLowerCase();
@@ -136,8 +151,10 @@
 
     function filterPosts() {
         return applyModePreset(POSTS).filter((post) => {
+            if (excludeSlug && post.slug === excludeSlug) return false;
             if (state.category && post.categorySlug !== state.category) return false;
             if (state.author && post.authorSlug !== state.author) return false;
+            if (state.cluster && post.cluster !== state.cluster) return false;
             if (state.q && !fullText(post).includes(state.q)) return false;
             if (state.tags.length && !state.tags.every((tag) => (post.tags || []).includes(tag))) return false;
             if (!inDateRange(post)) return false;
@@ -147,14 +164,17 @@
 
     function renderCard(post) {
         return [
-            '<div class="col-md-6 article-item">',
+            '<div class="col-md-6 col-lg-4 article-item">',
             '  <article class="glass-card">',
+            '    <a href="' + articleHref(post.slug) + '" class="card-media-link" aria-label="' + post.title + '">',
             '    <div class="card-media">',
             '      <span class="badge-soft">' + post.category + '</span>',
-            '      <img class="card-media-img" src="' + imageSrc(post.image) + '" alt="' + post.title + '" onerror="this.onerror=null;this.src=\'/images/blog/company-formation-guide-thumb.webp\';">',
+            (post.readTime ? '      <span class="badge-readtime"><i class="far fa-clock"></i>' + post.readTime + ' min</span>' : ''),
+            '      <img class="card-media-img" src="' + imageSrc(post.image) + '" alt="' + post.title + '" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/blog/company-formation-guide-thumb.webp\';">',
             '    </div>',
+            '    </a>',
             '    <div class="card-bodyx">',
-            '      <div class="meta-row">' + new Date(post.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' | <a href="' + authorHref(post.authorSlug) + '">' + post.author + '</a></div>',
+            '      <div class="meta-row"><span class="meta-date">' + new Date(post.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + '</span><span class="meta-dot">&bull;</span><a href="' + authorHref(post.authorSlug) + '" class="meta-author-link">' + post.author + '</a></div>',
             '      <h3 class="card-titlex"><a href="' + articleHref(post.slug) + '">' + post.title + '</a></h3>',
             '      <p class="mb-2 text-secondary">' + post.excerpt + '</p>',
             '      <div class="card-tags">' + (post.tags || []).slice(0, 3).map((tag) => '<button type="button" class="tag-chip" data-tag="' + tag + '">' + tag + '</button>').join('') + '</div>',
@@ -163,6 +183,34 @@
             '  </article>',
             '</div>'
         ].join('');
+    }
+
+    function renderCategorySection(group) {
+        return [
+            '<div class="category-cluster">',
+            '  <div class="cluster-head">',
+            '    <h3>' + group.label + '<span class="cluster-count">' + group.items.length + (group.items.length === 1 ? ' article' : ' articles') + '</span></h3>',
+            '  </div>',
+            '  <div class="row g-4">',
+            group.items.map(renderCard).join(''),
+            '  </div>',
+            '</div>'
+        ].join('');
+    }
+
+    function renderGrouped(posts) {
+        const groups = [];
+        const seen = new Map();
+        posts.forEach((post) => {
+            const key = post.cluster || 'general';
+            if (!seen.has(key)) {
+                const entry = { key: key, label: post.clusterLabel || CLUSTER_LABELS[key] || 'More Articles', items: [] };
+                seen.set(key, entry);
+                groups.push(entry);
+            }
+            seen.get(key).items.push(post);
+        });
+        return groups.map(renderCategorySection).join('');
     }
 
     function updateSummary(count) {
@@ -186,6 +234,9 @@
         if (state.author) {
             const foundAuthor = POSTS.find((p) => p.authorSlug === state.author);
             pills.push(filterPill('Author: ' + (foundAuthor ? foundAuthor.author : state.author), 'author', ''));
+        }
+        if (state.cluster) {
+            pills.push(filterPill('Topic: ' + (CLUSTER_LABELS[state.cluster] || state.cluster), 'cluster', ''));
         }
         if (state.from || state.to) {
             const fromStr = state.from ? new Date(state.from + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
@@ -261,6 +312,11 @@
         if (el.authorSelect) el.authorSelect.value = state.author;
         if (el.fromDate) el.fromDate.value = state.from;
         if (el.toDate) el.toDate.value = state.to;
+        if (el.clusterBar) {
+            el.clusterBar.querySelectorAll('.cluster-pill').forEach((pill) => {
+                pill.classList.toggle('is-active', (pill.getAttribute('data-cluster') || '') === state.cluster);
+            });
+        }
     }
 
     function updateQueryString() {
@@ -269,6 +325,7 @@
         if (state.q) params.set('q', state.q);
         if (state.category) params.set('category', state.category);
         if (state.author) params.set('author', state.author);
+        if (state.cluster) params.set('topic', state.cluster);
         if (state.from) params.set('from', state.from);
         if (state.to) params.set('to', state.to);
         const query = params.toString();
@@ -279,10 +336,15 @@
     function render() {
         const filtered = filterPosts();
         if (el.grid) {
-            el.grid.innerHTML = filtered.map(renderCard).join('');
+            if (mode === 'home' && !isFiltering()) {
+                el.grid.innerHTML = renderGrouped(filtered);
+            } else {
+                el.grid.innerHTML = filtered.map(renderCard).join('');
+            }
         }
         updateSummary(filtered.length);
         renderPills();
+        syncInputs();
         updateQueryString();
     }
 
@@ -355,6 +417,7 @@
                 state.q = '';
                 state.category = '';
                 state.author = '';
+                state.cluster = '';
                 state.from = '';
                 state.to = '';
                 state.tags = [];
@@ -372,8 +435,19 @@
                 if (key === 'q') state.q = '';
                 if (key === 'category') state.category = '';
                 if (key === 'author') state.author = '';
+                if (key === 'cluster') state.cluster = '';
                 if (key === 'from') state.from = state.to = '';
                 if (key === 'tag') state.tags = state.tags.filter((tag) => tag !== value);
+                syncInputs();
+                render();
+            });
+        }
+
+        if (el.clusterBar) {
+            el.clusterBar.addEventListener('click', function (event) {
+                const target = event.target.closest('.cluster-pill');
+                if (!target) return;
+                state.cluster = target.getAttribute('data-cluster') || '';
                 syncInputs();
                 render();
             });

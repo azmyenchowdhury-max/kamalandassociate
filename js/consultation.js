@@ -9,10 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const SUPABASE_URL = window.__SUPABASE_URL__ || 'https://rujctxkklzxnogniivdj.supabase.co';
     const SUPABASE_ANON_KEY = window.__SUPABASE_ANON_KEY__ || '';
 
-    // ===== Google Sheets Eligibility API =====
-    const ELIGIBILITY_API_URL = 'https://script.google.com/macros/s/AKfycbxjbOeyq6VE41zIDU-N5IUaO7w1ntHTo47V463n4Q7UHOQ9vJMU43QzxWxyTqq-xjfD_Q/exec';
-    const ELIGIBILITY_CLIENT_KEY = 'KamalLaw_EligCheck_2026';
-
     function getAuthHeaders() {
         if (!SUPABASE_ANON_KEY) {
             throw new Error('Missing runtime Supabase anon key (window.__SUPABASE_ANON_KEY__).');
@@ -93,23 +89,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return p;
     }
 
-    // Google Sheets Eligibility API – authoritative source of truth
+    // Google Sheets Eligibility API – authoritative source of truth.
+    // Routed through the Supabase proxy so the Apps Script client key stays
+    // server-side instead of shipping in this file to every visitor's browser.
     async function callEligibilityAPI(action, email, phone, extraData = {}) {
-        const response = await fetch(ELIGIBILITY_API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify({
-                action,
-                email: email.trim().toLowerCase(),
-                phone: normalizePhone(phone),
-                clientKey: ELIGIBILITY_CLIENT_KEY,
-                ...extraData
-            })
+        return invokeEdgeFunction('api-eligibility-check', {
+            action,
+            email: email.trim().toLowerCase(),
+            phone: normalizePhone(phone),
+            ...extraData
         });
-        if (!response.ok) {
-            throw new Error('Eligibility service unavailable (HTTP ' + response.status + '). Please try again or call our office.');
-        }
-        return response.json();
     }
     
     // State management

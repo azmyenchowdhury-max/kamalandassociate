@@ -617,7 +617,7 @@ function setupApplicationForm() {
           <div class="d-flex justify-content-between align-items-start gap-3">
             <div>
               <div class="d-flex align-items-center gap-2 mb-2">
-                <img src="images/logo.png" alt="Kamal and Associates logo" class="rv-logo" />
+                <img src="images/Logo.png" alt="Kamal and Associates logo" class="rv-logo" />
                 <div>
                   <p class="mb-0 fw-bold rv-firm-name">Kamal &amp; Associates</p>
                   <p class="mb-0 rv-firm-slogan">Excellence in Advocacy. Integrity in Counsel.</p>

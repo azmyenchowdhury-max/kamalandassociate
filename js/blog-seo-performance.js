@@ -2,7 +2,7 @@
     'use strict';
 
     var SITE_URL = 'https://kamalassociates.com.bd';
-    var ORG_LOGO = SITE_URL + '/images/logo.png';
+    var ORG_LOGO = SITE_URL + '/images/Logo.png';
 
     var ARTICLE_DATA = {
         'company-formation-guide.html': {

@@ -127,7 +127,7 @@ function findEligibilityRow(sheet, key) {
   return null;
 }
 
-function getOrCreateSheet(name, headers) {
+function getOrCreateSheet(name, headers, plainTextColumns) {
   const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
   let sheet = ss.getSheetByName(name);
   if (!sheet) {
@@ -139,7 +139,28 @@ function getOrCreateSheet(name, headers) {
     headerRange.setFontColor("#ffffff");
     sheet.setFrozenRows(1);
   }
+
+  // Force these columns to stay plain text — otherwise Sheets auto-converts
+  // strings like "2026-08-17" or "4:00 PM" into real Date/Time values, which
+  // silently breaks string comparisons used for slot-availability checks.
+  if (plainTextColumns && plainTextColumns.length) {
+    plainTextColumns.forEach(function(col) {
+      sheet.getRange(2, col, 1000, 1).setNumberFormat("@");
+    });
+  }
+
   return sheet;
+}
+
+// Reads a cell value back as plain text regardless of whether Sheets stored
+// it as a string or auto-converted it to a Date/Time value.
+function cellToText(value, timeOnly) {
+  if (value instanceof Date) {
+    return timeOnly
+      ? Utilities.formatDate(value, "Asia/Dhaka", "h:mm a")
+      : Utilities.formatDate(value, "Asia/Dhaka", "yyyy-MM-dd");
+  }
+  return String(value || "").trim();
 }
 
 // ------------------------------------------------------------
@@ -193,14 +214,14 @@ function getBookedSlots(date) {
     return { success: false, error: "Missing date." };
   }
 
-  const sheet = getOrCreateSheet(CONFIG.CONSULTATIONS_SHEET, CONFIG.CONSULTATION_HEADERS);
+  const sheet = getOrCreateSheet(CONFIG.CONSULTATIONS_SHEET, CONFIG.CONSULTATION_HEADERS, [12, 13]);
   const data = sheet.getDataRange().getValues();
   const booked = [];
 
   for (let i = 1; i < data.length; i++) {
-    const rowDate = data[i][11];   // Preferred Date
-    const rowTime = data[i][12];   // Preferred Time
-    const rowStatus = data[i][17]; // Payment Status
+    const rowDate = cellToText(data[i][11], false);   // Preferred Date
+    const rowTime = cellToText(data[i][12], true);    // Preferred Time
+    const rowStatus = cellToText(data[i][17], false); // Payment Status
     if (rowDate === date && BLOCKING_PAYMENT_STATUSES.indexOf(rowStatus) !== -1) {
       booked.push(rowTime);
     }
@@ -224,7 +245,7 @@ function saveConsultation(email, phone, consultation) {
     }
   }
 
-  const sheet = getOrCreateSheet(CONFIG.CONSULTATIONS_SHEET, CONFIG.CONSULTATION_HEADERS);
+  const sheet = getOrCreateSheet(CONFIG.CONSULTATIONS_SHEET, CONFIG.CONSULTATION_HEADERS, [12, 13]);
   const consultationId = "KC-" + Utilities.getUuid().split("-")[0].toUpperCase();
 
   sheet.appendRow([

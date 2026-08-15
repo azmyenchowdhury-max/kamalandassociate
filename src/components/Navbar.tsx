@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
     { name: 'About', path: '/about' },
     { name: 'Attorneys', path: '/attorneys' },
     { name: 'Practice Areas', path: '/practice-areas' },
-    { name: 'Case Studies', path: '/case-studies' },
+    // { name: 'Case Studies', path: '/case-studies' }, // disabled site-wide
     { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
   ];

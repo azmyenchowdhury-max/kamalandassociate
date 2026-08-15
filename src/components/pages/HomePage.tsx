@@ -362,7 +362,8 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Case Studies Section with Tabs */}
+      {/* Case Studies Section with Tabs — disabled site-wide */}
+      {false && (
       <section className="ftco-section bg-dark-custom">
         <div className="container">
           <div className="row justify-content-center mb-5" data-aos="fade-up">
@@ -424,6 +425,7 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+      )}
 
       {/* Awards Section */}
       <section className="ftco-section">

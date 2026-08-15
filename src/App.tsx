@@ -6,7 +6,7 @@ import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/AboutPage";
 import AttorneysPage from "./components/pages/AttorneysPage";
 import PracticeAreasPage from "./components/pages/PracticeAreasPage";
-import CaseStudiesPage from "./components/pages/CaseStudiesPage";
+// import CaseStudiesPage from "./components/pages/CaseStudiesPage"; // Case Studies disabled site-wide
 import BlogPage from "./components/pages/BlogPage";
 import ContactPage from "./components/pages/ContactPage";
 import ConsultationPage from "./components/pages/ConsultationPage";
@@ -21,7 +21,7 @@ const App = () => (
           <Route path="/about" element={<AboutPage />} />
           <Route path="/attorneys" element={<AttorneysPage />} />
           <Route path="/practice-areas" element={<PracticeAreasPage />} />
-          <Route path="/case-studies" element={<CaseStudiesPage />} />
+          {/* <Route path="/case-studies" element={<CaseStudiesPage />} /> */}
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/consultation" element={<ConsultationPage />} />

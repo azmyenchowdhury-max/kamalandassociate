@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
     { name: 'About Us', path: '/about' },
     { name: 'Our Attorneys', path: '/attorneys' },
     { name: 'Practice Areas', path: '/practice-areas' },
-    { name: 'Case Studies', path: '/case-studies' },
+    // { name: 'Case Studies', path: '/case-studies' }, // disabled site-wide
     { name: 'Blog', path: '/blog' },
     { name: 'Contact Us', path: '/contact' },
   ];

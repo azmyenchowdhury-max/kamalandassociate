@@ -1065,8 +1065,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 showError(error.message || 'An error occurred. Please try again.');
 
                 // Refresh slot availability in case this failure was a booking conflict.
-                if (preferredDate.value) {
-                    applyBookedSlotAvailability(preferredDate.value);
+                // (preferredDate here is the local date-string variable declared above,
+                // which shadows the outer preferredDate DOM element within this handler.)
+                if (preferredDate) {
+                    applyBookedSlotAvailability(preferredDate);
                 }
 
                 // Reset button

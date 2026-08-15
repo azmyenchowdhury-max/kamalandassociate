@@ -163,6 +163,14 @@ function cellToText(value, timeOnly) {
   return String(value || "").trim();
 }
 
+// Leading apostrophe forces Sheets to store the value as literal text
+// instead of auto-detecting it as a Date/Time — setNumberFormat("@") alone
+// is not reliably honored by appendRow(). The apostrophe itself never ends
+// up in the stored/displayed value.
+function forceText(value) {
+  return "'" + String(value || "");
+}
+
 // ------------------------------------------------------------
 // Actions
 // ------------------------------------------------------------
@@ -256,7 +264,7 @@ function saveConsultation(email, phone, consultation) {
     consultation.firstName || "", consultation.lastName || "",
     consultation.practiceArea || "", consultation.urgency || "",
     consultation.caseDescription || "", consultation.additionalNotes || "",
-    consultation.preferredDate || "", consultation.preferredTime || "",
+    forceText(consultation.preferredDate || ""), forceText(consultation.preferredTime || ""),
     consultation.consultationType || "",
     consultation.documentsCount || 0,
     (consultation.documentNames || []).join(", "),

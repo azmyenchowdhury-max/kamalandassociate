@@ -29,3 +29,6 @@ supabase/.temp/
 # Environment variables
 .env
 .env.local
+
+# Secrets / API keys — never track these
+Tokens/

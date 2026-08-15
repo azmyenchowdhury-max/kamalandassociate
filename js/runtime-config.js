@@ -1,13 +1,13 @@
 (function () {
   var config = window.__APP_RUNTIME_CONFIG__ || {};
   var defaultSupabaseAnonKey =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaG1ucHN2YWl2bWtzeXBtdndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzI3NTEsImV4cCI6MjA5OTg0ODc1MX0.G_MDkgEne54YeSrT32YYcTNmbD6C3oQndVruC5Rzi58";
+    "sb_publishable_utSnDAPyeFLPrzYGfXzHaA_LOKNrIsJ";
   var defaultSupabasePublishableKey = defaultSupabaseAnonKey;
 
   var supabaseUrl =
     config.supabaseUrl ||
     window.__SUPABASE_URL__ ||
-    "https://aehmnpsvaivmksypmvwm.supabase.co";
+    "https://rujctxkklzxnogniivdj.supabase.co";
 
   var anonKey =
     config.supabaseAnonKey ||

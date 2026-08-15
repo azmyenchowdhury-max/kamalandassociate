@@ -9,27 +9,34 @@
 // 4. Click Deploy > New deployment > Web app.
 //    - Execute as: Me
 //    - Who has access: Anyone
-// 5. Copy the Web App URL and paste it into careers.js as APPS_SCRIPT_URL.
+// 5. Copy the Web App URL and set it as APPS_SCRIPT_URL in the Supabase
+//    Edge Function env (supabase secrets set APPS_SCRIPT_URL=...), NOT in
+//    careers.js — the browser never talks to this URL directly anymore,
+//    it goes through the api-job-application proxy function.
 // ============================================================
 
 // ------------------------------------------------------------
 // CONFIG — fill these in before deploying
 // ------------------------------------------------------------
 const CONFIG = {
-  // Secret token — must match APPS_SCRIPT_SECRET in careers.js
-  SECRET_TOKEN: "7bd779df1a694b698e8b8cd09c23923444098777c1a14e1ca67daf876f15b9d6",
+  // Secret token — must match APPS_SCRIPT_SECRET set on the Supabase
+  // api-job-application function (supabase secrets set APPS_SCRIPT_SECRET=...).
+  // This file is tracked in git — do NOT paste the real token here. Only
+  // set the real value directly in the Apps Script editor at script.google.com
+  // (Project Settings are per-deployment, not synced from this repo file).
+  SECRET_TOKEN: "REPLACE_WITH_YOUR_SECRET_TOKEN_IN_THE_APPS_SCRIPT_EDITOR_ONLY",
 
   // Google Spreadsheet ID (from its URL: /spreadsheets/d/SPREADSHEET_ID/edit)
-  SPREADSHEET_ID: "1uDWpSgEnGA7zewv03b8iI5RSLHhzJ0rFHTmzjisazD4",
+  SPREADSHEET_ID: "11ds4wsppkOfz_7zCuH0tsJjf4WQl1Hz0fySkVrLUGes",
 
   // Google Drive folder IDs for each job type.
   // Create a root folder "Kamal & Associates — Job Applications"
   // then create 3 subfolders inside it and paste each folder ID here.
   DRIVE_FOLDERS: {
-    "Computer Typist":    "1LveQ9UUjzIp5UAW8c9bg1tUpiFL43zzd",
-    "Apprentice Lawyer":  "1Ay8LhnrsPlsWqDgFBe4DfLjJvUJqqSR5",
-    "Junior Associate":   "1OVM-S-UmkgfD1UjW5vyV7ArlwtyQ-_F4",
-    "Default":            "1Pz1vZ01uaI4GMmtlcX86Q9qQAcGg70Zy"
+    "Computer Typist":    "1YuwoWDvTIPdy1lmaCPzdBVd9IFNZPsNo",
+    "Apprentice Lawyer":  "1q4WoY5aR5rOkcD1wQCHwCPmdJ0_4ciYc",
+    "Junior Associate":   "1iwPFzbPkPeMwBTCfG2asQVfiRenXHiJC",
+    "Default":            "1HLVRmiacS4KLsK7SUXr3mFp5UVlKIuWl"
   },
 
   // Sheet names inside the spreadsheet — must match exactly.

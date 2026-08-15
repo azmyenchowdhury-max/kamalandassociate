@@ -1,20 +1,16 @@
 // Careers page logic
-// Job postings: fetched via Supabase proxy (falls back to static list).
-// Applications: submitted to Google Apps Script → Google Sheets + Google Drive.
+// Job postings: static list below (no external service — edit DEFAULT_JOB_OPENINGS to change).
+// Applications: submitted via Supabase proxy, which forwards to Google Apps
+// Script → Google Sheets + Google Drive. The Apps Script secret is held
+// server-side (Supabase function env var) and never shipped to the browser.
 
-// --- Google Apps Script endpoint ---
-// Paste your deployed Web App URL here after deploying google-apps-script/Code.gs
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby7W3R9uInzVVhCOaz8ncODhEuyRvrFT4V33sD9vhpo_Tktc_NE4fUlft03JS62XbBIcw/exec";
-// Must match CONFIG.SECRET_TOKEN in Code.gs
-const APPS_SCRIPT_SECRET = "7bd779df1a694b698e8b8cd09c23923444098777c1a14e1ca67daf876f15b9d6";
-
-// --- Supabase proxy (for job postings only) ---
-const DEFAULT_SUPABASE_URL = "https://aehmnpsvaivmksypmvwm.supabase.co";
+// --- Supabase proxy (applications only) ---
+const DEFAULT_SUPABASE_URL = "https://rujctxkklzxnogniivdj.supabase.co";
 const SUPABASE_FUNCTIONS_BASE = String(
   window.__KAMAL_CHATBOT_API_BASE__ ||
     (window.__SUPABASE_URL__ || DEFAULT_SUPABASE_URL) + "/functions/v1"
 ).replace(/\/$/, "");
-const JOB_POSTINGS_PROXY_URL = `${SUPABASE_FUNCTIONS_BASE}/api-job-postings`;
+const JOB_APPLICATION_PROXY_URL = `${SUPABASE_FUNCTIONS_BASE}/api-job-application`;
 const SUPABASE_ANON_KEY =
   window.__KAMAL_CHATBOT_SUPABASE_ANON_KEY__ || window.__SUPABASE_ANON_KEY__ || "";
 
@@ -141,26 +137,6 @@ const DEFAULT_JOB_OPENINGS = [
     ]
   }
 ];
-
-function createJobKey(job) {
-  return [job.title, job.location, job.jobType]
-    .map((value) => String(value || "").trim().toLowerCase())
-    .join("|");
-}
-
-function mergeJobs(staticJobs, dynamicJobs) {
-  const seen = new Set(staticJobs.map(createJobKey));
-  const uniqueDynamicJobs = dynamicJobs.filter((job) => {
-    const key = createJobKey(job);
-    if (seen.has(key)) {
-      return false;
-    }
-    seen.add(key);
-    return true;
-  });
-
-  return [...staticJobs, ...uniqueDynamicJobs];
-}
 
 function buildGenericJobDetails(job) {
   return {
@@ -293,95 +269,11 @@ function renderJobs(jobs) {
   });
 }
 
-async function fetchJobs() {
-  const jobBoard = document.getElementById("job-board");
-
-  if (!jobBoard) {
-    return;
-  }
-
-  jobBoard.innerHTML = `
-    <div class="col-12">
-      <div class="alert alert-light border" role="status">Loading open positions...</div>
-    </div>
-  `;
-
-  try {
-    const headers = {
-      "Content-Type": "application/json"
-    };
-
-    if (SUPABASE_ANON_KEY) {
-      headers.apikey = SUPABASE_ANON_KEY;
-      headers.Authorization = `Bearer ${SUPABASE_ANON_KEY}`;
-    }
-
-    const response = await fetch(JOB_POSTINGS_PROXY_URL, {
-      method: "GET",
-      headers
-    });
-
-    // 404 means the Edge Function is not deployed yet — show a friendly notice
-    // and fall back to the static job openings so the page stays usable.
-    if (response.status === 404) {
-      console.warn(
-        "Job postings proxy not deployed yet. Showing static openings. " +
-        "Deploy supabase/functions/api-job-postings to enable live Airtable data."
-      );
-      renderJobsWithProxyNotice(DEFAULT_JOB_OPENINGS);
-      return;
-    }
-
-    if (!response.ok) {
-      throw new Error(`Request failed with status ${response.status}`);
-    }
-
-    const data = await response.json();
-    const records = Array.isArray(data.records) ? data.records : [];
-    const jobs = records.map((record) => {
-      const fields = record.fields || {};
-
-      return {
-        title: fields["Job Title"] || "Untitled Position",
-        location: fields["Location"] || "Location not specified",
-        jobType: fields["Job Type"] || "Type not specified",
-        description: fields["Description"] || "No description available.",
-        overview: fields["Firm Overview"] || "",
-        responsibilities: fields["Key Responsibilities"] || null,
-        qualifications: fields["Qualifications & Requirements"] || null,
-        softSkills: fields["Soft Skills & Competencies"] || null,
-        benefits: fields["Salary & Benefits"] || null
-      };
-    });
-
-    renderJobs(mergeJobs(DEFAULT_JOB_OPENINGS, jobs));
-  } catch (error) {
-    console.error("Failed to fetch job postings:", error);
-    renderJobs(DEFAULT_JOB_OPENINGS);
-  }
-}
-
-function renderJobsWithProxyNotice(jobs) {
+function fetchJobs() {
   const jobBoard = document.getElementById("job-board");
   if (!jobBoard) return;
 
-  // Render the static jobs first so the page looks fully functional
-  renderJobs(jobs);
-
-  // Prepend a soft admin-only notice inside the section container (not visible to regular visitors)
-  // It appears only in the browser console; no UI banner that would confuse applicants.
-  // If you want a visible banner during setup, uncomment the block below.
-  /*
-  const notice = document.createElement("div");
-  notice.className = "col-12 mb-3";
-  notice.innerHTML = `
-    <div class="alert alert-warning small py-2" role="alert">
-      <strong>Setup notice:</strong> Live job postings from Airtable are not active yet.
-      Showing default positions. Deploy <code>api-job-postings</code> to enable live data.
-    </div>
-  `;
-  jobBoard.prepend(notice);
-  */
+  renderJobs(DEFAULT_JOB_OPENINGS);
 }
 
 
@@ -536,41 +428,31 @@ function collectFormData(form) {
 }
 
 // ---------------------------------------------------------------------------
-// Submit to Google Apps Script
+// Submit application via the Supabase proxy (which forwards to Google Apps
+// Script server-side, keeping the Apps Script secret out of the browser).
 // ---------------------------------------------------------------------------
 async function submitToGoogleSheets(formData, filePayloads) {
   const payload = { ...formData, files: filePayloads };
-  const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(APPS_SCRIPT_SECRET)}`;
-  const body = JSON.stringify(payload);
 
-  // Primary request path: expect JSON response from Apps Script.
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body
-    });
-
-    if (!response.ok) {
-      throw new Error(`Server responded with ${response.status}`);
-    }
-
-    return await response.json();
-  } catch (primaryError) {
-    // Fallback path for browser/CORS redirect quirks with Apps Script web apps.
-    // This request is fire-and-forget (opaque response), but usually reaches Apps Script.
-    await fetch(url, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body
-    });
-
-    return {
-      status: "ok-opaque",
-      message: "Submitted via fallback request."
-    };
+  const headers = { "Content-Type": "application/json" };
+  if (SUPABASE_ANON_KEY) {
+    headers.apikey = SUPABASE_ANON_KEY;
+    headers.Authorization = `Bearer ${SUPABASE_ANON_KEY}`;
   }
+
+  const response = await fetch(JOB_APPLICATION_PROXY_URL, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(payload)
+  });
+
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(result.error || `Server responded with ${response.status}`);
+  }
+
+  return result;
 }
 
 // ---------------------------------------------------------------------------
@@ -854,15 +736,6 @@ function setupApplicationForm() {
 
     if (!runValidation()) return;
 
-    // Check endpoint is configured
-    if (APPS_SCRIPT_URL.startsWith("REPLACE")) {
-      showApplicationStatus(
-        "The application endpoint is not configured yet. Please contact the site administrator.",
-        "warning"
-      );
-      return;
-    }
-
     // --- submit ---
     if (submitBtn) submitBtn.disabled = true;
     if (spinnerEl) spinnerEl.classList.remove("d-none");
@@ -874,10 +747,10 @@ function setupApplicationForm() {
       const filePayloads = await collectFilePayloads(fileInputs);
       const result       = await submitToGoogleSheets(formData, filePayloads);
 
-      if (result.status === "ok" || result.status === "ok-opaque") {
+      if (result.status === "ok") {
         const applicantName = formData.fullName || "Applicant";
         const applicantRole = formData.jobTitle || "Selected Position";
-        const emailSent = result.status === "ok" ? Boolean(result.applicantEmailSent) : true;
+        const emailSent = Boolean(result.applicantEmailSent);
 
         form.reset();
         form.classList.remove("was-validated");
@@ -902,9 +775,7 @@ function setupApplicationForm() {
         }
 
         showApplicationStatus(
-          result.status === "ok"
-            ? "Your application has been submitted successfully. We will be in touch if you are shortlisted."
-            : "Your application was sent. Please check your Google Sheet in 10-20 seconds to confirm entry.",
+          "Your application has been submitted successfully. We will be in touch if you are shortlisted.",
           "success"
         );
       } else {

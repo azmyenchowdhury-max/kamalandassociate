@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { corsHeaders, jsonResponse } from "../_shared/cors.ts";
+import { makeResponder, corsHeadersFor, logAndSanitize } from "../_shared/cors.ts";
+import { checkIpRateLimit, getClientIp } from "../_shared/rate_limit.ts";
 
 interface SessionStartRequest {
   visitor_id?: string;
@@ -9,12 +10,16 @@ interface SessionStartRequest {
 }
 
 Deno.serve(async (req) => {
+  const origin = req.headers.get("Origin");
+  const cors = corsHeadersFor(origin);
+  const respond = makeResponder(origin);
+
   if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: corsHeaders });
+    return new Response("ok", { headers: cors });
   }
 
   if (req.method !== "POST") {
-    return jsonResponse({ status: "error", error: "Method not allowed" }, 405);
+    return respond({ status: "error", error: "Method not allowed" }, 405);
   }
 
   try {
@@ -22,11 +27,24 @@ Deno.serve(async (req) => {
     const serviceRole = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
     if (!supabaseUrl || !serviceRole) {
-      return jsonResponse({ status: "error", error: "Missing Supabase env vars" }, 500);
+      return respond({ status: "error", error: "Missing Supabase env vars" }, 500);
     }
 
     const supabase = createClient(supabaseUrl, serviceRole);
     const requestId = crypto.randomUUID();
+
+    const clientIp = getClientIp(req);
+    const withinLimit = await checkIpRateLimit(supabase, "chat_session_start", clientIp, {
+      limit: 15,
+      windowSeconds: 600,
+    });
+
+    if (!withinLimit) {
+      return respond(
+        { status: "error", request_id: requestId, error: "Too many requests. Please try again shortly." },
+        429
+      );
+    }
 
     const payload = (await req.json()) as SessionStartRequest;
     const language = payload.language === "bn" ? "bn" : "en";
@@ -41,7 +59,8 @@ Deno.serve(async (req) => {
         .single();
 
       if (visitorError || !visitor) {
-        return jsonResponse({ status: "error", request_id: requestId, error: visitorError?.message ?? "Failed to create visitor" }, 500);
+        const message = logAndSanitize(requestId, "Failed to create visitor", visitorError);
+        return respond({ status: "error", request_id: requestId, error: message }, 500);
       }
 
       visitorId = visitor.id;
@@ -59,7 +78,8 @@ Deno.serve(async (req) => {
       .single();
 
     if (conversationError || !conversation) {
-      return jsonResponse({ status: "error", request_id: requestId, error: conversationError?.message ?? "Failed to create conversation" }, 500);
+      const message = logAndSanitize(requestId, "Failed to create conversation", conversationError);
+      return respond({ status: "error", request_id: requestId, error: message }, 500);
     }
 
     await supabase.from("chat_events").insert({
@@ -69,7 +89,7 @@ Deno.serve(async (req) => {
       event_payload: { source_page: payload.source_page ?? null },
     });
 
-    return jsonResponse({
+    return respond({
       request_id: requestId,
       status: "ok",
       data: {
@@ -82,6 +102,7 @@ Deno.serve(async (req) => {
       warnings: [],
     });
   } catch (error) {
-    return jsonResponse({ status: "error", error: (error as Error).message }, 500);
+    const message = logAndSanitize("unknown", "Unhandled session-start error", error);
+    return respond({ status: "error", error: message }, 500);
   }
 });

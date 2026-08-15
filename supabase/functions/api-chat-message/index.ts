@@ -1,7 +1,8 @@
 // @ts-nocheck
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { corsHeaders, jsonResponse } from "../_shared/cors.ts";
+import { makeResponder, corsHeadersFor, logAndSanitize } from "../_shared/cors.ts";
 import { matchAttorney } from "../_shared/attorneys.ts";
+import { checkConversationRateLimit } from "../_shared/rate_limit.ts";
 
 interface ChatMessageRequest {
   conversation_id: string;
@@ -346,12 +347,16 @@ async function generateGroqResponse(params: {
 }
 
 Deno.serve(async (req) => {
+  const origin = req.headers.get("Origin");
+  const cors = corsHeadersFor(origin);
+  const respond = makeResponder(origin);
+
   if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: corsHeaders });
+    return new Response("ok", { headers: cors });
   }
 
   if (req.method !== "POST") {
-    return jsonResponse({ status: "error", error: "Method not allowed" }, 405);
+    return respond({ status: "error", error: "Method not allowed" }, 405);
   }
 
   try {
@@ -361,7 +366,7 @@ Deno.serve(async (req) => {
     const groqModel = Deno.env.get("GROQ_MODEL") ?? "llama-3.1-8b-instant";
 
     if (!supabaseUrl || !serviceRole) {
-      return jsonResponse({ status: "error", error: "Missing Supabase env vars" }, 500);
+      return respond({ status: "error", error: "Missing Supabase env vars" }, 500);
     }
 
     const supabase = createClient(supabaseUrl, serviceRole);
@@ -371,7 +376,26 @@ Deno.serve(async (req) => {
     const language: "en" | "bn" = payload.language === "bn" ? "bn" : "en";
 
     if (!payload.conversation_id || !payload.message?.trim()) {
-      return jsonResponse({ status: "error", request_id: requestId, error: "conversation_id and message are required" }, 400);
+      return respond({ status: "error", request_id: requestId, error: "conversation_id and message are required" }, 400);
+    }
+
+    const withinLimit = await checkConversationRateLimit(supabase, payload.conversation_id, {
+      limit: 25,
+      windowSeconds: 600,
+    });
+
+    if (!withinLimit) {
+      return respond(
+        {
+          status: "error",
+          request_id: requestId,
+          error:
+            language === "bn"
+              ? "Apni khub druto message পাঠাচ্ছেন। Doya kore ektু wait korun."
+              : "You're sending messages too quickly. Please wait a moment and try again.",
+        },
+        429
+      );
     }
 
     const userInsert = await supabase.from("messages").insert({
@@ -386,7 +410,8 @@ Deno.serve(async (req) => {
     });
 
     if (userInsert.error) {
-      return jsonResponse({ status: "error", request_id: requestId, error: userInsert.error.message }, 500);
+      const message = logAndSanitize(requestId, "Failed to save user message", userInsert.error);
+      return respond({ status: "error", request_id: requestId, error: message }, 500);
     }
 
     const warnings: string[] = [];
@@ -399,7 +424,8 @@ Deno.serve(async (req) => {
       .limit(12);
 
     if (historyError) {
-      warnings.push(`History load failed: ${historyError.message}`);
+      logAndSanitize(requestId, "History load failed", historyError);
+      warnings.push("History load failed; continuing without prior context.");
     }
 
     const history = Array.isArray(historyRows) ? [...historyRows].reverse() : [];
@@ -416,7 +442,8 @@ Deno.serve(async (req) => {
           history,
         });
       } catch (error) {
-        warnings.push(`Groq fallback active: ${(error as Error).message}`);
+        logAndSanitize(requestId, "Groq request failed, using rule-based fallback", error);
+        warnings.push("Groq fallback active.");
         response = ruleBasedFallback(payload.message, language);
         response.reply_text = appendLegalGuardrails(response.reply_text, language);
       }
@@ -441,7 +468,8 @@ Deno.serve(async (req) => {
           ].slice(0, 3);
         }
       } catch (error) {
-        warnings.push(`Attorney match failed: ${(error as Error).message}`);
+        logAndSanitize(requestId, "Attorney match failed", error);
+        warnings.push("Attorney match failed.");
       }
     }
 
@@ -461,7 +489,8 @@ Deno.serve(async (req) => {
     });
 
     if (botInsert.error) {
-      return jsonResponse({ status: "error", request_id: requestId, error: botInsert.error.message }, 500);
+      const message = logAndSanitize(requestId, "Failed to save bot message", botInsert.error);
+      return respond({ status: "error", request_id: requestId, error: message }, 500);
     }
 
     await supabase
@@ -469,7 +498,7 @@ Deno.serve(async (req) => {
       .update({ current_intent: response.intent })
       .eq("id", payload.conversation_id);
 
-    return jsonResponse({
+    return respond({
       request_id: requestId,
       status: "ok",
       data: {
@@ -486,6 +515,7 @@ Deno.serve(async (req) => {
       warnings,
     });
   } catch (error) {
-    return jsonResponse({ status: "error", error: (error as Error).message }, 500);
+    const message = logAndSanitize("unknown", "Unhandled chat-message error", error);
+    return respond({ status: "error", error: message }, 500);
   }
 });

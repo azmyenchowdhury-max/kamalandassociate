@@ -16,7 +16,7 @@
       // <script> tag) if chatbot.js appears earlier in the document — so window.__KAMAL_*__
       // is not reliably set yet at this point. Always resolve live via getApiBaseUrl()/
       // applyApiAuthHeaders() at request time instead of reading these fields directly.
-      baseUrl: "https://aehmnpsvaivmksypmvwm.supabase.co/functions/v1",
+      baseUrl: "https://rujctxkklzxnogniivdj.supabase.co/functions/v1",
       sessionStartPath: "/api-chat-session-start",
       messagePath: "/api-chat-message",
       documentBriefPath: "/api-chat-document-brief",

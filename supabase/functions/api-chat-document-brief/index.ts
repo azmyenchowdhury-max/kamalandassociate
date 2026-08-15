@@ -1,7 +1,8 @@
 // @ts-nocheck
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { corsHeaders, jsonResponse } from "../_shared/cors.ts";
+import { makeResponder, corsHeadersFor, logAndSanitize } from "../_shared/cors.ts";
 import { matchAttorney } from "../_shared/attorneys.ts";
+import { checkConversationRateLimit } from "../_shared/rate_limit.ts";
 
 interface DocumentBriefRequest {
   conversation_id: string;
@@ -103,12 +104,16 @@ async function analyzeDocument(params: {
 }
 
 Deno.serve(async (req) => {
+  const origin = req.headers.get("Origin");
+  const cors = corsHeadersFor(origin);
+  const respond = makeResponder(origin);
+
   if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: corsHeaders });
+    return new Response("ok", { headers: cors });
   }
 
   if (req.method !== "POST") {
-    return jsonResponse({ status: "error", error: "Method not allowed" }, 405);
+    return respond({ status: "error", error: "Method not allowed" }, 405);
   }
 
   try {
@@ -118,11 +123,11 @@ Deno.serve(async (req) => {
     const groqModel = Deno.env.get("GROQ_MODEL") ?? "llama-3.1-8b-instant";
 
     if (!supabaseUrl || !serviceRole) {
-      return jsonResponse({ status: "error", error: "Missing Supabase env vars" }, 500);
+      return respond({ status: "error", error: "Missing Supabase env vars" }, 500);
     }
 
     if (!groqApiKey) {
-      return jsonResponse(
+      return respond(
         { status: "error", error: "Document analysis requires GROQ_API_KEY to be configured." },
         503
       );
@@ -135,9 +140,29 @@ Deno.serve(async (req) => {
 
     const documentText = String(payload.document_text ?? "").trim();
     if (!payload.conversation_id || !documentText) {
-      return jsonResponse(
+      return respond(
         { status: "error", request_id: requestId, error: "conversation_id and document_text are required" },
         400
+      );
+    }
+
+    const withinLimit = await checkConversationRateLimit(supabase, payload.conversation_id, {
+      limit: 6,
+      windowSeconds: 600,
+      messageType: "file",
+    });
+
+    if (!withinLimit) {
+      return respond(
+        {
+          status: "error",
+          request_id: requestId,
+          error:
+            language === "bn"
+              ? "Apni khub druto document পাঠাচ্ছেন। Doya kore ektু wait korun."
+              : "Too many documents submitted recently. Please wait a moment and try again.",
+        },
+        429
       );
     }
 
@@ -151,7 +176,7 @@ Deno.serve(async (req) => {
       .single();
 
     if (convError || !conversation) {
-      return jsonResponse(
+      return respond(
         { status: "error", request_id: requestId, error: "Conversation not found" },
         404
       );
@@ -181,7 +206,10 @@ Deno.serve(async (req) => {
       .single();
 
     const warnings: string[] = [];
-    if (leadError) warnings.push(`Lead save failed: ${leadError.message}`);
+    if (leadError) {
+      logAndSanitize(requestId, "Lead save failed", leadError);
+      warnings.push("Lead save failed.");
+    }
     if (truncated) warnings.push("Document text was truncated before analysis (very long document).");
 
     const replyText =
@@ -218,7 +246,7 @@ Deno.serve(async (req) => {
       },
     });
 
-    return jsonResponse({
+    return respond({
       request_id: requestId,
       status: "ok",
       data: {
@@ -233,6 +261,7 @@ Deno.serve(async (req) => {
       warnings,
     });
   } catch (error) {
-    return jsonResponse({ status: "error", error: (error as Error).message }, 500);
+    const message = logAndSanitize("unknown", "Unhandled document-brief error", error);
+    return respond({ status: "error", error: message }, 500);
   }
 });

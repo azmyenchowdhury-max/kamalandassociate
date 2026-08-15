@@ -10,7 +10,6 @@ import CaseStudiesPage from "./components/pages/CaseStudiesPage";
 import BlogPage from "./components/pages/BlogPage";
 import ContactPage from "./components/pages/ContactPage";
 import ConsultationPage from "./components/pages/ConsultationPage";
-import ClientPortalPage from "./components/pages/ClientPortalPage";
 import NotFound from "./pages/NotFound";
 
 const App = () => (
@@ -26,7 +25,6 @@ const App = () => (
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/consultation" element={<ConsultationPage />} />
-          <Route path="/client-portal" element={<ClientPortalPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

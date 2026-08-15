@@ -80,14 +80,6 @@ const Navbar: React.FC = () => {
                 </Link>
               </li>
             ))}
-            <li className={`nav-item ${isActive('/client-portal') ? 'active' : ''}`}>
-              <Link 
-                to="/client-portal" 
-                className="nav-link"
-              >
-                <i className="fas fa-user-lock mr-1"></i> Client Portal
-              </Link>
-            </li>
             <li className="nav-item cta">
               <Link 
                 to="/consultation" 

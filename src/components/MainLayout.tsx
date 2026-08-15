@@ -17,8 +17,7 @@ const MainLayout: React.FC = () => {
       '/case-studies': 'Case Studies | Kamal & Associates',
       '/blog': 'Legal Blog | Kamal & Associates',
       '/contact': 'Contact Us | Kamal & Associates',
-      '/consultation': 'Free Consultation | Kamal & Associates',
-      '/client-portal': 'Client Portal | Kamal & Associates'
+      '/consultation': 'Free Consultation | Kamal & Associates'
     };
     document.title = pageTitles[location.pathname] || 'Kamal & Associates';
   }, [location.pathname]);

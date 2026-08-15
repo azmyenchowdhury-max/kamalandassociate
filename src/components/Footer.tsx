@@ -114,12 +114,6 @@ const Footer: React.FC = () => {
                     Free Consultation
                   </Link>
                 </li>
-                <li>
-                  <Link to="/client-portal">
-                    <i className="fas fa-chevron-right mr-2" style={{ fontSize: '10px', color: '#AFA939' }}></i>
-                    Client Portal
-                  </Link>
-                </li>
               </ul>
             </div>
           </div>

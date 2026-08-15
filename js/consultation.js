@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentCalendarDate = new Date();
     const preferredDateDisplay = document.getElementById('preferredDateDisplay');
     const preferredDate = document.getElementById('preferredDate');
+    const preferredTimeSelect = document.getElementById('preferredTime');
     const calendarPicker = document.getElementById('calendarPicker');
     const calendarDays = document.getElementById('calendarDays');
     const calendarMonth = document.getElementById('calendarMonth');
@@ -131,6 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const today = new Date();
         currentCalendarDate = new Date(today);
         renderCalendar();
+        populateTimeSlots(today);
     }
     
     function renderCalendar() {
@@ -218,18 +220,60 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Office hours: Sun–Thu 3:00 PM–10:00 PM, Fri–Sat 10:00 AM–9:00 PM.
+    // getDay(): 0=Sun, 1=Mon, ... 5=Fri, 6=Sat.
+    function getAppointmentHoursForDate(date) {
+        const day = date.getDay();
+        const isWeekend = day === 5 || day === 6; // Friday, Saturday
+        const startHour = isWeekend ? 10 : 15;
+        const endHour = isWeekend ? 21 : 22;
+
+        const hours = [];
+        for (let h = startHour; h <= endHour; h++) {
+            hours.push(h);
+        }
+        return hours;
+    }
+
+    function formatHourLabel(hour24) {
+        const period = hour24 >= 12 ? 'PM' : 'AM';
+        let hour12 = hour24 % 12;
+        if (hour12 === 0) hour12 = 12;
+        return `${hour12}:00 ${period}`;
+    }
+
+    function populateTimeSlots(date) {
+        if (!preferredTimeSelect) return;
+
+        const previousValue = preferredTimeSelect.value;
+        const hours = getAppointmentHoursForDate(date);
+
+        preferredTimeSelect.innerHTML = '<option value="">Select Time</option>' +
+            hours.map(h => {
+                const label = formatHourLabel(h);
+                return `<option value="${label}">${label}</option>`;
+            }).join('');
+
+        // Keep the previous selection only if it's still a valid slot for the new date.
+        const stillValid = Array.from(preferredTimeSelect.options).some(opt => opt.value === previousValue);
+        preferredTimeSelect.value = stillValid ? previousValue : '';
+    }
+
     function selectDate(date) {
         const dateString = date.toISOString().split('T')[0];
         preferredDate.value = dateString;
-        
+
         // Format date for display
         const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
         preferredDateDisplay.value = date.toLocaleDateString('en-US', options);
-        
+
+        // Refresh available time slots for the selected day (office hours differ by weekday)
+        populateTimeSlots(date);
+
         // Close calendar and show success
         calendarPicker.style.display = 'none';
         showNotification('Date selected successfully!', 'success');
-        
+
         // Re-render to highlight selected date
         renderCalendar();
     }

@@ -95,7 +95,7 @@
         </div>
       </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -183,18 +183,21 @@
             Our Experienced <span class="text-accent">Attorneys</span>
           </h2>
           <p class="section-description">
-            Our team of dedicated attorneys brings over 18 years of experience across all practice areas.
-            experience across all major practice areas.
+            Our team of dedicated attorneys brings over 18 years of combined experience across all major practice areas.
           </p>
         </div>
       </div>
-      <!-- Head of The Chamber Section -->
+      <!-- Head of The Chamber Section — deliberately more senior than the
+           .chamber-card grid below: founder accent, seal, larger scale,
+           matching the treatment established on his own profile page. -->
       <div class="container">
         <div class="row justify-content-center mb-5" data-aos="fade-up">
           <div class="col-md-8 text-center">
+            <span class="founder-seal"><i class="fas fa-scale-balanced"></i></span>
             <h2 class="section-title">
               <span class="text-accent">Head of The Chamber</span>
             </h2>
+            <span class="head-chamber-established">Kamal &amp; Associates — Established 2008</span>
           </div>
         </div>
         <div class="row justify-content-center" data-aos="fade-up">
@@ -230,11 +233,11 @@
                       <h6 class="text-accent text-uppercase small fw-bold mb-3">
                         Areas of Expertise
                       </h6>
-                      <div class="d-flex flex-wrap">
-                        <span class="expertise-badge">Criminal Defense</span>
-                        <span class="expertise-badge">Corporate Law</span>
-                        <span class="expertise-badge">Writ Jurisdiction</span>
-                        <span class="expertise-badge">Family Law</span>
+                      <div class="d-flex flex-wrap gap-2">
+                        <span class="expertise-pill-sidebar">Criminal Defense</span>
+                        <span class="expertise-pill-sidebar">Corporate Law</span>
+                        <span class="expertise-pill-sidebar">Writ Jurisdiction</span>
+                        <span class="expertise-pill-sidebar">Family Law</span>
                       </div>
                     </div>
 
@@ -280,339 +283,180 @@
       <div class="row g-4 justify-content-center">
         <!--Attorney 1-->
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <a href="attorney-harun.html" class="flip-card d-block text-decoration-none">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <img src="images/Attorneys/Harun.jpg" alt="Harun Rayhan Front" loading="lazy" />
-                <div class="flip-front-caption">
-                  <h5 class="text-white mb-0">Adv. Harun Rayhan</h5>
-                  <small class="text-accent">Managing Partner, Kamal & Associates</small>
-                </div>
+          <a href="attorney-harun.html" class="chamber-card">
+            <div class="chamber-card-photo">
+              <img src="images/Attorneys/Harun.JPG" alt="Adv. Harun Rayhan" loading="lazy" />
+            </div>
+            <div class="chamber-card-body">
+              <h3 class="chamber-card-name">Adv. Harun Rayhan</h3>
+              <span class="chamber-card-role">Managing Partner, Kamal & Associates</span>
+              <p class="chamber-card-spec">Corporate & Constitutional Law</p>
+              <div class="chamber-card-pills">
+                <span class="expertise-pill-sidebar">Corporate Law</span>
+                <span class="expertise-pill-sidebar">Constitutional Law</span>
               </div>
-
-              <div class="flip-card-back bg-harun">
-                <div class="flip-back-content">
-                  <h4 class="text-white mb-1">Adv. Harun Rayhan</h4>
-                  <p class="text-accent small mb-4">
-                    Corporate & Constitutional Law
-                  </p>
-                </div>
+              <div class="chamber-card-stats">
+                <span>Experience<strong>18+ Years</strong></span>
+                <span>Enrolled<strong>Supreme Court</strong></span>
               </div>
             </div>
           </a>
-
-          <div class="attorney-stats-box">
-            <div class="mb-3">
-              <span class="stats-label">Expertise</span>
-              <div>
-                <span class="expertise-pill">Corporate Law</span>
-                <span class="expertise-pill">Constitutional Law</span>
-              </div>
-            </div>
-            <div class="stats-row">
-              <span>Experience:</span>
-              <span class="text-white">18+ Years</span>
-            </div>
-            <div class="stats-row">
-              <span>Enrolled:</span>
-              <span class="text-white">Supreme Court</span>
-            </div>
-          </div>
         </div>
-        
-        
+
         <!--Attorney 2-->
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <a href="attorney-nasrin.html" class="flip-card d-block text-decoration-none">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <img src="images/Attorneys/Nasrin.jpg" alt="Nasrin Front" loading="lazy" />
-                <div class="flip-front-caption">
-                  <h5 class="text-white mb-0">Adv. Nasrin Akter</h5>
-                  <small class="text-accent">Managing Partner, Kamal & Associates</small>
-                </div>
+          <a href="attorney-nasrin.html" class="chamber-card">
+            <div class="chamber-card-photo">
+              <img src="images/Attorneys/Nasrin.jpg" alt="Adv. Nasrin Akter" loading="lazy" />
+            </div>
+            <div class="chamber-card-body">
+              <h3 class="chamber-card-name">Adv. Nasrin Akter</h3>
+              <span class="chamber-card-role">Managing Partner, Kamal & Associates</span>
+              <p class="chamber-card-spec">Banking & Corporate Law</p>
+              <div class="chamber-card-pills">
+                <span class="expertise-pill-sidebar">Criminal Defense</span>
+                <span class="expertise-pill-sidebar">Family Law</span>
               </div>
-
-              <div class="flip-card-back bg-nasrin">
-                <div class="flip-back-content">
-                  <h4 class="text-white mb-1">Adv. Nasrin Akter</h4>
-                  <p class="text-accent small mb-4">
-                    Banking & Corporate Law
-                  </p>
-                </div>
+              <div class="chamber-card-stats">
+                <span>Experience<strong>15+ Years</strong></span>
+                <span>Enrolled<strong>High Court</strong></span>
               </div>
             </div>
           </a>
-
-          <div class="attorney-stats-box">
-            <div class="mb-3">
-              <span class="stats-label">Expertise</span>
-              <div>
-                <span class="expertise-pill">Criminal Defense</span>
-                <span class="expertise-pill">Family Law</span>
-              </div>
-            </div>
-            <div class="stats-row">
-              <span>Experience:</span>
-              <span class="text-white">15+ Years</span>
-            </div>
-            <div class="stats-row">
-              <span>Enrolled:</span>
-              <span class="text-white">High Court</span>
-            </div>
-          </div>
         </div>
-
 
         <!--Attorney 3-->
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <a href="attorney-jagadish.html" class="flip-card d-block text-decoration-none">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <img src="images/Attorneys/Jagadish.jpg" alt="Jagadish Front" loading="lazy" />
-                <div class="flip-front-caption">
-                  <h5 class="text-white mb-0">Adv. Jagadish Chandra Saha</h5>
-                  <small class="text-accent">Senior Partner, Kamal & Associates</small>
-                </div>
+          <a href="attorney-jagadish.html" class="chamber-card">
+            <!-- TODO: swap for a real photo when available — expected path images/Attorneys/Jagadish.jpg -->
+            <div class="chamber-card-photo photo-placeholder">
+              <span class="photo-placeholder-initials">JC</span>
+            </div>
+            <div class="chamber-card-body">
+              <h3 class="chamber-card-name">Adv. Jagadish Chandra Saha</h3>
+              <span class="chamber-card-role">Senior Partner, Kamal & Associates</span>
+              <p class="chamber-card-spec">Banking & Corporate Law</p>
+              <div class="chamber-card-pills">
+                <span class="expertise-pill-sidebar">Criminal Defense</span>
+                <span class="expertise-pill-sidebar">Family Law</span>
               </div>
-
-              <div class="flip-card-back bg-jagadish">
-                <div class="flip-back-content">
-                  <h4 class="text-white mb-1">Adv. Jagadish Chandra Saha</h4>
-                  <p class="text-accent small mb-4">
-                    Banking & Corporate Law
-                  </p>
-                </div>
+              <div class="chamber-card-stats">
+                <span>Experience<strong>15+ Years</strong></span>
+                <span>Enrolled<strong>Appellate Division, High Court</strong></span>
               </div>
             </div>
           </a>
-
-          <div class="attorney-stats-box">
-            <div class="mb-3">
-              <span class="stats-label">Expertise</span>
-              <div>
-                <span class="expertise-pill">Criminal Defense</span>
-                <span class="expertise-pill">Family Law</span>
-              </div>
-            </div>
-            <div class="stats-row">
-              <span>Experience:</span>
-              <span class="text-white">15+ Years</span>
-            </div>
-            <div class="stats-row">
-              <span>Enrolled:</span>
-              <span class="text-white">Appellate Division, High Court</span>
-            </div>
-          </div>
         </div>
-
 
         <!--Attorney 4-->
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <a href="attorney-habibur.html" class="flip-card d-block text-decoration-none">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <img src="images/Attorneys/Habibur.jpg" alt="Habibur Front" loading="lazy" />
-                <div class="flip-front-caption">
-                  <h5 class="text-white mb-0">Adv. Habibur Rahman</h5>
-                  <small class="text-accent">Senior Partner, Kamal & Associates</small>
-                </div>
+          <a href="attorney-habibur.html" class="chamber-card">
+            <!-- TODO: swap for a real photo when available — expected path images/Attorneys/Habibur.jpg -->
+            <div class="chamber-card-photo photo-placeholder">
+              <span class="photo-placeholder-initials">HR</span>
+            </div>
+            <div class="chamber-card-body">
+              <h3 class="chamber-card-name">Adv. Habibur Rahman</h3>
+              <span class="chamber-card-role">Senior Partner, Kamal & Associates</span>
+              <p class="chamber-card-spec">Banking & Corporate Law</p>
+              <div class="chamber-card-pills">
+                <span class="expertise-pill-sidebar">Criminal Defense</span>
+                <span class="expertise-pill-sidebar">Family Law</span>
               </div>
-
-              <div class="flip-card-back bg-habibur">
-                <div class="flip-back-content">
-                  <h4 class="text-white mb-1">Adv. Habibur Rahman</h4>
-                  <p class="text-accent small mb-4">
-                    Banking & Corporate Law
-                  </p>
-                </div>
+              <div class="chamber-card-stats">
+                <span>Experience<strong>15+ Years</strong></span>
+                <span>Enrolled<strong>High Court</strong></span>
               </div>
             </div>
           </a>
-
-          <div class="attorney-stats-box">
-            <div class="mb-3">
-              <span class="stats-label">Expertise</span>
-              <div>
-                <span class="expertise-pill">Criminal Defense</span>
-                <span class="expertise-pill">Family Law</span>
-              </div>
-            </div>
-            <div class="stats-row">
-              <span>Experience:</span>
-              <span class="text-white">15+ Years</span>
-            </div>
-            <div class="stats-row">
-              <span>Enrolled:</span>
-              <span class="text-white">High Court</span>
-            </div>
-          </div>
         </div>
 
         <!--Attorney 5-->
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <a href="attorney-chowdhury.html" class="flip-card d-block text-decoration-none">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <img src="images/Attorneys/Chowdhury.jpg" alt="Mustafa Kamal Chowdhury Front" loading="lazy" />
-                <div class="flip-front-caption">
-                  <h5 class="text-white mb-0">
-                    Adv. Mustafa Kamal Chowdhury
-                  </h5>
-                  <small class="text-accent">Senior Associate, Kamal & Associates</small>
-                </div>
+          <a href="attorney-chowdhury.html" class="chamber-card">
+            <div class="chamber-card-photo">
+              <img src="images/Attorneys/Chowdhury.jpg" alt="Adv. Mustafa Kamal Chowdhury" loading="lazy" />
+            </div>
+            <div class="chamber-card-body">
+              <h3 class="chamber-card-name">Adv. Mustafa Kamal Chowdhury</h3>
+              <span class="chamber-card-role">Senior Associate, Kamal & Associates</span>
+              <p class="chamber-card-spec">Criminal Defense</p>
+              <div class="chamber-card-pills">
+                <span class="expertise-pill-sidebar">Criminal Defense</span>
+                <span class="expertise-pill-sidebar">Litigation</span>
               </div>
-
-              <div class="flip-card-back bg-chowdhury">
-                <div class="flip-back-content">
-                  <h4 class="text-white mb-1">
-                    Adv. Mustafa Kamal Chowdhury
-                  </h4>
-                  <p class="text-accent small mb-4">Criminal Defense</p>
-                </div>
+              <div class="chamber-card-stats">
+                <span>Experience<strong>12+ Years</strong></span>
+                <span>Enrolled<strong>High Court</strong></span>
               </div>
             </div>
           </a>
-
-          <div class="attorney-stats-box">
-            <div class="mb-3">
-              <span class="stats-label">Expertise</span>
-              <div>
-                <span class="expertise-pill">Criminal Defense</span>
-                <span class="expertise-pill">Litigation</span>
-              </div>
-            </div>
-            <div class="stats-row">
-              <span>Experience:</span>
-              <span class="text-white">12+ Years</span>
-            </div>
-            <div class="stats-row">
-              <span>Enrolled:</span>
-              <span class="text-white">High Court</span>
-            </div>
-          </div>
         </div>
 
         <!--Attorney 6-->
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <a href="attorney-kabir.html" class="flip-card d-block text-decoration-none">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <img src="images/Attorneys/Kabir.jpg" alt="Kabir Front" loading="lazy" />
-                <div class="flip-front-caption">
-                  <h5 class="text-white mb-0">Adv. Mohammad Kabir</h5>
-                  <small class="text-accent">Senior Associate, Kamal & Associates</small>
-                </div>
+          <a href="attorney-kabir.html" class="chamber-card">
+            <div class="chamber-card-photo">
+              <img src="images/Attorneys/Kabir.JPG" alt="Adv. Mohammad Kabir" loading="lazy" />
+            </div>
+            <div class="chamber-card-body">
+              <h3 class="chamber-card-name">Adv. Mohammad Kabir</h3>
+              <span class="chamber-card-role">Senior Associate, Kamal & Associates</span>
+              <p class="chamber-card-spec">Family Law</p>
+              <div class="chamber-card-pills">
+                <span class="expertise-pill-sidebar">Family Law</span>
+                <span class="expertise-pill-sidebar">Civil Law</span>
               </div>
-
-              <div class="flip-card-back bg-kabir">
-                <div class="flip-back-content">
-                  <h4 class="text-white mb-1">Adv. Mohammad Kabir</h4>
-                  <p class="text-accent small mb-4">Family Law</p>
-                </div>
+              <div class="chamber-card-stats">
+                <span>Experience<strong>12+ Years</strong></span>
+                <span>Enrolled<strong>High Court</strong></span>
               </div>
             </div>
           </a>
-
-          <div class="attorney-stats-box">
-            <div class="mb-3">
-              <span class="stats-label">Expertise</span>
-              <div>
-                <span class="expertise-pill">Family Law</span>
-                <span class="expertise-pill">Civil Law</span>
-              </div>
-            </div>
-            <div class="stats-row">
-              <span>Experience:</span>
-              <span class="text-white">12+ Years</span>
-            </div>
-            <div class="stats-row">
-              <span>Enrolled:</span>
-              <span class="text-white">High Court</span>
-            </div>
-          </div>
         </div>
 
         <!--Attorney 7-->
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <a href="attorney-rashed.html" class="flip-card d-block text-decoration-none">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <img src="images/Attorneys/Rashed.jpg" alt="Rashed Front" loading="lazy" />
-                <div class="flip-front-caption">
-                  <h5 class="text-white mb-0">Adv. Yeasin Arafat Rashed</h5>
-                  <small class="text-accent">Associate, Kamal & Associates</small>
-                </div>
+          <a href="attorney-rashed.html" class="chamber-card">
+            <div class="chamber-card-photo">
+              <img src="images/Attorneys/Rashed.JPG" alt="Adv. Yeasin Arafat Rashed" loading="lazy" />
+            </div>
+            <div class="chamber-card-body">
+              <h3 class="chamber-card-name">Adv. Yeasin Arafat Rashed</h3>
+              <span class="chamber-card-role">Associate, Kamal & Associates</span>
+              <p class="chamber-card-spec">Civil & Property Law</p>
+              <div class="chamber-card-pills">
+                <span class="expertise-pill-sidebar">Civil Law</span>
+                <span class="expertise-pill-sidebar">Property Law</span>
               </div>
-
-              <div class="flip-card-back bg-rashed">
-                <div class="flip-back-content">
-                  <h4 class="text-white mb-1">Adv. Yeasin Arafat Rashed</h4>
-                  <p class="text-accent small mb-4">Civil & Property Law</p>
-                </div>
+              <div class="chamber-card-stats">
+                <span>Experience<strong>8+ Years</strong></span>
+                <span>Enrolled<strong>Supreme Court</strong></span>
               </div>
             </div>
           </a>
-
-          <div class="attorney-stats-box">
-            <div class="mb-3">
-              <span class="stats-label">Expertise</span>
-              <div>
-                <span class="expertise-pill">Civil Law</span>
-                <span class="expertise-pill">Property Law</span>
-              </div>
-            </div>
-            <div class="stats-row">
-              <span>Experience:</span>
-              <span class="text-white">8+ Years</span>
-            </div>
-            <div class="stats-row">
-              <span>Enrolled:</span>
-              <span class="text-white">Supreme Court</span>
-            </div>
-          </div>
         </div>
 
         <!--Attorney 8-->
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <a href="attorney-mahadi.html" class="flip-card d-block text-decoration-none">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <img src="images/Attorneys/Mahadi.jpg" alt="Mahadi Front" loading="lazy" />
-                <div class="flip-front-caption">
-                  <h5 class="text-white mb-0">Adv. Mahadi Hosin Manik</h5>
-                  <small class="text-accent">Associate, Kamal & Associates</small>
-                </div>
+          <a href="attorney-mahadi.html" class="chamber-card">
+            <div class="chamber-card-photo">
+              <img src="images/Attorneys/Mahadi.JPG" alt="Adv. Mahadi Hosin Manik" loading="lazy" />
+            </div>
+            <div class="chamber-card-body">
+              <h3 class="chamber-card-name">Adv. Mahadi Hosin Manik</h3>
+              <span class="chamber-card-role">Associate, Kamal & Associates</span>
+              <p class="chamber-card-spec">Administrative & Tax Law</p>
+              <div class="chamber-card-pills">
+                <span class="expertise-pill-sidebar">Administrative Law</span>
+                <span class="expertise-pill-sidebar">Tax Law</span>
               </div>
-
-              <div class="flip-card-back bg-mahadi">
-                <div class="flip-back-content">
-                  <h4 class="text-white mb-1">Adv. Mahadi Hosin Manik</h4>
-                  <p class="text-accent small mb-4">
-                    Administrative & Tax Law
-                  </p>
-                </div>
+              <div class="chamber-card-stats">
+                <span>Experience<strong>5+ Years</strong></span>
+                <span>Enrolled<strong>Supreme Court</strong></span>
               </div>
             </div>
           </a>
-
-          <div class="attorney-stats-box">
-            <div class="mb-3">
-              <span class="stats-label">Expertise</span>
-              <div>
-                <span class="expertise-pill">Administrative Law</span>
-                <span class="expertise-pill">Tax Law</span>
-              </div>
-            </div>
-            <div class="stats-row">
-              <span>Experience:</span>
-              <span class="text-white">5+ Years</span>
-            </div>
-            <div class="stats-row">
-              <span>Enrolled:</span>
-              <span class="text-white">Supreme Court</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -630,40 +474,13 @@
       <div class="row g-4 justify-content-center">
         <!--Office Staff 1-->
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <img src="images/Staffs/Sandip.jpg" alt="Sandip Robi Das Front" loading="lazy" />
-                <div class="flip-front-caption">
-                  <h5 class="text-white mb-0">Sandip Robi Das</h5>
-                  <small class="text-accent">Computer Operator</small>
-                </div>
-              </div>
-
-              <div class="flip-card-back u-inline-0031">
-                <div class="flip-back-content">
-                  <h4 class="text-white mb-1">Sandip Robi Das</h4>
-                  <p class="text-accent small mb-4">Computer Operator</p>
-                </div>
-              </div>
+          <div class="staff-card">
+            <div class="staff-card-photo">
+              <img src="images/Staffs/Sandip.jpg" alt="Sandip Robi Das" loading="lazy" />
             </div>
-          </div>
-
-          <div class="attorney-stats-box">
-            <div class="mb-3">
-              <span class="stats-label">Expertise</span>
-              <div>
-                <span class="expertise-pill">Corporate</span>
-                <span class="expertise-pill">Banking</span>
-              </div>
-            </div>
-            <div class="stats-row">
-              <span>Experience:</span>
-              <span class="text-white">15+ Years</span>
-            </div>
-            <div class="stats-row">
-              <span>Enrolled:</span>
-              <span class="text-white">High Court</span>
+            <div class="staff-card-body">
+              <h3 class="staff-card-name">Sandip Robi Das</h3>
+              <span class="staff-card-role">Computer Operator</span>
             </div>
           </div>
         </div>

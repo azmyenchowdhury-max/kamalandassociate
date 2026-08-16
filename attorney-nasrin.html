@@ -81,7 +81,7 @@
         </div>
       </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -140,39 +140,35 @@
     <div class="glow-blob blob-gold blob-profile-top"></div>
     <div class="glow-blob blob-gold blob-profile-side"></div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section: masthead (name/designation live here, no competing photo) -->
     <section class="hero-section hero-short">
-      <div class="hero-overlay"></div>
-      <div class="container">
-        <div class="row align-items-center justify-content-center text-center">
-          <div class="col-md-8" data-aos="fade-down" data-aos-duration="800">
-            <div class="row align-items-center">
-              <div class="col-12 mb-3">
-                <a href="attorneys.html" class="btn-back">
-                  <i class="fas fa-arrow-left"></i> Back to Attorneys
-                </a>
-              </div>
-
-              <div class="col-12">
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb justify-content-center mb-0">
-                    <li class="breadcrumb-item">
-                      <a href="index.html" class="text-accent text-decoration-none">Home</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                      <a href="attorneys.html" class="text-accent text-decoration-none">Attorneys</a>
-                    </li>
-                    <li class="breadcrumb-item active text-light" aria-current="page">
-                      Profile
-                    </li>
-                  </ol>
-                </nav>
-              </div>
+      <div class="container position-relative">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-9" data-aos="fade-down" data-aos-duration="800">
+            <div class="hero-masthead-toprow">
+              <a href="attorneys.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Attorneys
+              </a>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                  <li class="breadcrumb-item">
+                    <a href="index.html" class="text-accent text-decoration-none">Home</a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="attorneys.html" class="text-accent text-decoration-none">Attorneys</a>
+                  </li>
+                  <li class="breadcrumb-item active text-light" aria-current="page">
+                    Adv. Nasrin Akter
+                  </li>
+                </ol>
+              </nav>
             </div>
+            <span class="hero-masthead-kicker">Attorney Profile</span>
+            <h1 class="hero-masthead-name">Adv. Nasrin Akter</h1>
+            <p class="hero-masthead-designation">Managing Partner, Kamal &amp; Associates</p>
           </div>
         </div>
       </div>
-      <div class="hero-gradient-overlay"></div>
     </section>
 
     <!-- Profile Section -->
@@ -212,25 +208,28 @@
               <div class="expertise-card">
                 <div class="expertise-content">
                   <h3 class="expertise-title">Overseas Visits</h3>
-                  <div class="expertise-wrapper">
-                    <span class="expertise-pill">Japan</span>
-                    <span class="expertise-pill">Singapore</span>
-                    <span class="expertise-pill">Malaysia</span>
-                    <span class="expertise-pill">Saudi Arabia</span>
-                    <span class="expertise-pill">India</span>
-                    <span class="expertise-pill">Thailand</span>
-                    <span class="expertise-pill">Dubai</span>
-                    <span class="expertise-pill">Nepal</span>
-                    <span class="expertise-pill">United Kingdom (UK)</span>
-                    <span class="expertise-pill">Italy</span>
-                    <span class="expertise-pill">Switzerland</span>
-                    <span class="expertise-pill">France</span>
-                    <span class="expertise-pill">Germany</span>
-                    <span class="expertise-pill">Finland</span>
-                    <span class="expertise-pill">Sweden</span>
-                    <span class="expertise-pill">Canada</span>
-                    <span class="expertise-pill">United States of America (USA)</span>
-                  </div>
+                  <ul class="overseas-list">
+                    <li class="overseas-region-label">Asia & Middle East</li>
+                    <li class="overseas-row"><span>Japan</span></li>
+                    <li class="overseas-row"><span>Singapore</span></li>
+                    <li class="overseas-row"><span>Malaysia</span></li>
+                    <li class="overseas-row"><span>Saudi Arabia</span></li>
+                    <li class="overseas-row"><span>India</span></li>
+                    <li class="overseas-row"><span>Thailand</span></li>
+                    <li class="overseas-row"><span>Dubai</span></li>
+                    <li class="overseas-row"><span>Nepal</span></li>
+                    <li class="overseas-region-label">Europe</li>
+                    <li class="overseas-row"><span>United Kingdom (UK)</span></li>
+                    <li class="overseas-row"><span>Italy</span></li>
+                    <li class="overseas-row"><span>Switzerland</span></li>
+                    <li class="overseas-row"><span>France</span></li>
+                    <li class="overseas-row"><span>Germany</span></li>
+                    <li class="overseas-row"><span>Finland</span></li>
+                    <li class="overseas-row"><span>Sweden</span></li>
+                    <li class="overseas-region-label">North America</li>
+                    <li class="overseas-row"><span>Canada</span></li>
+                    <li class="overseas-row"><span>United States of America (USA)</span></li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -238,10 +237,8 @@
 
           <!-- Profile Content (Right Column) -->
           <div class="col-lg-8" data-aos="fade-left">
-            <!-- Name and Designation -->
+            <!-- Credentials (name/designation now live in the hero masthead) -->
             <div class="mb-5">
-              <h1 class="profile-name">Adv. Nasrin Akter</h1>
-              <p class="profile-designation">Managing Partner, Kamal & Associates</p>
               <p class="profile-credentials">MBS, LL.M (1st Class)</p>
               <p class="profile-title">
                 Advocate, Supreme Court of Bangladesh
@@ -274,7 +271,7 @@
                 </div>
                 <div class="quick-info-content">
                   <h4>Bar Admission</h4>
-                  <p>Supreme Court, 2016</p>
+                  <p>Bangladesh Supreme Court Bar Association, 2022</p>
                 </div>
               </div>
             </div>
@@ -284,14 +281,14 @@
               <h2 class="section-title">Professional Overview</h2>
               <p class="profile-text">
                 <strong>Nasrin Akter</strong> serves as the <strong>Managing Partner</strong> at Kamal & Associates,
-                where she brings a decade of legal acumen and strategic leadership to the firmâ€™s executive team. An
+                where she brings a decade of legal acumen and strategic leadership to the firm's executive team. An
                 enrolled <strong>Advocate of the Supreme Court of Bangladesh</strong> since 2016, Ms. Akter is
                 distinguished by her first-class academic background and a robust practice that spans complex corporate
                 advisory, banking securities, and high-stakes litigation.
               </p>
               <p class="profile-text">
                 With a comprehensive portfolio in <strong>commercial and corporate law</strong>, Ms. Akter specializes
-                in the architectural side of legal practiceâ€”handling company incorporations, society and trust
+                in the architectural side of legal practice—handling company incorporations, society and trust
                 formation, and commercial litigation. She is a trusted advisor to financial institutions, offering deep
                 expertise in <strong>banking securities</strong> and the management of complex financial instruments,
                 including debentures and chattel mortgages. Her practice is defined by meticulous attention to detail
@@ -305,7 +302,7 @@
                 and asset management.
               </p>
               <p class="profile-text">
-                Beyond domestic practice, Ms. Akter serves as the firmâ€™s primary <strong>Consultant on International
+                Beyond domestic practice, Ms. Akter serves as the firm's primary <strong>Consultant on International
                   Law</strong>. Drawing from her experience with leading law firms and corporate entities, she offers
                 strategic counsel on cross-border legal issues, providing clients with a global perspective on their
                 legal challenges.
@@ -434,9 +431,9 @@
                         <img src="images/Attorneys/Kamal.jpg" alt="Mohammad Mostofa Kamal" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -455,9 +452,9 @@
                         <img src="images/Attorneys/Harun.JPG" alt="Adv. Harun Rayhan" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -476,9 +473,9 @@
                         <img src="images/Attorneys/Nasrin.jpg" alt="Adv. Nasrin Akter" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -502,9 +499,9 @@
                         <img src="images/Attorneys/Harun.JPG" alt="Adv. Harun Rayhan" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -523,9 +520,9 @@
                         <img src="images/Attorneys/Nasrin.jpg" alt="Adv. Nasrin Akter" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -541,12 +538,12 @@
                   <a href="attorney-jagadish.html" class="attorney-card-link">
                     <div class="attorney-card-compact">
                       <div class="attorney-img-compact">
-                        <img src="images/Attorneys/Jagadish.jpg" alt="Adv. Jagadish Chandra Saha" loading="lazy" />
+                        <img src="images/Logo.png" alt="Adv. Jagadish Chandra Saha" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -570,9 +567,9 @@
                         <img src="images/Attorneys/Nasrin.jpg" alt="Adv. Nasrin Akter" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -588,12 +585,12 @@
                   <a href="attorney-jagadish.html" class="attorney-card-link">
                     <div class="attorney-card-compact">
                       <div class="attorney-img-compact">
-                        <img src="images/Attorneys/Jagadish.jpg" alt="Adv. Jagadish Chandra Saha" loading="lazy" />
+                        <img src="images/Logo.png" alt="Adv. Jagadish Chandra Saha" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -609,12 +606,12 @@
                   <a href="attorney-habibur.html" class="attorney-card-link">
                     <div class="attorney-card-compact">
                       <div class="attorney-img-compact">
-                        <img src="images/Attorneys/Habibur.jpg" alt="Adv. Habibur Rahman" loading="lazy" />
+                        <img src="images/Logo.png" alt="Adv. Habibur Rahman" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -635,12 +632,12 @@
                   <a href="attorney-jagadish.html" class="attorney-card-link">
                     <div class="attorney-card-compact">
                       <div class="attorney-img-compact">
-                        <img src="images/Attorneys/Jagadish.jpg" alt="Adv. Jagadish Chandra Saha" loading="lazy" />
+                        <img src="images/Logo.png" alt="Adv. Jagadish Chandra Saha" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -656,12 +653,12 @@
                   <a href="attorney-habibur.html" class="attorney-card-link">
                     <div class="attorney-card-compact">
                       <div class="attorney-img-compact">
-                        <img src="images/Attorneys/Habibur.jpg" alt="Adv. Habibur Rahman" loading="lazy" />
+                        <img src="images/Logo.png" alt="Adv. Habibur Rahman" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -680,9 +677,9 @@
                         <img src="images/Attorneys/Chowdhury.jpg" alt="Adv. Mustafa Kamal Chowdhury" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -703,12 +700,12 @@
                   <a href="attorney-habibur.html" class="attorney-card-link">
                     <div class="attorney-card-compact">
                       <div class="attorney-img-compact">
-                        <img src="images/Attorneys/Habibur.jpg" alt="Adv. Habibur Rahman" loading="lazy" />
+                        <img src="images/Logo.png" alt="Adv. Habibur Rahman" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -727,9 +724,9 @@
                         <img src="images/Attorneys/Chowdhury.jpg" alt="Adv. Mustafa Kamal Chowdhury" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -748,9 +745,9 @@
                         <img src="images/Attorneys/Kabir.JPG" alt="Adv. Mohammad Kabir" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -774,9 +771,9 @@
                         <img src="images/Attorneys/Chowdhury.jpg" alt="Adv. Mustafa Kamal Chowdhury" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -795,9 +792,9 @@
                         <img src="images/Attorneys/Kabir.JPG" alt="Adv. Mohammad Kabir" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -816,9 +813,9 @@
                         <img src="images/Attorneys/Rashed.JPG" alt="Adv. Yeasin Arafat Rashed" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -842,9 +839,9 @@
                         <img src="images/Attorneys/Kabir.JPG" alt="Adv. Mohammad Kabir" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -863,9 +860,9 @@
                         <img src="images/Attorneys/Rashed.JPG" alt="Adv. Yeasin Arafat Rashed" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -884,9 +881,9 @@
                         <img src="images/Attorneys/Mahadi.JPG" alt="Adv. Mahadi Hosin Manik" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -910,9 +907,9 @@
                         <img src="images/Attorneys/Rashed.JPG" alt="Adv. Yeasin Arafat Rashed" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -931,9 +928,9 @@
                         <img src="images/Attorneys/Mahadi.JPG" alt="Adv. Mahadi Hosin Manik" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -952,9 +949,9 @@
                         <img src="images/Attorneys/Kamal.jpg" alt="Mohammad Mostofa Kamal" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -978,9 +975,9 @@
                         <img src="images/Attorneys/Mahadi.JPG" alt="Adv. Mahadi Hosin Manik" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -999,9 +996,9 @@
                         <img src="images/Attorneys/Kamal.jpg" alt="Mohammad Mostofa Kamal" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>
@@ -1020,9 +1017,9 @@
                         <img src="images/Attorneys/Harun.JPG" alt="Adv. Harun Rayhan" loading="lazy" />
                         <div class="attorney-overlay">
                           <div class="attorney-social">
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:void(0)" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:void(0)" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                           </div>
                         </div>
                       </div>

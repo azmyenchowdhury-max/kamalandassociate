@@ -194,41 +194,42 @@
   <main id="main-content">
 
   <!-- Hero Section -->
-  <section class="hero-section hero-split-layout" id="hero">
+  <section class="hero-section" id="hero">
     <div class="hero-overlay"></div>
+
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 d-flex flex-column align-items-center text-center hero-split-col" data-aos="fade-up">
+      <div class="row">
+        <div class="col-12 hero-col" data-aos="fade-up">
 
-          <!-- Top anchor: subtitle -->
-          <div class="hero-top">
-            <h2 class="hero-greeting" aria-label="Welcome To Kamal & Associates">
-              <span>Welcome</span>
-              <span>To</span>
-              <span>Kamal</span>
-              <span>&amp; Associates</span>
-            </h2>
-          </div>
+          <h2 class="hero-kicker" aria-label="Welcome To Kamal & Associates">
+            <span>Welcome</span>
+            <span>To</span>
+            <span>Kamal</span>
+            <span>&amp; Associates</span>
+          </h2>
 
-          <!-- Bottom anchor: headline + description + CTA -->
-          <div class="hero-bottom-content">
-            <h1 class="hero-title">
-              <span class="hero-title-desktop">Our Attorneys <br> Stand For Your</span>
-              <span class="hero-title-mobile">We Stand For Your</span>
-              <span class="hero-title-mobile-break" aria-hidden="true"></span>
-              <span class="txt-rotate" data-period="2000" data-rotate='[ "Freedom.", "Rights.", "Case.", "Custody." ]'></span>
-            </h1>
-            <p class="hero-description mx-auto hero-description-mobile-hide">
-              With a proven record of assisting thousands in overcoming wrongful denials nationwide, the Law Firm
-              <strong>Kamal & Associates</strong> has earned its reputation as a trusted leader in legal advocacy.
-            </p>
-            <div class="hero-buttons justify-content-center">
-              <a href="contact.html" class="btn btn-primary btn-lg">
-                Get Legal Advice <i class="fas fa-arrow-right ms-2"></i>
-              </a>
-            </div>
-          </div>
+          <h1 class="hero-headline">
+            We Stand For Your <span class="txt-rotate" data-period="2000" data-rotate='[ "Freedom.", "Rights.", "Case.", "Custody." ]'></span>
+          </h1>
 
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="container">
+        <p class="hero-lede">
+          With a proven record of assisting thousands in overcoming wrongful denials nationwide, the Law Firm
+          <strong>Kamal & Associates</strong> has earned its reputation as a trusted leader in legal advocacy.
+        </p>
+
+        <div class="hero-actions">
+          <a href="contact.html" class="btn btn-primary btn-lg">
+            Get Legal Advice <i class="fas fa-arrow-right ms-2"></i>
+          </a>
+          <a href="attorneys.html" class="btn btn-outline-primary btn-lg">
+            Meet The Chamber
+          </a>
         </div>
       </div>
     </div>
@@ -642,8 +643,9 @@
     </div>
   </section> -->
 
-  <!-- Awards Section -->
-  <section class="section-padding">
+  <!-- Awards Section — not yet earned, commented out until the firm
+       actually receives an award; do not re-enable with placeholder claims. -->
+  <!-- <section class="section-padding">
     <div class="container">
       <div class="row justify-content-center mb-5" data-aos="fade-up">
         <div class="col-md-8 text-center">
@@ -684,7 +686,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- Attorneys Section -->
   <section class="section-padding section-dark">
@@ -703,25 +705,18 @@
       </div>
 
       <div class="row justify-content-center mb-5">
-        <div class="col-lg-4 col-md-6" data-aos="fade-up">
-          <a href="attorney-kamal.html" class="attorney-link">
-            <div class="attorney-card head-attorney">
-              <div class="attorney-img attorney-img--kamal">
-                <div class="attorney-social">
-                  <div class="social-link">
-                    <i class="fab fa-facebook-f"></i>
-                  </div>
-                  <div class="social-link">
-                    <i class="fab fa-twitter"></i>
-                  </div>
-                  <div class="social-link">
-                    <i class="fab fa-linkedin-in"></i>
-                  </div>
-                </div>
-              </div>
-              <div class="attorney-info">
-                <h3>Mohammad Mostofa Kamal</h3>
-                <span class="position text-accent">Head of The Chamber & Founder, Kamal & Associates</span>
+        <div class="col-lg-3 col-md-5" data-aos="fade-up">
+          <a href="attorney-kamal.html" class="chamber-card chamber-card--founder">
+            <div class="chamber-card-photo">
+              <img src="images/Attorneys/Kamal.jpg" alt="Mohammad Mostofa Kamal" loading="lazy" />
+            </div>
+            <div class="chamber-card-body">
+              <h3 class="chamber-card-name">Mohammad Mostofa Kamal</h3>
+              <span class="chamber-card-role chamber-card-role--founder">Head of The Chamber &amp; Founder, Kamal &amp; Associates</span>
+              <p class="chamber-card-spec">Criminal Defense &amp; Corporate Law</p>
+              <div class="chamber-card-stats">
+                <span>Experience<strong>25+ Years</strong></span>
+                <span>Enrolled<strong>Supreme Court of Bangladesh</strong></span>
               </div>
             </div>
           </a>
@@ -731,132 +726,133 @@
       <div class="row" data-aos="fade-up" data-aos-delay="200">
         <div class="col-12">
           <div class="owl-carousel attorney-carousel owl-theme">
-            
+
             <div class="item">
-              <a href="attorney-harun.html" class="attorney-link">
-                <div class="attorney-card">
-                  <div class="attorney-img attorney-img--harun">
-                    <div class="attorney-social">
-                      <div class="social-link">
-                        <i class="fab fa-facebook-f"></i>
-                      </div>
-                      <div class="social-link">
-                        <i class="fab fa-twitter"></i>
-                      </div>
-                    </div>
+              <a href="attorney-harun.html" class="chamber-card">
+                <div class="chamber-card-photo">
+                  <img src="images/Attorneys/Harun.JPG" alt="Adv. Harun Rayhan" loading="lazy" />
+                </div>
+                <div class="chamber-card-body">
+                  <h3 class="chamber-card-name">Adv. Harun Rayhan</h3>
+                  <span class="chamber-card-role">Managing Partner, Kamal &amp; Associates</span>
+                  <p class="chamber-card-spec">Corporate &amp; Constitutional Law</p>
+                  <div class="chamber-card-pills">
+                    <span class="expertise-pill-sidebar">Corporate Law</span>
+                    <span class="expertise-pill-sidebar">Constitutional Law</span>
                   </div>
-                  <div class="attorney-info">
-                    <h3>Adv. Harun Rayhan</h3>
-                    <span class="position">Managing Partner, Kamal & Associates</span>
+                  <div class="chamber-card-stats">
+                    <span>Experience<strong>18+ Years</strong></span>
+                    <span>Enrolled<strong>Supreme Court of Bangladesh</strong></span>
                   </div>
                 </div>
               </a>
             </div>
 
             <div class="item">
-              <a href="attorney-nasrin.html" class="attorney-link">
-                <div class="attorney-card">
-                  <div class="attorney-img attorney-img--nasrin">
-                    <div class="attorney-social">
-                      <div class="social-link">
-                        <i class="fab fa-facebook-f"></i>
-                      </div>
-                      <div class="social-link">
-                        <i class="fab fa-twitter"></i>
-                      </div>
-                    </div>
+              <a href="attorney-nasrin.html" class="chamber-card">
+                <div class="chamber-card-photo">
+                  <img src="images/Attorneys/Nasrin.jpg" alt="Adv. Nasrin Akter" loading="lazy" />
+                </div>
+                <div class="chamber-card-body">
+                  <h3 class="chamber-card-name">Adv. Nasrin Akter</h3>
+                  <span class="chamber-card-role">Managing Partner, Kamal &amp; Associates</span>
+                  <p class="chamber-card-spec">Banking &amp; Corporate Law</p>
+                  <div class="chamber-card-pills">
+                    <span class="expertise-pill-sidebar">Criminal Defense</span>
+                    <span class="expertise-pill-sidebar">Family Law</span>
                   </div>
-                  <div class="attorney-info">
-                    <h3>Adv. Nasrin Akter</h3>
-                    <span class="position">Managing Partner, Kamal & Associates</span>
+                  <div class="chamber-card-stats">
+                    <span>Experience<strong>15+ Years</strong></span>
+                    <span>Enrolled<strong>Supreme Court of Bangladesh</strong></span>
                   </div>
                 </div>
               </a>
             </div>
 
             <div class="item">
-              <a href="attorney-jagadish.html" class="attorney-link">
-                <div class="attorney-card">
-                  <div class="attorney-img attorney-img--jagadish">
-                    <div class="attorney-social">
-                      <div class="social-link">
-                        <i class="fab fa-facebook-f"></i>
-                      </div>
-                      <div class="social-link">
-                        <i class="fab fa-twitter"></i>
-                      </div>
-                    </div>
+              <a href="attorney-jagadish.html" class="chamber-card">
+                <div class="chamber-card-photo photo-placeholder">
+                  <span class="photo-placeholder-initials">JC</span>
+                </div>
+                <div class="chamber-card-body">
+                  <h3 class="chamber-card-name">Adv. Jagadish Chandra Saha</h3>
+                  <span class="chamber-card-role">Senior Partner, Kamal &amp; Associates</span>
+                  <p class="chamber-card-spec">Banking &amp; Corporate Law</p>
+                  <div class="chamber-card-pills">
+                    <span class="expertise-pill-sidebar">Criminal Defense</span>
+                    <span class="expertise-pill-sidebar">Family Law</span>
                   </div>
-                  <div class="attorney-info">
-                    <h3>Adv. Jagadish Chandra Saha</h3>
-                    <span class="position">Senior Partner, Kamal & Associates</span>
+                  <div class="chamber-card-stats">
+                    <span>Experience<strong>15+ Years</strong></span>
+                    <span>Enrolled<strong>Supreme Court of Bangladesh</strong></span>
                   </div>
                 </div>
               </a>
             </div>
 
             <div class="item">
-              <a href="attorney-habibur.html" class="attorney-link">
-                <div class="attorney-card">
-                  <div class="attorney-img attorney-img--habibur">
-                    <div class="attorney-social">
-                      <div class="social-link">
-                        <i class="fab fa-facebook-f"></i>
-                      </div>
-                      <div class="social-link">
-                        <i class="fab fa-twitter"></i>
-                      </div>
-                    </div>
+              <a href="attorney-habibur.html" class="chamber-card">
+                <div class="chamber-card-photo photo-placeholder">
+                  <span class="photo-placeholder-initials">HR</span>
+                </div>
+                <div class="chamber-card-body">
+                  <h3 class="chamber-card-name">Adv. Habibur Rahman</h3>
+                  <span class="chamber-card-role">Senior Partner, Kamal &amp; Associates</span>
+                  <p class="chamber-card-spec">Banking &amp; Corporate Law</p>
+                  <div class="chamber-card-pills">
+                    <span class="expertise-pill-sidebar">Criminal Defense</span>
+                    <span class="expertise-pill-sidebar">Family Law</span>
                   </div>
-                  <div class="attorney-info">
-                    <h3>Adv. Habibur Rahman</h3>
-                    <span class="position">Senior Partner, Kamal & Associates</span>
+                  <div class="chamber-card-stats">
+                    <span>Experience<strong>15+ Years</strong></span>
+                    <span>Enrolled<strong>Supreme Court of Bangladesh</strong></span>
                   </div>
                 </div>
               </a>
             </div>
 
             <div class="item">
-              <a href="attorney-chowdhury.html" class="attorney-link">
-                <div class="attorney-card">
-                  <div class="attorney-img attorney-img--chowdhury">
-                    <div class="attorney-social">
-                      <div class="social-link">
-                        <i class="fab fa-facebook-f"></i>
-                      </div>
-                      <div class="social-link">
-                        <i class="fab fa-twitter"></i>
-                      </div>
-                    </div>
+              <a href="attorney-chowdhury.html" class="chamber-card">
+                <div class="chamber-card-photo">
+                  <img src="images/Attorneys/Chowdhury.jpg" alt="Adv. Mustafa Kamal Chowdhury" loading="lazy" />
+                </div>
+                <div class="chamber-card-body">
+                  <h3 class="chamber-card-name">Adv. Mustafa Kamal Chowdhury</h3>
+                  <span class="chamber-card-role">Senior Associate, Kamal &amp; Associates</span>
+                  <p class="chamber-card-spec">Criminal Defense</p>
+                  <div class="chamber-card-pills">
+                    <span class="expertise-pill-sidebar">Criminal Defense</span>
+                    <span class="expertise-pill-sidebar">Litigation</span>
                   </div>
-                  <div class="attorney-info">
-                    <h3>Adv. Mustafa Kamal Chowdhury</h3>
-                    <span class="position">Senior Associate, Kamal & Associates</span>
+                  <div class="chamber-card-stats">
+                    <span>Experience<strong>12+ Years</strong></span>
+                    <span>Enrolled<strong>Supreme Court of Bangladesh</strong></span>
                   </div>
                 </div>
               </a>
             </div>
 
             <div class="item">
-              <a href="attorney-kabir.html" class="attorney-link">
-                <div class="attorney-card">
-                  <div class="attorney-img attorney-img--kabir">
-                    <div class="attorney-social">
-                      <div class="social-link">
-                        <i class="fab fa-facebook-f"></i>
-                      </div>
-                      <div class="social-link">
-                        <i class="fab fa-twitter"></i>
-                      </div>
-                    </div>
+              <a href="attorney-kabir.html" class="chamber-card">
+                <div class="chamber-card-photo">
+                  <img src="images/Attorneys/Kabir.JPG" alt="Adv. Mohammad Kabir" loading="lazy" />
+                </div>
+                <div class="chamber-card-body">
+                  <h3 class="chamber-card-name">Adv. Mohammad Kabir</h3>
+                  <span class="chamber-card-role">Senior Associate, Kamal &amp; Associates</span>
+                  <p class="chamber-card-spec">Family Law</p>
+                  <div class="chamber-card-pills">
+                    <span class="expertise-pill-sidebar">Family Law</span>
+                    <span class="expertise-pill-sidebar">Civil Law</span>
                   </div>
-                  <div class="attorney-info">
-                    <h3>Adv. Mohammad Kabir</h3>
-                    <span class="position">Senior Associate, Kamal & Associates</span>
+                  <div class="chamber-card-stats">
+                    <span>Experience<strong>12+ Years</strong></span>
+                    <span>Enrolled<strong>Supreme Court of Bangladesh</strong></span>
                   </div>
                 </div>
               </a>
             </div>
+
           </div>
         </div>
       </div>
@@ -896,7 +892,9 @@
                   attention to detail. Highly recommended."
                 </p>
                 <div class="testimonial-author">
-                  <img src="images/Clients/Clients_Popular.png" alt="Client of Kamal &amp; Associates law firm" class="author-img" />
+                  <span class="author-logo-badge">
+                    <img src="images/Clients/Clients_Popular.png" alt="Popular Diagnostics logo" class="author-logo" />
+                  </span>
                   <div class="author-info">
                     <h4 class="author-name">Popular Diagnostics</h4>
                     <span class="author-role">CEO, Popular Diagnostics</span>
@@ -917,7 +915,9 @@
                   thanks to them."
                 </p>
                 <div class="testimonial-author">
-                  <img src="images/Clients/Clients_PLFS.jpg" alt="Client of Kamal &amp; Associates law firm" class="author-img" />
+                  <span class="author-logo-badge">
+                    <img src="images/Clients/Clients_PLFS.jpg" alt="People's Leasing & Financial Services logo" class="author-logo" />
+                  </span>
                   <div class="author-info">
                     <h4 class="author-name">
                       People's Leasing & Financial Services
@@ -940,7 +940,9 @@
                   10 years."
                 </p>
                 <div class="testimonial-author">
-                  <img src="images/Clients/Clients_EXIM.jpg" alt="Client of Kamal &amp; Associates law firm" class="author-img" />
+                  <span class="author-logo-badge">
+                    <img src="images/Clients/Clients_EXIM.jpg" alt="EXIM Bank logo" class="author-logo" />
+                  </span>
                   <div class="author-info">
                     <h4 class="author-name">EXIM Bank Limited</h4>
                     <span class="author-role">Director, EXIM Bank Limited</span>
@@ -961,7 +963,9 @@
                   export business."
                 </p>
                 <div class="testimonial-author">
-                  <img src="images/Clients/Clients_NRBC.jpg" alt="Client of Kamal &amp; Associates law firm" class="author-img" />
+                  <span class="author-logo-badge">
+                    <img src="images/Clients/Clients_NRBC.jpg" alt="NRBC Bank logo" class="author-logo" />
+                  </span>
                   <div class="author-info">
                     <h4 class="author-name">NRBC Bank</h4>
                     <span class="author-role">Director, NRBC Bank</span>
@@ -1258,21 +1262,25 @@
     if (window.jQuery && window.jQuery.fn && typeof window.jQuery.fn.owlCarousel === 'function') {
       $(document).ready(function () {
         $(".attorney-carousel").owlCarousel({
-          loop: true, // Makes the slider infinite
-          margin: 30, // Space between cards
-          nav: false, // Hides ugly Next/Prev buttons
-          dots: true, // Shows the dots at the bottom
-          autoplay: true, // Auto-scrolls
-          autoplayTimeout: 3000, // Speed of auto-scroll
+          loop: true,
+          margin: 30,
+          nav: false,
+          dots: true,
+          autoplay: true,
+          autoplayTimeout: 3500,
+          slideBy: 1, // Always step one card at a time, never a full page of items
           responsive: {
             0: {
-              items: 1, // 1 item on Mobile
+              items: 1,
             },
-            768: {
-              items: 2, // 2 items on Tablets
+            576: {
+              items: 2,
             },
             992: {
-              items: 3, // 3 items on Desktop
+              items: 3,
+            },
+            1200: {
+              items: 4,
             },
           },
         });

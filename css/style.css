@@ -4556,10 +4556,15 @@ p {
 
 .chamber-card--founder .chamber-card-name {
     font-size: 20px;
+    text-align: center;
 }
 
 .chamber-card-role--founder {
     color: var(--gold-founder);
+}
+
+.chamber-card--founder .chamber-card-role {
+    text-align: center;
 }
 
 /* Home page cards run smaller than the attorneys.html grid — scoped to

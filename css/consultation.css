@@ -228,6 +228,22 @@
     color: var(--heading-color);
 }
 
+/* QR Payment Card */
+.qr-payment-card {
+    background: var(--background-color);
+    border: 2px solid rgba(var(--accent-rgb), 0.2);
+    border-radius: 12px;
+    padding: 25px 20px;
+}
+
+.qr-payment-card img {
+    max-width: 220px;
+    width: 100%;
+    background: #fff;
+    padding: 12px;
+    border-radius: 8px;
+}
+
 /* Eligibility Status */
 .eligibility-free {
     background: rgba(76, 175, 80, 0.1);

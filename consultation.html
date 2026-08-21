@@ -238,8 +238,8 @@
                 <i class="fas fa-gift text-accent me-3 fa-2x"></i>
                 <div>
                   <strong>First Consultation FREE!</strong><br />
-                  <small class="text-white">Subsequent consultations: BDT 3,000 (payable via bKash,
-                    Nagad, Rocket, or Card)</small>
+                  <small class="text-white">Subsequent consultations: BDT 3,000 (scan our Bangla QR code
+                    with bKash, Nagad, Rocket, or your banking app)</small>
                 </div>
               </div>
 
@@ -474,56 +474,35 @@
                   <strong class="text-accent">BDT 3,000</strong>
                 </p>
 
-                <div class="payment-methods mb-4">
-                  <label class="form-label">Select Payment Method *</label>
-                  <div class="row">
-                    <div class="col-6 col-md-3 mb-2">
-                      <div class="payment-method-card" data-method="bkash">
-                        <img src="https://www.logo.wine/a/logo/BKash/BKash-Icon-Logo.wine.svg" alt="bKash"
-                          class="u-inline-0086" loading="lazy" />
-                        <span>bKash</span>
-                      </div>
-                    </div>
-                    <div class="col-6 col-md-3 mb-2">
-                      <div class="payment-method-card" data-method="nagad">
-                        <img src="https://nagad.com.bd/wp-content/uploads/2023/01/Nagad-Logo-Icon.png" alt="Nagad"
-                          class="u-inline-0086" loading="lazy" />
-                        <span>Nagad</span>
-                      </div>
-                    </div>
-                    <div class="col-6 col-md-3 mb-2">
-                      <div class="payment-method-card" data-method="rocket">
-                        <i class="fas fa-rocket u-inline-0087"></i>
-                        <span>Rocket</span>
-                      </div>
-                    </div>
-                    <div class="col-6 col-md-3 mb-2">
-                      <div class="payment-method-card" data-method="card">
-                        <i class="fas fa-credit-card u-inline-0088"></i>
-                        <span>Card</span>
-                      </div>
-                    </div>
+                <div class="qr-payment-card text-center mb-4">
+                  <p class="text-white mb-3">
+                    Scan this <strong class="text-accent">Bangla QR</strong> code with your
+                    bKash, Nagad, Rocket, Upay, or mobile banking app to pay
+                    <strong class="text-accent">BDT 3,000</strong>.
+                  </p>
+                  <img src="images/bangla-qr-payment.png"
+                    alt="Bangla QR code for Kamal & Associates consultation payment" loading="lazy" />
+                  <p class="text-white mt-3 mb-0">
+                    <small><i class="fas fa-info-circle me-1"></i>After paying, enter the
+                      transaction/reference ID from your app below.</small>
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label">Payment Transaction / Reference ID *</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-receipt"></i></span>
+                    <input type="text" class="form-control" id="paymentReferenceId"
+                      placeholder="e.g. TrxID shown in your bKash/Nagad app" />
                   </div>
-                  <div class="row mt-2">
-                    <div class="col-6 col-md-3 mb-2">
-                      <div class="payment-method-card" data-method="upay">
-                        <i class="fas fa-mobile-alt u-inline-0089"></i>
-                        <span>Upay</span>
-                      </div>
-                    </div>
-                    <div class="col-6 col-md-3 mb-2">
-                      <div class="payment-method-card" data-method="internetbanking">
-                        <i class="fas fa-university u-inline-0090"></i>
-                        <span>Net Banking</span>
-                      </div>
-                    </div>
-                  </div>
+                  <small class="text-white">This is the confirmation number your app shows after a
+                    successful payment.</small>
                 </div>
 
                 <div class="alert alert-warning u-inline-0068">
                   <i class="fas fa-lock me-2"></i>
-                  <small>Your payment is secured by SSLCommerz. We do not store
-                    your card or MFS credentials.</small>
+                  <small>We do not store your card or MFS credentials. Your booking is confirmed
+                    once our team verifies the payment against the reference ID you provide.</small>
                 </div>
               </div>
 
@@ -566,6 +545,11 @@
                   your consultation request and will contact you shortly to
                   confirm your appointment.
                 </p>
+                <div id="paymentPendingNote" class="alert alert-warning text-start mb-4 d-none">
+                  <i class="fas fa-hourglass-half me-2"></i>
+                  We've recorded your payment reference and our team will verify it shortly.
+                  You'll receive a confirmation email once your payment is verified.
+                </div>
                 <div class="appointment-details p-4 mb-4 u-inline-0092">
                   <h5 class="text-accent mb-3">
                     <i class="fas fa-calendar-check me-2"></i>Appointment
@@ -656,8 +640,8 @@
               <hr class="u-inline-0093" />
               <small class="text-white">
                 <i class="fas fa-info-circle me-1"></i>
-                Payment accepted via bKash, Nagad, Rocket, Upay, Cards, and
-                Internet Banking.
+                Pay instantly by scanning our Bangla QR code — compatible with
+                bKash, Nagad, Rocket, Upay, and all major banking apps.
               </small>
             </div>
 
@@ -679,16 +663,10 @@
                   Stored
                 </li>
                 <li>
-                  <i class="fas fa-check text-success me-2"></i>Secure Payment
-                  Gateway
+                  <i class="fas fa-check text-success me-2"></i>Manually
+                  Verified Payments
                 </li>
               </ul>
-              <div class="payment-badges mt-3">
-                <img src="https://sslcommerz.com/wp-content/uploads/2021/11/verified-by-visa.png" alt="Verified by Visa"
-                  class="u-inline-0094" loading="lazy" />
-                <img src="https://sslcommerz.com/wp-content/uploads/2021/11/mastercard-securecode.png"
-                  alt="MasterCard SecureCode" class="u-inline-0095" loading="lazy" />
-              </div>
             </div>
           </div>
         </div>

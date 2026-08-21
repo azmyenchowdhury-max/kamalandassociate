@@ -104,11 +104,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // State management
     let currentStep = 1;
     let isFirstTimeUser = true;
-    let selectedPaymentMethod = null;
     let selectedConsultationType = 'office';
     let consultationFee = 3000;
-    let currentTransactionId = null;
-    let currentConsultationId = null;
     let uploadedDocuments = []; // Store uploaded documents
     
     // DOM Elements
@@ -424,7 +421,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 confirmationRef.textContent = consultationData.id.substring(0, 8).toUpperCase();
             }
         }
-        
+
+        const paymentPendingNote = document.getElementById('paymentPendingNote');
+        if (paymentPendingNote) {
+            paymentPendingNote.classList.toggle('d-none', !consultationData.paymentPending);
+        }
+
         document.getElementById('stepSuccess').classList.add('active');
     }
     
@@ -812,7 +814,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <i class="fas fa-info-circle fa-2x me-3"></i>
                             <div>
                                 <strong>Welcome back! A consultation fee applies.</strong><br>
-                                <small class="text-muted">Consultation Fee: BDT ${consultationFee.toLocaleString()} (payable via bKash, Nagad, Rocket, or Card)</small>
+                                <small class="text-muted">Consultation Fee: BDT ${consultationFee.toLocaleString()} (scan our Bangla QR code with bKash, Nagad, Rocket, or your banking app)</small>
                                 <br><small class="text-muted">Previous consultations: ${result.consultationCount || 1}</small>
                             </div>
                         </div>
@@ -888,16 +890,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // ===== Payment Method Selection =====
-    const paymentMethodCards = document.querySelectorAll('.payment-method-card');
-    paymentMethodCards.forEach(card => {
-        card.addEventListener('click', function() {
-            paymentMethodCards.forEach(c => c.classList.remove('active'));
-            this.classList.add('active');
-            selectedPaymentMethod = this.dataset.method;
-        });
-    });
-    
     // ===== Form Submission =====
     const submitBtn = document.getElementById('submitConsultation');
     if (submitBtn) {
@@ -916,9 +908,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // If payment required, check payment method
-            if (!isFirstTimeUser && !selectedPaymentMethod) {
-                showError('Please select a payment method.');
+            // If payment required, the Bangla QR transaction reference ID must be provided
+            const paymentReferenceId = document.getElementById('paymentReferenceId')?.value.trim() || '';
+            if (!isFirstTimeUser && !paymentReferenceId) {
+                showError('Please enter the transaction/reference ID from your payment app.');
                 return;
             }
             
@@ -997,70 +990,34 @@ document.addEventListener('DOMContentLoaded', function() {
                         preferredTime
                     });
                 } else {
-                    // Save consultation details before payment redirect (status: pending payment)
-                    const savePendingResult = await callEligibilityAPI('save_consultation', email, phone, {
+                    // Bangla QR payments are verified manually by our team (no automated
+                    // gateway) — save the booking with the transaction reference the
+                    // client entered, marked pending until staff confirm it.
+                    const saveResult = await callEligibilityAPI('save_consultation', email, phone, {
                         consultation: {
                             ...consultationData,
-                            paymentStatus: 'pending',
+                            paymentStatus: 'pending_verification',
                             isFree: false,
-                            selectedPaymentMethod,
+                            selectedPaymentMethod: 'Bangla QR',
+                            additionalNotes: `${additionalNotes ? additionalNotes + '\n\n' : ''}Payment Reference ID: ${paymentReferenceId}`,
                             submittedAt: new Date().toISOString()
                         }
                     });
-                    if (!savePendingResult.success) {
-                        throw new Error(savePendingResult.error || 'Unable to save consultation details before payment.');
+                    if (!saveResult.success) {
+                        throw new Error(saveResult.error || 'Consultation could not be saved. Please try again.');
                     }
 
-                    // Initiate payment for returning users
-                    sessionStorage.setItem('pendingConsultation', JSON.stringify({
-                        consultationId: savePendingResult.consultationId || null,
+                    showNotification('Consultation scheduled! We will verify your payment shortly.', 'success');
+                    showSuccess({
+                        id: saveResult.consultationId || ('KC-' + Date.now().toString(36).toUpperCase()),
                         firstName,
                         lastName,
                         caseType,
                         email,
-                        phone,
                         preferredDate,
-                        preferredTime
-                    }));
-                    
-                    let paymentResult;
-                    if (uploadedDocuments.length > 0) {
-                        paymentResult = await invokeEdgeFunctionWithFiles('payment-initiate', {
-                            ...consultationData,
-                            consultationId: savePendingResult.consultationId || null,
-                            returnUrl: window.location.href.split('?')[0],
-                            paymentMethod: selectedPaymentMethod
-                        }, uploadedDocuments);
-                    } else {
-                        paymentResult = await invokeEdgeFunction('payment-initiate', {
-                            ...consultationData,
-                            consultationId: savePendingResult.consultationId || null,
-                            returnUrl: window.location.href.split('?')[0],
-                            paymentMethod: selectedPaymentMethod
-                        });
-                    }
-                    
-                    if (paymentResult.success) {
-                        currentTransactionId = paymentResult.transactionId;
-                        currentConsultationId = paymentResult.consultationId;
-                        
-                        showNotification('Redirecting to payment gateway...', 'info');
-                        
-                        // Redirect to payment gateway
-                        if (paymentResult.gatewayUrl) {
-                            setTimeout(() => {
-                                window.location.href = paymentResult.gatewayUrl;
-                            }, 1500);
-                        } else {
-                            // For demo, simulate successful payment
-                            showNotification('Demo mode: Simulating payment...', 'warning');
-                            setTimeout(() => {
-                                window.location.href = `${window.location.pathname}?status=success&tran_id=${currentTransactionId}&demo=true`;
-                            }, 2000);
-                        }
-                    } else {
-                        throw new Error(paymentResult.error || 'Failed to initiate payment');
-                    }
+                        preferredTime,
+                        paymentPending: true
+                    });
                 }
             } catch (error) {
                 console.error('Submission error:', error);

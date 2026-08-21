@@ -30,7 +30,7 @@
 
 const CONFIG = {
   // Set the REAL value only in the deployed Apps Script editor, never here.
-  SECRET_TOKEN: "REPLACE_WITH_YOUR_SECRET_TOKEN_IN_THE_APPS_SCRIPT_EDITOR_ONLY",
+  SECRET_TOKEN: "38b367b6a1de86087756695b9e3dc1c523437b7e8a8ac7f1664e620f8125d61f",
 
   // Google Spreadsheet ID (from its URL: /spreadsheets/d/SPREADSHEET_ID/edit)
   SPREADSHEET_ID: "1uI5LLTqdP3NkILCmCKE29aOnvYnE3isl-qCgMxqlJjk",
@@ -51,7 +51,7 @@ const CONFIG = {
     "Practice Area", "Urgency", "Case Description", "Additional Notes",
     "Preferred Date", "Preferred Time", "Consultation Type",
     "Documents Count", "Document Names",
-    "Is Free", "Payment Status", "Payment Method"
+    "Is Free", "Payment Status", "Payment Method", "Payment Reference ID"
   ]
 };
 
@@ -117,6 +117,119 @@ function doPost(e) {
 
 function doGet(e) {
   return jsonResponse({ status: "ok", message: "Eligibility endpoint is live." });
+}
+
+// ------------------------------------------------------------
+// Staff menu — manual Bangla QR payment verification
+//
+// The Bangla QR code is a static "scan and pay to our account" code, not a
+// per-transaction gateway, so there's no automatic way to match a payment to
+// a specific booking. Staff check the reference ID a client typed in (visible
+// in the Additional Notes column) against their bKash/Nagad/Rocket app's own
+// transaction history, then use this menu to confirm or reject — no separate
+// admin site needed.
+//
+// This script is standalone (created at script.google.com, not from inside
+// the spreadsheet), so onOpen() below is never invoked automatically the way
+// it would be for a container-bound script. Run installSheetOpenTrigger()
+// ONCE from this editor (select it in the function dropdown, click Run, and
+// approve the permission prompt) to register it as an installable trigger —
+// after that, the menu will appear every time anyone opens the spreadsheet.
+// ------------------------------------------------------------
+function installSheetOpenTrigger() {
+  // Avoid piling up duplicate triggers if this is ever run more than once.
+  ScriptApp.getProjectTriggers().forEach(function(trigger) {
+    if (trigger.getHandlerFunction() === "onOpen") {
+      ScriptApp.deleteTrigger(trigger);
+    }
+  });
+
+  ScriptApp.newTrigger("onOpen")
+    .forSpreadsheet(CONFIG.SPREADSHEET_ID)
+    .onOpen()
+    .create();
+}
+
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu("Kamal & Associates")
+    .addItem("Confirm Payment for Selected Row", "confirmSelectedRowPayment")
+    .addItem("Mark Selected Row as Payment Not Found", "rejectSelectedRowPayment")
+    .addToUi();
+}
+
+function getSelectedConsultationRow() {
+  const activeSheet = SpreadsheetApp.getActiveSheet();
+  if (activeSheet.getName() !== CONFIG.CONSULTATIONS_SHEET) {
+    throw new Error('Select a row on the "' + CONFIG.CONSULTATIONS_SHEET + '" sheet first.');
+  }
+  const row = activeSheet.getActiveCell().getRow();
+  if (row === 1) {
+    throw new Error("That's the header row — select a data row instead.");
+  }
+  const values = activeSheet.getRange(row, 1, 1, CONFIG.CONSULTATION_HEADERS.length).getValues()[0];
+  return { sheet: activeSheet, row: row, values: values };
+}
+
+function confirmSelectedRowPayment() {
+  const ui = SpreadsheetApp.getUi();
+  try {
+    const selected = getSelectedConsultationRow();
+    const consultationId = selected.values[0];
+    const email = selected.values[3];
+    const phone = selected.values[4];
+    const currentStatus = selected.values[17];
+    const referenceId = selected.values[19] || "(none entered)";
+
+    if (currentStatus === "paid") {
+      ui.alert("That booking is already marked paid.");
+      return;
+    }
+
+    const response = ui.alert(
+      "Confirm payment?",
+      "Booking " + consultationId + " (" + email + ")\n" +
+        "Reference ID entered by client: " + referenceId + "\n\n" +
+        "Only click Yes after you've checked your bKash/Nagad/Rocket app and found a matching " +
+        "BDT 3,000 payment with this reference ID.",
+      ui.ButtonSet.YES_NO
+    );
+    if (response !== ui.Button.YES) return;
+
+    const result = confirmConsultation(email, phone, consultationId, "paid");
+    if (result.success) {
+      ui.alert(result.alreadyConfirmed ? "That booking was already confirmed." : "Confirmed — the client has been emailed.");
+    } else {
+      ui.alert("Could not confirm: " + (result.error || "unknown error"));
+    }
+  } catch (err) {
+    ui.alert(err.message);
+  }
+}
+
+function rejectSelectedRowPayment() {
+  const ui = SpreadsheetApp.getUi();
+  try {
+    const selected = getSelectedConsultationRow();
+    const currentStatus = selected.values[17];
+
+    if (currentStatus === "paid") {
+      ui.alert("That booking is already marked paid — this action is only for unpaid/unmatched bookings.");
+      return;
+    }
+
+    const response = ui.alert(
+      "Mark as payment not found?",
+      "This releases the time slot so someone else can book it. The client will NOT be emailed automatically — contact them directly if needed.",
+      ui.ButtonSet.YES_NO
+    );
+    if (response !== ui.Button.YES) return;
+
+    selected.sheet.getRange(selected.row, 18).setValue("payment_not_confirmed");
+    ui.alert("Marked. That time slot is now available again.");
+  } catch (err) {
+    ui.alert(err.message);
+  }
 }
 
 // ------------------------------------------------------------
@@ -237,11 +350,13 @@ function consumeFree(email, phone) {
   return { success: true, freeGranted: true };
 }
 
-// A booking holds its slot unless it was explicitly marked failed/cancelled.
-// (No such status is set anywhere yet — abandoned "pending" payments still
-// hold the slot. That's a known limitation, not a bug: revisit if abandoned
-// pending bookings start blocking real customers.)
-const BLOCKING_PAYMENT_STATUSES = ["not_required_free", "pending", "paid"];
+// A booking holds its slot unless it was explicitly marked failed/cancelled/
+// not-found. "pending_verification" (the Bangla QR manual-review flow) must
+// hold the slot too — otherwise two customers could both pay for the same
+// time before staff get to either one. Abandoned "pending" bookings still
+// hold the slot too; that's a known limitation, not a bug: revisit if
+// abandoned pending bookings start blocking real customers.
+const BLOCKING_PAYMENT_STATUSES = ["not_required_free", "pending", "pending_verification", "paid"];
 
 function getBookedSlotsFromSheet(sheet, date) {
   const data = sheet.getDataRange().getValues();
@@ -303,7 +418,8 @@ function saveConsultation(email, phone, consultation) {
     (consultation.documentNames || []).join(", "),
     Boolean(consultation.isFree),
     consultation.paymentStatus || "",
-    consultation.selectedPaymentMethod || ""
+    consultation.selectedPaymentMethod || "",
+    consultation.paymentReferenceId || ""
   ]);
 
   return { success: true, consultationId: consultationId };
@@ -318,6 +434,7 @@ function confirmConsultation(email, phone, consultationId, paymentStatus) {
   const data = sheet.getDataRange().getValues();
   let found = false;
   let alreadyConfirmed = false;
+  let confirmedRow = null;
 
   for (let i = 1; i < data.length; i++) {
     if (data[i][0] === consultationId) {
@@ -330,6 +447,7 @@ function confirmConsultation(email, phone, consultationId, paymentStatus) {
       }
       sheet.getRange(i + 1, 3).setValue(new Date());              // Confirmed At
       sheet.getRange(i + 1, 18).setValue(paymentStatus || "paid"); // Payment Status
+      confirmedRow = data[i];
       break;
     }
   }
@@ -357,7 +475,71 @@ function confirmConsultation(email, phone, consultationId, paymentStatus) {
     eligSheet.appendRow([key, email, phone, false, 1, now, now]);
   }
 
-  return { success: true };
+  const emailResult = sendConsultationConfirmationEmail(consultationId, confirmedRow);
+
+  return { success: true, emailSent: emailResult.sent };
+}
+
+// Notifies the client once their booking is confirmed — either automatically
+// (the SSLCommerz gateway flow) or manually, when staff verify a Bangla QR
+// payment from the sheet's custom menu below.
+function sendConsultationConfirmationEmail(consultationId, row) {
+  try {
+    const email = String(row[3] || "").trim();
+    if (!email) {
+      return { sent: false, message: "No client email on this booking." };
+    }
+
+    const firstName = String(row[5] || "Client").trim();
+    const practiceArea = String(row[7] || "your matter").trim();
+    const preferredDate = cellToText(row[11], false);
+    const preferredTime = cellToText(row[12], true);
+    const consultationType = String(row[13] || "").trim();
+
+    const subject = `Consultation Confirmed | Kamal & Associates | ${consultationId}`;
+    const htmlBody = `
+      <div style="font-family:Segoe UI,Arial,sans-serif;line-height:1.6;color:#1f2937;max-width:680px;margin:0 auto;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;">
+        <div style="background:#0a2342;color:#ffffff;padding:18px 22px;">
+          <div style="font-size:20px;font-weight:700;">Kamal &amp; Associates</div>
+          <div style="font-size:12px;opacity:0.88;letter-spacing:0.4px;">Defender Of Justice</div>
+        </div>
+        <div style="padding:20px 22px;">
+          <p style="margin:0 0 10px;"><strong>Dear ${escapeEmailHtml(firstName)},</strong></p>
+          <p style="margin:0 0 10px;">Your payment has been verified and your consultation is now <strong>confirmed</strong>.</p>
+          <ul style="margin:0 0 14px;padding-left:18px;">
+            <li><strong>Reference Number:</strong> ${escapeEmailHtml(consultationId)}</li>
+            <li><strong>Practice Area:</strong> ${escapeEmailHtml(practiceArea)}</li>
+            <li><strong>Date:</strong> ${escapeEmailHtml(preferredDate)}</li>
+            <li><strong>Time:</strong> ${escapeEmailHtml(preferredTime)}</li>
+            <li><strong>Type:</strong> ${escapeEmailHtml(consultationType)}</li>
+          </ul>
+          <p style="margin:0 0 10px;">We look forward to speaking with you. If you need to reschedule, please contact our office.</p>
+          <p style="margin:0;">With regards,<br><strong>Kamal &amp; Associates</strong></p>
+        </div>
+      </div>
+    `;
+
+    MailApp.sendEmail({
+      to: email,
+      subject: subject,
+      htmlBody: htmlBody,
+      name: "Kamal & Associates"
+    });
+
+    return { sent: true, message: "Confirmation email sent." };
+  } catch (err) {
+    Logger.log("Consultation confirmation email error: " + err.message);
+    return { sent: false, message: "Confirmation email failed." };
+  }
+}
+
+function escapeEmailHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 // ------------------------------------------------------------

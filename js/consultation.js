@@ -999,7 +999,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             paymentStatus: 'pending_verification',
                             isFree: false,
                             selectedPaymentMethod: 'Bangla QR',
-                            additionalNotes: `${additionalNotes ? additionalNotes + '\n\n' : ''}Payment Reference ID: ${paymentReferenceId}`,
+                            paymentReferenceId,
                             submittedAt: new Date().toISOString()
                         }
                     });

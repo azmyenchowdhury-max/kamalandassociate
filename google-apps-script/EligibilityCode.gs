@@ -70,24 +70,33 @@ function doPost(e) {
       return jsonResponse({ status: "error", error: "Unauthorized" });
     }
 
+    // get_booked_slots is a public, read-only availability lookup — no
+    // customer identity needed, and (like check_eligibility below) it must
+    // never sit behind the write lock: it's a UX convenience check, not the
+    // authoritative one (that happens inside save_consultation, under the
+    // lock, at submit time). Making reads wait on writes was the main cause
+    // of slow/variable response times.
+    if (payload.action === "get_booked_slots") {
+      return jsonResponse(getBookedSlots(String(payload.date || "").trim()));
+    }
+
+    const email = String(payload.email || "").trim().toLowerCase();
+    const phone = String(payload.phone || "").trim();
+    if (!email || !phone) {
+      return jsonResponse({ success: false, error: "Email and phone are required." });
+    }
+
+    if (payload.action === "check_eligibility") {
+      return jsonResponse(checkEligibility(email, phone));
+    }
+
+    // Only actions that mutate the sheet (or do a check-then-write, like the
+    // slot-availability check inside save_consultation) need to serialize
+    // through the lock.
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
-
     try {
-      // get_booked_slots is a public availability lookup — no customer identity needed.
-      if (payload.action === "get_booked_slots") {
-        return jsonResponse(getBookedSlots(String(payload.date || "").trim()));
-      }
-
-      const email = String(payload.email || "").trim().toLowerCase();
-      const phone = String(payload.phone || "").trim();
-      if (!email || !phone) {
-        return jsonResponse({ success: false, error: "Email and phone are required." });
-      }
-
       switch (payload.action) {
-        case "check_eligibility":
-          return jsonResponse(checkEligibility(email, phone));
         case "consume_free":
           return jsonResponse(consumeFree(email, phone));
         case "save_consultation":
@@ -127,8 +136,19 @@ function findEligibilityRow(sheet, key) {
   return null;
 }
 
+// Reuse the same open Spreadsheet handle across every sheet lookup within a
+// single request instead of re-opening it (a network round trip) each time —
+// several actions here touch more than one sheet per invocation.
+let _spreadsheet = null;
+function getSpreadsheet() {
+  if (!_spreadsheet) {
+    _spreadsheet = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  }
+  return _spreadsheet;
+}
+
 function getOrCreateSheet(name, headers, plainTextColumns) {
-  const ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  const ss = getSpreadsheet();
   let sheet = ss.getSheetByName(name);
   if (!sheet) {
     sheet = ss.insertSheet(name);
@@ -138,15 +158,20 @@ function getOrCreateSheet(name, headers, plainTextColumns) {
     headerRange.setBackground("#0a2342");
     headerRange.setFontColor("#ffffff");
     sheet.setFrozenRows(1);
-  }
 
-  // Force these columns to stay plain text — otherwise Sheets auto-converts
-  // strings like "2026-08-17" or "4:00 PM" into real Date/Time values, which
-  // silently breaks string comparisons used for slot-availability checks.
-  if (plainTextColumns && plainTextColumns.length) {
-    plainTextColumns.forEach(function(col) {
-      sheet.getRange(2, col, 1000, 1).setNumberFormat("@");
-    });
+    // Force these columns to stay plain text — otherwise Sheets auto-converts
+    // strings like "2026-08-17" or "4:00 PM" into real Date/Time values, which
+    // silently breaks string comparisons used for slot-availability checks.
+    // This only needs to run once, right when the sheet (and its 1000-row
+    // formatted range) is created — the format persists for every row
+    // appended afterward. Re-applying it on every single request (as this
+    // used to do) reformatted 2 columns x 1000 rows on every booking-related
+    // call and was the single biggest cause of slow responses.
+    if (plainTextColumns && plainTextColumns.length) {
+      plainTextColumns.forEach(function(col) {
+        sheet.getRange(2, col, 1000, 1).setNumberFormat("@");
+      });
+    }
   }
 
   return sheet;
@@ -201,9 +226,10 @@ function consumeFree(email, phone) {
   }
 
   if (existing) {
-    sheet.getRange(existing.rowIndex, 4).setValue(true);   // Free Consultation Used
-    sheet.getRange(existing.rowIndex, 5).setValue(1);       // Confirmed Consultation Count
-    sheet.getRange(existing.rowIndex, 7).setValue(now);     // Last Consultation
+    // One batched write (cols 4-7: Free Consultation Used, Confirmed Count,
+    // First Seen (kept as-is), Last Consultation) instead of three separate
+    // round trips.
+    sheet.getRange(existing.rowIndex, 4, 1, 4).setValues([[true, 1, existing.row[5], now]]);
   } else {
     sheet.appendRow([key, email, phone, true, 1, now, now]);
   }
@@ -217,12 +243,7 @@ function consumeFree(email, phone) {
 // pending bookings start blocking real customers.)
 const BLOCKING_PAYMENT_STATUSES = ["not_required_free", "pending", "paid"];
 
-function getBookedSlots(date) {
-  if (!date) {
-    return { success: false, error: "Missing date." };
-  }
-
-  const sheet = getOrCreateSheet(CONFIG.CONSULTATIONS_SHEET, CONFIG.CONSULTATION_HEADERS, [12, 13]);
+function getBookedSlotsFromSheet(sheet, date) {
   const data = sheet.getDataRange().getValues();
   const booked = [];
 
@@ -235,16 +256,29 @@ function getBookedSlots(date) {
     }
   }
 
-  return { success: true, bookedSlots: booked };
+  return booked;
+}
+
+function getBookedSlots(date) {
+  if (!date) {
+    return { success: false, error: "Missing date." };
+  }
+
+  const sheet = getOrCreateSheet(CONFIG.CONSULTATIONS_SHEET, CONFIG.CONSULTATION_HEADERS, [12, 13]);
+  return { success: true, bookedSlots: getBookedSlotsFromSheet(sheet, date) };
 }
 
 function saveConsultation(email, phone, consultation) {
   const preferredDate = consultation.preferredDate || "";
   const preferredTime = consultation.preferredTime || "";
 
+  // Opened once and reused for both the availability check and the append
+  // below, instead of opening the sheet and re-reading all its rows twice.
+  const sheet = getOrCreateSheet(CONFIG.CONSULTATIONS_SHEET, CONFIG.CONSULTATION_HEADERS, [12, 13]);
+
   if (preferredDate && preferredTime) {
-    const availability = getBookedSlots(preferredDate);
-    if (availability.bookedSlots && availability.bookedSlots.indexOf(preferredTime) !== -1) {
+    const booked = getBookedSlotsFromSheet(sheet, preferredDate);
+    if (booked.indexOf(preferredTime) !== -1) {
       return {
         success: false,
         slotTaken: true,
@@ -253,7 +287,6 @@ function saveConsultation(email, phone, consultation) {
     }
   }
 
-  const sheet = getOrCreateSheet(CONFIG.CONSULTATIONS_SHEET, CONFIG.CONSULTATION_HEADERS, [12, 13]);
   const consultationId = "KC-" + Utilities.getUuid().split("-")[0].toUpperCase();
 
   sheet.appendRow([
@@ -317,8 +350,9 @@ function confirmConsultation(email, phone, consultationId, paymentStatus) {
 
   if (existing) {
     const newCount = (Number(existing.row[4]) || 0) + 1;
-    eligSheet.getRange(existing.rowIndex, 5).setValue(newCount);
-    eligSheet.getRange(existing.rowIndex, 7).setValue(now);
+    // One batched write (cols 5-7: Confirmed Count, First Seen (kept as-is),
+    // Last Consultation) instead of two separate round trips.
+    eligSheet.getRange(existing.rowIndex, 5, 1, 3).setValues([[newCount, existing.row[5], now]]);
   } else {
     eligSheet.appendRow([key, email, phone, false, 1, now, now]);
   }

@@ -870,8 +870,8 @@ img {
 
 .hero-section.about-hero .hero-overlay {
     background:
-        linear-gradient(180deg, rgba(15, 17, 19, 0.28) 0%, rgba(15, 17, 19, 0.72) 100%),
-        linear-gradient(90deg, rgba(15, 17, 19, 0.62) 0%, rgba(15, 17, 19, 0.25) 55%, rgba(15, 17, 19, 0.5) 100%);
+        linear-gradient(180deg, rgba(6, 7, 9, 0.55) 0%, rgba(6, 7, 9, 0.78) 45%, rgba(6, 7, 9, 0.92) 100%),
+        linear-gradient(90deg, rgba(6, 7, 9, 0.68) 0%, rgba(6, 7, 9, 0.4) 55%, rgba(6, 7, 9, 0.62) 100%);
 }
 
 .hero-section.about-hero .row.align-items-center {
@@ -4556,10 +4556,15 @@ p {
 
 .chamber-card--founder .chamber-card-name {
     font-size: 20px;
+    text-align: center;
 }
 
 .chamber-card-role--founder {
     color: var(--gold-founder);
+}
+
+.chamber-card--founder .chamber-card-role {
+    text-align: center;
 }
 
 /* Home page cards run smaller than the attorneys.html grid — scoped to

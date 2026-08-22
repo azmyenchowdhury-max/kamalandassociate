@@ -6,7 +6,7 @@ export interface AttorneyMatch {
 }
 
 // Finds the best-available attorney for a practice area, falling back to the
-// firm's designated default (Mohammad Mostofa Kamal) when nothing matches.
+// firm's designated default (Mohammad Mostafa Kamal) when nothing matches.
 export async function matchAttorney(
   // deno-lint-ignore no-explicit-any
   supabase: any,

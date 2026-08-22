@@ -65,7 +65,7 @@
         }
     };
 
-    var FORMSUBMIT_URL = 'https://formsubmit.co/ajax/info@kamalassociates.com.bd';
+    var FORMSUBMIT_URL = 'https://formsubmit.co/ajax/kamalandassociates.info@gmail.com';
 
     // ── Helpers ────────────────────────────────────────────────────────────
     function bySlug(slug) {

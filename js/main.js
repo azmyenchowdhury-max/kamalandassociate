@@ -1368,7 +1368,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const lawyerDirectory = {
             kamal: {
-                name: 'Adv. Mohammad Mostofa Kamal',
+                name: 'Adv. Mohammad Mostafa Kamal',
                 role: 'Head of The Chamber & Founder, Kamal & Associates',
                 profileUrl: 'attorney-kamal.html',
                 phone: '+880 1713 456 800',

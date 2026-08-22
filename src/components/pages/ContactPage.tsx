@@ -36,7 +36,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ setCurrentPage }) => {
   const contactInfo = [
     { icon: 'fa-map-marker-alt', title: 'Address', content: 'House 45, Road 12, Banani\nDhaka 1213, Bangladesh' },
     { icon: 'fa-phone-alt', title: 'Phone', content: '+880 1713 456 800' },
-    { icon: 'fa-envelope', title: 'Email', content: 'info@kamalassociates.com.bd\nlegal@kamalassociates.com.bd' },
+    { icon: 'fa-envelope', title: 'Email', content: 'kamalandassociates.info@gmail.com\nlegal@kamalassociates.com.bd' },
     { icon: 'fa-clock', title: 'Office Hours', content: 'Sunday - Thursday\n9:00 AM - 6:00 PM' },
   ];
 

@@ -139,10 +139,36 @@ function doGet(e) {
 // to use Google Drive, so the script needs a one-time permission grant
 // before real submissions can use it. Also doubles as a sanity check that
 // CONFIG.DOCUMENTS_FOLDER_ID points at a folder this account can access —
-// it only reads the folder's name, it doesn't create or upload anything.
+// it creates and then immediately deletes one small test file, exercising
+// the exact same calls a real submission uses.
 function testDriveAccess() {
-  const folder = DriveApp.getFolderById(CONFIG.DOCUMENTS_FOLDER_ID);
-  Logger.log("Drive access OK — folder name: " + folder.getName());
+  const folderId = String(CONFIG.DOCUMENTS_FOLDER_ID || "").trim();
+  if (!folderId) {
+    Logger.log("FAILED: CONFIG.DOCUMENTS_FOLDER_ID is empty.");
+    return;
+  }
+
+  let folder;
+  try {
+    folder = DriveApp.getFolderById(folderId);
+  } catch (err) {
+    Logger.log("FAILED to open folder \"" + folderId + "\": " + err.message);
+    Logger.log("Most likely cause: this folder either doesn't exist, or belongs to a " +
+      "different Google account than the one you're authorizing this script as right now.");
+    return;
+  }
+  Logger.log("Opened folder OK — name: \"" + folder.getName() + "\"");
+
+  try {
+    const testBlob = Utilities.newBlob("test", "text/plain", "kamal-associates-drive-test.txt");
+    const testFile = folder.createFile(testBlob);
+    testFile.setTrashed(true);
+    Logger.log("SUCCESS: created and removed a test file — document upload is fully working.");
+  } catch (err) {
+    Logger.log("FAILED to create a test file inside that folder: " + err.message);
+    Logger.log("The folder itself is reachable, but this account can't write to it — " +
+      "check that you (the account that deployed this script) have Editor access to it.");
+  }
 }
 
 // ------------------------------------------------------------
@@ -464,14 +490,18 @@ function saveConsultation(email, phone, consultation) {
     lock.releaseLock();
   }
 
-  const folderUrl = uploadConsultationDocuments(
+  // Written into the last column either way — a real Drive link on success,
+  // or a plain-text "ERROR: ..." message on failure. Staff see this directly
+  // in the sheet, so a misconfigured folder ID or a permissions problem is
+  // obvious immediately instead of requiring a trip to the Executions log.
+  const uploadResult = uploadConsultationDocuments(
     consultationId,
     consultation.firstName,
     consultation.lastName,
     consultation.files
   );
-  if (folderUrl) {
-    sheet.getRange(rowIndex, CONFIG.CONSULTATION_HEADERS.length).setValue(folderUrl);
+  if (uploadResult.cellValue) {
+    sheet.getRange(rowIndex, CONFIG.CONSULTATION_HEADERS.length).setValue(uploadResult.cellValue);
   }
 
   return { success: true, consultationId: consultationId };
@@ -479,38 +509,70 @@ function saveConsultation(email, phone, consultation) {
 
 // Uploads each client-submitted file (sent as base64 JSON — the same
 // approach the job-applications script uses) into its own subfolder under
-// CONFIG.DOCUMENTS_FOLDER_ID, and returns that subfolder's URL. Returns ""
-// if there are no files or no folder is configured, so a booking never fails
-// just because a document failed to upload.
+// CONFIG.DOCUMENTS_FOLDER_ID. Returns { cellValue } — the Drive folder URL on
+// success, an "ERROR: ..." string describing exactly what went wrong on
+// failure, or "" if there were simply no files to upload (not an error). A
+// document failing to upload never fails the booking itself.
 function uploadConsultationDocuments(consultationId, firstName, lastName, files) {
-  if (!files || !files.length || !CONFIG.DOCUMENTS_FOLDER_ID) {
-    return "";
+  if (!files || !files.length) {
+    return { cellValue: "" };
   }
 
+  const folderId = String(CONFIG.DOCUMENTS_FOLDER_ID || "").trim();
+  if (!folderId) {
+    const message = "ERROR: No Drive folder configured (CONFIG.DOCUMENTS_FOLDER_ID is empty).";
+    Logger.log(message + " Consultation: " + consultationId);
+    return { cellValue: message };
+  }
+
+  let parentFolder;
   try {
-    const parentFolder = DriveApp.getFolderById(CONFIG.DOCUMENTS_FOLDER_ID);
+    parentFolder = DriveApp.getFolderById(folderId);
+  } catch (err) {
+    const message = "ERROR: Could not open Drive folder \"" + folderId + "\": " + err.message;
+    Logger.log(message + " Consultation: " + consultationId);
+    return { cellValue: message };
+  }
+
+  let folder;
+  try {
     const clientName = (String(firstName || "").trim() + " " + String(lastName || "").trim()).trim() || "Client";
     const today = Utilities.formatDate(new Date(), "Asia/Dhaka", "yyyy-MM-dd");
-    const folder = parentFolder.createFolder(clientName + " — " + today + " — " + consultationId);
-
-    files.forEach(function(fileData) {
-      if (!fileData || !fileData.base64) return;
-      try {
-        const mimeType = fileData.mimeType || "application/octet-stream";
-        const name = fileData.name || "document";
-        const blob = Utilities.newBlob(Utilities.base64Decode(fileData.base64), mimeType, name);
-        const driveFile = folder.createFile(blob);
-        driveFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-      } catch (fileErr) {
-        Logger.log("Failed to upload document \"" + (fileData && fileData.name) + "\" for " + consultationId + ": " + fileErr.message);
-      }
-    });
-
-    return folder.getUrl();
+    folder = parentFolder.createFolder(clientName + " — " + today + " — " + consultationId);
   } catch (err) {
-    Logger.log("Document upload failed for " + consultationId + ": " + err.message);
-    return "";
+    const message = "ERROR: Could not create a subfolder — " + err.message;
+    Logger.log(message + " Consultation: " + consultationId);
+    return { cellValue: message };
   }
+
+  let uploaded = 0;
+  const failures = [];
+  files.forEach(function(fileData) {
+    const fileName = (fileData && fileData.name) || "unnamed file";
+    if (!fileData || !fileData.base64) {
+      failures.push(fileName + " (no data received)");
+      return;
+    }
+    try {
+      const mimeType = fileData.mimeType || "application/octet-stream";
+      const blob = Utilities.newBlob(Utilities.base64Decode(fileData.base64), mimeType, fileName);
+      const driveFile = folder.createFile(blob);
+      driveFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+      uploaded++;
+    } catch (fileErr) {
+      Logger.log("Failed to upload \"" + fileName + "\" for " + consultationId + ": " + fileErr.message);
+      failures.push(fileName + " (" + fileErr.message + ")");
+    }
+  });
+
+  if (uploaded === 0) {
+    return { cellValue: "ERROR: All " + files.length + " file(s) failed to upload — " + failures.join("; ") };
+  }
+
+  const folderUrl = folder.getUrl();
+  return {
+    cellValue: failures.length ? (folderUrl + " (" + failures.length + " file(s) failed: " + failures.join("; ") + ")") : folderUrl
+  };
 }
 
 function confirmConsultation(email, phone, consultationId, paymentStatus) {

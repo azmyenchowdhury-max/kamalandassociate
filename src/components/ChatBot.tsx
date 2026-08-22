@@ -59,7 +59,7 @@ const ChatBot: React.FC = () => {
       console.error('Chat error:', error);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: "I apologize for the inconvenience. Please contact us directly at +880 2-9821234 or email info@kamalassociates.com.bd for assistance." 
+        content: "I apologize for the inconvenience. Please contact us directly at +880 2-9821234 or email kamalandassociates.info@gmail.com for assistance." 
       }]);
     } finally {
       setIsLoading(false);

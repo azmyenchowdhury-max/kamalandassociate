@@ -624,7 +624,7 @@ function setupApplicationForm() {
                 </div>
               </div>
               <p class="mb-1 rv-subtitle">Application to</p>
-              <p class="mb-2 rv-subtext">Chamber of Mohammad Mostofa Kamal, Advocate, Appellate Division, Supreme Court of Bangladesh</p>
+              <p class="mb-2 rv-subtext">Chamber of Mohammad Mostafa Kamal, Advocate, Appellate Division, Supreme Court of Bangladesh</p>
               <div class="d-flex flex-wrap gap-2">
                 <span class="rv-tag rv-tag-primary">${escapeHtml(formData.jobTitle || "Position")}</span>
                 <span class="rv-tag rv-tag-neutral">${escapeHtml(formData.jobType || "Full-Time")}</span>

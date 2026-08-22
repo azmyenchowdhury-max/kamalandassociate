@@ -72,9 +72,9 @@ const archiveMetadata = {
     }
   },
   'author': {
-    'mohammad-mostofa-kamal': {
-      title: 'Articles by Adv. Mohammad Mostofa Kamal',
-      description: 'Legal insights and case analysis from Senior Partner Adv. Mohammad Mostofa Kamal at Kamal & Associates.',
+    'mohammad-mostafa-kamal': {
+      title: 'Articles by Adv. Mohammad Mostafa Kamal',
+      description: 'Legal insights and case analysis from Senior Partner Adv. Mohammad Mostafa Kamal at Kamal & Associates.',
       image: 'https://kamalassociates.com.bd/images/og-author-kamal.jpg'
     },
     'mohammad-kabir': {

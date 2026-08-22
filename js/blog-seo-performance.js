@@ -8,14 +8,14 @@
         'company-formation-guide.html': {
             title: 'Company Formation in Bangladesh: A Step-by-Step Legal Guide',
             category: 'Company Formation',
-            author: 'Adv. Mohammad Mostofa Kamal',
+            author: 'Adv. Mohammad Mostafa Kamal',
             date: '2026-01-10',
             keywords: 'company formation Bangladesh, RJSC registration, business incorporation, startup legal setup, corporate compliance'
         },
         'commercial-litigation-complete-guide.html': {
             title: 'Commercial Litigation in Bangladesh: A Complete Legal Guide',
             category: 'Commercial Litigation',
-            author: 'Adv. Mohammad Mostofa Kamal',
+            author: 'Adv. Mohammad Mostafa Kamal',
             date: '2026-01-09',
             keywords: 'commercial litigation Bangladesh, business disputes, contract enforcement, trade litigation, commercial court remedies'
         },
@@ -29,7 +29,7 @@
         'business-setup-bangladesh.html': {
             title: 'Business Setup in Bangladesh: A Complete Legal Guide',
             category: 'Business Setup',
-            author: 'Adv. Mohammad Mostofa Kamal',
+            author: 'Adv. Mohammad Mostafa Kamal',
             date: '2026-01-07',
             keywords: 'business setup Bangladesh, business registration, licensing compliance, startup legal requirements, foreign investment'
         },
@@ -43,14 +43,14 @@
         'banking-litigation-guide.html': {
             title: 'Banking Litigation in Bangladesh: A Complete Legal Guide',
             category: 'Banking Litigation',
-            author: 'Adv. Mohammad Mostofa Kamal',
+            author: 'Adv. Mohammad Mostafa Kamal',
             date: '2026-01-05',
             keywords: 'banking litigation Bangladesh, debt recovery, financial disputes, artha rin litigation, legal banking compliance'
         },
         'aviation-law-bangladesh.html': {
             title: 'Aviation Law in Bangladesh: Navigating Complex Skies',
             category: 'Aviation Law',
-            author: 'Adv. Mohammad Mostofa Kamal',
+            author: 'Adv. Mohammad Mostafa Kamal',
             date: '2026-01-04',
             keywords: 'aviation law Bangladesh, CAAB compliance, aircraft leasing law, airline regulation, aviation dispute resolution'
         },
@@ -71,7 +71,7 @@
         'administrative-law-bangladesh.html': {
             title: 'Administrative Law in Bangladesh: Challenging Government Decisions',
             category: 'Administrative Law',
-            author: 'Adv. Mohammad Mostofa Kamal',
+            author: 'Adv. Mohammad Mostafa Kamal',
             date: '2026-01-01',
             keywords: 'administrative law Bangladesh, writ petition, judicial review, constitutional remedies, government decision challenge'
         }
@@ -262,7 +262,7 @@
             name: 'Kamal & Associates',
             url: SITE_URL,
             logo: ORG_LOGO,
-            email: 'info@kamalassociates.com.bd',
+            email: 'kamalandassociates.info@gmail.com',
             sameAs: [
                 'https://www.linkedin.com/',
                 'https://www.facebook.com/'

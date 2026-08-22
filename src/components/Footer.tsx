@@ -177,7 +177,7 @@ const Footer: React.FC = () => {
                   <div>
                     <h6 style={{ margin: 0, color: '#ECECEC', fontSize: '14px' }}>Email</h6>
                     <p style={{ margin: 0 }}>
-                      <a href="mailto:info@kamalassociates.com.bd" style={{ color: '#9CA3AF', fontSize: '13px' }}>info@kamalassociates.com.bd</a>
+                      <a href="mailto:kamalandassociates.info@gmail.com" style={{ color: '#9CA3AF', fontSize: '13px' }}>kamalandassociates.info@gmail.com</a>
                     </p>
                   </div>
                 </div>

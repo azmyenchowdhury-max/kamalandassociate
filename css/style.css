@@ -608,13 +608,7 @@ img {
     max-width: 100% !important;
 }
 
-/* This must stay aligned with the navbar-expand-xxl breakpoint used in the
-   HTML (1400px) — below that, .navbar-collapse is the standard Bootstrap
-   dropdown menu, not this inline flex layout. Raised from 992px because the
-   logo + 8 nav links + phone + CTA button don't actually fit until ~1440px;
-   below that (which includes the two most common laptop resolutions, 1280
-   and 1366px) the nav links were overlapping the logo. */
-@media (min-width: 1400px) {
+@media (min-width: 992px) {
     .navbar-dark.bg-dark-custom .container {
         display: flex;
         flex-wrap: nowrap;
@@ -668,7 +662,7 @@ img {
     order: 3;
 }
 
-@media (max-width: 1399.98px) {
+@media (max-width: 991.98px) {
     .action-zone {
         justify-content: flex-end;
         gap: 0.4rem;
@@ -676,10 +670,6 @@ img {
 
     .action-zone .phone-group,
     .action-zone .btn-gold {
-        display: none;
-    }
-
-    .brand-tagline {
         display: none;
     }
 }
@@ -720,18 +710,82 @@ img {
     transition: color 0.3s;
 }
 
-@media (max-width: 1500px) {
+/* The navbar container is capped at 1440px wide (see width: min(100%, 1440px)
+   further down) no matter how wide the viewport is, so there's never a
+   "spacious desktop" tier to grow into above that — logo + 8 nav links +
+   phone + CTA all need to fit in that same ≤1440px space from 992px up.
+   This is intentionally compact at every inline width rather than only
+   below some threshold, tightest right above the 992px collapse breakpoint
+   where the least room is available. */
+@media (min-width: 992px) {
     .navbar-nav .nav-link {
-        font-size: 14px;
-        padding: 0 10px !important;
+        font-size: 13.5px;
+        padding: 0 9px !important;
+    }
+
+    .brand-logo {
+        height: 44px;
     }
 
     .brand-name {
-        font-size: 20px;
+        font-size: 18px;
     }
 
-    .btn-gold {
-        padding: 9px 16px;
+    .brand-tagline {
+        display: none;
+    }
+
+    .navbar-dark.bg-dark-custom .container {
+        gap: 0.5rem;
+    }
+
+    .action-zone {
+        gap: 0.5rem !important;
+    }
+
+    .phone-group {
+        margin-right: 0 !important;
+    }
+
+    .phone-number {
+        font-size: 13.5px;
+    }
+
+    .action-zone .btn-gold {
+        padding: 9px 15px;
+        font-size: 13.5px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .navbar-nav .nav-link {
+        font-size: 12.5px;
+        padding: 0 6px !important;
+    }
+
+    .brand-logo {
+        height: 36px;
+    }
+
+    .brand-name {
+        font-size: 15px;
+    }
+
+    .navbar-dark.bg-dark-custom .container {
+        gap: 0.25rem;
+    }
+
+    .action-zone {
+        gap: 0.2rem !important;
+    }
+
+    .phone-number {
+        font-size: 12px;
+    }
+
+    .action-zone .btn-gold {
+        padding: 6px 10px;
+        font-size: 12px;
     }
 }
 
@@ -8324,72 +8378,6 @@ iframe {
 
     .section-padding {
         padding: 84px 0;
-    }
-}
-
-/* Extends the collapsed (hamburger) navbar layout from the block above up to
-   1399.98px, matching the navbar-expand-xxl breakpoint (1400px) used in the
-   HTML. The logo + 8 nav links + phone + CTA button don't fit inline until
-   ~1440px, so 992-1399px needs the same dropdown-menu treatment as narrower
-   screens rather than the cramped inline layout it had before. */
-@media (max-width: 1399.98px) {
-    .navbar-dark.bg-dark-custom {
-        padding: 12px 0;
-    }
-
-    .navbar-dark.bg-dark-custom .container {
-        align-items: flex-start;
-        gap: 0.75rem;
-    }
-
-    .navbar-brand {
-        max-width: calc(100% - 3.5rem);
-    }
-
-    .brand-text {
-        min-width: 0;
-    }
-
-    .navbar-collapse {
-        flex-basis: 100%;
-        width: 100%;
-        order: 3;
-    }
-
-    .navbar-collapse.show {
-        display: block;
-        max-height: calc(100vh - 88px);
-        overflow-y: auto;
-        overscroll-behavior: contain;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .navbar-nav {
-        width: 100%;
-        padding-top: 0.25rem;
-    }
-
-    .navbar-nav .nav-item,
-    .navbar-nav .nav-link {
-        width: 100%;
-    }
-
-    .navbar-nav .nav-link {
-        padding: 0.85rem 0 !important;
-    }
-
-    .action-zone {
-        display: none;
-    }
-
-    .nav-mobile-cta-item {
-        display: block;
-        margin-bottom: 0.25rem;
-    }
-
-    .nav-mobile-cta-link {
-        width: 100%;
-        justify-content: center;
     }
 }
 

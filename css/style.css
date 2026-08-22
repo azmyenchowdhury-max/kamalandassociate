@@ -608,7 +608,13 @@ img {
     max-width: 100% !important;
 }
 
-@media (min-width: 992px) {
+/* This must stay aligned with the navbar-expand-xxl breakpoint used in the
+   HTML (1400px) — below that, .navbar-collapse is the standard Bootstrap
+   dropdown menu, not this inline flex layout. Raised from 992px because the
+   logo + 8 nav links + phone + CTA button don't actually fit until ~1440px;
+   below that (which includes the two most common laptop resolutions, 1280
+   and 1366px) the nav links were overlapping the logo. */
+@media (min-width: 1400px) {
     .navbar-dark.bg-dark-custom .container {
         display: flex;
         flex-wrap: nowrap;
@@ -662,7 +668,7 @@ img {
     order: 3;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1399.98px) {
     .action-zone {
         justify-content: flex-end;
         gap: 0.4rem;
@@ -714,7 +720,7 @@ img {
     transition: color 0.3s;
 }
 
-@media (max-width: 1260px) {
+@media (max-width: 1500px) {
     .navbar-nav .nav-link {
         font-size: 14px;
         padding: 0 10px !important;
@@ -8318,6 +8324,72 @@ iframe {
 
     .section-padding {
         padding: 84px 0;
+    }
+}
+
+/* Extends the collapsed (hamburger) navbar layout from the block above up to
+   1399.98px, matching the navbar-expand-xxl breakpoint (1400px) used in the
+   HTML. The logo + 8 nav links + phone + CTA button don't fit inline until
+   ~1440px, so 992-1399px needs the same dropdown-menu treatment as narrower
+   screens rather than the cramped inline layout it had before. */
+@media (max-width: 1399.98px) {
+    .navbar-dark.bg-dark-custom {
+        padding: 12px 0;
+    }
+
+    .navbar-dark.bg-dark-custom .container {
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .navbar-brand {
+        max-width: calc(100% - 3.5rem);
+    }
+
+    .brand-text {
+        min-width: 0;
+    }
+
+    .navbar-collapse {
+        flex-basis: 100%;
+        width: 100%;
+        order: 3;
+    }
+
+    .navbar-collapse.show {
+        display: block;
+        max-height: calc(100vh - 88px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .navbar-nav {
+        width: 100%;
+        padding-top: 0.25rem;
+    }
+
+    .navbar-nav .nav-item,
+    .navbar-nav .nav-link {
+        width: 100%;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.85rem 0 !important;
+    }
+
+    .action-zone {
+        display: none;
+    }
+
+    .nav-mobile-cta-item {
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+
+    .nav-mobile-cta-link {
+        width: 100%;
+        justify-content: center;
     }
 }
 

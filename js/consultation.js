@@ -46,41 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
             throw error;
         }
     }
-    
-    // API Helper Function for multipart file uploads
-    async function invokeEdgeFunctionWithFiles(functionName, body, files) {
-        try {
-            const formData = new FormData();
-            
-            // Add JSON body as a field
-            formData.append('data', JSON.stringify(body));
-            
-            // Add files
-            files.forEach((file, index) => {
-                formData.append(`file_${index}`, file.file);
-            });
-            
-            const response = await fetch(`${SUPABASE_URL}/functions/v1/${functionName}`, {
-                method: 'POST',
-                headers: {
-                    ...getAuthHeaders()
-                    // Don't set Content-Type, let the browser set it with boundary
-                },
-                body: formData
-            });
-            
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.error || `API Error: ${response.status}`);
-            }
-            
-            return response.json();
-        } catch (error) {
-            console.error(`Error calling ${functionName} with files:`, error);
-            throw error;
-        }
-    }
-    
+
     // Normalize Bangladesh phone to canonical 01XXXXXXXXX (accepts +8801..., 8801..., 01...)
     function normalizePhone(phone) {
         let p = String(phone).replace(/[\s\-\(\)]/g, '');
@@ -607,6 +573,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Reads a File as a Base64 string (no data: URL prefix) — the format the
+    // Apps Script backend decodes into a Drive file, same approach the
+    // careers/job-application form already uses.
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = () => reject(new Error('Failed to read file: ' + file.name));
+            reader.readAsDataURL(file);
+        });
+    }
+
     // ===== Document Upload Handler =====
     const fileDropZone = document.getElementById('fileDropZone');
     const documentInput = document.getElementById('documentInput');
@@ -925,6 +903,28 @@ document.addEventListener('DOMContentLoaded', function() {
             const description = document.getElementById('caseDescription').value.trim();
             const additionalNotes = document.getElementById('additionalNotes')?.value.trim() || '';
             
+            // Show loading state early — reading larger documents can take a moment
+            this.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>' +
+                (uploadedDocuments.length ? 'Preparing documents...' : 'Processing...');
+            this.disabled = true;
+
+            // Convert any uploaded documents to Base64 so the backend can store
+            // them in Drive (same approach the careers/job-application form uses).
+            let filePayloads;
+            try {
+                filePayloads = await Promise.all(uploadedDocuments.map(async (doc) => ({
+                    name: doc.name,
+                    mimeType: doc.type || 'application/octet-stream',
+                    base64: await fileToBase64(doc.file)
+                })));
+            } catch (fileError) {
+                console.error('Document read error:', fileError);
+                showError('One of your documents could not be read. Please remove it and try again.');
+                this.innerHTML = `<span id="submitBtnText">${isFirstTimeUser ? 'Schedule Consultation' : 'Pay & Schedule'}</span><i class="fas fa-calendar-check ms-2"></i>`;
+                this.disabled = false;
+                return;
+            }
+
             const consultationData = {
                 email,
                 phone,
@@ -940,13 +940,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 consultationType: selectedConsultationType,
                 documentsCount: uploadedDocuments.length,
                 documentNames: uploadedDocuments.map(doc => doc.name),
+                files: filePayloads,
                 submissionSource: 'website_consultation_form'
             };
-            
-            // Show loading state
+
             this.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
-            this.disabled = true;
-            
+
             try {
                 if (isFirstTimeUser) {
                     // Verify & consume free slot via Google Sheets (server-side, race-condition safe)

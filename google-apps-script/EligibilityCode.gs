@@ -14,14 +14,19 @@
 //    (/spreadsheets/d/SPREADSHEET_ID/edit), paste it into CONFIG below.
 //    Two tabs will be created automatically on first use — you don't
 //    need to create them by hand.
-// 5. In the Apps Script editor, do NOT paste a real secret token into
+// 5. Create a Google Drive folder to hold client-uploaded documents (e.g.
+//    "Kamal & Associates — Consultation Documents"), copy its ID from the
+//    URL (/drive/folders/FOLDER_ID), paste it into CONFIG.DOCUMENTS_FOLDER_ID
+//    below. Every submission that includes files gets its own subfolder
+//    inside it, named "Client Name — YYYY-MM-DD — Consultation ID".
+// 6. In the Apps Script editor, do NOT paste a real secret token into
 //    CONFIG.SECRET_TOKEN in this repo file — set the real value directly
 //    in the deployed script's CONFIG constant only (this file stays a
 //    template with a placeholder, since it's tracked in git).
-// 6. Click Deploy > New deployment > Web app.
+// 7. Click Deploy > New deployment > Web app.
 //    - Execute as: Me
 //    - Who has access: Anyone
-// 7. Copy the Web App URL and set it as ELIGIBILITY_API_URL in the
+// 8. Copy the Web App URL and set it as ELIGIBILITY_API_URL in the
 //    Supabase Edge Function env:
 //    supabase secrets set ELIGIBILITY_API_URL=... ELIGIBILITY_CLIENT_KEY=...
 //    (the browser never talks to this URL directly — it goes through the
@@ -30,10 +35,14 @@
 
 const CONFIG = {
   // Set the REAL value only in the deployed Apps Script editor, never here.
-  SECRET_TOKEN: "38b367b6a1de86087756695b9e3dc1c523437b7e8a8ac7f1664e620f8125d61f",
+  SECRET_TOKEN: "REPLACE_WITH_YOUR_SECRET_TOKEN_IN_THE_APPS_SCRIPT_EDITOR_ONLY",
 
   // Google Spreadsheet ID (from its URL: /spreadsheets/d/SPREADSHEET_ID/edit)
   SPREADSHEET_ID: "1uI5LLTqdP3NkILCmCKE29aOnvYnE3isl-qCgMxqlJjk",
+
+  // Google Drive folder ID where client-uploaded documents are stored.
+  // Leave empty to skip document upload (bookings still save normally).
+  DOCUMENTS_FOLDER_ID: "1GVknkyYp68DC6aNfri-gUlF0TGGNrFsd",
 
   ELIGIBILITY_SHEET: "Eligibility",
   CONSULTATIONS_SHEET: "Consultations",
@@ -51,7 +60,8 @@ const CONFIG = {
     "Practice Area", "Urgency", "Case Description", "Additional Notes",
     "Preferred Date", "Preferred Time", "Consultation Type",
     "Documents Count", "Document Names",
-    "Is Free", "Payment Status", "Payment Method", "Payment Reference ID"
+    "Is Free", "Payment Status", "Payment Method", "Payment Reference ID",
+    "Documents Folder"
   ]
 };
 
@@ -90,17 +100,22 @@ function doPost(e) {
       return jsonResponse(checkEligibility(email, phone));
     }
 
-    // Only actions that mutate the sheet (or do a check-then-write, like the
-    // slot-availability check inside save_consultation) need to serialize
-    // through the lock.
+    // save_consultation manages its own, narrowly-scoped lock internally
+    // (see below) — it only holds it around the slot-availability
+    // check-then-append, not around the Drive document upload that follows,
+    // so a large upload never blocks other customers' bookings or checks.
+    if (payload.action === "save_consultation") {
+      return jsonResponse(saveConsultation(email, phone, payload.consultation || {}));
+    }
+
+    // The remaining actions mutate the sheet and need to serialize through
+    // the lock for their whole duration — they're all fast, no file I/O.
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
     try {
       switch (payload.action) {
         case "consume_free":
           return jsonResponse(consumeFree(email, phone));
-        case "save_consultation":
-          return jsonResponse(saveConsultation(email, phone, payload.consultation || {}));
         case "confirm_consultation":
           return jsonResponse(confirmConsultation(email, phone, payload.consultationId, payload.paymentStatus));
         default:
@@ -117,6 +132,17 @@ function doPost(e) {
 
 function doGet(e) {
   return jsonResponse({ status: "ok", message: "Eligibility endpoint is live." });
+}
+
+// Run this ONCE from the editor (select it in the function dropdown, click
+// Run) after adding document upload — it's the first thing in this project
+// to use Google Drive, so the script needs a one-time permission grant
+// before real submissions can use it. Also doubles as a sanity check that
+// CONFIG.DOCUMENTS_FOLDER_ID points at a folder this account can access —
+// it only reads the folder's name, it doesn't create or upload anything.
+function testDriveAccess() {
+  const folder = DriveApp.getFolderById(CONFIG.DOCUMENTS_FOLDER_ID);
+  Logger.log("Drive access OK — folder name: " + folder.getName());
 }
 
 // ------------------------------------------------------------
@@ -391,38 +417,100 @@ function saveConsultation(email, phone, consultation) {
   // below, instead of opening the sheet and re-reading all its rows twice.
   const sheet = getOrCreateSheet(CONFIG.CONSULTATIONS_SHEET, CONFIG.CONSULTATION_HEADERS, [12, 13]);
 
-  if (preferredDate && preferredTime) {
-    const booked = getBookedSlotsFromSheet(sheet, preferredDate);
-    if (booked.indexOf(preferredTime) !== -1) {
-      return {
-        success: false,
-        slotTaken: true,
-        error: "That time slot was just booked by someone else. Please choose a different time."
-      };
+  // Locked only around the check-then-append — this is the part that must
+  // be serialized to prevent two customers double-booking the same slot.
+  // The Drive upload below runs after the lock is released, since it has no
+  // shared state to protect and can take several seconds for larger files;
+  // holding the lock for that long would queue up every other customer's
+  // eligibility check and booking behind it.
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  let consultationId;
+  let rowIndex;
+  try {
+    if (preferredDate && preferredTime) {
+      const booked = getBookedSlotsFromSheet(sheet, preferredDate);
+      if (booked.indexOf(preferredTime) !== -1) {
+        return {
+          success: false,
+          slotTaken: true,
+          error: "That time slot was just booked by someone else. Please choose a different time."
+        };
+      }
     }
+
+    consultationId = "KC-" + Utilities.getUuid().split("-")[0].toUpperCase();
+
+    sheet.appendRow([
+      consultationId,
+      consultation.submittedAt || new Date().toISOString(),
+      "",
+      email, phone,
+      consultation.firstName || "", consultation.lastName || "",
+      consultation.practiceArea || "", consultation.urgency || "",
+      consultation.caseDescription || "", consultation.additionalNotes || "",
+      forceText(consultation.preferredDate || ""), forceText(consultation.preferredTime || ""),
+      consultation.consultationType || "",
+      consultation.documentsCount || 0,
+      (consultation.documentNames || []).join(", "),
+      Boolean(consultation.isFree),
+      consultation.paymentStatus || "",
+      consultation.selectedPaymentMethod || "",
+      consultation.paymentReferenceId || "",
+      "" // Documents Folder — filled in below, after the lock is released.
+    ]);
+    rowIndex = sheet.getLastRow();
+  } finally {
+    lock.releaseLock();
   }
 
-  const consultationId = "KC-" + Utilities.getUuid().split("-")[0].toUpperCase();
-
-  sheet.appendRow([
+  const folderUrl = uploadConsultationDocuments(
     consultationId,
-    consultation.submittedAt || new Date().toISOString(),
-    "",
-    email, phone,
-    consultation.firstName || "", consultation.lastName || "",
-    consultation.practiceArea || "", consultation.urgency || "",
-    consultation.caseDescription || "", consultation.additionalNotes || "",
-    forceText(consultation.preferredDate || ""), forceText(consultation.preferredTime || ""),
-    consultation.consultationType || "",
-    consultation.documentsCount || 0,
-    (consultation.documentNames || []).join(", "),
-    Boolean(consultation.isFree),
-    consultation.paymentStatus || "",
-    consultation.selectedPaymentMethod || "",
-    consultation.paymentReferenceId || ""
-  ]);
+    consultation.firstName,
+    consultation.lastName,
+    consultation.files
+  );
+  if (folderUrl) {
+    sheet.getRange(rowIndex, CONFIG.CONSULTATION_HEADERS.length).setValue(folderUrl);
+  }
 
   return { success: true, consultationId: consultationId };
+}
+
+// Uploads each client-submitted file (sent as base64 JSON — the same
+// approach the job-applications script uses) into its own subfolder under
+// CONFIG.DOCUMENTS_FOLDER_ID, and returns that subfolder's URL. Returns ""
+// if there are no files or no folder is configured, so a booking never fails
+// just because a document failed to upload.
+function uploadConsultationDocuments(consultationId, firstName, lastName, files) {
+  if (!files || !files.length || !CONFIG.DOCUMENTS_FOLDER_ID) {
+    return "";
+  }
+
+  try {
+    const parentFolder = DriveApp.getFolderById(CONFIG.DOCUMENTS_FOLDER_ID);
+    const clientName = (String(firstName || "").trim() + " " + String(lastName || "").trim()).trim() || "Client";
+    const today = Utilities.formatDate(new Date(), "Asia/Dhaka", "yyyy-MM-dd");
+    const folder = parentFolder.createFolder(clientName + " — " + today + " — " + consultationId);
+
+    files.forEach(function(fileData) {
+      if (!fileData || !fileData.base64) return;
+      try {
+        const mimeType = fileData.mimeType || "application/octet-stream";
+        const name = fileData.name || "document";
+        const blob = Utilities.newBlob(Utilities.base64Decode(fileData.base64), mimeType, name);
+        const driveFile = folder.createFile(blob);
+        driveFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+      } catch (fileErr) {
+        Logger.log("Failed to upload document \"" + (fileData && fileData.name) + "\" for " + consultationId + ": " + fileErr.message);
+      }
+    });
+
+    return folder.getUrl();
+  } catch (err) {
+    Logger.log("Document upload failed for " + consultationId + ": " + err.message);
+    return "";
+  }
 }
 
 function confirmConsultation(email, phone, consultationId, paymentStatus) {

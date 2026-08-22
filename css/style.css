@@ -732,7 +732,8 @@ img {
     }
 
     .brand-tagline {
-        display: none;
+        font-size: 9px;
+        letter-spacing: 1px;
     }
 
     .navbar-dark.bg-dark-custom .container {
@@ -769,6 +770,11 @@ img {
 
     .brand-name {
         font-size: 15px;
+    }
+
+    .brand-tagline {
+        font-size: 8px;
+        letter-spacing: 0.5px;
     }
 
     .navbar-dark.bg-dark-custom .container {

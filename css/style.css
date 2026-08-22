@@ -10,6 +10,7 @@
     --background-color: #0F1113;
     --text-color: #F1F5F9;
     --text-muted: rgba(241, 245, 249, 0.72);
+    --heading-color: #ECECEC;
 
     --card-bg: #13151A;
     --card-border: rgba(255, 255, 255, 0.08);
@@ -26,6 +27,7 @@
 
     --accent-color: #D4AF37;
     --accent-color-dark: #B48811;
+    --accent-rgb: 212, 175, 55;
 
     --primary-color: var(--accent-color);
     --primary-dark: var(--accent-color-dark);
@@ -61,6 +63,7 @@
     --background-color: #0F1113;
     --text-color: #F1F5F9;
     --text-muted: rgba(241, 245, 249, 0.72);
+    --heading-color: #ECECEC;
 
     --card-bg: #13151A;
     --card-border: rgba(255, 255, 255, 0.08);
@@ -77,6 +80,7 @@
 
     --accent-color: #D4AF37;
     --accent-color-dark: #B48811;
+    --accent-rgb: 212, 175, 55;
 
     --shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.6);

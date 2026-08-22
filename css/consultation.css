@@ -159,14 +159,19 @@
 }
 
 .consultation-type-card:hover {
-    border-color: rgba(var(--accent-rgb), 0.5);
+    border-color: rgba(var(--accent-rgb), 0.8);
+    background: rgba(var(--accent-rgb), 0.08);
     transform: translateY(-3px);
 }
 
 .consultation-type-card.active {
     border-color: var(--accent-color);
-    background: rgba(var(--accent-rgb), 0.1);
-    box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.2);
+    background: rgba(var(--accent-rgb), 0.22);
+    box-shadow: 0 0 0 1px var(--accent-color), 0 0 24px rgba(var(--accent-rgb), 0.45);
+}
+
+.consultation-type-card.active span {
+    color: var(--accent-color);
 }
 
 .consultation-type-card i {
@@ -181,6 +186,7 @@
     font-weight: 600;
     color: var(--heading-color);
     margin-bottom: 5px;
+    transition: color 0.3s ease;
 }
 
 .consultation-type-card small {

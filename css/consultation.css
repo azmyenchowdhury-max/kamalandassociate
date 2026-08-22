@@ -159,19 +159,19 @@
 }
 
 .consultation-type-card:hover {
-    border-color: rgba(var(--accent-rgb), 0.8);
-    background: rgba(var(--accent-rgb), 0.08);
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.08);
     transform: translateY(-3px);
 }
 
 .consultation-type-card.active {
-    border-color: var(--accent-color);
-    background: rgba(var(--accent-rgb), 0.22);
-    box-shadow: 0 0 0 1px var(--accent-color), 0 0 24px rgba(var(--accent-rgb), 0.45);
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 0 0 1px #ffffff, 0 0 24px rgba(255, 255, 255, 0.35);
 }
 
 .consultation-type-card.active span {
-    color: var(--accent-color);
+    color: #ffffff;
 }
 
 .consultation-type-card i {
